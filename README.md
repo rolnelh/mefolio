@@ -1,66 +1,132 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 Mefolio – Plateforme de Portfolio pour Créatifs
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📌 À propos du projet
 
-## About Laravel
+**Mefolio** est une plateforme web conçue pour permettre aux créatifs (développeurs, designers, étudiants, artistes…) de :
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* Créer un **profil professionnel en ligne**
+* **Partager leurs projets**
+* **Recevoir des commentaires**
+* **Découvrir et explorer** les réalisations d’autres utilisateurs
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+🎯 L’objectif est de valoriser les talents et favoriser une communauté active autour de la création.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🧩 Fonctionnalités principales
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### ✅ Fonctionnalités implémentées
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* 🔐 Authentification (inscription / connexion) avec Laravel Breeze
+* 👤 Gestion de profil utilisateur (photo, bio, informations)
+* 📁 Publication de projets (titre, description, image)
+* 💬 Système de commentaires
+* 🎨 Interface moderne avec Tailwind CSS
+* 📱 Design responsive (mobile, tablette, desktop)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+### 🚧 Fonctionnalités en cours / à venir
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+* 🔍 Filtrage avancé des projets
+* ❤️ Système de likes
+* 🔔 Notifications en temps réel
+* 🔎 Recherche améliorée
+* 🧑‍🤝‍🧑 Suivi d’utilisateurs
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## 🛠️ Technologies utilisées
 
-## Contributing
+* ⚙️ Backend : Laravel
+* 🎨 Frontend : Tailwind CSS, JavaScript (Vite)
+* 🗄️ Base de données : MySQL (local) / PostgreSQL (production)
+* 🔐 Authentification : Laravel Breeze
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🚀 Installation en local
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 1. Cloner le projet
 
-## Security Vulnerabilities
+```bash
+git clone https://github.com/rolnelh/mefolio.git
+cd mefolio
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+### 2. Installer les dépendances
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+composer install
+npm install
+```
+
+---
+
+### 3. Générer la clé de l’application
+
+```bash
+php artisan key:generate
+```
+
+---
+
+### 4. Lancer les migrations
+
+```bash
+php artisan migrate
+```
+
+---
+
+### 5. Lancer le projet
+
+```bash
+php artisan serve
+npm run dev
+```
+
+---
+
+## 🌐 Déploiement
+
+* Build automatisé via GitHub
+
+---
+
+## 📸 Aperçu
+
+<img width="1368" height="768" alt="mefolio-deskop" src="https://github.com/user-attachments/assets/ce0e2b9d-6a6c-43c6-b312-536cb729f006" />
+
+
+## 💡 Ce que j’ai appris
+
+Ce projet m’a permis de :
+
+* Structurer une application complète avec Laravel
+* Gérer l’authentification et les relations entre modèles
+* Concevoir une interface moderne et responsive
+* Déployer une application en production (Render + PostgreSQL)
+
+---
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues !
+N’hésite pas à ouvrir une issue ou proposer une pull request.
+
+---
+
+## 📬 Contact
+
+💼 Développeur : **Houndagnon Dieudonné**
+📧 Email : houndagnondieudonne4@gmail.com
+🔗 LinkedIn : [(ton profil)](https://www.linkedin.com/in/dieudonn%C3%A9-houndagnon-093387250)
+
+---
+
+## ⭐ Support
+
+Si tu aimes ce projet, n’hésite pas à laisser une ⭐ sur le repo !
