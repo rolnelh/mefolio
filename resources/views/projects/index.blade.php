@@ -2,92 +2,132 @@
     <div class="mx-auto max-w-7xl px-6 lg:px-8 py-12">
 
         <div class="mb-12">
-            <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-                Tous les Projets
+            <h1 class="text-4xl font-black tracking-tighter text-gray-900 dark:text-white sm:text-5xl">
+                TOUS LES <span class="text-indigo-600 dark:text-indigo-400 italic">PROJETS.</span>
             </h1>
-            <p class="mt-3 text-lg text-gray-600 dark:text-gray-400 font-light">
-                Découvrez les pépites créatives de notre communauté.
+            <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 font-light max-w-2xl">
+                Explorez les pépites créatives de notre communauté et laissez-vous inspirer par les talents locaux.
             </p>
         </div>
 
-        <div class="mb-16 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6">
-            <form action="{{ route('projects.search') }}" method="GET" class="flex flex-wrap items-end gap-6">
+        <div
+            class="mb-16 bg-white dark:bg-gray-800/40 rounded-[2.5rem] p-8 border border-gray-100 dark:border-white/5 shadow-sm">
+            <form action="{{ route('projects.search') }}" method="GET" class="flex flex-wrap items-end gap-8">
 
-                <div class="flex-1 min-w-[200px]">
+                <div class="flex-1 min-w-[240px]">
                     <label for="category"
-                        class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
-                        Catégorie
+                        class="block text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400 mb-3">
+                        Filtrer par domaine
                     </label>
                     <select name="category" id="category"
-                        class="block w-full border-0 border-b-2 border-gray-200 dark:border-gray-700 bg-transparent py-2 px-0 focus:border-gray-900 dark:focus:border-white focus:ring-0 sm:text-sm transition-colors">
-                        <option value="">Toutes les catégories</option>
-                        <option value="design">Design</option>
-                        <option value="developpement">Développement</option>
-                        <option value="photographie">Photographie</option>
+                        class="block w-full border-0 border-b-2 border-gray-200 dark:border-gray-700 bg-transparent py-3 px-0 focus:border-indigo-600 dark:focus:border-indigo-400 focus:ring-0 sm:text-sm transition-all cursor-pointer font-medium text-gray-900 dark:text-white">
+                        <option value="" class="dark:bg-gray-900">Toutes les catégories</option>
+                        <option value="design" class="dark:bg-gray-900">Design & UI/UX</option>
+                        <option value="developpement" class="dark:bg-gray-900">Développement Web</option>
+                        <option value="photographie" class="dark:bg-gray-900">Photographie</option>
                     </select>
                 </div>
 
-                <div class="flex-1 min-w-[200px]">
+                <div class="flex-1 min-w-[240px]">
                     <label for="location"
-                        class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
-                        Localisation
+                        class="block text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400 mb-3">
+                        Où cherchez-vous ?
                     </label>
-                    <input type="text" name="location" id="location" placeholder="Ex: Cotonou"
-                        class="block w-full border-0 border-b-2 border-gray-200 dark:border-gray-700 bg-transparent py-2 px-0 focus:border-gray-900 dark:focus:border-white focus:ring-0 sm:text-sm transition-colors">
+                    <input type="text" name="location" id="location" placeholder="Ex: Cotonou, Parakou..."
+                        class="block w-full border-0 border-b-2 border-gray-200 dark:border-gray-700 bg-transparent py-3 px-0 focus:border-indigo-600 dark:focus:border-indigo-400 focus:ring-0 sm:text-sm transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 font-medium text-gray-900 dark:text-white">
                 </div>
 
                 <button type="submit"
-                    class="rounded-full bg-gray-900 dark:bg-white px-8 py-2.5 text-sm font-semibold text-white dark:text-gray-900 shadow-sm hover:opacity-80 transition">
-                    Filtrer
+                    class="rounded-full bg-indigo-600 dark:bg-indigo-500 px-10 py-3.5 text-sm font-bold text-white shadow-xl shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 dark:hover:bg-indigo-400 transition transform hover:-translate-y-1 active:scale-95">
+                    Appliquer
                 </button>
             </form>
         </div>
 
-        <div class="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-            @foreach ($projects as $project)
+        <div class="grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+            @forelse ($projects as $project)
                 <article class="flex flex-col items-start group">
-                    <div class="relative w-full overflow-hidden rounded-2xl bg-gray-100 mb-5">
-                        <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}"
-                            class="aspect-[16/9] w-full object-cover transition duration-300 group-hover:scale-105">
-                        <a href="{{ route('projects.show', $project->slug) }}" class="absolute inset-0"></a>
+
+                    <div
+                        class="relative w-full aspect-[16/10] overflow-hidden rounded-[2rem] bg-gray-100 dark:bg-gray-800 mb-6 shadow-sm">
+                        <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" loading="lazy"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+
+                        <a href="{{ route('projects.show', $project->slug) }}" class="absolute inset-0 z-20"
+                            aria-label="Voir le projet"></a>
                     </div>
 
-                    <div class="flex items-center gap-x-3 text-xs mb-3">
-                        <span class="font-medium text-gray-500 uppercase tracking-widest">
+                    <div class="flex items-center gap-x-3 text-[10px] mb-4">
+                        <span
+                            class="px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-widest border border-indigo-100 dark:border-indigo-500/20">
                             {{ $project->category ?? 'Créatif' }}
                         </span>
-                        <span class="text-gray-300">•</span>
-                        <time class="text-gray-400">{{ $project->created_at->translatedFormat('d M Y') }}</time>
+                        <span class="text-gray-300 dark:text-gray-700">•</span>
+                        <time
+                            class="text-gray-500 font-medium italic">{{ $project->created_at->translatedFormat('d M Y') }}</time>
                     </div>
 
-                    <h3 class="text-xl font-semibold leading-7 text-gray-900 dark:text-white">
-                        <a href="{{ route('projects.show', $project->slug) }}" class="hover:text-gray-600 transition">
+                    <h3
+                        class="text-2xl font-bold leading-tight text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        <a href="{{ route('projects.show', $project->slug) }}">
                             {{ $project->title }}
                         </a>
                     </h3>
 
-                    <p class="mt-3 line-clamp-2 text-sm leading-6 text-gray-600 dark:text-gray-400 font-light">
-                        {{ Str::limit($project->description, 120) }}
+                    <p
+                        class="mt-4 line-clamp-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400 font-light italic">
+                        "{{ Str::limit($project->description, 130) }}"
                     </p>
 
-                    <div class="mt-6 flex items-center gap-x-3">
-                        <img src="{{ $project->creatif->photo ? asset('storage/' . $project->creatif->photo) : 'https://ui-avatars.com/api/?name=' . $project->creatif->prenom }}"
-                            class="h-8 w-8 rounded-full bg-gray-50">
-                        <div class="text-sm">
-                            <p class="font-medium text-gray-900 dark:text-white">
-                                <a href="{{ route('creatifs.show', $project->creatif->slug) }}"
-                                    class="hover:underline">
-                                    {{ $project->creatif->prenom }} {{ $project->creatif->nom }}
-                                </a>
-                            </p>
+                    <div
+                        class="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800 w-full flex items-center justify-between">
+                        <div class="flex items-center gap-x-3">
+                            <img src="{{ $project->creatif->photo ? asset('storage/' . $project->creatif->photo) : 'https://ui-avatars.com/api/?name=' . urlencode($project->creatif->prenom) . '&background=6366f1&color=fff' }}"
+                                class="h-9 w-9 rounded-full object-cover ring-2 ring-white dark:ring-gray-900 shadow-sm">
+                            <div class="text-sm">
+                                <p class="font-bold text-gray-900 dark:text-white leading-none">
+                                    <a href="{{ route('creatifs.show', $project->creatif->slug) }}"
+                                        class="hover:underline">
+                                        {{ $project->creatif->prenom }} {{ $project->creatif->nom }}
+                                    </a>
+                                </p>
+                                <span class="text-[10px] text-gray-400 uppercase tracking-tighter">Membre MeFolio</span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="text-gray-300 group-hover:text-indigo-600 transition-transform group-hover:translate-x-1">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
                         </div>
                     </div>
                 </article>
-            @endforeach
+
+            @empty
+
+                <div class="col-span-full py-24 flex flex-col items-center text-center">
+                    <div class="text-6xl mb-6">🔍</div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Aucun projet trouvé</h3>
+                    <p class="text-gray-500 mt-2 max-w-sm">Désolé, aucun créatif n'a encore publié de projet
+                        correspondant à vos critères.</p>
+                    <a href="{{ route('projects.index') }}"
+                        class="mt-8 px-6 py-2 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-full text-sm font-bold hover:bg-indigo-50 dark:hover:bg-gray-700 transition">
+                        Réinitialiser les filtres
+                    </a>
+                </div>
+            @endforelse
         </div>
 
-        <div class="mt-16 border-t border-gray-100 dark:border-gray-800 pt-10">
-            {{ $projects->links() }}
-        </div>
+        @if ($projects->hasPages())
+            <div class="mt-20 border-t border-gray-100 dark:border-gray-800 pt-10">
+                {{ $projects->links() }}
+            </div>
+        @endif
     </div>
 </x-app-layout>

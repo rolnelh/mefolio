@@ -9,13 +9,13 @@
         </h2>
     </div>
 
-    {{-- Liste des commentaires --}}
+
     <div class="space-y-10">
         @forelse ($project->comments as $comment)
-            {{-- Initialisation d'Alpine.js pour chaque commentaire --}}
-            <div x-data="{ showReply: false }" class="group">
+
+        <div x-data="{ showReply: false }" class="group">
                 <div class="flex items-start gap-4">
-                    {{-- Avatar cliquable --}}
+
                     <a href="{{ route('creatifs.show', $comment->user->creatif->id) }}"
                         class="flex-shrink-0 transition-transform hover:scale-110">
                         <img src="{{ $comment->user->creatif->photo ? asset('storage/' . $comment->user->creatif->photo) : 'https://ui-avatars.com/api/?name=' . urlencode($comment->user->name) . '&background=6366f1&color=fff' }}"
@@ -25,7 +25,7 @@
 
                     <div class="flex-1">
                         <div class="flex items-center justify-between">
-                            {{-- Nom cliquable --}}
+
                             <a href="{{ route('creatifs.show', $comment->user->creatif->id) }}"
                                 class="font-bold text-gray-900 dark:text-white hover:text-indigo-600 transition-colors">
                                 {{ $comment->user->creatif->prenom ?? $comment->user->name }}
@@ -40,7 +40,7 @@
                             {{ $comment->body }}
                         </p>
 
-                        {{-- Bouton Répondre --}}
+
                         @auth
                             @if (auth()->id() === $project->user_id && $comment->replies->isEmpty())
                                 <button type="button" @click="showReply = !showReply"
@@ -52,7 +52,6 @@
                                     <span x-text="showReply ? 'Annuler' : 'Répondre'"></span>
                                 </button>
 
-                                {{-- Formulaire de réponse animé avec Alpine --}}
                                 <div x-show="showReply" x-transition:enter="transition ease-out duration-200"
                                     x-transition:enter-start="opacity-0 -translate-y-2"
                                     x-transition:enter-end="opacity-100 translate-y-0" class="mt-4">
@@ -78,7 +77,7 @@
                     </div>
                 </div>
 
-                {{-- Réponse de l'auteur --}}
+
                 @if ($comment->replies->count())
                     <div
                         class="mt-6 ml-14 bg-indigo-50/50 dark:bg-indigo-900/10 p-5 rounded-3xl border border-indigo-100/50 dark:border-indigo-800/30">
@@ -120,7 +119,7 @@
         @endforelse
     </div>
 
-    {{-- Nouveau commentaire --}}
+
     <div class="mt-12 pt-8 border-t border-gray-100 dark:border-gray-700">
         @auth
             <form action="{{ route('comments.store', $project->id) }}" method="POST">

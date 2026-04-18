@@ -108,7 +108,6 @@
                                             PNG, JPG)</p>
                                     </div>
 
-                                    {{-- IMPORTANT: name="media[]" et multiple --}}
                                     <input type="file" name="media[]" id="fichiers" multiple
                                         @change="filesCount = $event.target.files.length" accept="image/*,video/*"
                                         class="absolute inset-0 opacity-0 cursor-pointer" required />

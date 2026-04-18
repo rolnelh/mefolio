@@ -46,7 +46,7 @@
                         {{-- Biographie --}}
                         @if ($creatif->bio)
                             <div class="mt-8 pt-6 border-t border-gray-50 dark:border-gray-700 w-full">
-                                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed text-justify">
+                                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed text-start">
                                     {{ $creatif->bio }}
                                 </p>
                             </div>

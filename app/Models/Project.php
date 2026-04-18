@@ -18,25 +18,21 @@ class Project extends Model
         'image',
         'slug',
         // 'category',
-        'fichiers', // Pour stocker les chemins des fichiers multiples
-        'technologies', // Si tu l'utilises dans ton formulaire
+        'fichiers', 
+        'technologies',
     ];
 
     protected $casts = [
     'fichiers' => 'array',
 ];
 
-    /**
-     * Utiliser le slug à la place de l'ID pour le Route Model Binding
-     */
+    
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
-    /**
-     * Relations
-     */
+    
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -52,9 +48,7 @@ class Project extends Model
         return $this->hasMany(Comment::class)->whereNull('parent_id')->latest();
     }
 
-    /**
-     * Boot : Génération automatique du slug unique à la création
-     */
+   
     protected static function boot()
     {
         parent::boot();
@@ -65,7 +59,6 @@ class Project extends Model
             }
         });
 
-        // Optionnel : Mettre à jour le slug si le titre change
         static::updating(function ($project) {
             if ($project->isDirty('title')) {
                 $project->slug = Str::slug($project->title) . '-' . uniqid();
@@ -73,9 +66,7 @@ class Project extends Model
         });
     }
 
-    /**
-     * Accessors
-     */
+
     public function getUrlAttribute()
     {
         return route('projects.show', $this->slug);
