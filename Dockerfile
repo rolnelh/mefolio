@@ -1,25 +1,31 @@
-FROM php:8.2-cli
+FROM php:8.2-apache
 
 # Installer les extensions PHP
 RUN apt-get update && apt-get install -y \
     git curl zip unzip libzip-dev libpng-dev libonig-dev libxml2-dev nodejs npm \
     && docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath
 
+# Activer mod_rewrite pour Laravel
+RUN a2enmod rewrite
+
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www
+WORKDIR /var/www/html
 COPY . .
 
-# Installer les dépendances PHP
+# Installer les dépendances
 RUN composer install --no-dev --optimize-autoloader
-
-# Installer les dépendances JS et builder les assets
 RUN npm install && npm run build
 
 # Permissions
 RUN chmod -R 775 storage bootstrap/cache
+RUN chown -R www-data:www-data storage bootstrap/cache
 
-EXPOSE 8000
+# Configurer Apache pour pointer vers /public
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-CMD php artisan storage:link && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
+EXPOSE 80
+
+CMD php artisan storage:link && php artisan migrate --force && apache2-foreground
