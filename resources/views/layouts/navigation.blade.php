@@ -168,19 +168,19 @@
                             <button
                                 class="flex items-center space-x-3 bg-gray-50 dark:bg-gray-800 py-1.5 pl-3 pr-1 rounded-full border border-gray-200 dark:border-gray-700 hover:bg-gray-100 transition-all shadow-sm">
                                 <span class="text-sm font-bold text-gray-700 dark:text-gray-200">
-                                    {{ Auth::user()->creatif->nom }} {{ Auth::user()->creatif->prenom }} </span>
-
-                                <div class="relative">
-                                    @if (Auth::user()->creatif && Auth::user()->creatif->photo)
-                                        <img src="{{ asset('storage/' . Auth::user()->creatif->photo) }}"
-                                            class="h-8 w-8 rounded-full object-cover border-2 border-white dark:border-gray-700 shadow-sm">
-                                    @else
-                                        <div
-                                            class="h-8 w-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-black">
-                                            {{ strtoupper(substr(Auth::user()->username, 0, 1)) }}
-                                        </div>
-                                    @endif
-                                </div>
+                                    {{ Auth::user()->creatif?->nom ?? Auth::user()->username }}
+                                    {{ Auth::user()->creatif?->prenom ?? '' }}
+                                    <div class="relative">
+                                        @if (Auth::user()->creatif && Auth::user()->creatif->photo)
+                                            <img src="{{ asset('storage/' . Auth::user()->creatif->photo) }}"
+                                                class="h-8 w-8 rounded-full object-cover border-2 border-white dark:border-gray-700 shadow-sm">
+                                        @else
+                                            <div
+                                                class="h-8 w-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-black">
+                                                {{ strtoupper(substr(Auth::user()->username, 0, 1)) }}
+                                            </div>
+                                        @endif
+                                    </div>
                             </button>
                         </x-slot>
 
