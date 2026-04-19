@@ -23,7 +23,6 @@ class Creatif extends Model
         'slug',
     ];
 
-    // Relation avec User
     public function user()
     {
         return $this->belongsTo(User::class);

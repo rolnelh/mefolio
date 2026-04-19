@@ -79,6 +79,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('blog', [PostController::class, 'index'])->name('blog');
 
 
+Route::get('/missions', function () {
+    return view('missions.index');
+})->name('missions.index');
+
 
 
 

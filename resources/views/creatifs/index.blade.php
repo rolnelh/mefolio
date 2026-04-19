@@ -19,7 +19,6 @@
                 <div class="h-32 bg-cover bg-center transition-opacity duration-500"
                     style="background-image: url('{{ $creatif->couverture ? asset('storage/' . $creatif->couverture) : 'https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000&auto=format&fit=crop' }}');">
 
-                    {{-- Optionnel : Un léger voile sombre pour faire ressortir l'avatar --}}
                     <div class="w-full h-full bg-black/10"></div>
                 </div>
 
@@ -45,14 +44,14 @@
                 </div>
 
                 <div class="flex justify-center gap-6 p-4 bg-gray-50 dark:bg-gray-700/50">
-                    {{-- Exemple de lien conditionnel --}}
+
                     @if ($creatif->linkedin)
                         <a href="{{ $creatif->linkedin }}" class="text-gray-400 hover:text-blue-600 transition-colors">
                             <span class="sr-only">LinkedIn</span>
                             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"></svg>
                         </a>
                     @endif
-                    {{-- Ajoutez d'autres réseaux ici --}}
+
                 </div>
             </div>
         @empty
