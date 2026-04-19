@@ -25,7 +25,8 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 # Configurer Apache pour pointer vers /public
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+RUN echo "Listen 8000" >> /etc/apache2/ports.conf && sed -i 's/VirtualHost \*:80/VirtualHost *:8000/' /etc/apache2/sites-available/000-default.conf
 
-EXPOSE 80
+EXPOSE 8000
 
 CMD php artisan storage:link && php artisan migrate --force && apache2-foreground
