@@ -25,7 +25,6 @@
                     </div>
                 @endif
 
-                {{-- On utilise le null-safe operator ?-> pour éviter l'erreur --}}
                 <form action="{{ route('creatifs.update', $creatif?->id ?? 0) }}" method="POST"
                     enctype="multipart/form-data" class="space-y-8">
                     @csrf
@@ -46,9 +45,9 @@
                                     de couverture</label>
                                 <div
                                     class="relative group h-40 w-full rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center overflow-hidden transition-all hover:border-indigo-400 bg-gray-50 dark:bg-gray-900">
-                                    if($creatif && $creatif->couverture):
-                                    <img src="{{ asset('storage/' . $creatif->couverture) }}"
-                                        class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity">
+                                    @if ($creatif && $creatif->couverture)
+                                        <img src="{{ asset('storage/' . $creatif->couverture) }}"
+                                            class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity">
                                     @endif
                                     <div class="relative z-10 text-center p-4">
                                         <svg class="mx-auto h-10 w-10 text-gray-400 group-hover:text-indigo-500 transition-colors"
@@ -67,7 +66,7 @@
 
                             <div class="flex items-center space-x-6">
                                 <div class="relative group">
-                                    <img src="{{ $creatif->photo ? asset('storage/' . $creatif->photo) : 'https://ui-avatars.com/api/?name=' . urlencode($creatif->prenom) . '&background=6366f1&color=fff' }}"
+                                    <img src="{{ $creatif?->photo ? asset('storage/' . $creatif->photo) : 'https://ui-avatars.com/api/?name=' . urlencode($creatif?->prenom ?? Auth::user()->username) . '&background=6366f1&color=fff' }}"
                                         class="h-20 w-20 rounded-full object-cover ring-4 ring-white dark:ring-gray-700 shadow-lg">
                                     <label
                                         class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
@@ -93,10 +92,10 @@
                         <div class="space-y-1">
                             <label class="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Nom complet</label>
                             <div class="flex space-x-4">
-                                <input type="text" name="prenom" value="{{ old('prenom', $creatif->prenom) }}"
+                                <input type="text" name="prenom" value="{{ old('prenom', $creatif?->prenom) }}"
                                     placeholder="Prénom"
                                     class="flex-1 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900 focus:border-indigo-500 focus:ring-indigo-500 transition-all">
-                                <input type="text" name="nom" value="{{ old('nom', $creatif->nom) }}"
+                                <input type="text" name="nom" value="{{ old('nom', $creatif?->nom) }}"
                                     placeholder="Nom"
                                     class="flex-1 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900 focus:border-indigo-500 focus:ring-indigo-500 transition-all">
                             </div>
@@ -106,7 +105,7 @@
                             <label class="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Spécialité &
                                 Titre</label>
                             <input type="text" name="specialite"
-                                value="{{ old('specialite', $creatif->specialite) }}"
+                                value="{{ old('specialite', $creatif?->specialite) }}"
                                 class="w-full rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900 focus:border-indigo-500 focus:ring-indigo-500 transition-all">
                         </div>
 
@@ -114,7 +113,7 @@
                             <label class="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">📍
                                 Localisation</label>
                             <input type="text" name="localisation"
-                                value="{{ old('localisation', $creatif->localisation) }}"
+                                value="{{ old('localisation', $creatif?->localisation) }}"
                                 class="w-full rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900 focus:border-indigo-500 focus:ring-indigo-500 transition-all">
                         </div>
 
@@ -122,7 +121,7 @@
                             <label class="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">🔗 Portfolio
                                 (URL)</label>
                             <input type="url" name="portfolio_url"
-                                value="{{ old('portfolio_url', $creatif->portfolio_url) }}"
+                                value="{{ old('portfolio_url', $creatif?->portfolio_url) }}"
                                 class="w-full rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900 focus:border-indigo-500 focus:ring-indigo-500 transition-all">
                         </div>
 
@@ -130,7 +129,7 @@
                             <label class="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Biographie
                                 professionnelle</label>
                             <textarea name="bio" rows="5"
-                                class="w-full rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900 focus:border-indigo-500 focus:ring-indigo-500 transition-all">{{ old('bio', $creatif->bio) }}</textarea>
+                                class="w-full rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900 focus:border-indigo-500 focus:ring-indigo-500 transition-all">{{ old('bio', $creatif?->bio) }}</textarea>
                             <p class="text-right text-xs text-gray-400">Utilisez ce texte pour convaincre vos futurs
                                 partenaires.</p>
                         </div>
