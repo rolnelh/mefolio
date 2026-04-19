@@ -51,42 +51,98 @@ class ProjectController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'title'       => 'required|string|max:255',
-            'description' => 'required|string',
-            'media'       => 'required|array',
-            'media.*'     => 'file|mimes:jpg,jpeg,png,webp,mp4,mov,avi|max:20480',
-        ]);
+{
+    $validated = $request->validate([
+        'title'       => 'required|string|max:255',
+        'description' => 'required|string',
+        'media'       => 'required|array',
+        'media.*'     => 'file|mimes:jpg,jpeg,png,webp,mp4,mov,avi|max:20480',
+    ]);
 
-        $project = new Project();
-        $project->user_id = auth()->id();
-        $project->creatif_id = auth()->user()->creatif?->id;
-        $project->title = $validated['title'];
-        $project->description = $validated['description'];
-        $project->slug = Str::slug($validated['title']) . '-' . uniqid();
+    $cloudinary = new \Cloudinary\Cloudinary([
+        'cloud' => [
+            'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+            'api_key'    => env('CLOUDINARY_API_KEY'),
+            'api_secret' => env('CLOUDINARY_API_SECRET'),
+        ],
+        'url' => ['secure' => true]
+    ]);
 
-        if ($request->hasFile('media')) {
-            $paths = [];
-            foreach ($request->file('media') as $index => $file) {
-                $result = cloudinary()->upload($file->getRealPath(), [
-                    'folder' => 'mefolio/projects',
-                    'resource_type' => 'auto',
-                ]);
-                $url = $result->getSecurePath();
+    $project = new Project();
+    $project->user_id = auth()->id();
+    $project->creatif_id = auth()->user()->creatif?->id;
+    $project->title = $validated['title'];
+    $project->description = $validated['description'];
+    $project->slug = Str::slug($validated['title']) . '-' . uniqid();
 
-                if ($index === 0) {
-                    $project->image = $url;
-                }
-                $paths[] = $url;
+    if ($request->hasFile('media')) {
+        $paths = [];
+        foreach ($request->file('media') as $index => $file) {
+            $result = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+                'folder' => 'mefolio/projects',
+                'resource_type' => 'auto',
+            ]);
+            $url = $result['secure_url'];
+            if ($index === 0) {
+                $project->image = $url;
             }
-            $project->fichiers = json_encode($paths);
+            $paths[] = $url;
         }
-
-        $project->save();
-
-        return redirect()->route('dashboard')->with('success', 'Chef-d\'œuvre propulsé ! 🚀');
+        $project->fichiers = json_encode($paths);
     }
+
+    $project->save();
+    return redirect()->route('dashboard')->with('success', 'Chef-d\'œuvre propulsé ! 🚀');
+}
+
+public function update(Request $request, Project $project)
+{
+    $validated = $request->validate([
+        'title'       => 'required|string|max:255',
+        'description' => 'required|string',
+        'image'       => 'nullable|image|max:4096',
+        'media.*'     => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4,mov,avi|max:20480',
+    ]);
+
+    $cloudinary = new \Cloudinary\Cloudinary([
+        'cloud' => [
+            'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+            'api_key'    => env('CLOUDINARY_API_KEY'),
+            'api_secret' => env('CLOUDINARY_API_SECRET'),
+        ],
+        'url' => ['secure' => true]
+    ]);
+
+    if ($request->hasFile('image')) {
+        $result = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
+            'folder' => 'mefolio/projects/covers',
+        ]);
+        $project->image = $result['secure_url'];
+    }
+
+    $currentFiles = json_decode($project->fichiers ?? '[]', true);
+
+    if ($request->hasFile('media')) {
+        foreach ($request->file('media') as $file) {
+            $result = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+                'folder' => 'mefolio/projects/gallery',
+                'resource_type' => 'auto',
+            ]);
+            $currentFiles[] = $result['secure_url'];
+        }
+    }
+
+    $project->update([
+        'title'       => $validated['title'],
+        'description' => $validated['description'],
+        'image'       => $project->image,
+        'fichiers'    => json_encode($currentFiles),
+    ]);
+
+    return redirect()->route('projects.show', $project->slug)
+        ->with('success', 'Projet mis à jour !');
+}
+   
 
     public function show($slug)
     {
@@ -102,46 +158,7 @@ class ProjectController extends Controller
             abort(403, 'Action non autorisée.');
         }
         return view('projects.edit', compact('project'));
-    }
-
-    public function update(Request $request, Project $project)
-    {
-        $validated = $request->validate([
-            'title'       => 'required|string|max:255',
-            'description' => 'required|string',
-            'image'       => 'nullable|image|max:4096',
-            'media.*'     => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4,mov,avi|max:20480',
-        ]);
-
-        if ($request->hasFile('image')) {
-            $result = cloudinary()->upload($request->file('image')->getRealPath(), [
-                'folder' => 'mefolio/projects/covers',
-            ]);
-            $project->image = $result->getSecurePath();
-        }
-
-        $currentFiles = json_decode($project->fichiers ?? '[]', true);
-
-        if ($request->hasFile('media')) {
-            foreach ($request->file('media') as $file) {
-                $result = cloudinary()->upload($file->getRealPath(), [
-                    'folder' => 'mefolio/projects/gallery',
-                    'resource_type' => 'auto',
-                ]);
-                $currentFiles[] = $result->getSecurePath();
-            }
-        }
-
-        $project->update([
-            'title'       => $validated['title'],
-            'description' => $validated['description'],
-            'image'       => $project->image,
-            'fichiers'    => json_encode($currentFiles),
-        ]);
-
-        return redirect()->route('projects.show', $project->slug)
-            ->with('success', 'Projet mis à jour !');
-    }
+    }  
 
     public function destroy(Project $project)
     {

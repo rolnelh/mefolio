@@ -5,9 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Creatif;
 use Illuminate\Support\Facades\Auth;
+use Cloudinary\Cloudinary;
 
 class CreatifController extends Controller
 {
+    private function getCloudinary()
+    {
+        return new Cloudinary([
+            'cloud' => [
+                'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                'api_key'    => env('CLOUDINARY_API_KEY'),
+                'api_secret' => env('CLOUDINARY_API_SECRET'),
+            ],
+            'url' => ['secure' => true]
+        ]);
+    }
+
+    private function uploadToCloudinary($file, $folder)
+    {
+        $cloudinary = $this->getCloudinary();
+        $result = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+            'folder' => $folder,
+        ]);
+        return $result['secure_url'];
+    }
+
     public function index()
     {
         $creatifs = Creatif::latest()->paginate(4);
@@ -34,30 +56,28 @@ class CreatifController extends Controller
         $user = Auth::user();
 
         $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'specialite' => 'required|string|max:255',
+            'nom'          => 'required|string|max:255',
+            'prenom'       => 'required|string|max:255',
+            'specialite'   => 'required|string|max:255',
             'localisation' => 'required|string|max:255',
-            'bio' => 'required|string',
-            'portfolio_url' => 'nullable|url',
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'couverture' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
+            'bio'          => 'required|string',
+            'portfolio_url'=> 'nullable|url',
+            'photo'        => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'couverture'   => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
         ]);
 
         if ($request->hasFile('photo')) {
-            $result = cloudinary()->upload($request->file('photo')->getRealPath(), [
-                'folder' => 'mefolio/photos_creatifs',
-                'transformation' => ['width' => 400, 'height' => 400, 'crop' => 'fill']
-            ]);
-            $validated['photo'] = $result->getSecurePath();
+            $validated['photo'] = $this->uploadToCloudinary(
+                $request->file('photo'),
+                'mefolio/photos_creatifs'
+            );
         }
 
         if ($request->hasFile('couverture')) {
-            $result = cloudinary()->upload($request->file('couverture')->getRealPath(), [
-                'folder' => 'mefolio/couvertures_creatifs',
-                'transformation' => ['width' => 1200, 'height' => 400, 'crop' => 'fill']
-            ]);
-            $validated['couverture'] = $result->getSecurePath();
+            $validated['couverture'] = $this->uploadToCloudinary(
+                $request->file('couverture'),
+                'mefolio/couvertures_creatifs'
+            );
         }
 
         $user->creatif()->create($validated);
@@ -77,30 +97,28 @@ class CreatifController extends Controller
         $user = Auth::user();
 
         $validated = $request->validate([
-            'nom' => 'nullable|string|max:255',
-            'prenom' => 'nullable|string|max:255',
-            'specialite' => 'nullable|string|max:255',
+            'nom'          => 'nullable|string|max:255',
+            'prenom'       => 'nullable|string|max:255',
+            'specialite'   => 'nullable|string|max:255',
             'localisation' => 'nullable|string|max:255',
-            'bio' => 'nullable|string',
-            'portfolio_url' => 'nullable|url',
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'couverture' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
+            'bio'          => 'nullable|string',
+            'portfolio_url'=> 'nullable|url',
+            'photo'        => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'couverture'   => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
         ]);
 
         if ($request->hasFile('photo')) {
-            $result = cloudinary()->upload($request->file('photo')->getRealPath(), [
-                'folder' => 'mefolio/photos_creatifs',
-                'transformation' => ['width' => 400, 'height' => 400, 'crop' => 'fill']
-            ]);
-            $validated['photo'] = $result->getSecurePath();
+            $validated['photo'] = $this->uploadToCloudinary(
+                $request->file('photo'),
+                'mefolio/photos_creatifs'
+            );
         }
 
         if ($request->hasFile('couverture')) {
-            $result = cloudinary()->upload($request->file('couverture')->getRealPath(), [
-                'folder' => 'mefolio/couvertures_creatifs',
-                'transformation' => ['width' => 1200, 'height' => 400, 'crop' => 'fill']
-            ]);
-            $validated['couverture'] = $result->getSecurePath();
+            $validated['couverture'] = $this->uploadToCloudinary(
+                $request->file('couverture'),
+                'mefolio/couvertures_creatifs'
+            );
         }
 
         $user->creatif()->updateOrCreate(['user_id' => $user->id], $validated);
