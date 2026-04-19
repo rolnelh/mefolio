@@ -46,9 +46,9 @@
                                     de couverture</label>
                                 <div
                                     class="relative group h-40 w-full rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center overflow-hidden transition-all hover:border-indigo-400 bg-gray-50 dark:bg-gray-900">
-                                    @if ($creatif->couverture)
-                                        <img src="{{ asset('storage/' . $creatif->couverture) }}"
-                                            class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity">
+                                    if($creatif && $creatif->couverture):
+                                    <img src="{{ asset('storage/' . $creatif->couverture) }}"
+                                        class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity">
                                     @endif
                                     <div class="relative z-10 text-center p-4">
                                         <svg class="mx-auto h-10 w-10 text-gray-400 group-hover:text-indigo-500 transition-colors"

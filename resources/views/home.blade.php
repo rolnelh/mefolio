@@ -16,55 +16,126 @@
 
         <div class="absolute inset-0 z-0 pointer-events-none">
             <div class="absolute -top-[10%] -right-[10%] w-[70%] h-[70%] rounded-full bg-blue-600/10 blur-[120px]"></div>
-
             <div class="absolute -bottom-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-indigo-600/10 blur-[100px]">
             </div>
-
             <div
                 class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay">
             </div>
         </div>
 
         <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
+            <div class="mx-auto max-w-6xl text-center">
 
                 <div
                     class="inline-flex items-center rounded-full bg-blue-500/5 px-4 py-1.5 text-xs font-semibold text-blue-400 ring-1 ring-inset ring-blue-500/20 mb-10 backdrop-blur-md">
-                    <span class="mr-2">✨</span> Propulsé par la créativité
+                    <span class="mr-2">🌍</span> La première plateforme africaine des talents créatifs
                 </div>
 
                 <h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-7xl leading-[1.05]">
-                    Partagez vos projets, <br>
+                    Le talent africain<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
-                        inspirez le monde
+                        mérite une scène mondiale.
                     </span>
                 </h1>
 
                 <p class="mt-8 text-lg md:text-xl leading-relaxed text-gray-400 font-light max-w-2xl mx-auto">
-                    Créez votre profil en quelques clics, présentez vos plus belles réalisations et rejoignez une
-                    <span class="text-gray-200 font-medium">communauté de créatifs</span> passionnés.
+                    Mefolio est la plateforme pensée pour les créatifs et étudiants africains.
+                    Construisez votre portfolio, soyez découverts par des recruteurs,
+                    et monétisez vos compétences avec
+                    <span class="text-gray-200 font-medium">Mobile Money.</span>
                 </p>
+
+                {{-- Stats rapides --}}
+                <div class="mt-10 flex items-center justify-center gap-8 flex-wrap">
+                    <div class="text-center">
+                        <div class="text-2xl font-extrabold text-white">2 000+</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Créatifs</div>
+                    </div>
+                    <div class="w-px h-8 bg-gray-800"></div>
+                    <div class="text-center">
+                        <div class="text-2xl font-extrabold text-white">5k+</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Projets</div>
+                    </div>
+                    <div class="w-px h-8 bg-gray-800"></div>
+                    <div class="text-center">
+                        <div class="text-2xl font-extrabold text-white">15+</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Pays</div>
+                    </div>
+                    <div class="w-px h-8 bg-gray-800"></div>
+                    <div class="text-center">
+                        <div class="text-2xl font-extrabold text-white">100%</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Africain</div>
+                    </div>
+                </div>
 
                 <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5">
                     @guest
                         <a href="{{ route('register') }}"
                             class="w-full sm:w-auto group relative inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-sm font-bold text-gray-950 shadow-2xl transition-all hover:bg-gray-100 hover:scale-[1.02] active:scale-95">
-                            Commencer maintenant
+                            Créer mon portfolio gratuit
+                            <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
                         </a>
-
-                        <a href="{{ route('login') }}"
+                        <a href="{{ route('projects.index') }}"
                             class="group flex items-center gap-2 text-sm font-bold text-gray-300 hover:text-white transition-colors py-3">
-                            Nous contacter
-                            <span class="group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                            Explorer les projets
+                            <span class="group-hover:translate-x-1 transition-transform">→</span>
                         </a>
                     @endguest
 
                     @auth
-                        <a href="{{ route('dashboard') }}"
-                            class="w-full sm:w-auto rounded-2xl bg-blue-600 px-10 py-4 text-sm font-bold text-white shadow-lg shadow-blue-900/20 hover:bg-blue-500 transition-all">
+                        <a href="{{ route('projects.index') }}"
+                            class="w-full sm:w-auto rounded-full bg-blue-600 px-10 py-4 text-sm font-bold text-white shadow-lg shadow-blue-900/20 hover:bg-blue-500 transition-all hover:scale-[1.02]">
                             Explorer les projets
                         </a>
+                        @php
+                            $creatif = Auth::user()->creatif;
+                            $profilComplet =
+                                $creatif &&
+                                $creatif->nom &&
+                                $creatif->prenom &&
+                                $creatif->specialite &&
+                                $creatif->localisation &&
+                                $creatif->bio &&
+                                $creatif->portfolio_url &&
+                                $creatif->photo;
+                        @endphp
+                        @if ($profilComplet)
+                            <a href="{{ route('projets.create') }}"
+                                class="group flex items-center gap-2 text-sm font-bold text-gray-300 hover:text-white transition-colors py-3">
+                                Partager un projet
+                                <span class="group-hover:translate-x-1 transition-transform">→</span>
+                            </a>
+                        @else
+                            <a href="{{ route('creatifs.edit') }}"
+                                class="group flex items-center gap-2 text-sm font-bold text-amber-400 hover:text-amber-300 transition-colors py-3">
+                                ⚠️ Compléter mon profil
+                                <span class="group-hover:translate-x-1 transition-transform">→</span>
+                            </a>
+                        @endif
                     @endauth
+                </div>
+
+                <div class="mt-12 flex items-center justify-center gap-3">
+                    <div class="flex -space-x-2">
+                        <div
+                            class="w-8 h-8 rounded-full bg-indigo-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
+                            D</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-blue-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
+                            A</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-purple-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
+                            S</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-pink-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
+                            K</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-green-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
+                            M</div>
+                    </div>
+                    <p class="text-sm text-gray-400">
+                        Rejoignez <span class="text-white font-semibold">+2 000 créatifs</span> africains
+                    </p>
                 </div>
 
             </div>
