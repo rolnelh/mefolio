@@ -105,7 +105,9 @@
                                 </span>
                                 <div class="relative">
                                     @if (Auth::user()->creatif && Auth::user()->creatif->photo)
-                                    <img src="{{ Auth::user()->creatif->photo }}" @else <div
+                                    <img src="{{ Auth::user()->creatif->photo }}" />
+                                    @else
+                                     <div
                                             class="h-8 w-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-black">
                                         {{ strtoupper(substr(Auth::user()->username, 0, 1)) }}
                                 </div>
