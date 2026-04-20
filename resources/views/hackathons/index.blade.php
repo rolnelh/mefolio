@@ -1,34 +1,79 @@
 <x-app-layout>
 
-    {{-- HERO --}}
-    <section class="relative bg-[#050810] py-24 overflow-hidden">
+    <section
+        class="relative bg-white py-8 lg:py-16 overflow-hidden border-b border-gray-100 min-h-[70vh] flex items-center">
+        <div class="absolute inset-0 z-0 opacity-[0.02]"
+            style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 40px 40px;"></div>
+
         <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute -top-[20%] right-0 w-[50%] h-[60%] rounded-full bg-orange-600/10 blur-[120px]"></div>
-            <div class="absolute bottom-0 -left-[10%] w-[40%] h-[50%] rounded-full bg-indigo-600/10 blur-[100px]"></div>
+            <div class="absolute -top-[10%] right-[5%] w-[40%] h-[50%] rounded-full bg-orange-50/50 blur-[100px]"></div>
+            <div class="absolute bottom-0 left-[5%] w-[30%] h-[40%] rounded-full bg-indigo-50/40 blur-[80px]"></div>
         </div>
-        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <div
-                class="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold px-4 py-1.5 rounded-full mb-8 uppercase tracking-widest">
-                <span class="w-1.5 h-1.5 bg-orange-400 rounded-full animate-pulse"></span>
-                Hub des opportunités africaines
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                <div class="text-left order-2 lg:order-1">
+                    <div
+                        class="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 text-orange-600 text-[10px] font-black px-4 py-1.5 rounded-full mb-6 uppercase tracking-[0.2em]">
+                        <span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                        Hub des opportunités africaines
+                    </div>
+
+                    <h1
+                        class="text-5xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[0.95] mb-6">
+                        Programmes &<br>
+                        <span class="text-orange-500">Hackathons</span>
+                    </h1>
+
+                    <p class="text-lg text-slate-500 max-w-xl leading-relaxed mb-8">
+                        Découvrez les meilleurs programmes d'accompagnement et compétitions tech en Afrique.
+                        <span class="text-slate-900 font-semibold border-b-2 border-orange-200">Postulez
+                            directement</span>
+                        avec votre profil MeFolio.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#explorer"
+                            class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 group shadow-lg shadow-orange-500/20">
+                            Postuler ici
+                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div
+                    class="relative order-1 lg:order-2 lg:-mt-16 transition-transform duration-500 hover:translate-y-2">
+                    <div class="absolute -inset-2 border border-slate-100 rounded-[2.5rem] rotate-1"></div>
+
+                    <div class="relative p-2 rounded-[2.2rem] overflow-hidden">
+                        <img src="{{ asset('images/designer.png') }}" alt="Programmes et Hackathons Afrique"
+                            class="w-full h-auto rounded-[1.8rem] object-cover">
+
+                        <div
+                            class="absolute bottom-6 right-6 bg-white border border-slate-100 p-3 rounded-xl flex items-center gap-3 shadow-sm">
+                            <div class="bg-green-50 p-1.5 rounded-lg text-green-600">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <h1 class="text-5xl sm:text-7xl font-black text-white tracking-tight leading-none mb-6">
-                Programmes &<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400">
-                    Hackathons
-                </span>
-            </h1>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Tous les grands programmes africains centralisés sur Mefolio.
-                <span class="text-white font-semibold">ASSIN, Sèmè City, SENUM</span> et plus —
-                candidatez directement depuis votre profil.
-            </p>
         </div>
     </section>
 
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
 
-        {{-- Stats --}}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
             @foreach ([['num' => '20+', 'label' => 'Programmes référencés', 'emoji' => '🏛️'], ['num' => '8', 'label' => 'Pays couverts', 'emoji' => '🌍'], ['num' => '500M+', 'label' => 'FCFA de dotations', 'emoji' => '💰'], ['num' => '0 FCFA', 'label' => 'Pour candidater', 'emoji' => '🆓']] as $stat)
                 <div class="bg-gray-50 rounded-2xl p-6 text-center">
@@ -39,7 +84,6 @@
             @endforeach
         </div>
 
-        {{-- Programmes vedettes --}}
         <div class="mb-20">
             <div class="mb-10">
                 <p class="text-xs font-bold uppercase tracking-[0.3em] text-orange-500 mb-2">À la une</p>
@@ -48,7 +92,6 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-                {{-- ASSIN --}}
                 <div
                     class="relative bg-gradient-to-br from-green-900 to-emerald-800 rounded-3xl p-8 text-white overflow-hidden">
                     <div
@@ -60,7 +103,7 @@
                                 🇧🇯</div>
                             <div>
                                 <p class="text-xs text-green-300 font-bold uppercase tracking-wider">Bénin · Annuel</p>
-                                <h3 class="text-xl font-black">ASSIN</h3>
+                                <h3 class="text-xl font-black">ASIN</h3>
                             </div>
                             <span
                                 class="ml-auto text-xs bg-amber-400/20 text-amber-300 border border-amber-400/30 font-semibold px-2.5 py-1 rounded-full">Bientôt</span>
@@ -93,7 +136,6 @@
                     </div>
                 </div>
 
-                {{-- Sèmè City --}}
                 <div
                     class="relative bg-gradient-to-br from-blue-900 to-indigo-800 rounded-3xl p-8 text-white overflow-hidden">
                     <div
@@ -141,7 +183,6 @@
             </div>
         </div>
 
-        {{-- Tous les programmes --}}
         <div class="mb-20">
             <div class="flex items-center justify-between mb-8">
                 <h2 class="text-2xl font-black text-gray-900">Tous les programmes</h2>
@@ -186,7 +227,6 @@
             </div>
         </div>
 
-        {{-- Proposer un programme --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
             <div class="bg-gradient-to-br from-indigo-600 to-violet-600 rounded-3xl p-8 text-white">
                 <div class="text-3xl mb-4">🔔</div>
