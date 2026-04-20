@@ -7,31 +7,176 @@
     showNav = currentPos < lastPos || currentPos < 50;
     lastPos = currentPos;
 })"
-    :class="{
-        'translate-y-0': showNav,
-        '-translate-y-full': !showNav && !open
-    }"
+    :class="{ 'translate-y-0': showNav, '-translate-y-full': !showNav && !open }"
     class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 transition-transform duration-300 ease-in-out">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-20">
-            <div class="flex">
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('home') }}" class="transition-transform hover:scale-105">
-                        <x-application-logo class="block h-10 w-auto fill-current text-indigo-600 dark:text-white" />
-                    </a>
-                </div>
 
-                <div class="hidden space-x-6 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">Explorer les projets</x-nav-link>
-                    <x-nav-link :href="route('creatifs.index')" :active="request()->routeIs('creatifs.index')">Créatifs</x-nav-link>
-                    <x-nav-link :href="route('missions.index')" :active="request()->routeIs('missions.index')">Missions Freelance</x-nav-link>
-                    <x-nav-link :href="route('blog')" :active="request()->routeIs('blog')">Blog</x-nav-link>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+
+            {{-- LOGO --}}
+            <div class="flex items-center gap-8">
+                <a href="{{ route('home') }}" class="transition-transform hover:scale-105">
+                    <x-application-logo class="block h-8 w-auto fill-current text-indigo-600" />
+                </a>
+
+                {{-- LIENS DESKTOP --}}
+                <div class="hidden lg:flex items-center gap-1">
+
+                    {{-- Explorer --}}
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open" @click.outside="open = false"
+                            class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all">
+                            Explorer
+                            <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                        <div x-show="open" x-transition:enter="transition ease-out duration-150"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            class="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 z-50">
+                            <a href="{{ route('projects.index') }}"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors group">
+                                <span class="text-lg">🎨</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Projets créatifs</p>
+                                    <p class="text-xs text-gray-400">Explorez les réalisations</p>
+                                </div>
+                            </a>
+
+                            <a href="{{ route('services.index') }}"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors">
+                                <span class="text-lg">🛠️</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Services</p>
+                                    <p class="text-xs text-gray-400">Commandez des services</p>
+                                </div>
+                            </a>
+
+                            <a href="talent.week"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors opacity-60">
+                                <span class="text-lg">🏆</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Talent of the Week
+                                        <span
+                                            class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span>
+                                    </p>
+                                    <p class="text-xs text-gray-400">Le talent de la semaine</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    {{-- Talents --}}
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open" @click.outside="open = false"
+                            class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all">
+                            Talents
+                            <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                        <div x-show="open" x-transition:enter="transition ease-out duration-150"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            class="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 z-50">
+                            <a href="{{ route('creatifs.index') }}"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors">
+                                <span class="text-lg">👥</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Tous les créatifs</p>
+                                    <p class="text-xs text-gray-400">Découvrez les talents</p>
+                                </div>
+                            </a>
+                            <a href="creatifs.localisation"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 opacity-60 transition-colors">
+                                <span class="text-lg">📍</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Par localisation
+                                        <span
+                                            class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span>
+                                    </p>
+                                    <p class="text-xs text-gray-400">Trouvez près de chez vous</p>
+                                </div>
+                            </a>
+                            <a href="creatifs.domaine"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 opacity-60 transition-colors">
+                                <span class="text-lg">🎯</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Par domaine <span
+                                            class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span>
+                                    </p>
+                                    <p class="text-xs text-gray-400">Design, Dev, Photo...</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    {{-- Missions --}}
+                    <a href="{{ route('missions.index') }}"
+                        class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all">
+                        Missions
+                    </a>
+
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open" @click.outside="open = false"
+                            class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all">
+                            Communauté
+                            <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                        <div x-show="open" x-transition:enter="transition ease-out duration-150"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            class="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 z-50">
+                            <a href="{{ route('blog') }}"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors">
+                                <span class="text-lg">📝</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Blog</p>
+                                    <p class="text-xs text-gray-400">Actualités et inspiration</p>
+                                </div>
+                            </a>
+                            <a href="challenges.index"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 opacity-60 transition-colors">
+                                <span class="text-lg">⚡</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Challenges créatifs
+                                        <span
+                                            class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span>
+                                    </p>
+                                    <p class="text-xs text-gray-400">Compétitions et défis</p>
+                                </div>
+                            </a>
+                            <a href="{{ route('hackathons.index') }}"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors">
+                                <span class="text-lg">🚀</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Programmes &
+                                        Hackathons
+                                    </p>
+                                    <p class="text-xs text-gray-400">ASSIN, Sèmè City et plus</p>
+                                </div>
+                            </a>
+                            <div class="border-t border-gray-100 dark:border-gray-700 my-2"></div>
+                            <a href="{{ route('register') }}"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 transition-colors">
+                                <span class="text-lg">🤝</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-indigo-700">Rejoindre Mefolio</p>
+                                    <p class="text-xs text-indigo-400">Créer mon profil gratuit</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-3">
+            {{-- DROITE --}}
+            <div class="hidden lg:flex items-center gap-3">
                 @auth
-                    {{-- Bouton Partager un projet --}}
                     @php
                         $creatif = Auth::user()->creatif;
                         $profilComplet =
@@ -47,32 +192,26 @@
 
                     @if ($profilComplet)
                         <a href="{{ route('projets.create') }}"
-                            class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md shadow-indigo-200 dark:shadow-none transition-all transform hover:-translate-y-0.5">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            class="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-md shadow-indigo-200 transition-all hover:scale-105">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                             </svg>
-                            Partager un projet
+                            Partager
                         </a>
                     @else
-                        <a href="{{ route('creatifs.edit') }}" x-data
-                            @click.prevent="
-                                $dispatch('notify', { message: 'Complétez votre profil avant de partager un projet.', type: 'warning' });
-                                window.location.href = '{{ route('creatifs.edit') }}';
-                            "
-                            class="inline-flex items-center gap-2 bg-gray-100 hover:bg-indigo-50 text-gray-500 hover:text-indigo-600 text-sm font-semibold px-4 py-2 rounded-full border border-gray-200 transition-all">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                            </svg>
-                            Partager un projet
+                        <a href="{{ route('creatifs.edit') }}"
+                            class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-600 border border-amber-200 text-xs font-semibold px-4 py-2 rounded-full transition-all hover:bg-amber-100">
+                            ⚠️ Compléter profil
                         </a>
                     @endif
 
-                    {{-- Notifications --}}
+                    {{-- Notifs --}}
                     <div class="relative" x-data="{ openNotify: false }">
                         <button @click="openNotify = !openNotify"
-                            class="p-2 text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none transition-colors relative">
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor">
+                            class="p-2 text-gray-500 hover:text-indigo-600 transition-colors relative">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
                             </svg>
@@ -82,13 +221,12 @@
                                 <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                             </span>
                         </button>
-
                         <div x-show="openNotify" @click.outside="openNotify = false"
                             x-transition:enter="transition ease-out duration-200"
                             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                            class="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-xl shadow-lg py-2 border border-gray-100 dark:border-gray-700 z-50">
-                            <div class="px-4 py-2 border-b border-gray-100 dark:border-gray-700">
-                                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Notifications</h3>
+                            class="absolute right-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-2xl shadow-xl py-2 border border-gray-100 dark:border-gray-700 z-50">
+                            <div class="px-4 py-2 border-b border-gray-100">
+                                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider">Notifications</h3>
                             </div>
                             <div class="px-4 py-8 text-center text-sm text-gray-400">
                                 Aucune notification pour le moment.
@@ -96,33 +234,29 @@
                         </div>
                     </div>
 
+                    {{-- User --}}
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
-                                class="flex items-center space-x-3 bg-gray-50 dark:bg-gray-800 py-1.5 pl-3 pr-1 rounded-full border border-gray-200 dark:border-gray-700 hover:bg-gray-100 transition-all shadow-sm">
-                                <span class="text-sm font-bold text-gray-700 dark:text-gray-200">
-                                    {{ Auth::user()->creatif?->prenom ?? Auth::user()->username }}
+                                class="flex items-center gap-2 bg-gray-50 dark:bg-gray-800 py-1.5 pl-3 pr-1.5 rounded-full border border-gray-200 hover:bg-gray-100 transition-all">
+                                <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                    {{ $creatif?->prenom ?? Auth::user()->username }}
                                 </span>
-
-                                <div class="relative">
-                                    @if (Auth::user()->creatif && Auth::user()->creatif->photo)
-                                        <img src="{{ Auth::user()->creatif->photo }}" alt="Profile"
-                                            class="h-8 w-8 rounded-full object-cover border border-gray-100 dark:border-gray-600" />
-                                    @else
-                                        <div
-                                            class="h-8 w-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-black">
-                                            {{ strtoupper(substr(Auth::user()->username, 0, 1)) }}
-                                        </div>
-                                    @endif
-                                </div>
+                                @if ($creatif?->photo)
+                                    <img src="{{ $creatif->photo }}"
+                                        class="h-7 w-7 rounded-full object-cover border-2 border-white shadow-sm">
+                                @else
+                                    <div
+                                        class="h-7 w-7 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-black">
+                                        {{ strtoupper(substr(Auth::user()->username, 0, 1)) }}
+                                    </div>
+                                @endif
                             </button>
                         </x-slot>
-
                         <x-slot name="content">
-                            <div class="px-4 py-2 border-b border-gray-100 dark:border-gray-700">
+                            <div class="px-4 py-2 border-b border-gray-100">
                                 <p class="text-xs text-gray-400">Connecté en tant que</p>
-                                <p class="text-sm font-bold truncate text-gray-800 dark:text-white">
-                                    {{ Auth::user()->email }}</p>
+                                <p class="text-sm font-bold truncate text-gray-800">{{ Auth::user()->email }}</p>
                             </div>
                             <x-dropdown-link :href="route('dashboard')">Tableau de bord</x-dropdown-link>
                             <x-dropdown-link :href="route('profile.edit')">Mon Profil</x-dropdown-link>
@@ -131,7 +265,7 @@
                                     ⚠️ Compléter mon profil
                                 </x-dropdown-link>
                             @endif
-                            <hr class="border-gray-100 dark:border-gray-700">
+                            <hr class="border-gray-100">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <x-dropdown-link :href="route('logout')"
@@ -143,27 +277,19 @@
                     </x-dropdown>
                 @else
                     <a href="{{ route('login') }}"
-                        class="text-sm font-bold text-gray-600 hover:text-indigo-600 transition">Connexion</a>
+                        class="text-sm font-semibold text-gray-600 hover:text-indigo-600 transition">Connexion</a>
                     <a href="{{ route('register') }}"
-                        class="bg-indigo-600 text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 transition transform hover:-translate-y-0.5">
+                        class="bg-indigo-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition hover:scale-105">
                         S'inscrire
                     </a>
                 @endauth
             </div>
 
-            <div class="-me-2 flex items-center sm:hidden">
-                @auth
-                    <button class="p-2 text-gray-400 hover:text-indigo-600 transition relative">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
-                        <span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500"></span>
-                    </button>
-                @endauth
-                <button @click="open = ! open"
+            {{-- MOBILE BURGER --}}
+            <div class="flex items-center lg:hidden">
+                <button @click="open = !open"
                     class="p-2 rounded-xl bg-gray-50 text-gray-400 hover:bg-indigo-50 hover:text-indigo-600 transition">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                    <svg class="h-5 w-5" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
@@ -175,72 +301,79 @@
         </div>
     </div>
 
+    {{-- MOBILE MENU --}}
     <div :class="{ 'block': open, 'hidden': !open }"
-        class="hidden sm:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">Explorer les projets</x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('creatifs.index')" :active="request()->routeIs('creatifs.index')">Créatifs</x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('missions.index')" :active="request()->routeIs('missions.index')">Missions Freelance</x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('blog')" :active="request()->routeIs('blog')">Blog</x-responsive-nav-link>
+        class="hidden lg:hidden bg-white dark:bg-gray-900 border-t border-gray-100">
+        <div class="px-4 py-3 space-y-1">
+            <a href="{{ route('projects.index') }}"
+                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">🎨 Projets
+                créatifs</a>
+            <a href="{{ route('creatifs.index') }}"
+                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">👥 Créatifs</a>
+            <a href="{{ route('missions.index') }}"
+                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">💼 Missions
+                Freelance</a>
+            <a href="{{ route('blog') }}"
+                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">📝 Blog</a>
+            <div class="opacity-60">
+                <span class="block px-3 py-2 text-sm font-medium text-gray-700">⚡ Challenges <span
+                        class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span></span>
+                <span class="block px-3 py-2 text-sm font-medium text-gray-700">🚀 Hackathons <span
+                        class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span></span>
+            </div>
         </div>
-
-        <div class="pt-4 pb-1 border-t border-gray-100 dark:border-gray-800">
+        <div class="px-4 py-3 border-t border-gray-100">
             @auth
-
-                <div class="px-4 mb-3">
-                    @if ($profilComplet)
-                        <a href="{{ route('projets.create') }}"
-                            class="flex items-center justify-center gap-2 w-full bg-indigo-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                            </svg>
-                            Partager un projet
-                        </a>
+                @php
+                    $creatif = Auth::user()->creatif;
+                    $profilComplet =
+                        $creatif &&
+                        $creatif->nom &&
+                        $creatif->prenom &&
+                        $creatif->specialite &&
+                        $creatif->localisation &&
+                        $creatif->bio &&
+                        $creatif->portfolio_url &&
+                        $creatif->photo;
+                @endphp
+                <div class="flex items-center gap-3 mb-3">
+                    @if ($creatif?->photo)
+                        <img src="{{ $creatif->photo }}" class="h-9 w-9 rounded-full object-cover">
                     @else
-                        <a href="{{ route('creatifs.edit') }}"
-                            class="flex items-center justify-center gap-2 w-full bg-amber-50 text-amber-600 border border-amber-200 text-sm font-semibold px-4 py-2.5 rounded-xl">
-                            ⚠️ Compléter mon profil pour partager
-                        </a>
-                    @endif
-                </div>
-
-                <div class="flex items-center px-4 mb-4">
-                    <div class="flex-shrink-0">
-                        @if (Auth::user()->creatif && Auth::user()->creatif->photo)
-                            <img src="{{ Auth::user()->creatif->photo }}" class="h-10 w-10 rounded-full object-cover">
-                        @else
-                            <div
-                                class="h-10 w-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold">
-                                {{ strtoupper(substr(Auth::user()->username, 0, 1)) }}
-                            </div>
-                        @endif
-                    </div>
-                    <div class="ms-3">
-                        <div class="font-bold text-base text-gray-800 dark:text-white">
-                            {{ Auth::user()->creatif?->prenom ?? Auth::user()->username }}
+                        <div
+                            class="h-9 w-9 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">
+                            {{ strtoupper(substr(Auth::user()->username, 0, 1)) }}
                         </div>
-                        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    @endif
+                    <div>
+                        <p class="text-sm font-bold text-gray-800">{{ $creatif?->prenom ?? Auth::user()->username }}</p>
+                        <p class="text-xs text-gray-400">{{ Auth::user()->email }}</p>
                     </div>
                 </div>
-                <div class="space-y-1">
-                    <x-responsive-nav-link :href="route('dashboard')">Tableau de bord</x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('profile.edit')">Mon Profil</x-responsive-nav-link>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault(); this.closest('form').submit();" class="text-red-500">
-                            Déconnexion
-                        </x-responsive-nav-link>
-                    </form>
-                </div>
+                @if ($profilComplet)
+                    <a href="{{ route('projets.create') }}"
+                        class="block w-full text-center py-2.5 bg-indigo-600 text-white text-sm font-bold rounded-xl mb-2">+
+                        Partager un projet</a>
+                @else
+                    <a href="{{ route('creatifs.edit') }}"
+                        class="block w-full text-center py-2.5 bg-amber-50 text-amber-600 border border-amber-200 text-sm font-bold rounded-xl mb-2">⚠️
+                        Compléter mon profil</a>
+                @endif
+                <a href="{{ route('dashboard') }}"
+                    class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg">Tableau de bord</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button onclick="event.preventDefault(); this.closest('form').submit();"
+                        class="w-full text-left px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg">
+                        Déconnexion
+                    </button>
+                </form>
             @else
-                <div class="p-4 space-y-2">
-                    <a href="{{ route('login') }}"
-                        class="block w-full text-center py-2 text-gray-600 font-bold border border-gray-200 rounded-xl">Connexion</a>
-                    <a href="{{ route('register') }}"
-                        class="block w-full text-center py-2 bg-indigo-600 text-white font-bold rounded-xl shadow-lg">Inscription</a>
-                </div>
+                <a href="{{ route('login') }}"
+                    class="block w-full text-center py-2.5 border border-gray-200 text-gray-700 text-sm font-bold rounded-xl mb-2">Connexion</a>
+                <a href="{{ route('register') }}"
+                    class="block w-full text-center py-2.5 bg-indigo-600 text-white text-sm font-bold rounded-xl">S'inscrire
+                    gratuitement</a>
             @endauth
         </div>
     </div>
