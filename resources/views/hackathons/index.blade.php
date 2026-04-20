@@ -48,14 +48,14 @@
 
                 <div
                     class="relative order-1 lg:order-2 lg:-mt-16 transition-transform duration-500 hover:translate-y-2">
-                    <div class="absolute -inset-2 border border-slate-100 rounded-[2.5rem] rotate-1"></div>
+                    <div class="absolute -inset-2 rounded-[2.5rem] rotate-1"></div>
 
                     <div class="relative p-2 rounded-[2.2rem] overflow-hidden">
                         <img src="{{ asset('images/designer.png') }}" alt="Programmes et Hackathons Afrique"
                             class="w-full h-auto rounded-[1.8rem] object-cover">
 
                         <div
-                            class="absolute bottom-6 right-6 bg-white border border-slate-100 p-3 rounded-xl flex items-center gap-3 shadow-sm">
+                            class="absolute bottom-6 right-6 bg-white p-3 rounded-xl flex items-center gap-3 shadow-sm">
                             <div class="bg-green-50 p-1.5 rounded-lg text-green-600">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
