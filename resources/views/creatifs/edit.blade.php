@@ -66,10 +66,14 @@
 
                             <div class="flex items-center space-x-6">
                                 <div class="relative group">
-                                    <img src="{{ $creatif->photo ?: 'https://via.placeholder.com/400x250' }}"
-                                        class="w-full h-full object-cover" alt="Current Image">
+                                    <div
+                                        class="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-100 dark:border-gray-700 shadow-sm">
+                                        <img src="{{ $creatif->photo ?: 'https://via.placeholder.com/400x250' }}"
+                                            class="w-full h-full object-cover" alt="Current Image">
+                                    </div>
+
                                     <label
-                                        class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
+                                        class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity border-2 border-transparent">
                                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -80,6 +84,7 @@
                                         <input type="file" name="photo" class="hidden">
                                     </label>
                                 </div>
+
                                 <div>
                                     <h4 class="text-sm font-bold text-gray-700 dark:text-gray-200">Avatar</h4>
                                     <p class="text-xs text-gray-500">JPG ou PNG de haute qualité</p>
