@@ -144,51 +144,6 @@
         <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050810] to-transparent z-10"></div>
     </section>
 
-    {{-- <section class="bg-white py-16 px-6">
-        <div class="max-w-5xl mx-auto">
-            <div
-                class="grid grid-cols-2 md:grid-cols-4 gap-12 py-8 border-y border-gray-100 items-center justify-center text-center">
-
-                <div class="flex flex-col gap-2">
-                    <span class="text-3xl md:text-4xl font-medium text-gray-900 tracking-tight">
-                        2,000<span class="text-gray-400 font-light">+</span>
-                    </span>
-                    <span class="text-[10px] md:text-xs font-medium uppercase tracking-[0.25em] text-gray-400">
-                        Créatifs
-                    </span>
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <span class="text-3xl md:text-4xl font-medium text-gray-900 tracking-tight">
-                        5k<span class="text-gray-400 font-light">+</span>
-                    </span>
-                    <span class="text-[10px] md:text-xs font-medium uppercase tracking-[0.25em] text-gray-400">
-                        Projets
-                    </span>
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <span class="text-3xl md:text-4xl font-medium text-gray-900 tracking-tight">
-                        15<span class="text-gray-400 font-light">+</span>
-                    </span>
-                    <span class="text-[10px] md:text-xs font-medium uppercase tracking-[0.25em] text-gray-400">
-                        Pays
-                    </span>
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <span class="text-3xl md:text-4xl font-medium text-gray-900 tracking-tight">
-                        98<span class="text-gray-400 font-light">%</span>
-                    </span>
-                    <span class="text-[10px] md:text-xs font-medium uppercase tracking-[0.25em] text-gray-400">
-                        Satisfaction
-                    </span>
-                </div>
-
-            </div>
-        </div>
-    </section> --}}
-
     <section class="bg-white py-24 px-6">
         <div class="max-w-5xl mx-auto">
 
@@ -422,7 +377,7 @@
                             <div class="absolute -top-12 left-8">
                                 <div class="relative">
                                     <img class="w-28 h-28 rounded-3xl object-cover shadow-2xl -rotate-6 group-hover:rotate-0 group-hover:scale-105 transition-all duration-500 border-4 border-white"
-                                        src="{{ $creatif->photo ? asset('storage/' . $creatif->photo) : 'https://ui-avatars.com/api/?name=' . urlencode($creatif->prenom) . '&background=random' }}"
+                                        src="{{ $creatif->photo ?: 'https://ui-avatars.com/api/?name=' . urlencode($creatif->prenom) . '&background=random' }}"
                                         alt="{{ $creatif->nom }}">
                                     <div
                                         class="absolute inset-0 rounded-3xl bg-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
