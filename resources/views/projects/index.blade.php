@@ -56,8 +56,12 @@
                     <a href="{{ route('projects.show', $project->slug) }}"
                         class="relative block w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800 mb-5"
                         style="aspect-ratio: 4/3;">
-                        <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" loading="lazy"
-                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                        <img src="{{ $project->creatif->photo
+                            ? $project->creatif->photo
+                            : 'https://ui-avatars.com/api/?name=' .
+                                urlencode($project->creatif->prenom ?? 'M') .
+                                '&background=6366f1&color=fff&size=64' }}"
+                            class="h-8 w-8 rounded-full object-cover ring-2 ring-white dark:ring-gray-900">
                         <div
                             class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500 rounded-2xl">
                         </div>
@@ -87,7 +91,7 @@
                     <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
                         <div class="flex items-center gap-2.5">
                             <img src="{{ $project->creatif->photo
-                                ? asset('storage/' . $project->creatif->photo)
+                                ? $project->creatif->photo
                                 : 'https://ui-avatars.com/api/?name=' .
                                     urlencode($project->creatif->prenom ?? 'M') .
                                     '&background=6366f1&color=fff&size=64' }}"

@@ -96,7 +96,6 @@
                         </div>
                     </div>
 
-                    {{-- User dropdown --}}
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
@@ -106,77 +105,71 @@
                                 </span>
                                 <div class="relative">
                                     @if (Auth::user()->creatif && Auth::user()->creatif->photo)
-                                        <img src="{{ asset('storage/' . Auth::user()->creatif->photo) }}"
-                                            class="h-8 w-8 rounded-full object-cover border-2 border-white dark:border-gray-700 shadow-sm">
-                                    @else
-                                        <div
+                                    <img src="{{ Auth::user()->creatif->photo }}" @else <div
                                             class="h-8 w-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-black">
-                                            {{ strtoupper(substr(Auth::user()->username, 0, 1)) }}
-                                        </div>
-                                    @endif
+                                        {{ strtoupper(substr(Auth::user()->username, 0, 1)) }}
                                 </div>
-                            </button>
-                        </x-slot>
-
-                        <x-slot name="content">
-                            <div class="px-4 py-2 border-b border-gray-100 dark:border-gray-700">
-                                <p class="text-xs text-gray-400">Connecté en tant que</p>
-                                <p class="text-sm font-bold truncate text-gray-800 dark:text-white">
-                                    {{ Auth::user()->email }}</p>
-                            </div>
-                            <x-dropdown-link :href="route('dashboard')">Tableau de bord</x-dropdown-link>
-                            <x-dropdown-link :href="route('profile.edit')">Mon Profil</x-dropdown-link>
-                            @if (!$profilComplet)
-                                <x-dropdown-link :href="route('creatifs.edit')" class="text-amber-600 font-semibold">
-                                    ⚠️ Compléter mon profil
-                                </x-dropdown-link>
-                            @endif
-                            <hr class="border-gray-100 dark:border-gray-700">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault(); this.closest('form').submit();" class="text-red-500">
-                                    Déconnexion
-                                </x-dropdown-link>
-                            </form>
-                        </x-slot>
-                    </x-dropdown>
-                @else
-                    <a href="{{ route('login') }}"
-                        class="text-sm font-bold text-gray-600 hover:text-indigo-600 transition">Connexion</a>
-                    <a href="{{ route('register') }}"
-                        class="bg-indigo-600 text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 transition transform hover:-translate-y-0.5">
-                        S'inscrire
-                    </a>
-                @endauth
-            </div>
-
-            {{-- Mobile menu button --}}
-            <div class="-me-2 flex items-center sm:hidden">
-                @auth
-                    <button class="p-2 text-gray-400 hover:text-indigo-600 transition relative">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
-                        <span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500"></span>
-                    </button>
-                @endauth
-                <button @click="open = ! open"
-                    class="p-2 rounded-xl bg-gray-50 text-gray-400 hover:bg-indigo-50 hover:text-indigo-600 transition">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                                @endif
+                </div>
                 </button>
-            </div>
+                </x-slot>
+
+                <x-slot name="content">
+                    <div class="px-4 py-2 border-b border-gray-100 dark:border-gray-700">
+                        <p class="text-xs text-gray-400">Connecté en tant que</p>
+                        <p class="text-sm font-bold truncate text-gray-800 dark:text-white">
+                            {{ Auth::user()->email }}</p>
+                    </div>
+                    <x-dropdown-link :href="route('dashboard')">Tableau de bord</x-dropdown-link>
+                    <x-dropdown-link :href="route('profile.edit')">Mon Profil</x-dropdown-link>
+                    @if (!$profilComplet)
+                        <x-dropdown-link :href="route('creatifs.edit')" class="text-amber-600 font-semibold">
+                            ⚠️ Compléter mon profil
+                        </x-dropdown-link>
+                    @endif
+                    <hr class="border-gray-100 dark:border-gray-700">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();"
+                            class="text-red-500">
+                            Déconnexion
+                        </x-dropdown-link>
+                    </form>
+                </x-slot>
+                </x-dropdown>
+            @else
+                <a href="{{ route('login') }}"
+                    class="text-sm font-bold text-gray-600 hover:text-indigo-600 transition">Connexion</a>
+                <a href="{{ route('register') }}"
+                    class="bg-indigo-600 text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 transition transform hover:-translate-y-0.5">
+                    S'inscrire
+                </a>
+            @endauth
+        </div>
+
+        <div class="-me-2 flex items-center sm:hidden">
+            @auth
+                <button class="p-2 text-gray-400 hover:text-indigo-600 transition relative">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    <span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500"></span>
+                </button>
+            @endauth
+            <button @click="open = ! open"
+                class="p-2 rounded-xl bg-gray-50 text-gray-400 hover:bg-indigo-50 hover:text-indigo-600 transition">
+                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                    <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
         </div>
     </div>
+    </div>
 
-    {{-- Mobile menu --}}
     <div :class="{ 'block': open, 'hidden': !open }"
         class="hidden sm:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
         <div class="pt-2 pb-3 space-y-1">
@@ -188,7 +181,7 @@
 
         <div class="pt-4 pb-1 border-t border-gray-100 dark:border-gray-800">
             @auth
-                {{-- Bouton mobile partager --}}
+
                 <div class="px-4 mb-3">
                     @if ($profilComplet)
                         <a href="{{ route('projets.create') }}"
@@ -210,8 +203,7 @@
                 <div class="flex items-center px-4 mb-4">
                     <div class="flex-shrink-0">
                         @if (Auth::user()->creatif && Auth::user()->creatif->photo)
-                            <img src="{{ asset('storage/' . Auth::user()->creatif->photo) }}"
-                                class="h-10 w-10 rounded-full object-cover">
+                            <img src="{{ Auth::user()->creatif->photo }}" class="h-10 w-10 rounded-full object-cover">
                         @else
                             <div
                                 class="h-10 w-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold">

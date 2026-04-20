@@ -48,7 +48,7 @@
                 <div class="w-full lg:w-8/12 space-y-8">
 
                     <div x-data="{
-                        activeMedia: '{{ $project->image ? asset('storage/' . $project->image) : 'https://via.placeholder.com/1200x800' }}',
+                        activeMedia: '{{ $project->image ?: 'https://via.placeholder.com/1200x800' }}',
                         activeType: 'image'
                     }"
                         class="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
@@ -78,14 +78,12 @@
                                 class="p-6 grid grid-cols-4 md:grid-cols-6 gap-4 border-t border-gray-50 dark:border-gray-700 bg-gray-50/30 dark:bg-gray-900/30">
 
                                 @if ($project->image)
-                                    <button
-                                        @click="activeMedia = '{{ asset('storage/' . $project->image) }}'; activeType = 'image'"
+                                    <button @click="activeMedia = '{{ $project->image }}'; activeType = 'image'"
                                         class="aspect-square rounded-xl overflow-hidden border-2 transition-all active:scale-95 shadow-sm relative group"
-                                        :class="activeMedia === '{{ asset('storage/' . $project->image) }}' ?
+                                        :class="activeMedia === '{{ $project->image }}' ?
                                             'border-indigo-600 ring-2 ring-indigo-500/20' :
                                             'border-transparent hover:border-gray-300'">
-                                        <img src="{{ asset('storage/' . $project->image) }}"
-                                            class="w-full h-full object-cover">
+                                        <img src="{{ $project->image }}" class="w-full h-full object-cover">
                                     </button>
                                 @endif
 
@@ -93,8 +91,7 @@
                                     @php
                                         $extension = pathinfo($file, PATHINFO_EXTENSION);
                                         $isVideo = in_array(strtolower($extension), ['mp4', 'webm', 'mov']);
-                                        $fileUrl = asset('storage/' . $file);
-                                    @endphp
+                                    $fileUrl = $file; @endphp
 
                                     <button
                                         @click="activeMedia = '{{ $fileUrl }}'; activeType = '{{ $isVideo ? 'video' : 'image' }}'"
@@ -168,7 +165,7 @@
                         <div class="p-8">
                             <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-6">Le Créatif</h2>
                             <div class="flex items-center gap-4 mb-6">
-                                <img src="{{ asset('storage/' . $project->creatif->photo) }}"
+                                <img src="{{ $project->creatif->photo }}"
                                     class="w-20 h-20 rounded-2xl object-cover shadow-md rotate-3" alt="Auteur">
                                 <div>
                                     <h3 class="font-black text-xl text-gray-900">{{ $project->creatif->prenom }}

@@ -297,7 +297,8 @@
                         <div
                             class="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-blue-500/10 group-hover:-translate-y-1">
 
-                            <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}"
+                            <img src="{{ $project->image ?: 'https://via.placeholder.com/400x300' }}"
+                                alt="{{ $project->title }}"
                                 class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
 
                             <div class="absolute top-4 left-4 z-20">
@@ -342,7 +343,7 @@
                             <a href="{{ route('creatifs.show', $project->creatif->slug) }}"
                                 class="flex items-center gap-3 group/author">
                                 <div class="relative">
-                                    <img src="{{ $project->creatif->photo ? asset('storage/' . $project->creatif->photo) : 'https://ui-avatars.com/api/?name=' . urlencode($project->creatif->prenom) }}"
+                                    <img src="{{ $project->creatif->photo ?: 'https://ui-avatars.com/api/?name=' . urlencode($project->creatif->prenom) }}"
                                         class="size-8 rounded-full object-cover grayscale group-hover/author:grayscale-0 transition-all duration-300" />
                                     <div
                                         class="absolute -bottom-0.5 -right-0.5 size-2 rounded-full bg-green-500 border-2 border-white dark:border-gray-950">

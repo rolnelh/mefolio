@@ -39,20 +39,14 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [ProjectController::class, 'dashboard'])->name('dashboard');
-    Route::get('/projets/créer', [ProjectController::class, 'create'])->name('projets.create');
+    Route::get('/projets/creer', [ProjectController::class, 'create'])->name('projets.create');
     Route::post('/projets', [ProjectController::class, 'store'])->name('projets.store');
-    // Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
     Route::get('/projets/{project}/edit', [ProjectController::class, 'edit'])->name('projets.edit');
     Route::put('/projets/{project}', [ProjectController::class, 'update'])->name('projets.update');
     Route::delete('/projets/{project}', [ProjectController::class, 'destroy'])->name('projets.destroy');
 
-
-// Route pour enregistrer un commentaire ou une réponse
-Route::post('/projects/{project}/comments', [CommentController::class, 'store'])->name('comments.store');
-Route::post('/projects/{project}/comments/ajax', [CommentController::class, 'storeAjax'])
-    ->name('comments.store.ajax');
-
-
+    Route::post('/projects/{project}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::post('/projects/{project}/comments/ajax', [CommentController::class, 'storeAjax'])->name('comments.store.ajax');
 });
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');

@@ -264,27 +264,35 @@
                     </a>
 
                     @foreach ($projects as $project)
-                        <div class="group bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow"
-                            style="height: 240px; display: flex; flex-direction: column;">
-                            <div class="overflow-hidden flex-shrink-0" style="height: 130px;">
-                                <img src="{{ $project->image ? $project->image : 'https://via.placeholder.com/400x300' }}"
+                        <div
+                            class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-all duration-300">
+
+                            <div class="relative overflow-hidden" style="height: 180px;">
+                                <img src="{{ $project->image ?: 'https://via.placeholder.com/400x300' }}"
                                     alt="{{ $project->title }}"
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            </div>
-                            <div class="p-4 flex flex-col justify-between flex-1">
-                                <div>
-                                    <h3 class="text-sm font-bold text-gray-900 dark:text-white truncate">
-                                        {{ $project->title }}</h3>
-                                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
-                                        {{ Str::limit($project->description, 80) }}
-                                    </p>
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 </div>
-                                <div class="flex items-center justify-between mt-3">
+                            </div>
+
+                            <div class="p-4">
+                                <h3 class="font-bold text-gray-900 dark:text-white truncate text-sm mb-1">
+                                    {{ $project->title }}
+                                </h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 leading-relaxed">
+                                    {{ $project->description }}
+                                </p>
+
+                                <div
+                                    class="flex items-center justify-between mt-4 pt-3 border-t border-gray-50 dark:border-gray-700">
                                     <a href="{{ route('projects.show', $project->slug) }}"
-                                        class="text-indigo-600 text-xs font-semibold hover:text-indigo-700">Voir →</a>
-                                    <div class="flex gap-2">
+                                        class="text-indigo-600 text-xs font-semibold hover:text-indigo-700 transition-colors">
+                                        Voir →
+                                    </a>
+                                    <div class="flex gap-1">
                                         <a href="{{ route('projets.edit', $project->id) }}"
-                                            class="p-1.5 text-gray-400 hover:text-gray-600 transition">
+                                            class="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all">
                                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -297,7 +305,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="p-1.5 text-red-400 hover:text-red-600 transition">
+                                                class="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all">
                                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                                                     stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round"

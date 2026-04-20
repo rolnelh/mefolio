@@ -46,7 +46,7 @@
                                 <div
                                     class="relative group h-40 w-full rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center overflow-hidden transition-all hover:border-indigo-400 bg-gray-50 dark:bg-gray-900">
                                     @if ($creatif && $creatif->couverture)
-                                        <img src="{{ asset('storage/' . $creatif->couverture) }}"
+                                        <img src="{{ $creatif->couverture }}"
                                             class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity">
                                     @endif
                                     <div class="relative z-10 text-center p-4">
@@ -66,8 +66,8 @@
 
                             <div class="flex items-center space-x-6">
                                 <div class="relative group">
-                                    <img src="{{ $creatif?->photo ? asset('storage/' . $creatif->photo) : 'https://ui-avatars.com/api/?name=' . urlencode($creatif?->prenom ?? Auth::user()->username) . '&background=6366f1&color=fff' }}"
-                                        class="h-20 w-20 rounded-full object-cover ring-4 ring-white dark:ring-gray-700 shadow-lg">
+                                    <img src="{{ $project->image ?: 'https://via.placeholder.com/400x250' }}"
+                                        class="w-full h-full object-cover" alt="Current Image">
                                     <label
                                         class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
                                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
