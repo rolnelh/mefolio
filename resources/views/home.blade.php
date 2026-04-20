@@ -430,324 +430,205 @@
 
     </section>
 
-    <section class="py-24 px-6 max-w-7xl mx-auto overflow-hidden">
-
-        <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
-            <div class="max-w-2xl">
-                <h2 class="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter leading-tight">
-                    Ils parlent de leur expérience <br>
-                    <span class="text-indigo-600">sur Mefolio.</span>
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-6">
+            <div class="max-w-xl">
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+                    L'expérience <span class="text-indigo-600">MeFolio</span>
                 </h2>
-                <p class="text-gray-500 mt-4 text-lg font-medium">Découvrez pourquoi les créatifs choisissent notre
-                    plateforme pour propulser leur carrière.</p>
-            </div>
-
-            <button
-                class="group inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white text-sm font-bold rounded-2xl hover:bg-indigo-600 transition-all duration-300 shadow-xl shadow-gray-200">
-                Donner votre avis
-                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-            </button>
-        </div>
-
-        <div class="py-12 bg-white overflow-hidden relative">
-            <div
-                class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-50 via-gray-50/40 to-transparent z-10">
-            </div>
-            <div
-                class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-gray-50 via-gray-50/40 to-transparent z-10">
-            </div>
-
-            <div
-                class="flex animate-marquee hover:[animation-play-state:paused] gap-8 whitespace-nowrap items-start w-max">
-
-                <div class="flex gap-8 items-start">
-                    <div
-                        class="w-[380px] whitespace-normal flex-shrink-0 bg-white border border-gray-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="flex items-center gap-4">
-                                <img src="https://ui-avatars.com/api/?name=Koffi+Mensah&background=4f46e5&color=fff"
-                                    class="w-12 h-12 rounded-2xl shadow-inner">
-                                <div>
-                                    <h4 class="text-sm font-bold text-gray-900 leading-none">Koffi Mensah</h4>
-                                    <span
-                                        class="text-[10px] text-indigo-600 font-black uppercase tracking-widest">Fullstack
-                                        Dev</span>
-                                </div>
-                            </div>
-                            <div class="flex text-amber-400 text-[10px]">★★★★★</div>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed font-medium italic">
-                            "Grâce à <span class="text-gray-900 font-bold">Mefolio</span>, mes projets sont présentés
-                            avec le prestige qu'ils méritent. Un outil indispensable."
-                        </p>
-                    </div>
-
-                    <div
-                        class="w-[380px] whitespace-normal flex-shrink-0 bg-white border border-gray-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="flex items-center gap-4">
-                                <img src="https://ui-avatars.com/api/?name=Aicha+Diallo&background=6366f1&color=fff"
-                                    class="w-12 h-12 rounded-2xl">
-                                <div>
-                                    <h4 class="text-sm font-bold text-gray-900 leading-none">Aïcha Diallo</h4>
-                                    <span class="text-[10px] text-purple-600 font-black uppercase tracking-widest">UX
-                                        Designer</span>
-                                </div>
-                            </div>
-                            <div class="flex text-amber-400 text-[10px]">★★★★★</div>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed font-medium italic">
-                            "Une visibilité immédiate auprès des recruteurs. L’interface est une masterclass de
-                            minimalisme. Je recommande !"
-                        </p>
-                    </div>
-
-                    <div
-                        class="w-[380px] whitespace-normal flex-shrink-0 bg-white border border-gray-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="flex items-center gap-4">
-                                <img src="https://ui-avatars.com/api/?name=Jean+H&background=f59e0b&color=fff"
-                                    class="w-12 h-12 rounded-2xl">
-                                <div>
-                                    <h4 class="text-sm font-bold text-gray-900 leading-none">Jean H.</h4>
-                                    <span class="text-[10px] text-amber-600 font-black uppercase tracking-widest">Tech
-                                        Student</span>
-                                </div>
-                            </div>
-                            <div class="flex text-amber-400 text-[10px]">★★★★★</div>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed font-medium italic">
-                            "C’est devenu mon CV numérique ultime. Idéal pour sortir du lot lors des candidatures en
-                            agence."
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex gap-8 items-start" aria-hidden="true">
-                    <div
-                        class="w-[380px] whitespace-normal flex-shrink-0 bg-white border border-gray-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="flex items-center gap-4">
-                                <img src="https://ui-avatars.com/api/?name=Koffi+Mensah&background=4f46e5&color=fff"
-                                    class="w-12 h-12 rounded-2xl shadow-inner">
-                                <div>
-                                    <h4 class="text-sm font-bold text-gray-900 leading-none">Koffi Mensah</h4>
-                                    <span
-                                        class="text-[10px] text-indigo-600 font-black uppercase tracking-widest">Fullstack
-                                        Dev</span>
-                                </div>
-                            </div>
-                            <div class="flex text-amber-400 text-[10px]">★★★★★</div>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed font-medium italic">
-                            "Grâce à <span class="text-gray-900 font-bold">Mefolio</span>, mes projets sont présentés
-                            avec le prestige qu'ils méritent. Un outil indispensable."
-                        </p>
-                    </div>
-
-                    <div
-                        class="w-[380px] whitespace-normal flex-shrink-0 bg-white border border-gray-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="flex items-center gap-4">
-                                <img src="https://ui-avatars.com/api/?name=Aicha+Diallo&background=6366f1&color=fff"
-                                    class="w-12 h-12 rounded-2xl">
-                                <div>
-                                    <h4 class="text-sm font-bold text-gray-900 leading-none">Aïcha Diallo</h4>
-                                    <span class="text-[10px] text-purple-600 font-black uppercase tracking-widest">UX
-                                        Designer</span>
-                                </div>
-                            </div>
-                            <div class="flex text-amber-400 text-[10px]">★★★★★</div>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed font-medium italic">
-                            "Une visibilité immédiate auprès des recruteurs. L’interface est une masterclass de
-                            minimalisme. Je recommande !"
-                        </p>
-                    </div>
-
-                    <div
-                        class="w-[380px] whitespace-normal flex-shrink-0 bg-white border border-gray-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="flex items-center gap-4">
-                                <img src="https://ui-avatars.com/api/?name=Jean+H&background=f59e0b&color=fff"
-                                    class="w-12 h-12 rounded-2xl">
-                                <div>
-                                    <h4 class="text-sm font-bold text-gray-900 leading-none">Jean H.</h4>
-                                    <span class="text-[10px] text-amber-600 font-black uppercase tracking-widest">Tech
-                                        Student</span>
-                                </div>
-                            </div>
-                            <div class="flex text-amber-400 text-[10px]">★★★★★</div>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed font-medium italic">
-                            "C’est devenu mon CV numérique ultime. Idéal pour sortir du lot lors des candidatures en
-                            agence."
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <style>
-        @keyframes marquee {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(calc(-100% - 2rem));
-            }
-
-            /* -2rem pour compenser le gap */
-        }
-
-        .animate-marquee {
-            animation: marquee 40s linear infinite;
-        }
-
-        .animate-marquee:hover {
-            animation-play-state: paused;
-        }
-    </style>
-
-    <section class="py-24 px-6 bg-[#050810] text-white overflow-hidden">
-        <div class="max-w-6xl mx-auto">
-
-            <div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div>
-                    <h2 class="text-5xl font-extrabold tracking-tighter leading-none">
-                        DES RÉPONSES,<br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">SANS
-                            DÉTOUR.</span>
-                    </h2>
-                    <p class="text-gray-500 mt-6 max-w-md font-medium">
-                        Tout ce que vous devez savoir pour propulser votre carrière sur MeFolio.
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                <div onclick="expandCard(this)"
-                    class="md:col-span-2 group relative p-10 rounded-[2.5rem] bg-white/5 border border-white/5 cursor-pointer hover:bg-white/[0.07] transition-all duration-500 overflow-hidden min-h-[240px]">
-                    <div class="relative z-10">
-                        <span
-                            class="flex size-8 items-center justify-center rounded-full bg-blue-500/10 text-blue-400 font-mono text-xs mb-4 border border-blue-500/20">01</span>
-                        <h3 class="text-2xl font-bold">Comment créer un compte ?</h3>
-                        <div
-                            class="content opacity-0 mt-6 translate-y-4 transition-all duration-500 text-gray-400 max-w-md leading-relaxed">
-                            Le processus est instantané. Cliquez sur « S’inscrire », validez votre email et votre
-                            portfolio est prêt. Pas de carte bancaire, juste votre talent.
-                        </div>
-                    </div>
-                    <div
-                        class="absolute -bottom-4 -right-4 text-8xl opacity-[0.03] group-hover:opacity-10 group-hover:-rotate-12 transition-all duration-700">
-                        👤</div>
-                </div>
-
-                <div onclick="expandCard(this)"
-                    class="group relative p-10 rounded-[2.5rem] bg-white/5 border border-white/5 cursor-pointer hover:bg-white/[0.07] transition-all duration-500 md:row-span-2 flex flex-col justify-start">
-                    <div class="relative z-10">
-                        <span
-                            class="flex size-8 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 font-mono text-xs mb-4 border border-emerald-500/20">02</span>
-                        <h3 class="text-2xl font-bold italic">Mefolio est-il gratuit ?</h3>
-                        <div
-                            class="content opacity-0 mt-6 translate-y-4 transition-all duration-500 text-gray-400 leading-relaxed">
-                            Oui, 100% gratuit. Nous croyons en l'accessibilité du talent local. Des options de boost de
-                            visibilité seront disponibles prochainement.
-                        </div>
-                    </div>
-                    <div
-                        class="absolute bottom-10 right-10 text-6xl opacity-[0.03] group-hover:opacity-10 group-hover:scale-125 transition-all duration-700">
-                        💎</div>
-                </div>
-
-                <div onclick="expandCard(this)"
-                    class="group relative p-10 rounded-[2.5rem] bg-white/5 border border-white/5 cursor-pointer hover:bg-white/[0.07] transition-all duration-500 min-h-[240px]">
-                    <div class="relative z-10">
-                        <span
-                            class="flex size-8 items-center justify-center rounded-full bg-indigo-500/10 text-indigo-400 font-mono text-xs mb-4 border border-indigo-500/20">03</span>
-                        <h3 class="text-2xl font-bold">Publier un projet</h3>
-                        <div
-                            class="content opacity-0 mt-6 translate-y-4 transition-all duration-500 text-gray-400 leading-relaxed">
-                            Glissez vos images, liez GitHub ou Behance, et validez. Votre travail est exposé au monde.
-                        </div>
-                    </div>
-                    <div
-                        class="absolute -bottom-4 -right-4 text-7xl opacity-[0.03] group-hover:opacity-10 group-hover:-translate-y-4 transition-all duration-700">
-                        🚀</div>
-                </div>
-
-                <div onclick="expandCard(this)"
-                    class="group relative p-10 rounded-[2.5rem] bg-white/5 border border-white/5 cursor-pointer hover:bg-white/[0.07] transition-all duration-500 min-h-[240px]">
-                    <div class="relative z-10">
-                        <span
-                            class="flex size-8 items-center justify-center rounded-full bg-orange-500/10 text-orange-400 font-mono text-xs mb-4 border border-orange-500/20">04</span>
-                        <h3 class="text-2xl font-bold">Partage recruteurs</h3>
-                        <div
-                            class="content opacity-0 mt-6 translate-y-4 transition-all duration-500 text-gray-400 leading-relaxed">
-                            Votre URL personnalisée est votre nouvelle carte de visite numérique. Simple, pro, efficace.
-                        </div>
-                    </div>
-                    <div
-                        class="absolute -bottom-4 -right-4 text-7xl opacity-[0.03] group-hover:opacity-10 group-hover:rotate-12 transition-all duration-700">
-                        🔗</div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="max-w-7xl mx-auto px-6 py-20">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-10 border-t border-gray-100 pt-16">
-
-            <div class="max-w-2xl">
-                <h3 class="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight leading-[1.1]">
-                    Prêt à booster <br />
-                    <span class="text-blue-600">votre visibilité ?</span>
-                </h3>
-                <p class="text-lg text-gray-500 mt-6 max-w-md leading-relaxed">
-                    Rejoignez plus de <span class="font-semibold text-gray-900">2000+ créatifs</span> qui font déjà
-                    briller leur talent sur Mefolio.
+                <p class="text-slate-500 mt-3 text-lg">
+                    Ce que disent les talents qui font bouger les lignes.
                 </p>
             </div>
 
-            <div class="flex items-center">
-                <a href="#"
-                    class="group relative inline-flex items-center justify-center px-10 py-4 font-semibold text-white bg-blue-600 rounded-full overflow-hidden transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200 active:scale-95">
-                    <span>Créer mon portfolio</span>
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                </a>
+            <a href="#"
+                class="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-indigo-600 transition-all duration-300">
+                Partager mon avis
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <div
+                class="bg-slate-50 p-8 rounded-3xl border border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-xl hover:shadow-indigo-50/50 transition-all duration-500">
+                <div class="flex items-center gap-3 mb-6">
+                    <img src="https://storage.googleapis.com/monecocmsfiles/thumbnail_Reussir_en_tant_que_freelance_en_Afrique_1f1130c913/thumbnail_Reussir_en_tant_que_freelance_en_Afrique_1f1130c913.jpg"
+                        class="w-10 h-10 rounded-xl" alt="Koffi Mensah">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900">Koffi Mensah</h4>
+                        <p class="text-[10px] text-indigo-600 font-black uppercase tracking-widest">Fullstack Dev</p>
+                    </div>
+                </div>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    "Grâce à <span class="font-bold text-slate-900">MeFolio</span>, mes projets sont présentés avec le
+                    prestige qu'ils méritent. C'est l'outil qui manquait à notre écosystème."
+                </p>
+            </div>
+
+            <div
+                class="bg-slate-50 p-8 rounded-3xl border border-transparent hover:border-purple-100 hover:bg-white hover:shadow-xl hover:shadow-purple-50/50 transition-all duration-500">
+                <div class="flex items-center gap-3 mb-6">
+                    <img src="https://nexlance.net/assets/uploads/media-uploader/IMAGE%20011751291135.jpg"
+                        class="w-10 h-10 rounded-xl" alt="Aïcha Diallo">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900">Aïcha Diallo</h4>
+                        <p class="text-[10px] text-purple-600 font-black uppercase tracking-widest">UX Designer</p>
+                    </div>
+                </div>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    "Une visibilité immédiate auprès des recruteurs locaux. L’interface est une masterclass de
+                    minimalisme. Je recommande sans hésiter !"
+                </p>
+            </div>
+
+            <div
+                class="bg-slate-50 p-8 rounded-3xl border border-transparent hover:border-amber-100 hover:bg-white hover:shadow-xl hover:shadow-amber-50/50 transition-all duration-500">
+                <div class="flex items-center gap-3 mb-6">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThjfdhNte8pAfRXIZjkMjczmSn8icmhUiCtA&s"
+                        class="w-10 h-10 rounded-xl" alt="Jean H.">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900">Jean H.</h4>
+                        <p class="text-[10px] text-amber-600 font-black uppercase tracking-widest">Tech Student</p>
+                    </div>
+                </div>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    "C’est devenu mon CV numérique ultime. Idéal pour sortir du lot et monétiser mes premières missions
+                    en freelance."
+                </p>
             </div>
 
         </div>
     </section>
 
-    <script>
-        function expandCard(element) {
-            // Optionnel : Fermer les autres cartes ouvertes
-            document.querySelectorAll('.content').forEach(el => {
-                el.classList.add('opacity-0', 'translate-y-4');
-                el.closest('div[onclick]').classList.remove('ring-2', 'ring-purple-500/20');
-            });
+    <section class="py-24 px-6 max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
+                Questions fréquentes
+            </h2>
+            <p class="text-slate-500 mt-4 font-medium">
+                Tout ce que vous devez savoir pour propulser votre carrière sur MeFolio.
+            </p>
+        </div>
 
-            // Ouvrir la carte actuelle
-            const content = element.querySelector('.content');
-            content.classList.toggle('opacity-0');
-            content.classList.toggle('translate-y-4');
-        }
-    </script>
+        <div class="space-y-4">
+
+            <details class="group border-b border-slate-100 pb-4" open>
+                <summary class="flex items-center justify-between cursor-pointer list-none py-4">
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                        Comment créer mon portfolio ?
+                    </h3>
+                    <span class="text-slate-400 group-open:rotate-180 transition-transform duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </span>
+                </summary>
+                <div class="text-slate-500 leading-relaxed text-base pb-4">
+                    Le processus est instantané. Cliquez sur « S’inscrire », validez votre email et personnalisez votre
+                    espace. Pas de configuration complexe, juste votre talent mis en avant.
+                </div>
+            </details>
+
+            <details class="group border-b border-slate-100 pb-4">
+                <summary class="flex items-center justify-between cursor-pointer list-none py-4">
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                        Est-ce vraiment gratuit ?
+                    </h3>
+                    <span class="text-slate-400 group-open:rotate-180 transition-transform duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </span>
+                </summary>
+                <div class="text-slate-500 leading-relaxed text-base pb-4">
+                    Oui, l'accès de base et la publication de projets sont 100% gratuits. Nous croyons en
+                    l'accessibilité du talent local pour dynamiser l'écosystème tech en Afrique.
+                </div>
+            </details>
+
+            <details class="group border-b border-slate-100 pb-4">
+                <summary class="flex items-center justify-between cursor-pointer list-none py-4">
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                        Comment les recruteurs me trouvent-ils ?
+                    </h3>
+                    <span class="text-slate-400 group-open:rotate-180 transition-transform duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </span>
+                </summary>
+                <div class="text-slate-500 leading-relaxed text-base pb-4">
+                    Votre profil est indexé dans notre moteur de recherche de talents. Vous disposez aussi d'une URL
+                    personnalisée professionnelle que vous pouvez partager directement sur votre CV ou LinkedIn.
+                </div>
+            </details>
+
+            <details class="group border-b border-slate-100 pb-4">
+                <summary class="flex items-center justify-between cursor-pointer list-none py-4">
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                        Quels types de fichiers puis-je publier ?
+                    </h3>
+                    <span class="text-slate-400 group-open:rotate-180 transition-transform duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </span>
+                </summary>
+                <div class="text-slate-500 leading-relaxed text-base pb-4">
+                    Vous pouvez importer des images (JPG, PNG), lier des dépôts GitHub pour le code, ou intégrer des
+                    liens externes comme Figma, Behance ou des vidéos de démonstration.
+                </div>
+            </details>
+
+        </div>
+
+        {{-- <div class="mt-16 p-8 bg-slate-50 rounded-[2rem] text-center border border-slate-100">
+            <p class="text-slate-900 font-bold mb-4">Vous avez d'autres questions ?</p>
+            <a href="mailto:support@mefolio.com" class="text-indigo-600 font-bold hover:underline">
+                Contactez notre équipe &rarr;
+            </a>
+        </div> --}}
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 py-24">
+        <div
+            class="relative overflow-hidden bg-slate-900 rounded-[2.5rem] md:rounded-[3.5rem] p-12 md:p-20 shadow-2xl shadow-indigo-100/20">
+
+            <div
+                class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
+
+                <div class="max-w-xl">
+                    <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.1]">
+                        Prêt à booster <br />
+                        <span class="text-indigo-400">votre visibilité ?</span>
+                    </h2>
+                    <p class="text-lg text-white mt-6 max-w-md leading-relaxed">
+                        Rejoignez la communauté des <span class="font-bold text-white">créatifs</span> qui transforment
+                        leur passion en carrière sur MeFolio.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-6">
+                    <a href="#"
+                        class="group inline-flex items-center justify-center px-10 py-3 font-bold text-white bg-indigo-600 rounded-full md:rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl">
+                        Créer mon portfolio
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 
     @extends('layouts.footer')
 
