@@ -66,7 +66,7 @@
 
                             <div class="flex items-center space-x-6">
                                 <div class="relative group">
-                                    <img src="{{ $project->image ?: 'https://via.placeholder.com/400x250' }}"
+                                    <img src="{{ $creatif->photo ?: 'https://via.placeholder.com/400x250' }}"
                                         class="w-full h-full object-cover" alt="Current Image">
                                     <label
                                         class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
