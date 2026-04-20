@@ -174,7 +174,6 @@
                 </div>
             </div>
 
-            {{-- DROITE --}}
             <div class="hidden lg:flex items-center gap-3">
                 @auth
                     @php
@@ -197,7 +196,7 @@
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                             </svg>
-                            Partager
+                            Partager un projet
                         </a>
                     @else
                         <a href="{{ route('creatifs.edit') }}"
@@ -206,7 +205,6 @@
                         </a>
                     @endif
 
-                    {{-- Notifs --}}
                     <div class="relative" x-data="{ openNotify: false }">
                         <button @click="openNotify = !openNotify"
                             class="p-2 text-gray-500 hover:text-indigo-600 transition-colors relative">
@@ -234,7 +232,6 @@
                         </div>
                     </div>
 
-                    {{-- User --}}
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
@@ -285,7 +282,6 @@
                 @endauth
             </div>
 
-            {{-- MOBILE BURGER --}}
             <div class="flex items-center lg:hidden">
                 <button @click="open = !open"
                     class="p-2 rounded-xl bg-gray-50 text-gray-400 hover:bg-indigo-50 hover:text-indigo-600 transition">
@@ -301,7 +297,6 @@
         </div>
     </div>
 
-    {{-- MOBILE MENU --}}
     <div :class="{ 'block': open, 'hidden': !open }"
         class="hidden lg:hidden bg-white dark:bg-gray-900 border-t border-gray-100">
         <div class="px-4 py-3 space-y-1">
@@ -316,9 +311,10 @@
             <a href="{{ route('blog') }}"
                 class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">📝 Blog</a>
             <div class="opacity-60">
+                <a href="{{ route('hackathons.index') }}"
+                    class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">🚀
+                    Hackathons</a>
                 <span class="block px-3 py-2 text-sm font-medium text-gray-700">⚡ Challenges <span
-                        class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span></span>
-                <span class="block px-3 py-2 text-sm font-medium text-gray-700">🚀 Hackathons <span
                         class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span></span>
             </div>
         </div>
