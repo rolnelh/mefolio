@@ -144,7 +144,7 @@
         <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050810] to-transparent z-10"></div>
     </section>
 
-    <section class="bg-white py-16 px-6">
+    {{-- <section class="bg-white py-16 px-6">
         <div class="max-w-5xl mx-auto">
             <div
                 class="grid grid-cols-2 md:grid-cols-4 gap-12 py-8 border-y border-gray-100 items-center justify-center text-center">
@@ -187,7 +187,7 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="bg-white py-24 px-6">
         <div class="max-w-5xl mx-auto">
@@ -786,7 +786,6 @@
 
         </div>
     </section>
-
 
     <script>
         function expandCard(element) {

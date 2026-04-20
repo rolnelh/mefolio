@@ -13,7 +13,7 @@
         $creatif = Auth::user()->creatif;
         $couverturePath =
             $creatif && $creatif->couverture
-                ? asset('storage/' . $creatif->couverture)
+                ? $creatif->couverture
                 : 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop';
 
         $profilComplet =
@@ -55,8 +55,7 @@
                 <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
 
                     <div class="relative">
-                        <img src="{{ $creatif?->photo ? asset('storage/' . $creatif->photo) : asset('images/avatar.png') }}"
-                            alt="Profil"
+                        <img src="{{ $creatif?->photo ? $creatif->photo : asset('images/avatar.png') }}" alt="Profil"
                             class="w-28 h-28 rounded-2xl object-cover ring-4 ring-indigo-50 dark:ring-indigo-900/20 shadow-md">
                         <div
                             class="absolute -bottom-2 -right-2 bg-green-500 w-5 h-5 rounded-full border-4 border-white dark:border-gray-900">
@@ -268,7 +267,7 @@
                         <div class="group bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow"
                             style="height: 240px; display: flex; flex-direction: column;">
                             <div class="overflow-hidden flex-shrink-0" style="height: 130px;">
-                                <img src="{{ $project->image ? asset('storage/' . $project->image) : 'https://via.placeholder.com/400x300' }}"
+                                <img src="{{ $project->image ? $project->image : 'https://via.placeholder.com/400x300' }}"
                                     alt="{{ $project->title }}"
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                             </div>
