@@ -144,76 +144,67 @@
         <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050810] to-transparent z-10"></div>
     </section>
 
-    <section class="bg-white py-24 px-6">
+    <section class="bg-white py-24 px-6 border-t border-gray-50">
         <div class="max-w-5xl mx-auto">
 
-            <div class="mb-16">
-                <h2 class="text-2xl md:text-3xl font-medium text-gray-900 tracking-tight mb-4">
-                    Pourquoi choisir <span class="text-blue-600">Mefolio</span>
+            <div class="mb-20 text-center md:text-left">
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-6">
+                    L'avantage <span class="text-orange-500">MeFolio</span>
                 </h2>
-                <p class="text-gray-500 text-lg max-w-xl font-light leading-relaxed">
-                    Une approche directe pour mettre en avant votre travail.
-                    <span class="text-gray-900">L'essentiel, tout simplement.</span>
+                <p class="text-slate-500 text-lg max-w-xl font-medium leading-relaxed">
+                    Une infrastructure pensée pour les réalités du marché africain, du premier projet au premier
+                    paiement.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16">
 
                 <div class="group">
-                    <div class="text-blue-600 mb-5 transition-transform duration-300 group-hover:-translate-y-1">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
+                    <div
+                        class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:bg-indigo-100">
+                        <img src="{{ asset('images/people.png') }}" alt="Recruteurs" class="w-10 h-10 object-contain">
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2 tracking-tight">Mise en avant des talents</h3>
-                    <p class="text-gray-500 leading-relaxed font-light text-sm md:text-base">
-                        Créez un profil professionnel en quelques minutes et partagez vos projets avec une interface
-                        optimisée pour le SEO.
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Connexion Recruteurs Locaux</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm md:text-base">
+                        Soyez visible auprès des entreprises et startups locales qui recherchent activement des talents.
+                        Votre profil MeFolio sert de pont direct pour décrocher votre prochain contrat.
                     </p>
                 </div>
 
                 <div class="group">
-                    <div class="text-blue-600 mb-5 transition-transform duration-300 group-hover:-translate-y-1">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04C3.063 6.267 3 6.99 3 7.771c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-.781-.063-1.504-.182-2.243z">
-                            </path>
-                        </svg>
+                    <div
+                        class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:bg-green-100">
+                        <img src="{{ asset('images/cash.png') }}" alt="Paiements" class="w-10 h-10 object-contain">
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2 tracking-tight">Sécurité des données</h3>
-                    <p class="text-gray-500 leading-relaxed font-light text-sm md:text-base">
-                        Vos créations sont protégées par des standards élevés. Vous gardez le contrôle total sur votre
-                        contenu.
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Paiements Mobile Money</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm md:text-base">
+                        Facilitez vos transactions freelance. MeFolio intègre les solutions de paiement locales pour
+                        vous permettre de monétiser vos compétences en toute simplicité.
                     </p>
                 </div>
 
                 <div class="group">
-                    <div class="text-blue-600 mb-5 transition-transform duration-300 group-hover:-translate-y-1">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
-                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                    <div
+                        class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-100">
+                        <img src="{{ asset('images/optimization.png') }}" alt="Performance"
+                            class="w-10 h-10 object-contain">
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2 tracking-tight">Simplicité d'utilisation</h3>
-                    <p class="text-gray-500 leading-relaxed font-light text-sm md:text-base">
-                        Une interface pensée pour être prise en main immédiatement. Pas de configuration complexe, juste
-                        votre talent.
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Optimisation SEO & Vitesse</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm md:text-base">
+                        Un portfolio ultra-rapide et optimisé pour les moteurs de recherche. Ne vous souciez plus du
+                        code, concentrez-vous sur vos créations.
                     </p>
                 </div>
 
                 <div class="group">
-                    <div class="text-blue-600 mb-5 transition-transform duration-300 group-hover:-translate-y-1">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z">
-                            </path>
-                        </svg>
+                    <div
+                        class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-100">
+                        <img src="{{ asset('images/struggle.png') }}" alt="Hackathons" class="w-10 h-10 object-contain">
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2 tracking-tight">Communauté active</h3>
-                    <p class="text-gray-500 leading-relaxed font-light text-sm md:text-base">
-                        Rejoignez un réseau de créatifs passionnés. Échangez des idées et trouvez vos futurs
-                        collaborateurs.
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Accès Exclusif aux Défis</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm md:text-base">
+                        Participez à des hackathons et programmes d'accompagnement sélectionnés pour propulser votre
+                        carrière de "builder".
                     </p>
                 </div>
 
@@ -377,7 +368,7 @@
                             <div class="absolute -top-12 left-8">
                                 <div class="relative">
                                     <img class="w-28 h-28 rounded-3xl object-cover shadow-2xl -rotate-6 group-hover:rotate-0 group-hover:scale-105 transition-all duration-500 border-4 border-white"
-                                        src="{{ $creatif->photo ?: 'https://ui-avatars.com/api/?name=' . urlencode($creatif->prenom) . '&background=random' }}"
+                                        src="{{ $creatif->photo ?: 'https://ui-avatars.com/api/?name=' . urlencode($creatif->prenom ?? 'M') . '&background=6366f1&color=fff' }}"
                                         alt="{{ $creatif->nom }}">
                                     <div
                                         class="absolute inset-0 rounded-3xl bg-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
