@@ -1,20 +1,80 @@
 <x-app-layout>
     <div class="mx-auto max-w-7xl px-6 lg:px-8 py-16">
 
-        <div class="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-            <div>
-                <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Mefolio · Communauté</p>
-                <h1 class="text-5xl font-black tracking-tighter text-gray-900 dark:text-white sm:text-6xl leading-none">
-                    Tous les<br>
-                    <span class="text-indigo-600 italic font-black">projets.</span>
+        <div class="mx-auto max-w-7xl px-6 lg:px-8 py-4">
+
+            <div class="mb-10 text-center md:text-left">
+                <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    Découvrez les meilleurs <span class="text-indigo-600">créatifs</span>
                 </h1>
+                <p class="text-gray-500 mt-2 text-base font-medium">
+                    Explorez des milliers de projets inspirants réalisés par la communauté africaine.
+                </p>
             </div>
-            <p class="text-sm text-gray-400 max-w-xs leading-relaxed">
-                Explorez les pépites créatives de notre communauté et laissez-vous inspirer par les talents africains.
-            </p>
+
+            <div class="space-y-6 mb-16">
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="text-sm font-semibold text-gray-900 dark:text-white mr-2">Populaire :</span>
+
+                    <a href="#"
+                        class="px-4 py-1.5 border border-gray-200 dark:border-gray-800 rounded-full text-xs font-bold text-gray-500 hover:border-indigo-600 hover:text-indigo-600 transition-all">Design
+                        UI/UX</a>
+                    <a href="#"
+                        class="px-4 py-1.5 border border-gray-200 dark:border-gray-800 rounded-full text-xs font-bold text-gray-500 hover:border-indigo-600 hover:text-indigo-600 transition-all">Mobile
+                        App</a>
+                    <a href="#"
+                        class="px-4 py-1.5 border border-gray-200 dark:border-gray-800 rounded-full text-xs font-bold text-gray-500 hover:border-indigo-600 hover:text-indigo-600 transition-all">Web
+                        Design</a>
+                    <a href="#"
+                        class="px-4 py-1.5 border border-gray-200 dark:border-gray-800 rounded-full text-xs font-bold text-gray-500 hover:border-indigo-600 hover:text-indigo-600 transition-all">Branding</a>
+                    <a href="#"
+                        class="px-4 py-1.5 border border-gray-200 dark:border-gray-800 rounded-full text-xs font-bold text-gray-500 hover:border-indigo-600 hover:text-indigo-600 transition-all">Illustration</a>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-4 pt-6 border-t border-gray-100 dark:border-gray-800">
+
+                    <button
+                        class="p-2.5 border border-gray-200 dark:border-gray-800 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                        </svg>
+                    </button>
+
+                    <div class="group relative">
+                        <button
+                            class="flex items-center gap-2 px-4 py-2.5 border border-gray-200 dark:border-gray-800 rounded-xl text-sm font-bold text-gray-700 dark:text-gray-300 hover:border-gray-300 transition-all">
+                            Catégories
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="group relative">
+                        <button
+                            class="flex items-center gap-2 px-4 py-2.5 border border-gray-200 dark:border-gray-800 rounded-xl text-sm font-bold text-gray-700 dark:text-gray-300 hover:border-gray-300 transition-all">
+                            Localisation
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="ml-auto flex-1 max-w-xs hidden md:block">
+                        <input type="text" placeholder="Rechercher un projet..."
+                            class="w-full bg-gray-100 dark:bg-gray-900 border-none rounded-xl py-2.5 px-4 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
-        <form action="{{ route('projects.search') }}" method="GET"
+        {{-- <form action="{{ route('projects.search') }}" method="GET"
             class="flex flex-wrap items-end gap-6 mb-16 pb-8 border-b border-gray-100 dark:border-gray-800">
 
             <div class="flex-1 min-w-[200px]">
@@ -47,7 +107,7 @@
                 class="text-sm text-gray-400 hover:text-gray-600 transition-colors font-medium">
                 Réinitialiser
             </a>
-        </form>
+        </form> --}}
 
         <div class="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
             @forelse ($projects as $project)
@@ -67,7 +127,7 @@
                         </div>
                     </a>
 
-                    <div class="flex items-center gap-2 mb-3">
+                    {{-- <div class="flex items-center gap-2 mb-3">
                         <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-500">
                             {{ $project->category ?? 'Créatif' }}
                         </span>
@@ -75,7 +135,7 @@
                         <time class="text-[11px] text-gray-400">
                             {{ $project->created_at->translatedFormat('d M Y') }}
                         </time>
-                    </div>
+                    </div> --}}
 
                     <h3
                         class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 transition-colors leading-snug mb-3">
