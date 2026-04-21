@@ -32,17 +32,20 @@
                 </div>
 
                 <h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-7xl leading-[1.05]">
-                    Le talent africain<br>
+                    {{-- Le talent africain<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
                         mérite une scène mondiale.
-                    </span>
+                    </span> --}}
+                    Discover, Showcase and Hire African Talents
                 </h1>
 
                 <p class="mt-8 text-lg md:text-xl leading-relaxed text-gray-400 font-light max-w-2xl mx-auto">
-                    Mefolio est la plateforme pensée pour les créatifs et étudiants africains.
+                    {{-- Mefolio est la plateforme pensée pour les créatifs et étudiants africains.
                     Construisez votre portfolio, soyez découverts par des recruteurs,
                     et monétisez vos compétences avec
-                    <span class="text-gray-200 font-medium">Mobile Money.</span>
+                    <span class="text-gray-200 font-medium">Mobile Money.</span> --}}
+
+                    The first platform dedicated to students, creatives and developers across Africa.
                 </p>
 
                 {{-- Stats rapides --}}
@@ -72,12 +75,12 @@
                     @guest
                         <a href="{{ route('register') }}"
                             class="w-full sm:w-auto group relative inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-sm font-bold text-gray-950 shadow-2xl transition-all hover:bg-gray-100 hover:scale-[1.02] active:scale-95">
-                            Créer mon portfolio gratuit
+                            Join as Talent
                             <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
                         </a>
                         <a href="{{ route('projects.index') }}"
                             class="group flex items-center gap-2 text-sm font-bold text-gray-300 hover:text-white transition-colors py-3">
-                            Explorer les projets
+                            Explore Talents
                             <span class="group-hover:translate-x-1 transition-transform">→</span>
                         </a>
                     @endguest
