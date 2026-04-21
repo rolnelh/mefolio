@@ -39,6 +39,7 @@
         $activeTab = request()->get('tab', 'projets');
     @endphp
 
+
     {{-- COVER --}}
     <div class="relative w-full h-48 sm:h-56 overflow-hidden bg-gray-200">
         <img src="{{ $couverturePath }}" alt="Couverture" class="w-full h-full object-cover object-center">
@@ -184,26 +185,38 @@
 
                 {{-- Navigation sidebar --}}
                 <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-3">
-                    <nav class="space-y-1">
-                        @foreach ([['tab' => 'projets', 'label' => 'Mes projets', 'emoji' => '🎨', 'count' => count($projects)], ['tab' => 'services', 'label' => 'Mes services', 'emoji' => '🛠️', 'count' => 0], ['tab' => 'stats', 'label' => 'Statistiques', 'emoji' => '📊', 'count' => null], ['tab' => 'parametres', 'label' => 'Paramètres', 'emoji' => '⚙️', 'count' => null]] as $nav)
-                            <a href="?tab={{ $nav['tab'] }}"
-                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all {{ $activeTab === $nav['tab'] ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-50' }}">
-                                <span class="text-base">{{ $nav['emoji'] }}</span>
-                                <span class="text-sm font-semibold flex-1">{{ $nav['label'] }}</span>
-                                @if ($nav['count'] !== null)
-                                    <span
-                                        class="text-xs {{ $activeTab === $nav['tab'] ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-500' }} font-bold px-2 py-0.5 rounded-full">
-                                        {{ $nav['count'] }}
+                    <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-3">
+                        <nav class="space-y-1">
+                            @foreach ([['tab' => 'projets', 'label' => 'Mes projets', 'icon' => 'project.png', 'count' => count($projects)], ['tab' => 'services', 'label' => 'Mes services', 'icon' => 'service.png', 'count' => 0], ['tab' => 'stats', 'label' => 'Statistiques', 'icon' => 'statistics.png', 'count' => null], ['tab' => 'parametres', 'label' => 'Paramètres', 'icon' => 'setting.png', 'count' => null]] as $nav)
+                                <a href="?tab={{ $nav['tab'] }}"
+                                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all
+            {{ $activeTab === $nav['tab'] ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-50' }}">
+
+                                    <img src="{{ asset('images/' . $nav['icon']) }}" alt="{{ $nav['label'] }}"
+                                        class="w-5 h-5 object-contain">
+
+                                    <span class="text-sm font-semibold flex-1">
+                                        {{ $nav['label'] }}
                                     </span>
-                                @endif
-                            </a>
-                        @endforeach
-                    </nav>
+
+                                    @if ($nav['count'] !== null)
+                                        <span
+                                            class="text-xs
+                {{ $activeTab === $nav['tab'] ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-500' }}
+                font-bold px-2 py-0.5 rounded-full">
+                                            {{ $nav['count'] }}
+                                        </span>
+                                    @endif
+
+                                </a>
+                            @endforeach
+                        </nav>
+                    </div>
                 </div>
 
             </aside>
 
-           
+
             <main class="flex-1 min-w-0 space-y-6">
 
                 @if (session('error'))
