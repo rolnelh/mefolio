@@ -310,7 +310,7 @@
             <a href="{{ route('missions.index') }}"
                 class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">Missions
                 Freelance</a>
-            <a href="{{ route('vision.index') }}"
+            <a href="{{ route('vision') }}"
                 class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">Missions
                 Vision Mefolio</a>
             <a href="{{ route('services.index') }}"
