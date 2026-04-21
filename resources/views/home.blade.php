@@ -28,7 +28,7 @@
 
                 <div
                     class="inline-flex items-center rounded-full bg-blue-500/5 px-4 py-1.5 text-xs font-semibold text-blue-400 ring-1 ring-inset ring-blue-500/20 mb-10 backdrop-blur-md">
-                    <span class="mr-2">🌍</span> La première plateforme africaine des talents créatifs
+                    <span class="mr-2">🌍</span> The first African platform for creative talent
                 </div>
 
                 <h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-7xl leading-[1.05]">
@@ -328,16 +328,15 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
             <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-10">
-                <div class="max-w-4xl">
+                <div class="max-w-5xl">
                     <h2
-                        class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 leading-[0.95]">
-                        Nos talents <br>
+                        class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                        Nos talents
                         <span class="text-blue-600">créatifs</span>
                     </h2>
 
-                    <div class="mt-8 flex gap-6">
-                        <div class="w-1 bg-blue-600 rounded-full"></div>
-                        <p class="text-lg md:text-xl text-gray-500 leading-relaxed max-w-md">
+                    <div class="mt-'' flex gap-6">
+                        <p class="mt-3 text-gray-500 dark:text-gray-400 font-light max-w-md">
                             L'élite de notre communauté. Des esprits audacieux qui repoussent les limites du possible.
                         </p>
                     </div>
@@ -345,7 +344,7 @@
 
                 <div class="pb-2">
                     <a href="{{ route('creatifs.index') }}"
-                        class="group inline-flex items-center gap-4 text-gray-900 font-bold uppercase tracking-[0.2em] text-[11px] transition-all">
+                        class="group inline-flex items-center gap-4 text-gray-900 font-bold uppercase tracking-[0.1em] text-[11px] transition-all">
                         <span class="relative">
                             Voir tout l'écosystème
                             <span
@@ -364,7 +363,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-12">
                 @foreach ($creatifs as $creatif)
-                    <div class="group relative pt-12">
+                    <div class="group relative pt-8">
                         <div
                             class="relative bg-zinc-900 rounded-[2.5rem] p-8 transition-all duration-500 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.35)] group-hover:-translate-y-2 border border-white/5">
 
