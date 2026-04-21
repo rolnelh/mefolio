@@ -110,7 +110,7 @@
 
                     <a href="{{ route('missions.index') }}"
                         class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all">
-                        Découvrir les Missions
+                        Trouver les Missions
                     </a>
 
                     <div x-data="{ open: false }" class="relative">
@@ -301,18 +301,30 @@
         class="hidden lg:hidden bg-white dark:bg-gray-900 border-t border-gray-100">
         <div class="px-4 py-3 space-y-1">
             <a href="{{ route('projects.index') }}"
-                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">🎨 Projets
-                créatifs</a>
+                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">Explorer les
+                Projets
+            </a>
             <a href="{{ route('creatifs.index') }}"
-                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">👥 Créatifs</a>
+                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">Découvrir les
+                Créatifs</a>
             <a href="{{ route('missions.index') }}"
-                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">💼 Missions
+                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">Missions
                 Freelance</a>
+            <a href="{{ route('vision.index') }}"
+                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">Missions
+                Vision Mefolio</a>
+            <a href="{{ route('services.index') }}"
+                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">Missions
+                Servies</a>
+            <a href="{{ route('talentoftheweek.index') }}"
+                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">Missions
+                Talents oh the week</a>
             <a href="{{ route('blog') }}"
-                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">📝 Blog</a>
+                class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg"> Blog</a>
             <div class="opacity-60">
                 <a href="{{ route('hackathons.index') }}"
-                    class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">🚀
+                    class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 rounded-lg">Programmes
+                    &
                     Hackathons</a>
                 <span class="block px-3 py-2 text-sm font-medium text-gray-700">⚡ Challenges <span
                         class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span></span>

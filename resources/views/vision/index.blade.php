@@ -1,32 +1,48 @@
 <x-app-layout>
 
-    {{-- HERO --}}
-    <section class="relative bg-[#050810] py-28 overflow-hidden">
-        <div class="absolute inset-0 pointer-events-none">
+    <section class="relative py-20 lg:py-6 overflow-hidden">
+        {{-- <div class="absolute inset-0 pointer-events-none">
             <div class="absolute top-0 right-0 w-[60%] h-[70%] rounded-full bg-indigo-600/10 blur-[150px]"></div>
             <div class="absolute bottom-0 left-0 w-[40%] h-[50%] rounded-full bg-violet-600/10 blur-[100px]"></div>
-        </div>
-        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <div
-                class="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold px-4 py-1.5 rounded-full mb-8 uppercase tracking-widest">
-                🚧 Mefolio 2.0 — Currently Building the African Talent Ecosystem
+        </div> --}}
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+                <div class="text-left">
+                    <div
+                        class="inline-flex items-center gap-2 bg-slate-950 border border-indigo-500/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-8 uppercase tracking-widest">
+                        🚧 Mefolio 2.0 — Africa's Talent Ecosystem
+                    </div>
+
+                    <h1 class="text-5xl sm:text-7xl font-black text-slate-900 tracking-tight leading-[1.05] mb-8">
+                        Vision<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
+                            Africa 2030
+                        </span>
+                    </h1>
+
+                    <p class="text-xl text-gray-700 max-w-xl leading-relaxed">
+                        Construire l'infrastructure digitale qui révèle, connecte et propulse les talents africains vers
+                        les opportunités mondiales.
+                    </p>
+                </div>
+
+                <div class="relative group">
+                    <div
+                        class="absolute -inset-4 bg-indigo-500/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition duration-1000">
+                    </div>
+
+                    <img src="{{ asset('images/vision.png') }}" alt="Vision Africa 2030"
+                        class="relative w-full h-auto object-contain max-h-[450px] rounded-xl drop-shadow-xl">
+                </div>
+
             </div>
-            <h1 class="text-5xl sm:text-7xl font-black text-white tracking-tight leading-[1.05] mb-8">
-                Vision<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
-                    Africa 2030
-                </span>
-            </h1>
-            <p class="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Construire l'infrastructure digitale qui révèle, connecte et propulse les talents africains vers les
-                opportunités mondiales.
-            </p>
         </div>
     </section>
 
-    <div class="max-w-5xl mx-auto px-6 lg:px-8 py-20 space-y-20">
+    <div class="max-w-5xl mx-auto px-6 lg:px-8 py-20 space-y-20 mt-8">
 
-        {{-- Le problème --}}
         <div>
             <p class="text-xs font-bold uppercase tracking-[0.3em] text-red-500 mb-3">Le constat</p>
             <h2 class="text-3xl font-black text-gray-900 mb-8">L'Afrique regorge de talents.<br>Ils restent invisibles.
@@ -59,7 +75,6 @@
             </div>
         </div>
 
-        {{-- Pourquoi maintenant --}}
         <div>
             <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Pourquoi maintenant</p>
             <h2 class="text-3xl font-black text-gray-900 mb-8">Le moment est parfait.</h2>
@@ -77,14 +92,15 @@
             </div>
         </div>
 
-        {{-- Histoire personnelle --}}
+
         <div class="bg-white border border-gray-100 rounded-3xl p-10 md:p-14 shadow-sm">
             <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-4">Le fondateur</p>
             <div class="flex flex-col md:flex-row gap-8 items-start">
                 <div class="flex-shrink-0">
                     <div
                         class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:bg-green-100">
-                        <img src="{{ asset('images/profil.webp') }}" alt="Paiements" class="w-full h-full rounded-lg object-contain">
+                        <img src="{{ asset('images/profil.webp') }}" alt="Paiements"
+                            class="w-full h-full rounded-lg object-contain">
                     </div>
                 </div>
                 <div>
@@ -113,7 +129,6 @@
             </div>
         </div>
 
-        {{-- Roadmap 2030 --}}
         <div>
             <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">La feuille de route</p>
             <h2 class="text-3xl font-black text-gray-900 mb-8">Vision Africa 2030</h2>
@@ -141,7 +156,6 @@
             </div>
         </div>
 
-        {{-- CTA --}}
         <div class="bg-[#050810] rounded-3xl p-12 text-center text-white">
             <div class="text-4xl mb-4">🌍</div>
             <h2 class="text-3xl font-black mb-4">Rejoignez le mouvement</h2>

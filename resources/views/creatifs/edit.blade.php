@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="min-h-screen bg-slate-50 dark:bg-gray-900 py-12 px-4 sm:px-6">
         <div
-            class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700">
+            class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
 
             <div class="relative h-32 bg-gradient-to-r from-indigo-600 to-violet-700 p-8">
                 <div class="relative z-10">
