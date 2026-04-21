@@ -116,7 +116,7 @@
                     <a href="{{ route('projects.show', $project->slug) }}"
                         class="relative block w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800 mb-5"
                         style="aspect-ratio: 4/3;">
-                        <img src="{{ $project->creatif->photo
+                        <img src="{{ $project->image
                             ? $project->creatif->photo
                             : 'https://ui-avatars.com/api/?name=' .
                                 urlencode($project->creatif->prenom ?? 'M') .
