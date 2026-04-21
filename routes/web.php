@@ -103,6 +103,12 @@ Route::get('/creatifs/domaine', function () {
     return view('coming-soon', ['page' => 'Talents par domaine', 'emoji' => '🎯', 'description' => 'Design, Développement, Photographie, Vidéo — trouvez le bon profil.']);
 })->name('creatifs.domaine');
 
+Route::get('/talentoftheweek', function () {
+    return view('talentoftheweek.index');
+})->name('talentoftheweek.index');
 
+Route::get('/vision', function () {
+    return view('vision.index');
+})->name('vision');
 
 require __DIR__.'/auth.php';

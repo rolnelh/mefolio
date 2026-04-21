@@ -10,7 +10,7 @@
     :class="{ 'translate-y-0': showNav, '-translate-y-full': !showNav && !open }"
     class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 transition-transform duration-300 ease-in-out">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-auto mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
 
             {{-- LOGO --}}
@@ -52,14 +52,11 @@
                                     <p class="text-xs text-gray-400">Commandez des services</p>
                                 </div>
                             </a>
-
-                            <a href="talent.week"
-                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors opacity-60">
+                            <a href="{{ route('talentoftheweek.index') }}"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors">
                                 <span class="text-lg">🏆</span>
                                 <div>
                                     <p class="text-sm font-semibold text-gray-900 dark:text-white">Talent of the Week
-                                        <span
-                                            class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span>
                                     </p>
                                     <p class="text-xs text-gray-400">Le talent de la semaine</p>
                                 </div>
@@ -78,7 +75,7 @@
                         </button>
                         <div x-show="open" x-transition:enter="transition ease-out duration-150"
                             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                            class="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 z-50">
+                            class="absolute top-full left-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 z-50">
                             <a href="{{ route('creatifs.index') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors">
                                 <span class="text-lg">👥</span>
@@ -113,12 +110,12 @@
 
                     <a href="{{ route('missions.index') }}"
                         class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all">
-                       Découvrir les Missions
+                        Découvrir les Missions
                     </a>
 
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open" @click.outside="open = false"
-                            class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all">
+                            class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all">Notre
                             Communauté
                             <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
                                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -127,7 +124,7 @@
                         </button>
                         <div x-show="open" x-transition:enter="transition ease-out duration-150"
                             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                            class="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 z-50">
+                            class="absolute top-full left-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 z-50">
                             <a href="{{ route('blog') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors">
                                 <span class="text-lg">📝</span>
@@ -168,6 +165,11 @@
                             </a>
                         </div>
                     </div>
+
+                    <a href="{{ route('vision') }}"
+                        class="hidden lg:inline-flex items-center gap-1.5 bg-indigo-950 border border-indigo-800 text-indigo-300 text-[10px] font-bold px-3 py-1 rounded-full hover:border-indigo-600 transition-all">
+                        🚧 Mefolio 2.0
+                    </a>
 
                 </div>
             </div>

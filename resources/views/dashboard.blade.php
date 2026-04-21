@@ -35,320 +35,510 @@
         $progression = collect($etapes)->filter()->count();
         $total = count($etapes);
         $pourcentage = ($progression / $total) * 100;
+
+        $activeTab = request()->get('tab', 'projets');
     @endphp
 
-    <div class="relative w-full h-48 sm:h-64 md:h-72 rounded-sm overflow-hidden mb-6 bg-gray-200">
-        <img src="{{ $couverturePath }}" alt="Photo de couverture"
-            class="w-full h-full bg-center object-cover object-center">
-        <div class="absolute bottom-2 right-2">
+    {{-- COVER --}}
+    <div class="relative w-full h-48 sm:h-56 overflow-hidden bg-gray-200">
+        <img src="{{ $couverturePath }}" alt="Couverture" class="w-full h-full object-cover object-center">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+        <div class="absolute bottom-3 right-3">
             <a href="{{ route('creatifs.edit') }}"
-                class="bg-white/80 hover:bg-white text-gray-800 text-xs font-semibold px-3 py-1.5 rounded-md shadow-md transition-all">
-                {{ $creatif && $creatif->couverture ? 'Changer la couverture' : 'Ajouter une couverture' }}
+                class="inline-flex items-center gap-1.5 bg-white/90 hover:bg-white text-gray-800 text-xs font-semibold px-3 py-1.5 rounded-lg shadow-md transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                {{ $creatif && $creatif->couverture ? 'Changer' : 'Ajouter couverture' }}
             </a>
         </div>
     </div>
 
-    <div class="max-w-5xl mx-auto mt-2 p-6 space-y-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex flex-col lg:flex-row gap-6 items-start">
 
-        <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800">
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+            {{-- ═══════════════════════════════════════
+             SIDEBAR
+        ═══════════════════════════════════════ --}}
+            <aside class="w-full lg:w-72 flex-shrink-0 space-y-4 lg:sticky lg:top-24">
 
-                    <div class="relative">
-                        <img src="{{ $creatif?->photo ? $creatif->photo : asset('images/avatar.png') }}" alt="Profil"
-                            class="w-28 h-28 rounded-2xl object-cover ring-4 ring-indigo-50 dark:ring-indigo-900/20 shadow-md">
-                        <div
-                            class="absolute -bottom-2 -right-2 bg-green-500 w-5 h-5 rounded-full border-4 border-white dark:border-gray-900">
+                {{-- Profil card --}}
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden">
+                    {{-- Avatar --}}
+                    <div class="px-6 pt-6 pb-4 text-center border-b border-gray-50 dark:border-gray-800">
+                        <div class="relative inline-block mb-3">
+                            <img src="{{ $creatif?->photo ?: asset('images/avatar.png') }}" alt="Profil"
+                                class="w-20 h-20 rounded-2xl object-cover ring-4 ring-indigo-50 dark:ring-indigo-900/20 shadow-md mx-auto">
+                            <div
+                                class="absolute -bottom-1.5 -right-1.5 bg-green-500 w-4 h-4 rounded-full border-2 border-white">
+                            </div>
+                        </div>
+                        <h2 class="text-base font-bold text-gray-900 dark:text-white">
+                            {{ $creatif ? $creatif->prenom . ' ' . $creatif->nom : Auth::user()->username }}
+                        </h2>
+                        @if ($creatif?->specialite)
+                            <p class="text-xs text-indigo-600 font-semibold mt-0.5">{{ $creatif->specialite }}</p>
+                        @endif
+                        @if ($creatif?->localisation)
+                            <p class="text-xs text-gray-400 mt-1 flex items-center justify-center gap-1">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                {{ $creatif->localisation }}
+                            </p>
+                        @endif
+                    </div>
+
+                    {{-- Bio --}}
+                    @if ($creatif?->bio)
+                        <div class="px-6 py-4 border-b border-gray-50 dark:border-gray-800">
+                            <p class="text-xs text-gray-500 leading-relaxed line-clamp-4">{{ $creatif->bio }}</p>
+                        </div>
+                    @endif
+
+                    {{-- Stats --}}
+                    <div
+                        class="grid grid-cols-3 divide-x divide-gray-50 dark:divide-gray-800 border-b border-gray-50 dark:border-gray-800">
+                        <div class="py-3 text-center">
+                            <p class="text-lg font-black text-gray-900 dark:text-white">{{ count($projects) }}</p>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Projets</p>
+                        </div>
+                        <div class="py-3 text-center">
+                            <p class="text-lg font-black text-gray-900 dark:text-white">0</p>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Vues</p>
+                        </div>
+                        <div class="py-3 text-center">
+                            <p class="text-lg font-black text-gray-900 dark:text-white">0</p>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Likes</p>
                         </div>
                     </div>
 
-                    <div class="text-center sm:text-left flex-1">
-                        <div class="flex items-center justify-center sm:justify-start gap-2">
-                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-                                {{ $creatif ? $creatif->nom . ' ' . $creatif->prenom : Auth::user()->username }}
-                            </h2>
-                            <a href="{{ route('creatifs.edit') }}"
-                                class="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all">
-                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                </svg>
-                            </a>
-                        </div>
-
-                        <div class="flex flex-wrap justify-center sm:justify-start gap-y-2 gap-x-4 mt-2">
-                            @if ($creatif?->specialite)
-                                <span class="flex items-center text-sm font-medium text-indigo-600">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 mr-2"></span>
-                                    {{ $creatif->specialite }}
-                                </span>
-                            @endif
-                            @if ($creatif?->localisation)
-                                <span class="flex items-center text-sm text-gray-500">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    {{-- Liens sociaux --}}
+                    <div class="px-6 py-4 border-b border-gray-50 dark:border-gray-800">
+                        <div class="flex justify-center gap-3">
+                            @if ($creatif?->portfolio_url)
+                                <a href="{{ $creatif->portfolio_url }}" target="_blank"
+                                    class="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                                    title="Portfolio">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                                     </svg>
-                                    {{ $creatif->localisation }}
-                                </span>
+                                </a>
                             @endif
-                        </div>
-
-                        @if ($creatif?->bio)
-                            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-lg">
-                                {{ $creatif->bio }}
-                            </p>
-                        @endif
-
-                        <div class="flex justify-center sm:justify-start gap-4 mt-4">
-                            <a href="#" class="text-gray-400 hover:text-indigo-600 transition-colors">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <a href="#"
+                                class="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                                title="LinkedIn">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                     <path
                                         d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                                 </svg>
                             </a>
-                            <a href="#" class="text-gray-400 hover:text-indigo-600 transition-colors">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <a href="#"
+                                class="p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all"
+                                title="GitHub">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                     <path
                                         d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                                 </svg>
                             </a>
                         </div>
                     </div>
-                </div>
 
-                <div class="flex items-center justify-center lg:justify-end gap-3 self-center lg:self-start">
-                    <div class="flex bg-gray-50 dark:bg-gray-800/50 p-1 rounded-xl">
-                        <button class="relative p-2.5 text-gray-500 hover:text-indigo-600 transition-colors">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    {{-- Actions --}}
+                    <div class="px-6 py-4 space-y-2">
+                        <a href="{{ route('creatifs.edit') }}"
+                            class="flex items-center justify-center gap-2 w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl transition-all">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                             </svg>
-                            <span
-                                class="absolute top-2 right-2 w-2 h-2 bg-blue-500 rounded-full border-2 border-white dark:border-gray-800"></span>
-                        </button>
-                    </div>
-                    @if (!$creatif)
-                        <a href="{{ route('creatifs.create') }}"
-                            class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-indigo-200">
-                            Compléter profil
+                            Modifier mon profil
                         </a>
-                    @endif
-                </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-gray-50 dark:border-gray-800 flex justify-between items-center">
-                <span class="text-[11px] uppercase tracking-wider font-bold text-gray-400">
-                    Membre depuis {{ Auth::user()->created_at->translatedFormat('F Y') }}
-                </span>
-                @if ($creatif?->portfolio_url)
-                    <a href="{{ $creatif->portfolio_url }}" target="_blank"
-                        class="text-xs text-indigo-500 hover:underline font-medium">
-                        {{ str_replace(['http://', 'https://'], '', $creatif->portfolio_url) }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        @if ($pourcentage < 100)
-            <div class="bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100 rounded-2xl p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h3 class="text-base font-bold text-gray-900">Configurez votre espace créatif</h3>
-                        <p class="text-sm text-gray-500 mt-0.5">{{ $progression }}/{{ $total }} étapes
-                            complétées</p>
-                    </div>
-                    <span class="text-2xl font-extrabold text-indigo-600">{{ (int) $pourcentage }}%</span>
-                </div>
-
-                <div class="w-full bg-white rounded-full h-2 mb-6 overflow-hidden">
-                    <div class="bg-indigo-600 h-2 rounded-full transition-all duration-500"
-                        style="width: {{ $pourcentage }}%"></div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-
-                    <a href="{{ route('creatifs.edit') }}"
-                        class="flex items-center gap-3 p-4 bg-white rounded-xl border {{ $etapes['profil'] ? 'border-green-200' : 'border-indigo-200 hover:border-indigo-400' }} transition-all">
-                        <div
-                            class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 {{ $etapes['profil'] ? 'bg-green-100 text-green-600' : 'bg-indigo-100 text-indigo-600' }}">
-                            @if ($etapes['profil'])
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                </svg>
-                            @else
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+                        @if ($creatif?->slug)
+                            <a href="{{ route('creatifs.show', $creatif->slug) }}" target="_blank"
+                                class="flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 text-xs font-semibold rounded-xl transition-all border border-gray-100">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                 </svg>
-                            @endif
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p
-                                class="text-sm font-semibold {{ $etapes['profil'] ? 'text-green-700' : 'text-gray-900' }}">
-                                {{ $etapes['profil'] ? '✓ Profil complété' : 'Compléter mon profil' }}
-                            </p>
-                            <p class="text-xs text-gray-400">Photo, bio, spécialité, localisation</p>
-                        </div>
-                        @if (!$etapes['profil'])
-                            <svg class="w-4 h-4 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor"
-                                stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                            </svg>
+                                Voir mon profil public
+                            </a>
                         @endif
-                    </a>
-
-                    <a href="{{ $etapes['profil'] ? route('projets.create') : '#' }}"
-                        class="flex items-center gap-3 p-4 bg-white rounded-xl border {{ $etapes['projet'] ? 'border-green-200' : 'border-indigo-200' }} transition-all {{ !$etapes['profil'] ? 'opacity-50 cursor-not-allowed' : 'hover:border-indigo-400' }}">
-                        <div
-                            class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 {{ $etapes['projet'] ? 'bg-green-100 text-green-600' : 'bg-indigo-100 text-indigo-600' }}">
-                            @if ($etapes['projet'])
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                </svg>
-                            @else
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                                </svg>
-                            @endif
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p
-                                class="text-sm font-semibold {{ $etapes['projet'] ? 'text-green-700' : 'text-gray-900' }}">
-                                {{ $etapes['projet'] ? '✓ Premier projet ajouté' : 'Ajouter mon premier projet' }}
-                            </p>
-                            <p class="text-xs text-gray-400">
-                                {{ !$etapes['profil'] ? 'Complétez d\'abord votre profil' : 'Partagez votre première réalisation' }}
-                            </p>
-                        </div>
-                        @if (!$etapes['projet'] && $etapes['profil'])
-                            <svg class="w-4 h-4 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor"
-                                stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                            </svg>
-                        @endif
-                    </a>
-
-                </div>
-            </div>
-        @endif
-
-        <hr class="border-gray-100">
-
-        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-
-            @if ($aDesProjets)
-                <div class="flex items-center justify-between mb-6">
-                    <span class="text-base font-bold text-gray-900 dark:text-white">Mes projets</span>
-                    <span class="text-sm text-gray-400">{{ count($projects) }}
-                        projet{{ count($projects) > 1 ? 's' : '' }}</span>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
-                    <a href="{{ route('projets.create') }}"
-                        class="group flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl hover:border-indigo-500 transition-all duration-300 min-h-[240px]">
-                        <div
-                            class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4v16m8-8H4" />
-                            </svg>
-                        </div>
-                        <span class="mt-4 font-medium text-gray-600 dark:text-gray-400">Nouveau projet</span>
-                    </a>
-
-                    @foreach ($projects as $project)
-                        <div
-                            class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-all duration-300">
-
-                            <div class="relative overflow-hidden" style="height: 180px;">
-                                <img src="{{ $project->image ?: 'https://via.placeholder.com/400x300' }}"
-                                    alt="{{ $project->title }}"
-                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                </div>
-                            </div>
-
-                            <div class="p-4">
-                                <h3 class="font-bold text-gray-900 dark:text-white truncate text-sm mb-1">
-                                    {{ $project->title }}
-                                </h3>
-                                <p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 leading-relaxed">
-                                    {{ $project->description }}
-                                </p>
-
-                                <div
-                                    class="flex items-center justify-between mt-4 pt-3 border-t border-gray-50 dark:border-gray-700">
-                                    <a href="{{ route('projects.show', $project->slug) }}"
-                                        class="text-indigo-600 text-xs font-semibold hover:text-indigo-700 transition-colors">
-                                        Voir →
-                                    </a>
-                                    <div class="flex gap-1">
-                                        <a href="{{ route('projets.edit', $project->id) }}"
-                                            class="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all">
-                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="1.5"
-                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.414-9.414z" />
-                                            </svg>
-                                        </a>
-                                        <form method="POST" action="{{ route('projets.destroy', $project->id) }}"
-                                            onsubmit="return confirm('Supprimer ce projet ?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all">
-                                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @else
-                <div
-                    class="flex flex-col items-center justify-center py-16 bg-gray-50 dark:bg-gray-800/50 rounded-3xl border-2 border-dotted border-gray-200 dark:border-gray-700">
-                    <div class="p-4 bg-white dark:bg-gray-800 rounded-full shadow-sm mb-4">
-                        <svg class="w-10 h-10 text-gray-400" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">Aucun projet pour le moment</h3>
-                    <p class="text-gray-500 mt-2 mb-8 text-center max-w-sm">
-                        Votre portfolio est vide. Ajoutez votre première réalisation pour impressionner vos visiteurs.
-                    </p>
-                    @if ($profilComplet)
-                        <a href="{{ route('projets.create') }}"
-                            class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-full shadow-lg shadow-indigo-200 transition-all">
-                            + Créer mon premier projet
-                        </a>
-                    @else
-                        <a href="{{ route('creatifs.edit') }}"
-                            class="px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-full shadow-lg transition-all">
-                            ⚠️ Compléter mon profil d'abord
-                        </a>
-                    @endif
+
+                    {{-- Membre depuis --}}
+                    <div class="px-6 pb-4">
+                        <p class="text-[10px] uppercase tracking-widest font-bold text-gray-300 text-center">
+                            Membre depuis {{ Auth::user()->created_at->translatedFormat('F Y') }}
+                        </p>
+                    </div>
                 </div>
-            @endif
+
+                {{-- Navigation sidebar --}}
+                <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-3">
+                    <nav class="space-y-1">
+                        @foreach ([['tab' => 'projets', 'label' => 'Mes projets', 'emoji' => '🎨', 'count' => count($projects)], ['tab' => 'services', 'label' => 'Mes services', 'emoji' => '🛠️', 'count' => 0], ['tab' => 'stats', 'label' => 'Statistiques', 'emoji' => '📊', 'count' => null], ['tab' => 'parametres', 'label' => 'Paramètres', 'emoji' => '⚙️', 'count' => null]] as $nav)
+                            <a href="?tab={{ $nav['tab'] }}"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all {{ $activeTab === $nav['tab'] ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-50' }}">
+                                <span class="text-base">{{ $nav['emoji'] }}</span>
+                                <span class="text-sm font-semibold flex-1">{{ $nav['label'] }}</span>
+                                @if ($nav['count'] !== null)
+                                    <span
+                                        class="text-xs {{ $activeTab === $nav['tab'] ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-500' }} font-bold px-2 py-0.5 rounded-full">
+                                        {{ $nav['count'] }}
+                                    </span>
+                                @endif
+                            </a>
+                        @endforeach
+                    </nav>
+                </div>
+
+            </aside>
+
+           
+            <main class="flex-1 min-w-0 space-y-6">
+
+                @if (session('error'))
+                    <div
+                        class="mb-4 flex items-center gap-3 p-4 bg-red-50 border border-red-100 text-red-700 rounded-2xl">
+                        <span class="text-xl">⚠️</span>
+                        <span class="text-sm font-medium">{{ session('error') }}</span>
+                    </div>
+                @endif
+
+                {{-- Onboarding --}}
+                @if ($pourcentage < 100)
+                    <div class="bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100 rounded-2xl p-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-900">Configurez votre espace créatif</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">{{ $progression }}/{{ $total }}
+                                    étapes complétées</p>
+                            </div>
+                            <span class="text-xl font-extrabold text-indigo-600">{{ (int) $pourcentage }}%</span>
+                        </div>
+                        <div class="w-full bg-white rounded-full h-1.5 mb-4 overflow-hidden">
+                            <div class="bg-indigo-600 h-1.5 rounded-full transition-all duration-500"
+                                style="width: {{ $pourcentage }}%"></div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <a href="{{ route('creatifs.edit') }}"
+                                class="flex items-center gap-3 p-3 bg-white rounded-xl border {{ $etapes['profil'] ? 'border-green-200' : 'border-indigo-200 hover:border-indigo-400' }} transition-all">
+                                <div
+                                    class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 {{ $etapes['profil'] ? 'bg-green-100 text-green-600' : 'bg-indigo-100 text-indigo-600' }}">
+                                    @if ($etapes['profil'])
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M4.5 12.75l6 6 9-13.5" />
+                                        </svg>
+                                    @else
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                        </svg>
+                                    @endif
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="text-xs font-semibold {{ $etapes['profil'] ? 'text-green-700' : 'text-gray-900' }}">
+                                        {{ $etapes['profil'] ? '✓ Profil complété' : 'Compléter mon profil' }}
+                                    </p>
+                                    <p class="text-[11px] text-gray-400">Photo, bio, spécialité, localisation</p>
+                                </div>
+                            </a>
+                            <a href="{{ $etapes['profil'] ? route('projets.create') : '#' }}"
+                                class="flex items-center gap-3 p-3 bg-white rounded-xl border {{ $etapes['projet'] ? 'border-green-200' : 'border-indigo-200' }} transition-all {{ !$etapes['profil'] ? 'opacity-50 cursor-not-allowed' : 'hover:border-indigo-400' }}">
+                                <div
+                                    class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 {{ $etapes['projet'] ? 'bg-green-100 text-green-600' : 'bg-indigo-100 text-indigo-600' }}">
+                                    @if ($etapes['projet'])
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M4.5 12.75l6 6 9-13.5" />
+                                        </svg>
+                                    @else
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                        </svg>
+                                    @endif
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p
+                                        class="text-xs font-semibold {{ $etapes['projet'] ? 'text-green-700' : 'text-gray-900' }}">
+                                        {{ $etapes['projet'] ? '✓ Premier projet ajouté' : 'Ajouter mon premier projet' }}
+                                    </p>
+                                    <p class="text-[11px] text-gray-400">
+                                        {{ !$etapes['profil'] ? 'Complétez d\'abord votre profil' : 'Partagez votre première réalisation' }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                @endif
+
+                {{-- ─── ONGLET : PROJETS ─── --}}
+                @if ($activeTab === 'projets')
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div>
+                                <h2 class="text-lg font-black text-gray-900 dark:text-white">Mes projets</h2>
+                                <p class="text-xs text-gray-400 mt-0.5">{{ count($projects) }}
+                                    projet{{ count($projects) > 1 ? 's' : '' }} dans votre portfolio</p>
+                            </div>
+                            @if ($profilComplet)
+                                <a href="{{ route('projets.create') }}"
+                                    class="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    Nouveau projet
+                                </a>
+                            @endif
+                        </div>
+
+                        @if ($aDesProjets)
+                            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mt-8">
+
+                                @foreach ($projects as $project)
+                                    <div
+                                        class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-all duration-300">
+                                        <div class="relative overflow-hidden" style="height: 170px;">
+                                            <img src="{{ $project->image ?: 'https://via.placeholder.com/400x300' }}"
+                                                alt="{{ $project->title }}"
+                                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            </div>
+                                            <div
+                                                class="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <a href="{{ route('projets.edit', $project->id) }}"
+                                                    class="p-1.5 bg-white/90 text-gray-700 hover:text-indigo-600 rounded-lg transition-all shadow-sm">
+                                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="1.5"
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.414-9.414z" />
+                                                    </svg>
+                                                </a>
+                                                <form method="POST"
+                                                    action="{{ route('projets.destroy', $project->id) }}"
+                                                    onsubmit="return confirm('Supprimer ce projet ?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="p-1.5 bg-white/90 text-gray-700 hover:text-red-500 rounded-lg transition-all shadow-sm">
+                                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
+                                                            stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="1.5"
+                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="p-4">
+                                            <h3 class="font-bold text-gray-900 dark:text-white truncate text-sm mb-1">
+                                                {{ $project->title }}</h3>
+                                            <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">
+                                                {{ $project->description }}</p>
+                                            <div
+                                                class="flex items-center justify-between mt-3 pt-3 border-t border-gray-50 dark:border-gray-700">
+                                                <a href="{{ route('projects.show', $project->slug) }}"
+                                                    class="text-indigo-600 text-xs font-semibold hover:text-indigo-700 transition-colors">
+                                                    Voir le projet →
+                                                </a>
+                                                <span
+                                                    class="text-[11px] text-gray-400">{{ $project->created_at->diffForHumans() }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                {{-- Add project card --}}
+                                <a href="{{ $profilComplet ? route('projets.create') : route('creatifs.edit') }}"
+                                    class="group flex flex-col items-center justify-center border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-2xl hover:border-indigo-400 hover:bg-indigo-50/30 transition-all duration-300"
+                                    style="min-height: 250px;">
+                                    <div
+                                        class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-100 transition-all">
+                                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 4v16m8-8H4" />
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="mt-3 text-sm font-semibold text-gray-500 group-hover:text-indigo-600 transition-colors">Nouveau
+                                        projet</span>
+                                </a>
+
+                            </div>
+                        @else
+                            <div
+                                class="flex flex-col items-center justify-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
+                                <div class="text-4xl mb-4">🎨</div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-2">Aucun projet pour le moment</h3>
+                                <p class="text-sm text-gray-400 text-center max-w-xs mb-6">Ajoutez votre première
+                                    réalisation pour impressionner vos visiteurs.</p>
+                                @if ($profilComplet)
+                                    <a href="{{ route('projets.create') }}"
+                                        class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-full transition-all">
+                                        + Créer mon premier projet
+                                    </a>
+                                @else
+                                    <a href="{{ route('creatifs.edit') }}"
+                                        class="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-full transition-all">
+                                        ⚠️ Compléter mon profil d'abord
+                                    </a>
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+                @endif
+
+                {{-- ─── ONGLET : SERVICES ─── --}}
+                @if ($activeTab === 'services')
+                    <div
+                        class="flex flex-col items-center justify-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
+                        <div class="text-4xl mb-4">🛠️</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Services bientôt disponibles</h3>
+                        <p class="text-sm text-gray-400 text-center max-w-xs mb-6">Vous pourrez bientôt proposer vos
+                            services et être payé via Mobile Money.</p>
+                        <a href="{{ route('services.index') }}"
+                            class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-full transition-all">
+                            En savoir plus →
+                        </a>
+                    </div>
+                @endif
+
+                {{-- ─── ONGLET : STATS ─── --}}
+                @if ($activeTab === 'stats')
+                    <div>
+                        <h2 class="text-lg font-black text-gray-900 mb-5">Statistiques</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                            @foreach ([['label' => 'Vues du profil', 'val' => '0', 'emoji' => '👁️', 'color' => 'indigo'], ['label' => 'Vues projets', 'val' => '0', 'emoji' => '🎨', 'color' => 'violet'], ['label' => 'Likes reçus', 'val' => '0', 'emoji' => '❤️', 'color' => 'pink'], ['label' => 'Commentaires', 'val' => '0', 'emoji' => '💬', 'color' => 'blue']] as $stat)
+                                <div class="bg-white border border-gray-100 rounded-2xl p-5 text-center">
+                                    <div class="text-2xl mb-2">{{ $stat['emoji'] }}</div>
+                                    <div class="text-3xl font-black text-gray-900">{{ $stat['val'] }}</div>
+                                    <div class="text-xs text-gray-400 mt-1">{{ $stat['label'] }}</div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div
+                            class="bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100 rounded-2xl p-6 text-center">
+                            <div class="text-2xl mb-2">📊</div>
+                            <h3 class="font-bold text-gray-900 mb-1">Analytics détaillées bientôt</h3>
+                            <p class="text-sm text-gray-500">Vues par projet, provenance géographique, performance —
+                                tout ça arrive très bientôt.</p>
+                        </div>
+                    </div>
+                @endif
+
+                {{-- ─── ONGLET : PARAMÈTRES ─── --}}
+                @if ($activeTab === 'parametres')
+                    <div class="space-y-4">
+                        <h2 class="text-lg font-black text-gray-900">Paramètres du compte</h2>
+
+                        {{-- Visibilité du profil --}}
+                        <div class="bg-white border border-gray-100 rounded-2xl p-6">
+                            <h3 class="font-bold text-gray-900 mb-1">Visibilité du profil</h3>
+                            <p class="text-sm text-gray-500 mb-4">Choisissez qui peut voir votre profil et vos projets.
+                            </p>
+                            <div class="space-y-3">
+                                @foreach ([['val' => 'public', 'label' => 'Public', 'desc' => 'Tout le monde peut voir votre profil et vos projets.', 'emoji' => '🌍'], ['val' => 'members', 'label' => 'Membres uniquement', 'desc' => 'Seuls les membres connectés peuvent voir votre profil.', 'emoji' => '👥'], ['val' => 'private', 'label' => 'Privé', 'desc' => 'Votre profil est masqué. Vous seul pouvez le voir.', 'emoji' => '🔒']] as $opt)
+                                    <label
+                                        class="flex items-start gap-4 p-4 border border-gray-100 rounded-xl cursor-pointer hover:border-indigo-200 hover:bg-indigo-50/30 transition-all">
+                                        <input type="radio" name="visibility" value="{{ $opt['val'] }}"
+                                            {{ ($creatif?->visibility ?? 'public') === $opt['val'] ? 'checked' : '' }}
+                                            class="mt-0.5 text-indigo-600 focus:ring-indigo-500">
+                                        <div>
+                                            <p class="text-sm font-semibold text-gray-900">{{ $opt['emoji'] }}
+                                                {{ $opt['label'] }}</p>
+                                            <p class="text-xs text-gray-400 mt-0.5">{{ $opt['desc'] }}</p>
+                                        </div>
+                                    </label>
+                                @endforeach
+                            </div>
+                            <button
+                                class="mt-4 px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-xl transition-all">
+                                Sauvegarder
+                            </button>
+                        </div>
+
+                        {{-- Compte --}}
+                        <div class="bg-white border border-gray-100 rounded-2xl p-6">
+                            <h3 class="font-bold text-gray-900 mb-1">Informations du compte</h3>
+                            <p class="text-sm text-gray-500 mb-4">Gérez votre email et votre mot de passe.</p>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                    <div>
+                                        <p class="text-xs text-gray-400">Email</p>
+                                        <p class="text-sm font-semibold text-gray-900">{{ Auth::user()->email }}</p>
+                                    </div>
+                                    <a href="{{ route('profile.edit') }}"
+                                        class="text-xs text-indigo-600 font-semibold hover:underline">Modifier</a>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                    <div>
+                                        <p class="text-xs text-gray-400">Mot de passe</p>
+                                        <p class="text-sm font-semibold text-gray-900">••••••••</p>
+                                    </div>
+                                    <a href="{{ route('profile.edit') }}"
+                                        class="text-xs text-indigo-600 font-semibold hover:underline">Modifier</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Mettre en pause --}}
+                        <div class="bg-amber-50 border border-amber-100 rounded-2xl p-6">
+                            <div class="flex items-start gap-4">
+                                <div class="text-2xl">⏸️</div>
+                                <div class="flex-1">
+                                    <h3 class="font-bold text-amber-900 mb-1">Mettre mon compte en pause</h3>
+                                    <p class="text-sm text-amber-700 mb-4">Votre profil sera temporairement masqué.
+                                        Vous pourrez le réactiver à tout moment.</p>
+                                    <button
+                                        class="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-xl transition-all">
+                                        Mettre en pause
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Supprimer le compte --}}
+                        <div class="bg-red-50 border border-red-100 rounded-2xl p-6">
+                            <div class="flex items-start gap-4">
+                                <div class="text-2xl">🗑️</div>
+                                <div class="flex-1">
+                                    <h3 class="font-bold text-red-900 mb-1">Supprimer définitivement mon compte</h3>
+                                    <p class="text-sm text-red-700 mb-4">Cette action est irréversible. Toutes vos
+                                        données, projets et profil seront supprimés définitivement.</p>
+                                    <button onclick="return confirm('Êtes-vous sûr ? Cette action est irréversible.')"
+                                        class="px-5 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-xl transition-all">
+                                        Supprimer mon compte
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                @endif
+
+            </main>
+
         </div>
-
     </div>
-
 
 </x-app-layout>

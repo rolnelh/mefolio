@@ -52,6 +52,13 @@ class ProjectController extends Controller
 
     public function store(Request $request)
 {
+
+ $creatif = auth()->user()->creatif;
+    if ($creatif && $creatif->projects()->count() >= 2) {
+        return redirect()->route('dashboard')
+            ->with('error', 'Vous avez atteint la limite de 2 projets pour la phase de test. Merci de votre compréhension ! 🙏');
+    }
+    
     $validated = $request->validate([
         'title'       => 'required|string|max:255',
         'description' => 'required|string',
