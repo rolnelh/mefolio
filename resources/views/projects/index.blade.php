@@ -1,11 +1,11 @@
 <x-app-layout>
-    <div class="mx-auto max-w-7xl px-6 lg:px-8 py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8 py-10">
 
         <div class="mx-auto max-w-7xl px-6 lg:px-8 py-4">
 
-            <div class="mb-10 text-center md:text-left">
+            <div class="mb-6 md:text-left">
                 <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    Découvrez les meilleurs <span class="text-indigo-600">créatifs</span>
+                    Découvrez les meilleures réalisations de nos <span class="text-indigo-600">créatifs</span>
                 </h1>
                 <p class="text-gray-500 mt-2 text-base font-medium">
                     Explorez des milliers de projets inspirants réalisés par la communauté africaine.
@@ -30,6 +30,9 @@
                         class="px-4 py-1.5 border border-gray-200 dark:border-gray-800 rounded-full text-xs font-bold text-gray-500 hover:border-indigo-600 hover:text-indigo-600 transition-all">Branding</a>
                     <a href="#"
                         class="px-4 py-1.5 border border-gray-200 dark:border-gray-800 rounded-full text-xs font-bold text-gray-500 hover:border-indigo-600 hover:text-indigo-600 transition-all">Illustration</a>
+                    <a href="#"
+                        class="px-4 py-1.5 border border-gray-200 dark:border-gray-800 rounded-full text-xs font-bold text-gray-500 hover:border-indigo-600 hover:text-indigo-600 transition-all">
+                        logo design</a>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-4 pt-6 border-t border-gray-100 dark:border-gray-800">
@@ -111,69 +114,81 @@
 
         <div class="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
             @forelse ($projects as $project)
-                <article class="group flex flex-col">
+                <article class="group">
 
-                    <a href="{{ route('projects.show', $project->slug) }}"
-                        class="relative block w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800 mb-5"
-                        style="aspect-ratio: 4/3;">
-                        <img src="{{ $project->image
-                            ? $project->creatif->photo
-                            : 'https://ui-avatars.com/api/?name=' .
-                                urlencode($project->creatif->prenom ?? 'M') .
-                                '&background=6366f1&color=fff&size=64' }}"
-                            class="h-8 w-8 rounded-full object-cover ring-2 ring-white dark:ring-gray-900">
-                        <div
-                            class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500 rounded-2xl">
+                    <div
+                        class="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-blue-500/10 group-hover:-translate-y-1">
+
+                        <img src="{{ $project->image ?: 'https://via.placeholder.com/400x300' }}"
+                            alt="{{ $project->title }}"
+                            class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+
+                        <div class="absolute top-4 left-4 z-20">
+                            <span
+                                class="inline-flex items-center rounded-full bg-white/90 dark:bg-gray-900/80 px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-gray-900 dark:text-white backdrop-blur-md border border-white/20">
+                                {{ $project->category ?? 'Design' }}
+                            </span>
                         </div>
-                    </a>
 
-                    {{-- <div class="flex items-center gap-2 mb-3">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-500">
-                            {{ $project->category ?? 'Créatif' }}
-                        </span>
-                        <span class="text-gray-200 dark:text-gray-700">·</span>
-                        <time class="text-[11px] text-gray-400">
-                            {{ $project->created_at->translatedFormat('d M Y') }}
-                        </time>
-                    </div> --}}
+                        <div
+                            class="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
+                            <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
 
-                    <h3
-                        class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 transition-colors leading-snug mb-3">
-                        <a href="{{ route('projects.show', $project->slug) }}">
-                            {{ $project->title }}
-                        </a>
-                    </h3>
+                                <div class="flex items-start justify-between gap-4">
+                                    <div class="flex-1">
 
-                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-2 mb-5 flex-1">
-                        {{ Str::limit($project->description, 110) }}
-                    </p>
+                                        <h3 class="text-base font-bold text-white leading-tight">
+                                            {{ $project->title }}
+                                        </h3>
 
-                    <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
-                        <div class="flex items-center gap-2.5">
-                            <img src="{{ $project->creatif->photo
-                                ? $project->creatif->photo
-                                : 'https://ui-avatars.com/api/?name=' .
-                                    urlencode($project->creatif->prenom ?? 'M') .
-                                    '&background=6366f1&color=fff&size=64' }}"
-                                class="h-8 w-8 rounded-full object-cover ring-2 ring-white dark:ring-gray-900">
-                            <div>
-                                <p class="text-xs font-bold text-gray-900 dark:text-white leading-none">
-                                    <a href="{{ route('creatifs.show', $project->creatif->slug) }}"
-                                        class="hover:text-indigo-600 transition-colors">
-                                        {{ $project->creatif->prenom }} {{ $project->creatif->nom }}
+                                        <p class="mt-2 text-xs text-gray-200 line-clamp-2 font-light leading-relaxed">
+                                            {{ $project->description }}
+                                        </p>
+                                    </div>
+
+                                    <a href="{{ route('projects.show', $project->slug) }}"
+                                        class="size-9 shrink-0 flex items-center justify-center rounded-full bg-white text-gray-900 shadow-xl hover:scale-110 transition-transform duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
                                     </a>
-                                </p>
-                                <span class="text-[10px] text-gray-400 uppercase tracking-tight">Membre Mefolio</span>
+                                </div>
+
                             </div>
                         </div>
+                    </div>
 
-                        <a href="{{ route('projects.show', $project->slug) }}"
-                            class="w-8 h-8 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 group-hover:border-indigo-500 group-hover:text-indigo-500 group-hover:bg-indigo-50 transition-all">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
+                    <div class="mt-5 flex items-center justify-between px-1">
+                        <a href="{{ route('creatifs.show', $project->creatif->slug) }}"
+                            class="flex items-center gap-3 group/author">
+                            <div class="relative">
+                                <img src="{{ $project->creatif->photo ?: 'https://ui-avatars.com/api/?name=' . urlencode($project->creatif->prenom) }}"
+                                    class="size-8 rounded-full object-cover grayscale group-hover/author:grayscale-0 transition-all duration-300" />
+                                <div
+                                    class="absolute -bottom-0.5 -right-0.5 size-2 rounded-full bg-green-500 border-2 border-white dark:border-gray-950">
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-none">
+                                    {{ $project->creatif->prenom }}
+                                </span>
+                                <span class="text-[10px] text-gray-400 font-medium mt-1">
+                                    @ {{ $project->creatif->slug }}
+                                </span>
+                            </div>
                         </a>
+
+                        <button
+                            class="flex items-center gap-1.5 px-2 py-1 text-gray-400 hover:text-red-500 transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                            <span class="text-[11px] font-bold">24</span>
+                        </button>
                     </div>
                 </article>
 

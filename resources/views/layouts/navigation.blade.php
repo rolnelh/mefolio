@@ -67,7 +67,6 @@
                         </div>
                     </div>
 
-                    {{-- Talents --}}
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open" @click.outside="open = false"
                             class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all">
@@ -112,10 +111,9 @@
                         </div>
                     </div>
 
-                    {{-- Missions --}}
                     <a href="{{ route('missions.index') }}"
                         class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all">
-                        Missions
+                       Découvrir les Missions
                     </a>
 
                     <div x-data="{ open: false }" class="relative">
