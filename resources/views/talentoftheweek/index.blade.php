@@ -1,5 +1,6 @@
 <x-app-layout>
-    <section class="relative bg-white py-8 lg:py-12 overflow-hidden min-h-[70vh] flex items-center">
+    <section
+        class="relative bg-white py-8 lg:py-12 overflow-hidden min-h-[70vh] flex items-center">
         <div class="absolute inset-0 z-0 opacity-[0.02]"
             style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 40px 40px;"></div>
 
@@ -31,15 +32,16 @@
                     </p>
 
                     <div class="flex flex-wrap gap-4">
-
                         <a href="#explorer"
-                            class="px-6 py-3 bg-orange-500 text-white text-sm font-bold rounded-full hover:bg-orange-600 transition-all">
-                            Participer au programme →
+                            class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 group shadow-lg shadow-orange-500/20">
+                            Participer au programme
+                            
                         </a>
                     </div>
                 </div>
 
-                <div class="relative order-1 lg:order-2 lg:-mt-16">
+                <div
+                    class="relative order-1 lg:order-2 lg:-mt-16">
                     <div class="absolute -inset-2 rounded-[2.5rem] rotate-1"></div>
 
                     <div class="relative p-2 overflow-hidden">
@@ -55,6 +57,7 @@
 
     <div class="max-w-6xl mx-auto px-6 lg:px-8 py-16">
 
+        {{-- Talent vedette --}}
         <div
             class="bg-gradient-to-br from-yellow-50 to-orange-50 border border-yellow-100 rounded-3xl p-8 md:p-12 mb-16">
             <div class="flex flex-col md:flex-row gap-8 items-center">

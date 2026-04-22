@@ -57,7 +57,7 @@
                                     <p class="text-xs text-gray-400">Commandez des services</p>
                                 </div>
                             </a>
-                            <a href="{{ route('talent.week') }}"
+                            <a href="{{ route('talentoftheweek.index') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
                                 <span class="text-lg">🏆</span>
                                 <div>
