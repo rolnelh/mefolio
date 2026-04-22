@@ -362,7 +362,7 @@
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
                                     <span>🏠</span><span class="text-sm font-semibold text-gray-700">Dashboard</span>
                                 </a>
-                                <a href="{{ route('talent.week') }}"
+                                <a href="{{ route('talentoftheweek.index') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
                                     <span>🏆</span><span class="text-sm font-semibold text-gray-700">Talent of the
                                         Week</span>
