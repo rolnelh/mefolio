@@ -83,17 +83,14 @@ Route::get('/services', function () {
     return view('services.index', ['page' => 'Services', 'emoji' => '🛠️', 'description' => 'Commandez des services créatifs directement aux talents africains.']);
 })->name('services.index');
 
-Route::get('/talent-of-the-week', function () {
-    return view('coming-soon', ['page' => 'Talent of the Week', 'emoji' => '🏆', 'description' => 'Chaque semaine, un talent africain mis en lumière par la communauté.']);
-})->name('talent.week');
-
-Route::get('/challenges', function () {
-    return view('coming-soon', ['page' => 'Challenges Créatifs', 'emoji' => '⚡', 'description' => 'Participez à des défis créatifs et faites reconnaître vos compétences.']);
-})->name('challenges.index');
 
 Route::get('/hackathons', function () {
     return view('hackathons.index', ['page' => 'Programmes & Hackathons', 'emoji' => '🚀', 'description' => 'Les grands programmes africains — ASSIN, Sèmè City, et plus — centralisés sur Mefolio.']);
 })->name('hackathons.index');
+
+Route::get('/challenges', function () {
+    return view('challenges.index');
+})->name('challenges.index');
 
 Route::get('/creatifs/localisation', function () {
     return view('coming-soon', ['page' => 'Talents par localisation', 'emoji' => '📍', 'description' => 'Trouvez des talents créatifs près de chez vous au Bénin et en Afrique.']);

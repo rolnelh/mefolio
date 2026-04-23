@@ -297,7 +297,6 @@
                 @endauth
             </div>
 
-            {{-- MOBILE TOP RIGHT — Photo profil --}}
             <div class="flex items-center lg:hidden">
                 @auth
                     @php
@@ -331,7 +330,6 @@
                             </svg>
                         </button>
 
-                        {{-- Dropdown mobile profil --}}
                         <div x-show="openProfile" @click.outside="openProfile = false"
                             x-transition:enter="transition ease-out duration-200"
                             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
@@ -356,7 +354,6 @@
                                 </div>
                             </div>
 
-                            {{-- Links --}}
                             <div class="p-2">
                                 <a href="{{ route('dashboard') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
@@ -377,7 +374,7 @@
                                     <span>📝</span><span class="text-sm font-semibold text-gray-700">Blog</span>
                                 </a>
                                 <a href="{{ route('challenges.index') }}"
-                                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors opacity-60">
+                                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
                                     <span>⚡</span>
                                     <span class="text-sm font-semibold text-gray-700">Challenges</span>
                                     <span
@@ -417,9 +414,7 @@
     </div>
 </nav>
 
-{{-- ═══════════════════════════════════════════════
-     BOTTOM NAV MOBILE
-═══════════════════════════════════════════════ --}}
+
 <div class="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-sm">
     <div
         class="bg-white/95 backdrop-blur-xl rounded-full shadow-2xl border border-gray-100 px-2 py-2 flex items-center justify-around">
@@ -481,5 +476,3 @@
 
     </div>
 </div>
-
-{{-- <div class="lg:hidden h-4"></div> --}}

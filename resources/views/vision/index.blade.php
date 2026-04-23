@@ -58,7 +58,6 @@
             </div>
         </div>
 
-        {{-- Mission --}}
         <div class="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-3xl p-10 md:p-14 text-white">
             <p class="text-indigo-300 text-xs font-bold uppercase tracking-widest mb-4">Notre Mission</p>
             <h2 class="text-3xl md:text-4xl font-black mb-6 leading-tight">
@@ -79,7 +78,17 @@
             <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Pourquoi maintenant</p>
             <h2 class="text-3xl font-black text-gray-900 mb-8">Le moment est parfait.</h2>
             <div class="space-y-4">
-                @foreach ([['num' => '01', 'titre' => 'La jeunesse africaine est en ligne', 'desc' => 'Avec 600M d\'utilisateurs internet d\'ici 2025, l\'Afrique connaît la plus forte croissance digitale mondiale. Les talents y sont, les outils manquent.'], ['num' => '02', 'titre' => 'Mobile Money révolutionne les paiements', 'desc' => 'MTN, Moov, Wave — les paiements mobiles explosent en Afrique. Les freelancers peuvent enfin être rémunérés facilement, sans PayPal ni Stripe.'], ['num' => '03', 'titre' => 'Les recruteurs cherchent des talents africains', 'desc' => 'De plus en plus d\'entreprises mondiales tournent leur regard vers l\'Afrique pour recruter. La demande existe. L\'infrastructure de découverte manque.'], ['num' => '04', 'titre' => 'Les écosystèmes startup africains maturent', 'desc' => 'ASSIN, Sèmè City, OrangeDigitalCenter, Tony Elumelu — des programmes sérieux émergent partout. Mefolio peut devenir le hub qui les centralise.']] as $r)
+                @foreach ([
+        ['num' => '01', 'titre' => 'La jeunesse africaine est en ligne', 'desc' => 'Avec 600M d\'utilisateurs internet d\'ici 2025, l\'Afrique connaît la plus forte croissance digitale mondiale. Les talents y sont, les outils manquent.'],
+        ['num' => '02', 'titre' => 'Mobile Money révolutionne les paiements', 'desc' => 'MTN, Moov, Wave — les paiements mobiles explosent en Afrique. Les freelancers peuvent enfin être rémunérés facilement, sans PayPal ni Stripe.'],
+        ['num' => '03', 'titre' => 'Les recruteurs cherchent des talents africains', 'desc' => 'De plus en plus d\'entreprises mondiales tournent leur regard vers l\'Afrique pour recruter. La demande existe. L\'infrastructure de découverte manque.'],
+        ['num' => '04', 'titre' => 'Les écosystèmes startup africains maturent', 'desc' => 'ASSIN, Sèmè City, OrangeDigitalCenter, Tony Elumelu — des programmes sérieux émergent partout. Mefolio peut devenir le hub qui les centralise.'],
+        [
+            'num' => '05',
+            'titre' => 'Inverser le regard : attirer plutôt que chercher',
+            'desc' => "L'Afrique n'a pas besoin de chercher sa place sur les plateformes des autres. Avec MeFolio, nous créons notre propre scène. Nous n'allons plus vers le monde, nous attirons le monde vers l'excellence africaine.",
+        ],
+    ] as $r)
                     <div class="flex gap-6 p-6 bg-gray-50 rounded-2xl hover:bg-indigo-50 transition-all group">
                         <span
                             class="text-3xl font-black text-indigo-200 group-hover:text-indigo-400 transition-colors flex-shrink-0">{{ $r['num'] }}</span>

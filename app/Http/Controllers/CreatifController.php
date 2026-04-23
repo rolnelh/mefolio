@@ -87,10 +87,14 @@ class CreatifController extends Controller
     }
 
     public function edit()
-    {
-        $creatif = Auth::user()->creatif;
-        return view('creatifs.edit', compact('creatif'));
-    }
+{
+
+    $creatif = Auth::user()->creatif()->firstOrCreate([
+        'user_id' => Auth::id()
+    ]);
+
+    return view('creatifs.edit', compact('creatif'));
+}
 
     public function update(Request $request)
     {

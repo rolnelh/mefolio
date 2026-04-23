@@ -12,7 +12,7 @@
 </style>
 <x-app-layout>
 
-    <section class="relative bg-[#050810] py-32 sm:py-28 overflow-hidden">
+    <section class="relative bg-[#050810] py-20 sm:py-28 overflow-hidden">
 
         <div class="absolute inset-0 z-0 pointer-events-none">
             <div class="absolute -top-[10%] -right-[10%] w-[70%] h-[70%] rounded-full bg-blue-600/10 blur-[120px]"></div>
