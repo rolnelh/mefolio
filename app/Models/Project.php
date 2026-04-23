@@ -44,9 +44,9 @@ class Project extends Model
     }
 
     public function comments()
-    {
-        return $this->hasMany(Comment::class)->whereNull('parent_id')->latest();
-    }
+{
+    return $this->hasMany(Comment::class)->whereNull('parent_id')->with('replies.user.creatif', 'user.creatif')->latest();
+}
 
    
     protected static function boot()

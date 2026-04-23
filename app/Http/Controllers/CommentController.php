@@ -8,35 +8,36 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-  public function store(Request $request, Project $project)
+ public function store(Request $request, Project $project)
 {
     $request->validate([
         'body' => 'required|string|max:1000',
         'parent_id' => 'nullable|exists:comments,id',
     ]);
 
+    // Si c'est une réponse
     if ($request->filled('parent_id')) {
         $parent = Comment::findOrFail($request->parent_id);
 
-
+        // Seul le propriétaire du projet peut répondre
         if (auth()->id() !== $project->user_id) {
-            abort(403);
+            return back()->with('error', 'Seul l\'auteur du projet peut répondre aux commentaires.');
         }
 
+        // Une seule réponse par commentaire
         if ($parent->replies()->exists()) {
-            return back()->with('error', 'Déjà répondu.');
+            return back()->with('error', 'Vous avez déjà répondu à ce commentaire.');
         }
     }
 
     $project->comments()->create([
         'body' => $request->body,
         'user_id' => auth()->id(),
-        'parent_id' => $request->parent_id, 
+        'parent_id' => $request->parent_id ?? null,
     ]);
 
-    return back()->with('success', 'Envoyé !');
+    return back()->with('success', 'Commentaire publié !');
 }
-
 
 public function storeAjax(Request $request, $projectId)
 {

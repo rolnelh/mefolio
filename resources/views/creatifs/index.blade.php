@@ -18,14 +18,12 @@
         tri: 'recent'
     }">
 
-        {{-- Header --}}
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mt-10 mb-4">
             <div>
-                <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-2">Mefolio · Communauté</p>
-                <h1 class="text-4xl font-black text-gray-900">Découvrez les<br><span
-                        class="text-indigo-600 italic">talents.</span></h1>
+                <h1 class="text-4xl font-black text-gray-900">Découvrez les
+                    talents.</h1>
             </div>
-            <p class="text-sm text-gray-400 max-w-xs">Designers, développeurs, photographes — les meilleurs créatifs
+            <p class="text-sm text-gray-700 max-w-xs">Designers, développeurs, photographes — les meilleurs créatifs
                 africains sont sur Mefolio.</p>
         </div>
 

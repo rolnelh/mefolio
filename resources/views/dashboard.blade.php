@@ -182,7 +182,7 @@
                 <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-3">
                     <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-3">
                         <nav class="space-y-1">
-                            @foreach ([['tab' => 'projets', 'label' => 'Projets', 'icon' => 'project.png', 'count' => count($projects)], ['tab' => 'services', 'label' => 'Services', 'icon' => 'service.png', 'count' => 0], ['tab' => 'stats', 'label' => 'Analytics', 'icon' => 'statistics.png', 'count' => null], ['tab' => 'parametres', 'label' => 'Paramètres', 'icon' => 'setting.png', 'count' => null], ['tab' => 'paiements', 'label' => 'Moyens de paiement', 'emoji' => '💳', 'count' => null]] as $nav)
+                            @foreach ([['tab' => 'projets', 'label' => 'Portfolio', 'icon' => 'project.png', 'count' => count($projects)], ['tab' => 'services', 'label' => 'Services', 'icon' => 'service.png', 'count' => 0], ['tab' => 'stats', 'label' => 'Analytics', 'icon' => 'statistics.png', 'count' => null], ['tab' => 'parametres', 'label' => 'Paramètres', 'icon' => 'setting.png', 'count' => null], ['tab' => 'paiements', 'label' => 'Moyens de paiement', 'icon' => 'hand.png', 'count' => null]] as $nav)
                                 <a href="?tab={{ $nav['tab'] }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all
             {{ $activeTab === $nav['tab'] ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-50' }}">

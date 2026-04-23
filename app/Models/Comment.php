@@ -9,7 +9,7 @@ class Comment extends Model
 {
     protected $fillable = ['body', 'user_id', 'project_id', 'parent_id'];
 
-    public function user()
+     public function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -24,7 +24,7 @@ class Comment extends Model
         return $this->belongsTo(Comment::class, 'parent_id');
     }
 
-    public function replies()
+     public function replies()
     {
         return $this->hasMany(Comment::class, 'parent_id');
     }

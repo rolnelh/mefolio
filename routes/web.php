@@ -24,8 +24,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard/{slug}', [DashboardController::class, 'show'])->name('dashboard');
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -48,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/projects/{project}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::post('/projects/{project}/comments/ajax', [CommentController::class, 'storeAjax'])->name('comments.store.ajax');
 });
+
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 Route::get('/projects/search', [ProjectController::class, 'search'])->name('projects.search');
@@ -78,7 +77,6 @@ Route::get('/missions', function () {
 })->name('missions.index');
 
 
-// Pages Coming Soon
 Route::get('/services', function () {
     return view('services.index', ['page' => 'Services', 'emoji' => '🛠️', 'description' => 'Commandez des services créatifs directement aux talents africains.']);
 })->name('services.index');
