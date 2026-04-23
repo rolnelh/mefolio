@@ -299,12 +299,191 @@
             </div>
 
             {{-- GRILLE MISSIONS --}}
-            {{-- ... ici tes cards de missions ... --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                @foreach ([
+        [
+            'titre' => 'Créer une identité visuelle complète',
+            'domaine' => 'Design & Branding',
+            'emoji' => '🎨',
+            'budget' => '80 000 FCFA',
+            'duree' => '2 semaines',
+            'niveau' => 'Intermédiaire',
+            'lieu' => '🌐 Remote',
+            'client' => 'StartupBJ',
+            'pays' => '🇧🇯',
+            'date' => 'Il y a 2h',
+            'urgence' => true,
+            'tags' => ['Logo', 'Charte', 'Figma'],
+        ],
+        [
+            'titre' => 'Développement landing page produit SaaS',
+            'domaine' => 'Développement Web',
+            'emoji' => '💻',
+            'budget' => '150 000 FCFA',
+            'duree' => '1 semaine',
+            'niveau' => 'Senior',
+            'lieu' => '🌐 Remote',
+            'client' => 'TechDakar',
+            'pays' => '🇸🇳',
+            'date' => 'Il y a 5h',
+            'urgence' => false,
+            'tags' => ['Next.js', 'Tailwind', 'TypeScript'],
+        ],
+        [
+            'titre' => 'Shooting photo produits cosmétiques',
+            'domaine' => 'Photographie',
+            'emoji' => '📸',
+            'budget' => '50 000 FCFA',
+            'duree' => '3 jours',
+            'niveau' => 'Tous niveaux',
+            'lieu' => '📍 Abidjan',
+            'client' => 'BeautyCI',
+            'pays' => '🇨🇮',
+            'date' => 'Il y a 1j',
+            'urgence' => true,
+            'tags' => ['Studio', 'Produit', 'Retouche'],
+        ],
+        [
+            'titre' => 'Montage vidéo publicité réseaux sociaux',
+            'domaine' => 'Vidéo & Montage',
+            'emoji' => '🎥',
+            'budget' => '60 000 FCFA',
+            'duree' => '5 jours',
+            'niveau' => 'Junior',
+            'lieu' => '🌐 Remote',
+            'client' => 'AgroMali',
+            'pays' => '🇲🇱',
+            'date' => 'Il y a 2j',
+            'urgence' => false,
+            'tags' => ['Premiere', 'Reels', 'After Effects'],
+        ],
+        [
+            'titre' => 'Application mobile de livraison',
+            'domaine' => 'Développement Mobile',
+            'emoji' => '📱',
+            'budget' => '500 000 FCFA',
+            'duree' => '2 mois',
+            'niveau' => 'Senior',
+            'lieu' => '📍 Cotonou',
+            'client' => 'QuickBJ',
+            'pays' => '🇧🇯',
+            'date' => 'Il y a 3j',
+            'urgence' => false,
+            'tags' => ['React Native', 'Laravel', 'Mobile Money'],
+        ],
+        [
+            'titre' => 'Gestion community manager 1 mois',
+            'domaine' => 'Marketing Digital',
+            'emoji' => '📣',
+            'budget' => '75 000 FCFA',
+            'duree' => '1 mois',
+            'niveau' => 'Intermédiaire',
+            'lieu' => '🌐 Remote',
+            'client' => 'FashionGH',
+            'pays' => '🇬🇭',
+            'date' => 'Il y a 4j',
+            'urgence' => false,
+            'tags' => ['Instagram', 'TikTok', 'Canva'],
+        ],
+    ] as $mission)
+                    <div
+                        class="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-lg hover:border-indigo-100 transition-all duration-300">
 
+                        {{-- Header card --}}
+                        <div class="p-5 pb-4">
+                            <div class="flex items-start justify-between gap-3 mb-4">
+                                <div
+                                    class="w-11 h-11 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl flex-shrink-0">
+                                    {{ $mission['emoji'] }}
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    @if ($mission['urgence'])
+                                        <span
+                                            class="text-[10px] bg-red-50 text-red-600 border border-red-100 font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
+                                            🔥 Urgent
+                                        </span>
+                                    @endif
+                                    <span
+                                        class="text-[10px] bg-amber-50 text-amber-600 border border-amber-100 font-bold px-2 py-0.5 rounded-full">
+                                        Bientôt
+                                    </span>
+                                </div>
+                            </div>
+
+                            <h3
+                                class="font-bold text-gray-900 text-sm leading-snug mb-2 group-hover:text-indigo-600 transition-colors">
+                                {{ $mission['titre'] }}
+                            </h3>
+
+                            <p class="text-[11px] font-bold text-indigo-500 mb-3">{{ $mission['domaine'] }}</p>
+
+                            {{-- Infos --}}
+                            <div class="space-y-1.5 mb-4">
+                                <div class="flex items-center gap-2 text-xs text-gray-500">
+                                    <svg class="w-3.5 h-3.5 flex-shrink-0 text-gray-300" fill="none"
+                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0zM19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                    </svg>
+                                    {{ $mission['lieu'] }}
+                                </div>
+                                <div class="flex items-center gap-2 text-xs text-gray-500">
+                                    <svg class="w-3.5 h-3.5 flex-shrink-0 text-gray-300" fill="none"
+                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    {{ $mission['duree'] }}
+                                </div>
+                                <div class="flex items-center gap-2 text-xs text-gray-500">
+                                    <svg class="w-3.5 h-3.5 flex-shrink-0 text-gray-300" fill="none"
+                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 013.741-1.342" />
+                                    </svg>
+                                    {{ $mission['niveau'] }}
+                                </div>
+                            </div>
+
+                            {{-- Tags --}}
+                            <div class="flex flex-wrap gap-1.5">
+                                @foreach ($mission['tags'] as $tag)
+                                    <span
+                                        class="text-[11px] bg-gray-50 text-gray-600 font-medium px-2 py-0.5 rounded-full border border-gray-100">
+                                        {{ $tag }}
+                                    </span>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        {{-- Footer card --}}
+                        <div class="px-5 py-3.5 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center text-[10px] font-black text-indigo-600">
+                                    {{ substr($mission['client'], 0, 1) }}
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-gray-900">{{ $mission['client'] }}
+                                        {{ $mission['pays'] }}</p>
+                                    <p class="text-[10px] text-gray-400">{{ $mission['date'] }}</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-black text-gray-900">{{ $mission['budget'] }}</p>
+                                <button disabled
+                                    class="text-[10px] bg-indigo-100 text-indigo-400 font-bold px-3 py-1 rounded-full cursor-not-allowed mt-1">
+                                    Postuler →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
 
             @foreach ([
         ['titre' => 'Création d\'une identité visuelle', 'budget' => '150.000 FCFA', 'domaine' => 'Design', 'lieu' => 'Cotonou, Bénin', 'emoji' => '🎨', 'duree' => '2 semaines', 'niveau' => 'Intermédiaire'],
@@ -373,21 +552,20 @@
                 </div>
             @endforeach
 
-        </div>
+        </div> --}}
 
 
-        <div class="bg-indigo-600 rounded-2xl sm:rounded-3xl p-6 sm:p-10 text-center text-white">
-            <h2 class="text-xl sm:text-2xl font-bold mb-2">Soyez notifié en premier</h2>
-            <p class="text-indigo-200 text-sm sm:text-base mb-8">
-                Inscrivez-vous pour recevoir les premières missions dès le lancement.
+        <div class="mt-12 bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl p-8 text-center text-white">
+            <h2 class="text-xl font-black mb-2">🔔 Soyez notifié en premier</h2>
+            <p class="text-indigo-200 text-sm mb-6">Inscrivez-vous pour recevoir les premières missions dès le
+                lancement.
+
             </p>
-
-            <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <div class="flex gap-3 max-w-sm mx-auto">
                 <input type="email" placeholder="votre@email.com"
-                    class="w-full flex-1 px-4 py-3.5 rounded-xl text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-white transition-all">
-
+                    class="flex-1 px-4 py-3 rounded-xl text-gray-900 text-sm focus:outline-none">
                 <button
-                    class="w-full sm:w-auto bg-white text-indigo-600 font-bold px-8 py-3.5 rounded-xl hover:bg-indigo-50 active:scale-95 transition-all">
+                    class="bg-white text-indigo-600 font-bold px-5 py-3 rounded-xl hover:bg-indigo-50 transition whitespace-nowrap text-sm">
                     M'alerter
                 </button>
             </div>
