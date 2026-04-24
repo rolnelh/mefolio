@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="min-h-screen flex">
 
-        <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-end p-16 bg-[#050810] overflow-hidden">
+        <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-end p-4 bg-[#050810] overflow-hidden">
             {{-- <div class="absolute inset-0">
                 <img src="https://i.pinimg.com/736x/82/7a/dc/827adc7f7265d3f9a296bfdc6e3f9b83.jpg"
                     class="w-full h-full object-cover opacity-50">
@@ -18,8 +18,8 @@
                     </svg>
                 </div>
 
-                <h2 class="text-5xl xl:text-5xl font-black text-white leading-tight mb-4">
-                    Bon retour<br>parmi nous. 👋
+                <h2 class="text-5xl xl:text-5xl font-black text-white leading-relaxed mb-4">
+                    Bon retour parmi <br> nous. 👋
                 </h2>
 
                 <p class="text-gray-400 text-base leading-relaxed max-w-sm mb-10">
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="flex-1 lg:w-1/2 flex flex-col justify-center px-6 py-8 sm:px-12 lg:px-20 xl:px-32 bg-white">
+        <div class="flex-1 lg:w-1/2 flex flex-col justify-center px-6 py-4 sm:px-12 lg:px-20 xl:px-32 bg-white">
             <div class="w-full max-w-md mx-auto">
 
                 <a href="{{ route('home') }}" class="inline-block mb-4 transition-transform hover:scale-105">

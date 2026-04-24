@@ -106,4 +106,6 @@ Route::get('/vision', function () {
     return view('vision.index');
 })->name('vision');
 
+
+
 require __DIR__.'/auth.php';
