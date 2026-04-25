@@ -182,10 +182,10 @@
                 </div>
 
                 <div class="space-y-3">
-                    <h3 class="text-lg font-bold text-slate-900">Hub des Builders</h3>
+                    <h3 class="text-lg font-bold text-slate-900">Écosystème startup africain fragmenté</h3>
                     <p class="text-slate-500 text-sm leading-relaxed">
-                        L'élite de l'écosystème. Hackathons et programmes <span class="text-slate-900 font-medium">Sèmè
-                            City & ASSIN</span> regroupés au même endroit.
+                        L'élite de l'écosystème. Hackathons, challenges créatifs et programmes <span class="text-slate-900 font-medium">Sèmè
+                            City & ASIN</span> regroupés au même endroit.
                     </p>
                 </div>
             </div>
