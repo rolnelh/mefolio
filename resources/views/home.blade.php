@@ -147,70 +147,47 @@
         <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050810] to-transparent z-10"></div>
     </section>
 
-    <section class="bg-white py-24 px-6 border-t border-gray-50">
-        <div class="max-w-5xl mx-auto">
-
-            <div class="mb-20 text-center md:text-left">
-                <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-6">
-                    L'avantage <span class="text-orange-500">MeFolio</span>
+    <section class="bg-white py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-20">
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-4">
+                    Les vrais problèmes. <span class="text-slate-400 font-medium">Les vraies solutions.</span>
                 </h2>
-                <p class="text-slate-500 text-lg max-w-xl font-medium leading-relaxed">
-                    Une infrastructure pensée pour les réalités du marché africain, du premier projet au premier
-                    paiement.
-                </p>
+                <div class="w-12 h-1 bg-indigo-600 rounded"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16">
-
-                <div class="group">
-                    <div
-                        class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:bg-indigo-100">
-                        <img src="{{ asset('images/people.png') }}" alt="Recruteurs" class="w-10 h-10 object-contain">
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Connexion Recruteurs Locaux</h3>
-                    <p class="text-slate-500 leading-relaxed text-sm md:text-base">
-                        Soyez visible auprès des entreprises et startups locales qui recherchent activement des talents.
-                        Votre profil MeFolio sert de pont direct pour décrocher votre prochain contrat.
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+                <div class="space-y-3">
+                    <h3 class="text-lg font-bold text-slate-900">Visibilité sans frontières</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Sortez de l'ombre. Un profil MeFolio optimisé pour connecter les talents aux recruteurs
+                        locaux et internationaux.
                     </p>
                 </div>
 
-                <div class="group">
-                    <div
-                        class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:bg-green-100">
-                        <img src="{{ asset('images/cash.png') }}" alt="Paiements" class="w-10 h-10 object-contain">
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Paiements Mobile Money</h3>
-                    <p class="text-slate-500 leading-relaxed text-sm md:text-base">
-                        Facilitez vos transactions freelance. MeFolio intègre les solutions de paiement locales pour
-                        vous permettre de monétiser vos compétences en toute simplicité.
+                <div class="space-y-3">
+                    <h3 class="text-lg font-bold text-slate-900">Paiements locaux intégrés</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        L'argent arrive là où vous êtes. Retraits directs via <span
+                            class="text-slate-900 font-medium">MTN MoMo, Wave, Kkiapay, Fedapay, Moov ...</span> sans détours.
                     </p>
                 </div>
 
-                <div class="group">
-                    <div
-                        class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-100">
-                        <img src="{{ asset('images/optimization.png') }}" alt="Performance"
-                            class="w-10 h-10 object-contain">
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Optimisation SEO & Vitesse</h3>
-                    <p class="text-slate-500 leading-relaxed text-sm md:text-base">
-                        Un portfolio ultra-rapide et optimisé pour les moteurs de recherche. Ne vous souciez plus du
-                        code, concentrez-vous sur vos créations.
+                <div class="space-y-3">
+                    <h3 class="text-lg font-bold text-slate-900">Marketplace de missions</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Ne cherchez plus, postulez. Un accès direct aux missions freelance pour décrocher vos futurs
+                        contrats en un clic.
                     </p>
                 </div>
 
-                <div class="group">
-                    <div
-                        class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-100">
-                        <img src="{{ asset('images/struggle.png') }}" alt="Hackathons" class="w-10 h-10 object-contain">
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Accès Exclusif aux Défis</h3>
-                    <p class="text-slate-500 leading-relaxed text-sm md:text-base">
-                        Participez à des hackathons et programmes d'accompagnement sélectionnés pour propulser votre
-                        carrière de "builder".
+                <div class="space-y-3">
+                    <h3 class="text-lg font-bold text-slate-900">Hub des Builders</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        L'élite de l'écosystème. Hackathons et programmes <span class="text-slate-900 font-medium">Sèmè
+                            City & ASSIN</span> regroupés au même endroit.
                     </p>
                 </div>
-
             </div>
         </div>
     </section>
@@ -329,8 +306,7 @@
 
             <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-10">
                 <div class="max-w-5xl">
-                    <h2
-                        class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
                         Nos talents
                         <span class="text-blue-600">créatifs</span>
                     </h2>

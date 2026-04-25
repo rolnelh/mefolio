@@ -1,136 +1,161 @@
 <x-app-layout>
-    <section class="min-h-screen bg-slate-50 dark:bg-gray-900 py-16 px-4">
-        <div class="max-w-3xl mx-auto">
+    <div class="min-h-screen bg-gray-50/40 py-10 px-4">
+        <div class="max-w-2xl mx-auto">
 
-            <div class="mb-6">
-                <a href="{{ route('dashboard') }}"
-                    class="text-indigo-600 dark:text-indigo-400 text-sm font-medium flex items-center hover:underline">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    Retour au tableau de bord
-                </a>
+            {{-- Back --}}
+            <a href="{{ route('dashboard') }}"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors mb-8">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Retour au tableau de bord
+            </a>
+
+            {{-- Header --}}
+            <div class="bg-gradient-to-br from-indigo-600 to-violet-600 rounded-3xl p-8 mb-6 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2">
+                </div>
+                <div class="relative z-10">
+                    <span
+                        class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
+                        ✨ Nouveau projet
+                    </span>
+                    <h1 class="text-3xl font-black text-white leading-tight">Partagez votre<br>réalisation</h1>
+                    <p class="text-indigo-200 text-sm mt-2">Montrez ce que vous savez faire à la communauté Mefolio.</p>
+                </div>
             </div>
 
-            <div
-                class="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden">
-
-                <div class="bg-indigo-600 p-8 text-center relative overflow-hidden">
-                    <div class="relative z-10">
-                        <h1 class="text-3xl font-black text-white italic tracking-tighter">NOUVEAU PROJET</h1>
-                        <p class="text-indigo-100 mt-2 font-medium">Partagez votre univers avec la communauté Mefolio
-                        </p>
+            @if (Session::has('success'))
+                <div
+                    class="mb-6 flex items-center justify-between p-4 bg-green-50 border border-green-200 text-green-700 rounded-2xl">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">🚀</span>
+                        <span class="font-semibold text-sm">{{ Session::get('success') }}</span>
                     </div>
-                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-indigo-500 rounded-full opacity-50"></div>
+                </div>
+            @endif
+
+            <form action="{{ route('projets.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+                @csrf
+
+                {{-- Titre --}}
+                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                    <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
+                        📌 Titre du projet
+                    </label>
+                    <input type="text" name="title" required value="{{ old('title') }}"
+                        placeholder="Ex: Refonte UI d'une app mobile fintech"
+                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                    @error('title')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
 
-                <div class="p-8 sm:p-12">
-                    @if (Session::has('success'))
+                {{-- Description --}}
+                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                    <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
+                        📝 Description du projet
+                    </label>
+                    <textarea name="description" rows="5" required
+                        placeholder="Décrivez votre démarche créative, les outils utilisés, les défis relevés..."
+                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all resize-none">{{ old('description') }}</textarea>
+                    @error('description')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                {{-- Catégorie + Technologies --}}
+                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                    <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
+                        🎯 Catégorie & Technologies
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <select name="category"
+                            class="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <option value="">-- Catégorie --</option>
+                            <option value="Design">🎨 Design / UI-UX</option>
+                            <option value="Web">💻 Développement Web</option>
+                            <option value="Mobile">📱 Application Mobile</option>
+                            <option value="Photo">📸 Photographie</option>
+                            <option value="Video">🎥 Vidéo & Montage</option>
+                            <option value="Branding">🏷️ Branding</option>
+                            <option value="Autre">🔧 Autre</option>
+                        </select>
+                        <input type="text" name="technologies" value="{{ old('technologies') }}"
+                            placeholder="Figma, Laravel, React..."
+                            class="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                    </div>
+                </div>
+
+                {{-- Liens --}}
+                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                    <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
+                        🔗 Liens (optionnel)
+                    </label>
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🌐</span>
+                            <input type="url" name="lien_site" value="{{ old('lien_site') }}"
+                                placeholder="https://mon-projet.com"
+                                class="w-full pl-9 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        </div>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">⚙️</span>
+                            <input type="url" name="lien_github" value="{{ old('lien_github') }}"
+                                placeholder="https://github.com/..."
+                                class="w-full pl-9 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Médias --}}
+                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm" x-data="{ count: 0, previews: [] }">
+                    <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
+                        📁 Médias du projet
+                    </label>
+                    <div class="relative">
                         <div
-                            class="mb-8 p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 rounded-2xl flex items-center justify-between shadow-sm">
-                            <div class="flex items-center">
-                                <span class="text-xl mr-3">🚀</span>
-                                <p class="font-bold">{{ Session::get('success') }}</p>
-                            </div>
-                            <a href="{{ route('userprofile.index') }}"
-                                class="bg-emerald-600 text-white px-4 py-1.5 rounded-xl text-sm font-bold hover:bg-emerald-700 transition">Voir</a>
-                        </div>
-                    @endif
-
-                    <form action="{{ route('projets.store') }}" method="POST" enctype="multipart/form-data"
-                        class="space-y-8">
-                        @csrf
-
-                        <div class="space-y-2">
-                            <label for="title"
-                                class="flex items-center text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">
-                                <span class="mr-2 text-indigo-500">📌</span> Titre du chef-d'œuvre
-                            </label>
-                            <input type="text" id="title" name="title" required
-                                class="w-full px-5 py-4 rounded-2xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 focus:outline-none transition-all"
-                                placeholder="Quel nom porte ce projet ?">
-                        </div>
-
-                        <div class="space-y-2">
-                            <label for="description"
-                                class="flex items-center text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">
-                                <span class="mr-2 text-indigo-500">📝</span> L'histoire derrière le projet
-                            </label>
-                            <textarea id="description" name="description" rows="5" required
-                                class="w-full px-5 py-4 rounded-2xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 focus:outline-none transition-all"
-                                placeholder="Démarche créative, outils (Photoshop, Laravel, etc.)..."></textarea>
-                        </div>
-
-                        {{-- <div class="mb-6">
-                            <label for="technologies"
-                                class="block text-sm font-black text-gray-700 dark:text-gray-300 uppercase tracking-widest mb-2">
-                                Technologies / Outils utilisés
-                            </label>
-                            <div class="relative">
-                                <i class="fas fa-code absolute left-4 top-4 text-gray-400"></i>
-                                <input type="text" name="technologies" id="technologies"
-                                    value="{{ old('technologies', $projects->technologies) }}"
-                                    class="w-full rounded-2xl border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:border-indigo-500 focus:ring-indigo-500 pl-11 py-3 shadow-sm"
-                                    placeholder="Ex: Laravel, Tailwind CSS, Figma, React...">
-                            </div>
-                            <p class="text-[10px] text-gray-400 mt-2 italic">Séparez les outils par des virgules pour un
-                                meilleur affichage.</p>
-                            @error('technologies')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-                        </div> --}}
-
-                        <div class="space-y-2" x-data="{ filesCount: 0 }">
-                            <label class="flex items-center text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">
-                                <span class="mr-2 text-indigo-500">📁</span> Médias & Fichiers (Plusieurs choix
-                                possibles)
-                            </label>
-
-                            <div class="relative group">
+                            class="flex flex-col items-center justify-center min-h-[180px] border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50 hover:bg-indigo-50/30 hover:border-indigo-300 transition-all cursor-pointer">
+                            <div class="text-center px-6 py-8 pointer-events-none">
                                 <div
-                                    class="flex flex-col items-center justify-center w-full min-h-[220px] border-3 border-dashed border-gray-200 dark:border-gray-700 rounded-3xl bg-gray-50 dark:bg-gray-900 group-hover:bg-indigo-50/50 dark:group-hover:bg-indigo-900/10 group-hover:border-indigo-400 transition-all cursor-pointer">
-
-                                    <div class="p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-sm mb-4">
-                                        <svg class="w-10 h-10 text-indigo-600" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                        </svg>
-                                    </div>
-
-                                    <div class="text-center">
-                                        <p class="text-base font-bold text-gray-700 dark:text-gray-200">
-                                            <span
-                                                x-text="filesCount === 0 ? 'Sélectionnez vos créations' : filesCount + ' fichier(s) prêt(s)'"></span>
-                                        </p>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Images ou Vidéos (MP4,
-                                            PNG, JPG)</p>
-                                    </div>
-
-                                    <input type="file" name="media[]" id="fichiers" multiple
-                                        @change="filesCount = $event.target.files.length" accept="image/*,video/*"
-                                        class="absolute inset-0 opacity-0 cursor-pointer" required />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="pt-4">
-                            <button type="submit"
-                                class="group relative w-full flex items-center justify-center bg-indigo-600 text-white py-4 rounded-2xl font-black text-lg uppercase tracking-widest overflow-hidden transition-all hover:bg-indigo-700 shadow-xl shadow-indigo-200 dark:shadow-none active:scale-[0.98]">
-                                <span class="relative z-10 flex items-center">
-                                    Propulser le projet
-                                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor"
+                                        stroke-width="1.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                                     </svg>
-                                </span>
-                            </button>
+                                </div>
+                                <p class="text-sm font-bold text-gray-700"
+                                    x-text="count === 0 ? 'Glissez vos fichiers ou cliquez pour sélectionner' : count + ' fichier(s) sélectionné(s)'">
+                                </p>
+                                <p class="text-xs text-gray-400 mt-1">JPG, PNG, MP4 — Max 10 Mo par fichier</p>
+                            </div>
+                            <input type="file" name="media[]" multiple @change="count = $event.target.files.length"
+                                accept="image/*,video/*" class="absolute inset-0 opacity-0 cursor-pointer" required>
                         </div>
-                    </form>
+                    </div>
+                    @error('media')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
-            </div>
+
+                {{-- Submit --}}
+                <button type="submit"
+                    class="w-full flex items-center justify-center gap-2 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-sm rounded-2xl transition-all shadow-lg shadow-indigo-200 hover:scale-[1.01] active:scale-95">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                    </svg>
+                    Publier le projet
+                </button>
+
+                <p class="text-center text-xs text-gray-400">
+                    Votre projet sera visible sur votre profil public après publication.
+                </p>
+            </form>
         </div>
-    </section>
+    </div>
 </x-app-layout>

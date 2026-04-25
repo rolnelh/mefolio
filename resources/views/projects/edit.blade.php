@@ -1,190 +1,157 @@
 <x-app-layout>
-    <div class="bg-gray-50/50 min-h-screen py-12">
-        <div class="max-w-4xl mx-auto px-4">
+    <div class="min-h-screen bg-gray-50/40 py-10 px-4">
+        <div class="max-w-3xl mx-auto">
+
+            {{-- Back --}}
+            <a href="{{ route('projects.show', $project->slug) }}"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors mb-8">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Retour au projet
+            </a>
 
             <div class="mb-8">
-                <a href="{{ route('projects.show', $project->slug) }}"
-                    class="inline-flex items-center text-sm font-bold text-gray-500 hover:text-indigo-600 transition mb-4">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    Annuler et retourner au projet
-                </a>
-                <h1 class="text-3xl font-black text-gray-900 tracking-tight">Modifier le projet <span
-                        class="text-indigo-600">.</span></h1>
-                <p class="text-gray-500 mt-2">Mettez à jour les détails, les images ou les liens de votre réalisation.
-                </p>
+                <h1 class="text-3xl font-black text-gray-900">Modifier le projet <span class="text-indigo-600">.</span>
+                </h1>
+                <p class="text-gray-400 text-sm mt-1">Mettez à jour vos informations et médias.</p>
             </div>
 
             <form action="{{ route('projets.update', $project) }}" method="POST" enctype="multipart/form-data"
-                class="space-y-8">
+                class="space-y-5">
                 @csrf
                 @method('PUT')
 
-                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 space-y-6">
+                {{-- Infos principales --}}
+                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm space-y-5">
+                    <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest">Informations</h2>
 
                     <div>
-                        <label for="title"
-                            class="block text-sm font-black text-gray-700 uppercase tracking-widest mb-2">Titre du
-                            projet</label>
-                        <input type="text" name="title" id="title" value="{{ old('title', $project->title) }}"
-                            class="w-full rounded-2xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm px-4 py-3"
-                            placeholder="Ex: Refonte Dashboard SaaS">
+                        <label class="block text-xs font-bold text-gray-600 mb-1.5">Titre du projet</label>
+                        <input type="text" name="title" value="{{ old('title', $project->title) }}"
+                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                         @error('title')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div>
-                        <label for="description"
-                            class="block text-sm font-black text-gray-700 uppercase tracking-widest mb-2">Description
-                            détaillée</label>
-                        <textarea name="description" id="description" rows="6"
-                            class="w-full rounded-2xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm px-4 py-3"
-                            placeholder="Expliquez votre démarche, les défis et les solutions apportées...">{{ old('description', $project->description) }}</textarea>
+                        <label class="block text-xs font-bold text-gray-600 mb-1.5">Description</label>
+                        <textarea name="description" rows="6"
+                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none">{{ old('description', $project->description) }}</textarea>
                         @error('description')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label for="technologies"
-                                class="block text-sm font-black text-gray-700 uppercase tracking-widest mb-2">Technologies
-                                (séparées par des virgules)</label>
-                            <input type="text" name="technologies" id="technologies" {{-- value="{{ old('technologies', $project->technologies) }}" --}}
-                                value="Technologies "
-                                class="w-full rounded-2xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm px-4 py-3"
-                                placeholder="Laravel, Tailwind, React...">
-                        </div>
-
-                        <div>
-                            <label for="category"
-                                class="block text-sm font-black text-gray-700 uppercase tracking-widest mb-2">Catégorie</label>
-                            <select name="category" id="category"
-                                class="w-full rounded-2xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm px-4 py-3">
-                                <option value="Web">Développement
-                                    Web</option>
-                                <option value="Design">Design /
-                                    UI-UX</option>
-                                <option value="Mobile">
-                                    Application Mobile</option>
-                                <option value="Autre">Autre
-                                </option>
+                            <label class="block text-xs font-bold text-gray-600 mb-1.5">Catégorie</label>
+                            <select name="category"
+                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                @foreach (['Design' => '🎨 Design / UI-UX', 'Web' => '💻 Développement Web', 'Mobile' => '📱 App Mobile', 'Photo' => '📸 Photo', 'Video' => '🎥 Vidéo', 'Branding' => '🏷️ Branding', 'Autre' => '🔧 Autre'] as $val => $label)
+                                    <option value="{{ $val }}"
+                                        {{ ($project->category ?? '') === $val ? 'selected' : '' }}>{{ $label }}
+                                    </option>
+                                @endforeach
                             </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 mb-1.5">Technologies</label>
+                            <input type="text" name="technologies"
+                                value="{{ old('technologies', $project->technologies) }}"
+                                placeholder="Figma, Laravel, React..."
+                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                         </div>
                     </div>
                 </div>
 
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-8 space-y-8">
-                    <h3 class="text-sm font-black text-gray-700 dark:text-gray-300 uppercase tracking-widest">Visuels du
-                        projet</h3>
+                {{-- Liens --}}
+                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                    <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Liens</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm">🌐</span>
+                            <input type="url" name="lien_site" value="{{ old('lien_site', $project->lien_site) }}"
+                                placeholder="https://mon-projet.com"
+                                class="w-full pl-9 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        </div>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm">⚙️</span>
+                            <input type="url" name="lien_github"
+                                value="{{ old('lien_github', $project->lien_github) }}"
+                                placeholder="https://github.com/..."
+                                class="w-full pl-9 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="flex flex-col md:flex-row gap-8 items-start">
-                        <div class="w-full md:w-1/3">
-                            <span class="block text-xs font-bold text-gray-400 mb-2 uppercase">Couverture
-                                actuelle</span>
-                            <div
-                                class="aspect-video rounded-2xl overflow-hidden border border-gray-100 shadow-inner bg-gray-50">
-                                <img src="{{ $project->image ? asset('storage/' . $project->image) : 'https://via.placeholder.com/400x250' }}"
-                                    class="w-full h-full object-cover" alt="Current Image">
+                {{-- Visuels --}}
+                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                    <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-5">Visuels</h2>
+
+                    {{-- Image actuelle --}}
+                    @if ($project->image)
+                        <div class="mb-5">
+                            <p class="text-xs font-bold text-gray-400 mb-2">Couverture actuelle</p>
+                            <div class="relative w-full h-48 rounded-2xl overflow-hidden border border-gray-100">
+                                <img src="{{ $project->image }}" class="w-full h-full object-cover">
                             </div>
                         </div>
+                    @endif
 
-                        {{-- <div class="w-full md:w-2/3">
-                            <span class="block text-xs font-bold text-gray-400 mb-2 uppercase">Remplacer la
-                                couverture</span>
-                            <div class="relative group">
-                                <input type="file" name="image" id="image"
-                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-                                <div
-                                    class="border-2 border-dashed border-gray-200 group-hover:border-indigo-400 rounded-2xl p-8 text-center transition-colors">
-                                    <svg class="w-8 h-8 mx-auto text-gray-400 group-hover:text-indigo-500 mb-2"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                    <p class="text-sm text-gray-500">Cliquez pour <span
-                                            class="font-bold text-indigo-600">changer la couverture</span></p>
-                                </div>
-                            </div>
-                        </div> --}}
-                    </div>
-
-                    <hr class="border-gray-100 dark:border-gray-700">
-
-                    <div class="space-y-4">
-                        <span class="block text-xs font-bold text-gray-400 uppercase">Galerie photos & vidéos</span>
-
-                        @if ($project->fichiers)
-                            <div class="grid grid-cols-3 md:grid-cols-5 gap-4 mb-4">
-                                @foreach (json_decode($project->fichiers) as $file)
-                                    <div
-                                        class="relative aspect-square rounded-xl overflow-hidden border border-gray-200">
-                                        @if (in_array(pathinfo($file, PATHINFO_EXTENSION), ['mp4', 'mov', 'webm']))
-                                            <video src="{{ asset('storage/' . $file) }}"
+                    {{-- Galerie actuelle --}}
+                    @if ($project->fichiers && count(json_decode($project->fichiers, true) ?? []) > 0)
+                        <div class="mb-5">
+                            <p class="text-xs font-bold text-gray-400 mb-2">Galerie actuelle</p>
+                            <div class="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                                @foreach (json_decode($project->fichiers, true) as $file)
+                                    @php
+                                        $ext = strtolower(pathinfo(parse_url($file, PHP_URL_PATH), PATHINFO_EXTENSION));
+                                        $isVideo = in_array($ext, ['mp4', 'mov', 'webm']);
+                                    @endphp
+                                    <div class="aspect-square rounded-xl overflow-hidden border border-gray-100">
+                                        @if ($isVideo)
+                                            <video src="{{ $file }}"
                                                 class="w-full h-full object-cover"></video>
                                         @else
-                                            <img src="{{ asset('storage/' . $file) }}"
-                                                class="w-full h-full object-cover">
+                                            <img src="{{ $file }}" class="w-full h-full object-cover">
                                         @endif
                                     </div>
                                 @endforeach
                             </div>
-                        @endif
+                        </div>
+                    @endif
 
-                        <div class="relative group" x-data="{ count: 0 }">
+                    {{-- Upload nouveaux fichiers --}}
+                    <div x-data="{ count: 0 }" class="relative">
+                        <p class="text-xs font-bold text-gray-400 mb-2">Ajouter des médias</p>
+                        <div
+                            class="flex items-center justify-center min-h-[100px] border-2 border-dashed border-gray-200 rounded-xl bg-gray-50 hover:bg-indigo-50/20 hover:border-indigo-300 transition-all cursor-pointer">
+                            <div class="text-center py-5 pointer-events-none">
+                                <p class="text-sm font-semibold text-gray-500"
+                                    x-text="count === 0 ? '+ Ajouter des photos ou vidéos' : count + ' fichiers sélectionnés'">
+                                </p>
+                                <p class="text-xs text-gray-400 mt-0.5">JPG, PNG, MP4</p>
+                            </div>
                             <input type="file" name="media[]" multiple accept="image/*,video/*"
                                 @change="count = $event.target.files.length"
-                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-                            <div
-                                class="border-2 border-dashed border-gray-200 group-hover:border-indigo-400 rounded-2xl p-6 text-center transition-colors bg-gray-50/50 dark:bg-gray-900/20">
-                                <p class="text-sm text-gray-500 font-medium">
-                                    <span
-                                        x-text="count === 0 ? '+ Ajouter des photos ou vidéos à la galerie' : count + ' nouveaux fichiers sélectionnés'"></span>
-                                </p>
-                            </div>
+                                class="absolute inset-0 opacity-0 cursor-pointer">
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 space-y-6">
-                    <h3 class="text-sm font-black text-gray-700 uppercase tracking-widest mb-2">Liens du projet</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <div class="relative">
-                                <i class="fas fa-link absolute left-4 top-4 text-gray-400"></i>
-                                <input type="url" name="lien_site"
-                                    value="{{ old('lien_site', $project->lien_site) }}"
-                                    class="w-full rounded-2xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 pl-11 py-3"
-                                    placeholder="Lien du site (https://...)">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="relative">
-                                <i class="fab fa-github absolute left-4 top-4 text-gray-400"></i>
-                                <input type="url" name="lien_github"
-                                    value="{{ old('lien_github', $project->lien_github) }}"
-                                    class="w-full rounded-2xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 pl-11 py-3"
-                                    placeholder="Lien GitHub (https://...)">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-end gap-4">
-                    <button type="reset"
-                        class="px-8 py-4 text-sm font-bold text-gray-500 hover:text-gray-700 transition">
-                        Réinitialiser
-                    </button>
+                {{-- Actions --}}
+                <div class="flex items-center justify-end gap-3 pt-2">
+                    <a href="{{ route('projects.show', $project->slug) }}"
+                        class="px-6 py-3 text-sm font-semibold text-gray-500 hover:text-gray-700 transition-colors">
+                        Annuler
+                    </a>
                     <button type="submit"
-                        class="px-10 py-4 bg-indigo-600 text-white font-black rounded-2xl hover:bg-indigo-700 transition shadow-lg shadow-indigo-200">
+                        class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-indigo-200 hover:scale-105">
                         Enregistrer les modifications
                     </button>
                 </div>
-
             </form>
         </div>
     </div>
