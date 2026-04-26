@@ -86,12 +86,10 @@ class CreatifController extends Controller
             ->with('success', '🎉 Profil complété avec succès !');
     }
 
-    public function edit()
+  public function edit()
 {
 
-    $creatif = Auth::user()->creatif()->firstOrCreate([
-        'user_id' => Auth::id()
-    ]);
+$creatif = auth()->user()->creatif ?? new \App\Models\Creatif();
 
     return view('creatifs.edit', compact('creatif'));
 }
