@@ -244,7 +244,7 @@
                                 style="width: {{ $pourcentage }}%"></div>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <a href="{{ route('creatifs.edit') }}"
+                            <a href="{{ route('creatifs.create') }}"
                                 class="flex items-center gap-3 p-3 bg-white rounded-xl border {{ $etapes['profil'] ? 'border-green-200' : 'border-indigo-200 hover:border-indigo-400' }} transition-all">
                                 <div
                                     class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 {{ $etapes['profil'] ? 'bg-green-100 text-green-600' : 'bg-indigo-100 text-indigo-600' }}">
