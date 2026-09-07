@@ -63,14 +63,14 @@ class ProjectController extends Controller
         return back();
     }
 
-    public function dashboard()
+    public function dashboard(BuilderScoreService $scorer)
     {
         $user = Auth::user();
         $creatif = $user->creatif;
         $projects = $creatif ? $creatif->projects()->withCount(['likes', 'comments'])->latest()->get() : collect();
         $totalLikes = $projects->sum('likes_count');
         $totalComments = $projects->sum('comments_count');
-        return view('dashboard', compact('creatif', 'projects', 'totalLikes', 'totalComments'));
+        return view('dashboard', compact('creatif', 'projects', 'totalLikes', 'totalComments', 'scorer'));
     }
 
     public function create()
