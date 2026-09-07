@@ -51,26 +51,26 @@
         <div class="flex-1 lg:w-1/2 flex items-center justify-center px-8 py-3 sm:px-12 lg:px-16">
             <div class="w-full max-w-md">
 
-                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-10 transition-transform hover:scale-105">
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-6 transition-transform hover:scale-105">
                     <x-application-logo class="h-9 w-auto text-indigo-600" />
                     <span class="font-bold text-xl text-gray-900">Mefolio</span>
                 </a>
 
                 <h1 class="text-3xl font-black text-gray-900 mb-2">Créer votre compte</h1>
-                <p class="text-sm text-gray-500 mb-8">
+                <p class="text-sm text-gray-500 mb-6">
                     Déjà membre ?
                     <a href="{{ route('login') }}" class="text-indigo-600 font-bold hover:underline">Se
                         connecter</a>
                 </p>
 
                 @if (session('google_error'))
-                    <div class="mb-6 p-3 bg-amber-50 border border-amber-100 rounded-xl text-sm text-amber-700">
+                    <div class="mb-4 p-3 bg-amber-50 border border-amber-100 rounded-xl text-sm text-amber-700">
                         {{ session('google_error') }}
                     </div>
                 @endif
 
                 <a href="{{ route('google.redirect') }}"
-                    class="w-full flex items-center justify-center gap-3 border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all mb-6">
+                    class="w-full flex items-center justify-center gap-3 border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all mb-4">
                     <svg class="w-5 h-5" viewBox="0 0 48 48">
                         <path fill="#FFC107"
                             d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
@@ -84,7 +84,7 @@
                     Continuer avec Google
                 </a>
 
-                <div class="relative mb-6">
+                <div class="relative mb-4">
                     <div class="absolute inset-0 flex items-center">
                         <div class="w-full border-t border-gray-100"></div>
                     </div>
@@ -94,33 +94,26 @@
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('register') }}" class="space-y-4">
+                <form method="POST" action="{{ route('register') }}" class="space-y-3">
                     @csrf
 
                     {{-- RÔLE --}}
-                    <div class="space-y-1">
-                        <label class="block text-sm font-bold text-gray-700 ml-1">Je m'inscris en tant que</label>
-                        <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <div class="grid grid-cols-2 gap-1 p-1 bg-gray-100 rounded-xl">
                             <label class="cursor-pointer">
                                 <input type="radio" name="role" value="creatif" class="peer hidden"
                                     @checked(old('role', 'creatif') === 'creatif')>
                                 <div
-                                    class="p-3 border rounded-xl text-center border-gray-200 peer-checked:border-indigo-600 peer-checked:bg-indigo-50 transition hover:border-gray-300">
-                                    <svg class="w-5 h-5 mx-auto mb-1 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
-                                    </svg>
-                                    <span class="text-sm font-semibold">Créatif</span>
+                                    class="py-2 rounded-lg text-center text-sm font-semibold text-gray-500 peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm transition-all">
+                                    Je suis créatif
                                 </div>
                             </label>
                             <label class="cursor-pointer">
                                 <input type="radio" name="role" value="client" class="peer hidden"
                                     @checked(old('role') === 'client')>
                                 <div
-                                    class="p-3 border rounded-xl text-center border-gray-200 peer-checked:border-indigo-600 peer-checked:bg-indigo-50 transition hover:border-gray-300">
-                                    <svg class="w-5 h-5 mx-auto mb-1 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                                    </svg>
-                                    <span class="text-sm font-semibold">Client</span>
+                                    class="py-2 rounded-lg text-center text-sm font-semibold text-gray-500 peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm transition-all">
+                                    Je suis client
                                 </div>
                             </label>
                         </div>
@@ -129,7 +122,6 @@
 
                     {{-- USERNAME --}}
                     <div class="space-y-1">
-                        <label class="block text-sm font-bold text-gray-700 ml-1">Nom d'utilisateur</label>
                         <input type="text" name="username" value="{{ old('username') }}" required
                             placeholder="Nom d'utilisateur"
                             class="w-full h-12 px-4 rounded-xl border border-gray-200 text-sm outline-none
@@ -139,7 +131,6 @@
 
                     {{-- EMAIL --}}
                     <div class="space-y-1">
-                        <label class="block text-sm font-bold text-gray-700 ml-1">Email</label>
                         <input type="email" name="email" value="{{ old('email') }}" required
                             placeholder="votre@email.com"
                             class="w-full h-12 px-4 rounded-xl border border-gray-200 text-sm outline-none
@@ -149,9 +140,8 @@
 
                     {{-- PASSWORD --}}
                     <div class="space-y-1">
-                        <label class="block text-sm font-bold text-gray-700 ml-1">Mot de passe</label>
                         <div class="relative">
-                            <input type="password" id="password" name="password" required placeholder="••••••••"
+                            <input type="password" id="password" name="password" required placeholder="Mot de passe"
                                 class="w-full h-12 px-4 pr-12 rounded-xl border border-gray-200 text-sm outline-none
                    focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
                             <button type="button" onclick="togglePwd('password', 'eye-open-1', 'eye-close-1')"
@@ -173,35 +163,8 @@
                         <x-input-error :messages="$errors->get('password')" />
                     </div>
 
-                    {{-- CONFIRM --}}
-                    <div class="space-y-1">
-                        <label class="block text-sm font-bold text-gray-700 ml-1">Confirmer le mot de passe</label>
-                        <div class="relative">
-                            <input type="password" id="password_confirmation" name="password_confirmation" required
-                                placeholder="••••••••"
-                                class="w-full h-12 px-4 pr-12 rounded-xl border border-gray-200 text-sm outline-none
-                   focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
-                            <button type="button" onclick="togglePwd('password_confirmation', 'eye-open-2', 'eye-close-2')"
-                                class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-indigo-600">
-                                <svg id="eye-open-2" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
-                                    stroke-width="2" viewBox="0 0 24 24">
-                                    <path
-                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                <svg id="eye-close-2" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029" />
-                                    <path d="M3 3l18 18" />
-                                </svg>
-                            </button>
-                        </div>
-                        <x-input-error :messages="$errors->get('password_confirmation')" />
-                    </div>
-
                     <button type="submit"
-                        class="w-full bg-[#050810] hover:bg-indigo-700 text-white font-bold py-4 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-xl shadow-indigo-100 text-sm">
+                        class="w-full bg-[#050810] hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-xl shadow-indigo-100 text-sm">
                         Créer mon compte gratuitement →
                     </button>
                 </form>
