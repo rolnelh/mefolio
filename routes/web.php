@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CreatifController;
@@ -62,6 +63,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/projects/{project}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::post('/projects/{project}/comments/ajax', [CommentController::class, 'storeAjax'])->name('comments.store.ajax');
     Route::post('/projects/{project}/like', [ProjectController::class, 'toggleLike'])->name('projects.like');
+
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
 
     Route::post('/dashboard/assistant', [AIAssistantController::class, 'chat'])
         ->middleware('throttle:15,1')

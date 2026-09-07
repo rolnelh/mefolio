@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Creatif;
+use App\Notifications\ActivityNotification;
 use App\Services\BuilderScoreService;
 use Illuminate\Support\Facades\Auth;
 use Cloudinary\Cloudinary;
@@ -137,6 +138,15 @@ class CreatifController extends Controller
 
         if (! $wasComplete && $this->isProfileComplete($creatif)) {
             app(BuilderScoreService::class)->addPoints($creatif, 'profile_complete');
+        }
+
+        if ($request->hasFile('photo')) {
+            $user->notify(new ActivityNotification(
+                title: 'Photo de profil mise à jour',
+                message: 'Votre photo de profil a bien été changée.',
+                url: $creatif->slug ? route('creatifs.show', $creatif->slug) : null,
+                icon: 'photo',
+            ));
         }
 
         return redirect()->route('dashboard')
