@@ -1,25 +1,30 @@
 <x-guest-layout>
     <div class="min-h-screen flex">
 
-        <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-end p-4 bg-[#050810] overflow-hidden">
-            {{-- <div class="absolute inset-0">
-                <img src="https://i.pinimg.com/736x/82/7a/dc/827adc7f7265d3f9a296bfdc6e3f9b83.jpg"
-                    class="w-full h-full object-cover opacity-50">
-                <div class="absolute inset-0 bg-gradient-to-t from-[#050810] via-[#050810]/40 to-transparent"></div>
-            </div> --}}
-
-            <div class="relative z-10 flex flex-col justify-center px-10 py-20">
-                <div
-                    class="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-indigo-500/20">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
+        {{-- Panneau gauche : identité de marque --}}
+        <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-10 bg-[#050810] overflow-hidden">
+            <div aria-hidden="true" class="absolute inset-0">
+                <div class="absolute -top-24 -left-24 w-72 h-72 bg-indigo-600/30 rounded-full blur-3xl"></div>
+                <div class="absolute top-1/3 -right-20 w-80 h-80 bg-violet-600/20 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 left-1/4 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl"></div>
+                <div class="absolute inset-0 opacity-[0.15]"
+                    style="background-image: radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 26px 26px;">
                 </div>
+                <svg class="absolute top-20 right-14 w-20 h-20 text-white/10" fill="none" stroke="currentColor"
+                    stroke-width="1.5" viewBox="0 0 100 100">
+                    <path d="M10 60 C 30 20, 60 90, 90 40" stroke-linecap="round" />
+                </svg>
+                <div class="absolute bottom-32 right-24 w-10 h-10 border border-white/10 rounded-lg rotate-12"></div>
+            </div>
 
-                <h2 class="text-5xl xl:text-5xl font-black text-white leading-relaxed mb-4">
-                    Bon retour parmi <br> nous. 
+            <a href="{{ route('home') }}" class="relative z-10 inline-flex items-center gap-2 w-fit transition-transform hover:scale-105">
+                <x-application-logo class="h-8 w-auto text-white" />
+                <span class="font-bold text-lg text-white">Mefolio</span>
+            </a>
+
+            <div class="relative z-10 py-16">
+                <h2 class="text-5xl font-black text-white leading-tight mb-4">
+                    Bon retour parmi <br> nous.
                 </h2>
 
                 <p class="text-gray-400 text-base leading-relaxed max-w-sm mb-10">
@@ -43,49 +48,27 @@
                     </div>
                 </div>
             </div>
+
+            <p class="relative z-10 text-gray-600 text-xs">© {{ now()->year }} Mefolio</p>
         </div>
 
+        {{-- Panneau droit : formulaire --}}
         <div class="flex-1 lg:w-1/2 flex flex-col justify-center px-6 py-4 sm:px-12 lg:px-20 xl:px-32 bg-white">
             <div class="w-full max-w-md mx-auto">
 
-                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-4 transition-transform hover:scale-105">
+                <a href="{{ route('home') }}" class="lg:hidden inline-flex items-center gap-2 mb-8 transition-transform hover:scale-105">
                     <x-application-logo class="h-9 w-auto text-indigo-600" />
                     <span class="font-bold text-xl text-gray-900">Mefolio</span>
                 </a>
 
                 <h1 class="text-3xl font-black text-gray-900 mb-2">Se connecter</h1>
-                <p class="text-sm text-gray-500 mb-6">
+                <p class="text-sm text-gray-500 mb-8">
                     Pas encore de compte ?
                     <a href="{{ route('register') }}" class="text-indigo-600 font-bold hover:underline">S'inscrire
                         gratuitement</a>
                 </p>
 
                 <x-auth-session-status class="mb-4" :status="session('status')" />
-
-                <button type="button"
-                    class="w-full flex items-center justify-center gap-3 border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all mb-8">
-                    <svg class="w-5 h-5" viewBox="0 0 48 48">
-                        <path fill="#FFC107"
-                            d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
-                        <path fill="#FF3D00"
-                            d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
-                        <path fill="#4CAF50"
-                            d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
-                        <path fill="#1976D2"
-                            d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
-                    </svg>
-                    Continuer avec Google
-                </button>
-
-                <div class="relative mb-8">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-100"></div>
-                    </div>
-                    <div class="relative flex justify-center">
-                        <span class="px-4 bg-white text-[10px] text-gray-800 font-bold uppercase">ou
-                            avec votre email</span>
-                    </div>
-                </div>
 
                 <form method="POST" action="{{ route('login') }}" class="space-y-4">
                     @csrf
