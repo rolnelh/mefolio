@@ -13,7 +13,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                syne: ["Syne", "sans-serif"],
+                jakarta: ["Plus Jakarta Sans", ...defaultTheme.fontFamily.sans],
             },
         },
     },

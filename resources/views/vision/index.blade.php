@@ -12,7 +12,7 @@
                 <div class="text-left">
                     <div
                         class="inline-flex items-center gap-2 bg-slate-950 border border-indigo-500/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-8 uppercase tracking-widest">
-                        🚧 Mefolio 2.0 — Africa's Talent Ecosystem
+                        Mefolio 2.0 — Africa's Talent Ecosystem
                     </div>
 
                     <h1 class="text-5xl sm:text-7xl font-black text-slate-900 tracking-tight leading-[1.05] mb-8">
@@ -64,9 +64,8 @@
                 "Révéler, connecter et propulser les talents africains vers les opportunités qu'ils méritent."
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 pt-8 border-t border-white/10">
-                @foreach ([['emoji' => '🔍', 'titre' => 'Révéler', 'desc' => 'Donner une vitrine professionnelle à chaque créatif africain.'], ['emoji' => '🤝', 'titre' => 'Connecter', 'desc' => 'Relier les talents aux recruteurs, startups et entreprises locales et internationales.'], ['emoji' => '🚀', 'titre' => 'Propulser', 'desc' => 'Offrir les outils pour monétiser, grandir et s\'exporter.']] as $m)
+                @foreach ([['titre' => 'Révéler', 'desc' => 'Donner une vitrine professionnelle à chaque créatif africain.'], ['titre' => 'Connecter', 'desc' => 'Relier les talents aux recruteurs, startups et entreprises locales et internationales.'], ['titre' => 'Propulser', 'desc' => 'Offrir les outils pour monétiser, grandir et s\'exporter.']] as $m)
                     <div>
-                        <div class="text-3xl mb-3">{{ $m['emoji'] }}</div>
                         <h3 class="font-bold text-lg mb-2">{{ $m['titre'] }}</h3>
                         <p class="text-indigo-200 text-sm leading-relaxed">{{ $m['desc'] }}</p>
                     </div>
@@ -114,7 +113,7 @@
                 </div>
                 <div>
                     <h2 class="text-2xl font-black text-gray-900 mb-1">Dieudonné Houndagnon</h2>
-                    <p class="text-indigo-600 font-semibold mb-6">Fondateur & CEO — Mefolio · Cotonou, Bénin 🇧🇯</p>
+                    <p class="text-indigo-600 font-semibold mb-6">Fondateur & CEO — Mefolio · Cotonou, Bénin</p>
                     <div class="space-y-4 text-gray-600 leading-relaxed">
                         <p>
                             J'ai grandi à Cotonou en voyant autour de moi des talents incroyables — des designers, des
@@ -166,7 +165,6 @@
         </div>
 
         <div class="bg-[#050810] rounded-3xl p-12 text-center text-white">
-            <div class="text-4xl mb-4">🌍</div>
             <h2 class="text-3xl font-black mb-4">Rejoignez le mouvement</h2>
             <p class="text-gray-400 mb-8 max-w-lg mx-auto">Mefolio ne construit pas juste une plateforme. Nous
                 construisons l'avenir du talent africain. Et vous pouvez en faire partie dès maintenant.</p>

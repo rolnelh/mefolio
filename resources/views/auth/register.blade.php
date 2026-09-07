@@ -40,8 +40,9 @@
         <div class="flex-1 lg:w-1/2 flex items-center justify-center px-8 py-3 sm:px-12 lg:px-16">
             <div class="w-full max-w-md">
 
-                <a href="{{ route('home') }}" class="inline-block mb-10 transition-transform hover:scale-105">
-                    <x-application-logo class="h-9 text-indigo-600" />
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-10 transition-transform hover:scale-105">
+                    <x-application-logo class="h-9 w-auto text-indigo-600" />
+                    <span class="font-bold text-xl text-gray-900">Mefolio</span>
                 </a>
 
                 <h1 class="text-2xl font-bold text-gray-900 mb-1">Créer votre compte</h1>

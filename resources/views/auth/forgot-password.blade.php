@@ -36,8 +36,9 @@
             <div class="w-full max-w-md mx-auto">
 
                 {{-- Logo --}}
-                <a href="{{ route('home') }}" class="inline-block mb-8">
-                    <x-application-logo class="h-9 w-auto fill-current text-indigo-600" />
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-8">
+                    <x-application-logo class="h-9 w-auto text-indigo-600" />
+                    <span class="font-bold text-xl text-gray-900">Mefolio</span>
                 </a>
 
                 <h1 class="text-2xl font-black text-gray-900 mb-1">Mot de passe oublié ?</h1>
@@ -49,7 +50,7 @@
                 @if (session('status'))
                     <div
                         class="mb-6 flex items-center gap-3 p-4 bg-green-50 border border-green-200 text-green-700 rounded-2xl text-sm font-semibold">
-                        ✅ {{ session('status') }}
+                         {{ session('status') }}
                     </div>
                 @endif
 

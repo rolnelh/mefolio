@@ -2,63 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return view('blog');
+        $query = Post::with('author')->published()->latest('published_at');
+
+        if ($request->filled('categorie')) {
+            $query->where('category', $request->categorie);
+        }
+
+        $posts = $query->paginate(9)->withQueryString();
+        $featured = Post::published()->latest('published_at')->first();
+        $categories = Post::published()->whereNotNull('category')->distinct()->pluck('category');
+
+        return view('blog', compact('posts', 'featured', 'categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show(Post $post)
     {
-        //
-    }
+        if ($post->status !== 'published') {
+            abort(404);
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $related = Post::published()
+            ->where('id', '!=', $post->id)
+            ->where('category', $post->category)
+            ->take(3)
+            ->get();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('blog-show', compact('post', 'related'));
     }
 }

@@ -104,11 +104,11 @@
                             <p class="text-[10px] text-gray-400 uppercase tracking-wider">Projets</p>
                         </div>
                         <div class="py-3 text-center">
-                            <p class="text-lg font-black text-gray-900 dark:text-white">0</p>
-                            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Vues</p>
+                            <p class="text-lg font-black text-gray-900 dark:text-white">{{ number_format($creatif->builder_score ?? 0) }}</p>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Score</p>
                         </div>
                         <div class="py-3 text-center">
-                            <p class="text-lg font-black text-gray-900 dark:text-white">0</p>
+                            <p class="text-lg font-black text-gray-900 dark:text-white">{{ $totalLikes }}</p>
                             <p class="text-[10px] text-gray-400 uppercase tracking-wider">Likes</p>
                         </div>
                     </div>
@@ -127,22 +127,6 @@
                                     </svg>
                                 </a>
                             @endif
-                            <a href="#"
-                                class="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
-                                title="LinkedIn">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                </svg>
-                            </a>
-                            <a href="#"
-                                class="p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all"
-                                title="GitHub">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                                </svg>
-                            </a>
                         </div>
                     </div>
 
@@ -178,55 +162,12 @@
                     </div>
                 </div>
 
-                {{-- Navigation sidebar --}}
-                <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-3">
-                    <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-3">
-                        <nav class="space-y-1">
-                            @foreach ([['tab' => 'projets', 'label' => 'Portfolio', 'icon' => 'project.png', 'count' => count($projects)], ['tab' => 'services', 'label' => 'Services', 'icon' => 'service.png', 'count' => 0], ['tab' => 'stats', 'label' => 'Analytics', 'icon' => 'statistics.png', 'count' => null], ['tab' => 'parametres', 'label' => 'Paramètres', 'icon' => 'setting.png', 'count' => null], ['tab' => 'paiements', 'label' => 'Moyens de paiement', 'icon' => 'hand.png', 'count' => null]] as $nav)
-                                <a href="?tab={{ $nav['tab'] }}"
-                                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all
-            {{ $activeTab === $nav['tab'] ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-50' }}">
-
-                                    <img src="{{ asset('images/' . $nav['icon']) }}" alt="{{ $nav['label'] }}"
-                                        class="w-5 h-5 object-contain">
-
-                                    <span class="text-sm font-semibold flex-1">
-                                        {{ $nav['label'] }}
-                                    </span>
-
-                                    @if ($nav['count'] !== null)
-                                        <span
-                                            class="text-xs
-                {{ $activeTab === $nav['tab'] ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-500' }}
-                font-bold px-2 py-0.5 rounded-full">
-                                            {{ $nav['count'] }}
-                                        </span>
-                                    @endif
-
-                                </a>
-                            @endforeach
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="items-center mt-10 mx-auto">
-                    <a href="#" class="bg-green-600 text-white text-xs px-3 py-2 rounded-xl">
-                        📢 Promouvoir mon profil
-                    </a>
-                </div>
+                <x-dashboard-sidebar :active="$activeTab" />
 
             </aside>
 
 
             <main class="flex-1 min-w-0 space-y-6">
-
-                @if (session('error'))
-                    <div
-                        class="mb-4 flex items-center gap-3 p-4 bg-red-50 border border-red-100 text-red-700 rounded-2xl">
-                        <span class="text-xl">⚠️</span>
-                        <span class="text-sm font-medium">{{ session('error') }}</span>
-                    </div>
-                @endif
 
                 {{-- Onboarding --}}
                 @if ($pourcentage < 100)
@@ -265,7 +206,7 @@
                                 <div class="flex-1 min-w-0">
                                     <p
                                         class="text-xs font-semibold {{ $etapes['profil'] ? 'text-green-700' : 'text-gray-900' }}">
-                                        {{ $etapes['profil'] ? '✓ Profil complété' : 'Compléter mon profil' }}
+                                        {{ $etapes['profil'] ? ' Profil complété' : 'Compléter mon profil' }}
                                     </p>
                                     <p class="text-[11px] text-gray-400">Photo, bio, spécialité, localisation</p>
                                 </div>
@@ -290,7 +231,7 @@
                                 <div class="flex-1 min-w-0">
                                     <p
                                         class="text-xs font-semibold {{ $etapes['projet'] ? 'text-green-700' : 'text-gray-900' }}">
-                                        {{ $etapes['projet'] ? '✓ Premier projet ajouté' : 'Ajouter mon premier projet' }}
+                                        {{ $etapes['projet'] ? ' Premier projet ajouté' : 'Ajouter mon premier projet' }}
                                     </p>
                                     <p class="text-[11px] text-gray-400">
                                         {{ !$etapes['profil'] ? 'Complétez d\'abord votre profil' : 'Partagez votre première réalisation' }}
@@ -402,7 +343,6 @@
                         @else
                             <div
                                 class="flex flex-col items-center justify-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
-                                <div class="text-4xl mb-4">🎨</div>
                                 <h3 class="text-lg font-bold text-gray-900 mb-2">Aucun projet pour le moment</h3>
                                 <p class="text-sm text-gray-400 text-center max-w-xs mb-6">Ajoutez votre première
                                     réalisation pour impressionner vos visiteurs.</p>
@@ -414,7 +354,7 @@
                                 @else
                                     <a href="{{ route('creatifs.edit') }}"
                                         class="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-full transition-all">
-                                        ⚠️ Compléter mon profil d'abord
+                                        Compléter mon profil d'abord
                                     </a>
                                 @endif
                             </div>
@@ -426,7 +366,6 @@
                 @if ($activeTab === 'services')
                     <div
                         class="flex flex-col items-center justify-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
-                        <div class="text-4xl mb-4">🛠️</div>
                         <h3 class="text-lg font-bold text-gray-900 mb-2">Services bientôt disponibles</h3>
                         <p class="text-sm text-gray-400 text-center max-w-xs mb-6">Vous pourrez bientôt proposer vos
                             services et être payé via Mobile Money.</p>
@@ -442,9 +381,8 @@
                     <div>
                         <h2 class="text-lg font-black text-gray-900 mb-5">Statistiques</h2>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                            @foreach ([['label' => 'Vues du profil', 'val' => '0', 'emoji' => '👁️', 'color' => 'indigo'], ['label' => 'Vues projets', 'val' => '0', 'emoji' => '🎨', 'color' => 'violet'], ['label' => 'Likes reçus', 'val' => '0', 'emoji' => '❤️', 'color' => 'pink'], ['label' => 'Commentaires', 'val' => '0', 'emoji' => '💬', 'color' => 'blue']] as $stat)
+                            @foreach ([['label' => 'Projets publiés', 'val' => count($projects)], ['label' => 'Builder Score', 'val' => number_format($creatif->builder_score ?? 0)], ['label' => 'Likes reçus', 'val' => $totalLikes], ['label' => 'Commentaires', 'val' => $totalComments]] as $stat)
                                 <div class="bg-white border border-gray-100 rounded-2xl p-5 text-center">
-                                    <div class="text-2xl mb-2">{{ $stat['emoji'] }}</div>
                                     <div class="text-3xl font-black text-gray-900">{{ $stat['val'] }}</div>
                                     <div class="text-xs text-gray-400 mt-1">{{ $stat['label'] }}</div>
                                 </div>
@@ -452,7 +390,6 @@
                         </div>
                         <div
                             class="bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100 rounded-2xl p-6 text-center">
-                            <div class="text-2xl mb-2">📊</div>
                             <h3 class="font-bold text-gray-900 mb-1">Analytics détaillées bientôt</h3>
                             <p class="text-sm text-gray-500">Vues par projet, provenance géographique, performance —
                                 tout ça arrive très bientôt.</p>
@@ -468,27 +405,13 @@
                         {{-- Visibilité du profil --}}
                         <div class="bg-white border border-gray-100 rounded-2xl p-6">
                             <h3 class="font-bold text-gray-900 mb-1">Visibilité du profil</h3>
-                            <p class="text-sm text-gray-500 mb-4">Choisissez qui peut voir votre profil et vos projets.
+                            <p class="text-sm text-gray-500 mb-4">
+                                Votre profil est actuellement
+                                <span class="font-semibold {{ $creatif?->is_paused ? 'text-amber-600' : 'text-green-600' }}">
+                                    {{ $creatif?->is_paused ? 'en pause (masqué des listes publiques)' : 'public et visible par tous' }}
+                                </span>.
+                                Vous pouvez le mettre en pause depuis la section « Mettre en pause » ci-dessous.
                             </p>
-                            <div class="space-y-3">
-                                @foreach ([['val' => 'public', 'label' => 'Public', 'desc' => 'Tout le monde peut voir votre profil et vos projets.', 'emoji' => '🌍'], ['val' => 'members', 'label' => 'Membres uniquement', 'desc' => 'Seuls les membres connectés peuvent voir votre profil.', 'emoji' => '👥'], ['val' => 'private', 'label' => 'Privé', 'desc' => 'Votre profil est masqué. Vous seul pouvez le voir.', 'emoji' => '🔒']] as $opt)
-                                    <label
-                                        class="flex items-start gap-4 p-4 border border-gray-100 rounded-xl cursor-pointer hover:border-indigo-200 hover:bg-indigo-50/30 transition-all">
-                                        <input type="radio" name="visibility" value="{{ $opt['val'] }}"
-                                            {{ ($creatif?->visibility ?? 'public') === $opt['val'] ? 'checked' : '' }}
-                                            class="mt-0.5 text-indigo-600 focus:ring-indigo-500">
-                                        <div>
-                                            <p class="text-sm font-semibold text-gray-900">{{ $opt['emoji'] }}
-                                                {{ $opt['label'] }}</p>
-                                            <p class="text-xs text-gray-400 mt-0.5">{{ $opt['desc'] }}</p>
-                                        </div>
-                                    </label>
-                                @endforeach
-                            </div>
-                            <button
-                                class="mt-4 px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-xl transition-all">
-                                Sauvegarder
-                            </button>
                         </div>
 
                         {{-- Compte --}}
@@ -518,15 +441,24 @@
                         {{-- Mettre en pause --}}
                         <div class="bg-amber-50 border border-amber-100 rounded-2xl p-6">
                             <div class="flex items-start gap-4">
-                                <div class="text-2xl">⏸️</div>
                                 <div class="flex-1">
-                                    <h3 class="font-bold text-amber-900 mb-1">Mettre mon compte en pause</h3>
-                                    <p class="text-sm text-amber-700 mb-4">Votre profil sera temporairement masqué.
-                                        Vous pourrez le réactiver à tout moment.</p>
-                                    <button
-                                        class="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-xl transition-all">
-                                        Mettre en pause
-                                    </button>
+                                    @if ($creatif?->is_paused)
+                                        <h3 class="font-bold text-amber-900 mb-1">Votre profil est en pause</h3>
+                                        <p class="text-sm text-amber-700 mb-4">Votre profil est actuellement masqué des
+                                            listes publiques. Réactivez-le à tout moment.</p>
+                                    @else
+                                        <h3 class="font-bold text-amber-900 mb-1">Mettre mon compte en pause</h3>
+                                        <p class="text-sm text-amber-700 mb-4">Votre profil sera temporairement masqué
+                                            des listes publiques. Vous pourrez le réactiver à tout moment.</p>
+                                    @endif
+                                    <form method="POST" action="{{ route('creatifs.pause') }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <button
+                                            class="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-xl transition-all">
+                                            {{ $creatif?->is_paused ? 'Réactiver mon profil' : 'Mettre en pause' }}
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -534,12 +466,12 @@
                         {{-- Supprimer le compte --}}
                         <div class="bg-red-50 border border-red-100 rounded-2xl p-6">
                             <div class="flex items-start gap-4">
-                                <div class="text-2xl">🗑️</div>
                                 <div class="flex-1">
                                     <h3 class="font-bold text-red-900 mb-1">Supprimer définitivement mon compte</h3>
                                     <p class="text-sm text-red-700 mb-4">Cette action est irréversible. Toutes vos
                                         données, projets et profil seront supprimés définitivement.</p>
-                                    <button onclick="return confirm('Êtes-vous sûr ? Cette action est irréversible.')"
+                                    <button type="button" x-data=""
+                                        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
                                         class="px-5 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-xl transition-all">
                                         Supprimer mon compte
                                     </button>
@@ -547,12 +479,47 @@
                             </div>
                         </div>
 
+                        <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                            <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+                                @csrf
+                                @method('delete')
+
+                                <h2 class="text-lg font-medium text-gray-900">
+                                    Êtes-vous sûr(e) de vouloir supprimer votre compte ?
+                                </h2>
+
+                                <p class="mt-1 text-sm text-gray-600">
+                                    Une fois votre compte supprimé, toutes ses données seront définitivement effacées.
+                                    Saisissez votre mot de passe pour confirmer la suppression définitive de votre compte.
+                                </p>
+
+                                <div class="mt-6">
+                                    <x-input-label for="delete-password" value="Mot de passe" class="sr-only" />
+                                    <x-text-input id="delete-password" name="password" type="password" class="mt-1 block w-3/4"
+                                        placeholder="Mot de passe" />
+                                    <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+                                </div>
+
+                                <div class="mt-6 flex justify-end">
+                                    <x-secondary-button x-on:click="$dispatch('close')">
+                                        Annuler
+                                    </x-secondary-button>
+                                    <x-danger-button class="ms-3">
+                                        Supprimer mon compte
+                                    </x-danger-button>
+                                </div>
+                            </form>
+                        </x-modal>
+
                     </div>
                 @endif
 
                 {{-- ─── ONGLET : PAIEMENTS ─── --}}
                 @if ($activeTab === 'paiements')
-                    <div class="space-y-6">
+                    @php $mesMoyens = Auth::user()->payment_methods ?? []; @endphp
+                    <form method="POST" action="{{ route('profile.payment-methods.update') }}" class="space-y-6">
+                        @csrf
+                        @method('PUT')
                         <div>
                             <h2 class="text-lg font-black text-gray-900">Moyens de paiement</h2>
                             <p class="text-sm text-gray-400 mt-1">Choisissez comment vous souhaitez être payé pour vos
@@ -562,9 +529,6 @@
                         {{-- Mobile Money Afrique --}}
                         <div class="bg-white border border-gray-100 rounded-2xl p-6">
                             <div class="flex items-center gap-3 mb-5">
-                                <div class="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
-                                    <span class="text-base">🌍</span>
-                                </div>
                                 <div>
                                     <h3 class="font-bold text-gray-900 text-sm">Mobile Money Afrique</h3>
                                     <p class="text-xs text-gray-400">Paiements locaux recommandés</p>
@@ -577,7 +541,7 @@
                                 @foreach ([['id' => 'mtn', 'nom' => 'MTN Mobile Money', 'pays' => 'Bénin, Ghana, Côte d\'Ivoire...', 'color' => 'bg-yellow-400', 'logo' => 'MTN'], ['id' => 'moov', 'nom' => 'Moov Money', 'pays' => 'Bénin, Togo, Niger...', 'color' => 'bg-blue-500', 'logo' => 'MOOV'], ['id' => 'wave', 'nom' => 'Wave', 'pays' => 'Sénégal, Côte d\'Ivoire...', 'color' => 'bg-sky-400', 'logo' => 'WAVE'], ['id' => 'orange', 'nom' => 'Orange Money', 'pays' => 'Afrique francophone', 'color' => 'bg-orange-500', 'logo' => 'OM'], ['id' => 'kkiapay', 'nom' => 'Kkiapay', 'pays' => 'Bénin & Afrique de l\'Ouest', 'color' => 'bg-indigo-600', 'logo' => 'KK'], ['id' => 'fedapay', 'nom' => 'FedaPay', 'pays' => 'Bénin, Togo, Sénégal...', 'color' => 'bg-violet-600', 'logo' => 'FEDA']] as $pm)
                                     <label
                                         class="flex items-center gap-4 p-4 border border-gray-100 rounded-xl cursor-pointer hover:border-indigo-200 hover:bg-indigo-50/20 transition-all group">
-                                        <input type="checkbox" name="paiements[]" value="{{ $pm['id'] }}"
+                                        <input type="checkbox" name="paiements[]" value="{{ $pm['id'] }}" @checked(in_array($pm['id'], $mesMoyens))
                                             class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500">
                                         <div
                                             class="w-10 h-10 {{ $pm['color'] }} rounded-xl flex items-center justify-center flex-shrink-0">
@@ -599,16 +563,13 @@
                             <div class="mt-4 pt-4 border-t border-gray-50">
                                 <label class="block text-xs font-bold text-gray-700 mb-1.5">Numéro Mobile Money</label>
                                 <div class="flex gap-2">
-                                    <select
+                                    <select name="payment_phone_prefix"
                                         class="px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
-                                        <option>🇧🇯 +229</option>
-                                        <option>🇸🇳 +221</option>
-                                        <option>🇨🇮 +225</option>
-                                        <option>🇬🇭 +233</option>
-                                        <option>🇲🇱 +223</option>
-                                        <option>🇳🇬 +234</option>
+                                        @foreach (['+229', '+221', '+225', '+233', '+223', '+234'] as $prefix)
+                                            <option value="{{ $prefix }}" @selected(Auth::user()->payment_phone_prefix === $prefix)>{{ $prefix }}</option>
+                                        @endforeach
                                     </select>
-                                    <input type="tel" placeholder="Ex: 97000000"
+                                    <input type="tel" name="payment_phone" value="{{ Auth::user()->payment_phone }}" placeholder="Ex: 97000000"
                                         class="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                 </div>
                             </div>
@@ -617,9 +578,6 @@
                         {{-- Paiements internationaux --}}
                         <div class="bg-white border border-gray-100 rounded-2xl p-6">
                             <div class="flex items-center gap-3 mb-5">
-                                <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
-                                    <span class="text-base">🌐</span>
-                                </div>
                                 <div>
                                     <h3 class="font-bold text-gray-900 text-sm">Paiements Internationaux</h3>
                                     <p class="text-xs text-gray-400">Pour les clients hors Afrique</p>
@@ -630,7 +588,7 @@
                                 {{-- PayPal --}}
                                 <label
                                     class="flex items-center gap-4 p-4 border border-gray-100 rounded-xl cursor-pointer hover:border-blue-200 hover:bg-blue-50/20 transition-all">
-                                    <input type="checkbox" name="paiements[]" value="paypal"
+                                    <input type="checkbox" name="paiements[]" value="paypal" @checked(in_array('paypal', $mesMoyens))
                                         class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500">
                                     <div
                                         class="w-10 h-10 bg-[#003087] rounded-xl flex items-center justify-center flex-shrink-0">
@@ -654,7 +612,7 @@
                                 {{-- Stripe --}}
                                 <label
                                     class="flex items-center gap-4 p-4 border border-gray-100 rounded-xl cursor-pointer hover:border-violet-200 hover:bg-violet-50/20 transition-all">
-                                    <input type="checkbox" name="paiements[]" value="stripe"
+                                    <input type="checkbox" name="paiements[]" value="stripe" @checked(in_array('stripe', $mesMoyens))
                                         class="w-4 h-4 rounded text-violet-600 focus:ring-violet-500">
                                     <div
                                         class="w-10 h-10 bg-[#635bff] rounded-xl flex items-center justify-center flex-shrink-0">
@@ -674,7 +632,7 @@
                                 {{-- Wise --}}
                                 <label
                                     class="flex items-center gap-4 p-4 border border-gray-100 rounded-xl cursor-pointer hover:border-green-200 hover:bg-green-50/20 transition-all">
-                                    <input type="checkbox" name="paiements[]" value="wise"
+                                    <input type="checkbox" name="paiements[]" value="wise" @checked(in_array('wise', $mesMoyens))
                                         class="w-4 h-4 rounded text-green-600 focus:ring-green-500">
                                     <div
                                         class="w-10 h-10 bg-[#9fe870] rounded-xl flex items-center justify-center flex-shrink-0">
@@ -693,9 +651,6 @@
                         {{-- Virement bancaire --}}
                         <div class="bg-white border border-gray-100 rounded-2xl p-6">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
-                                    <span class="text-base">🏦</span>
-                                </div>
                                 <div>
                                     <h3 class="font-bold text-gray-900 text-sm">Virement Bancaire</h3>
                                     <p class="text-xs text-gray-400">Pour les grandes transactions</p>
@@ -703,7 +658,7 @@
                             </div>
                             <label
                                 class="flex items-center gap-4 p-4 border border-gray-100 rounded-xl cursor-pointer hover:border-gray-300 transition-all">
-                                <input type="checkbox" name="paiements[]" value="virement"
+                                <input type="checkbox" name="paiements[]" value="virement" @checked(in_array('virement', $mesMoyens))
                                     class="w-4 h-4 rounded text-gray-600">
                                 <div
                                     class="w-10 h-10 bg-gray-800 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -718,12 +673,140 @@
 
                         {{-- Bouton sauvegarder --}}
                         <div class="flex justify-end">
-                            <button
+                            <button type="submit"
                                 class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-indigo-200">
                                 Sauvegarder mes moyens de paiement
                             </button>
                         </div>
+                    </form>
+                @endif
+
+                {{-- ─── ONGLET : ASSISTANT IA ─── --}}
+                @if ($activeTab === 'assistant')
+                    <div x-data="mefolioAssistant()" x-init="init()" class="flex flex-col"
+                        style="height: calc(100vh - 220px); min-height: 480px;">
+
+                        <div class="mb-4">
+                            <h2 class="text-lg font-black text-gray-900">Assistant IA</h2>
+                            <p class="text-xs text-gray-400 mt-0.5">Un coup de main pour peaufiner votre profil créatif :
+                                bio, spécialité, présentation de votre portfolio.</p>
+                        </div>
+
+                        <div class="flex-1 min-h-0 bg-white border border-gray-100 rounded-2xl flex flex-col overflow-hidden">
+
+                            <div x-ref="thread" class="flex-1 overflow-y-auto p-5 space-y-4">
+                                <template x-if="messages.length === 0">
+                                    <div class="h-full flex flex-col items-center justify-center text-center px-6">
+                                        <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-3">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                                            </svg>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-gray-900 mb-1">Comment puis-je vous aider ?</h3>
+                                        <p class="text-xs text-gray-400 max-w-xs mb-5">Posez une question ou choisissez une
+                                            suggestion pour commencer.</p>
+                                        <div class="flex flex-wrap justify-center gap-2 max-w-md">
+                                            <template x-for="suggestion in suggestions" :key="suggestion">
+                                                <button type="button" @click="send(suggestion)"
+                                                    class="text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-3 py-2 rounded-xl transition-all"
+                                                    x-text="suggestion"></button>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                <template x-for="(msg, index) in messages" :key="index">
+                                    <div class="flex" :class="msg.role === 'user' ? 'justify-end' : 'justify-start'">
+                                        <div class="max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-line"
+                                            :class="msg.role === 'user'
+                                                ? 'bg-indigo-600 text-white rounded-br-sm'
+                                                : (msg.isError ? 'bg-amber-50 text-amber-800 rounded-bl-sm' : 'bg-gray-100 text-gray-800 rounded-bl-sm')"
+                                            x-text="msg.content"></div>
+                                    </div>
+                                </template>
+
+                                <div class="flex justify-start" x-show="loading" x-cloak>
+                                    <div class="bg-gray-100 text-gray-400 rounded-2xl rounded-bl-sm px-4 py-2.5 text-sm">
+                                        <span class="inline-flex gap-1">
+                                            <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:0ms"></span>
+                                            <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:150ms"></span>
+                                            <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:300ms"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form @submit.prevent="send(input); input = ''"
+                                class="flex items-center gap-2 p-3 border-t border-gray-100">
+                                <input type="text" x-model="input" :disabled="loading"
+                                    placeholder="Ex : aide-moi à écrire ma bio..."
+                                    class="flex-1 border-gray-200 rounded-xl text-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:opacity-50">
+                                <button type="submit" :disabled="loading || !input.trim()"
+                                    class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-bold rounded-xl transition-all">
+                                    Envoyer
+                                </button>
+                            </form>
+                        </div>
                     </div>
+
+                    <script>
+                        function mefolioAssistant() {
+                            return {
+                                messages: [],
+                                input: '',
+                                loading: false,
+                                suggestions: [
+                                    'Aide-moi à écrire ma bio',
+                                    'Quels champs compléter en priorité ?',
+                                    'Comment formuler ma spécialité ?',
+                                ],
+                                init() {},
+                                async send(text) {
+                                    text = (text || '').trim();
+                                    if (!text || this.loading) return;
+
+                                    this.messages.push({ role: 'user', content: text });
+                                    this.loading = true;
+                                    this.scrollDown();
+
+                                    const history = this.messages
+                                        .filter(m => !m.isError)
+                                        .slice(0, -1)
+                                        .map(m => ({ role: m.role, content: m.content }));
+
+                                    try {
+                                        const res = await fetch('{{ route('assistant.chat') }}', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'Accept': 'application/json',
+                                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                                            },
+                                            body: JSON.stringify({ message: text, history }),
+                                        });
+                                        const data = await res.json();
+
+                                        if (res.ok) {
+                                            this.messages.push({ role: 'assistant', content: data.reply });
+                                        } else {
+                                            this.messages.push({ role: 'assistant', content: data.message || 'Une erreur est survenue.', isError: true });
+                                        }
+                                    } catch (e) {
+                                        this.messages.push({ role: 'assistant', content: 'Connexion impossible. Vérifiez votre connexion et réessayez.', isError: true });
+                                    } finally {
+                                        this.loading = false;
+                                        this.scrollDown();
+                                    }
+                                },
+                                scrollDown() {
+                                    this.$nextTick(() => {
+                                        const el = this.$refs.thread;
+                                        if (el) el.scrollTop = el.scrollHeight;
+                                    });
+                                },
+                            };
+                        }
+                    </script>
                 @endif
 
             </main>

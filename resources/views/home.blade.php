@@ -12,139 +12,188 @@
 </style>
 <x-app-layout>
 
-    <section class="relative bg-[#050810] py-20 sm:py-28 overflow-hidden">
+    @php
+        $heroCreatifs = $creatifs->filter(fn ($c) => $c->photo)->take(4)->values();
+    @endphp
 
-        <div class="absolute inset-0 z-0 pointer-events-none">
-            <div class="absolute -top-[10%] -right-[10%] w-[70%] h-[70%] rounded-full bg-blue-600/10 blur-[120px]"></div>
-            <div class="absolute -bottom-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-indigo-600/10 blur-[100px]">
-            </div>
-            <div
-                class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay">
-            </div>
+    <section class="relative bg-[#F7F6F1] py-24 sm:py-32 overflow-hidden">
+
+        {{-- Trame de points --}}
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-60"
+            style="background-image: radial-gradient(#00000014 1px, transparent 1px); background-size: 28px 28px;">
+        </div>
+        <div class="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-[#F7F6F1]">
         </div>
 
-        <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-6xl text-center">
+        {{-- Avatars flottants --}}
+        @foreach ($heroCreatifs as $i => $hc)
+            @php
+                $positions = [
+                    'top-[14%] left-[6%] lg:left-[12%]',
+                    'top-[18%] right-[6%] lg:right-[13%]',
+                    'bottom-[14%] left-[9%] lg:left-[16%]',
+                    'bottom-[16%] right-[8%] lg:right-[15%]',
+                ];
+                $rotations = ['-rotate-6', 'rotate-6', 'rotate-3', '-rotate-3'];
+            @endphp
+            <a href="{{ route('creatifs.show', $hc->slug) }}"
+                class="hidden md:block absolute {{ $positions[$i] }} z-10 {{ $rotations[$i] }} hover:scale-105 hover:rotate-0 transition-all duration-300">
+                <span class="relative block">
+                    <img src="{{ $hc->photo }}"
+                        class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl object-cover shadow-xl ring-4 ring-white">
+                    <span
+                        class="absolute -top-2 -right-2 w-7 h-7 bg-gray-900 rounded-full flex items-center justify-center shadow-md">
+                        <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </span>
+                </span>
+            </a>
+        @endforeach
 
-                <div
-                    class="inline-flex items-center rounded-full bg-blue-500/5 px-4 py-1.5 text-xs font-semibold text-blue-400 ring-1 ring-inset ring-blue-500/20 mb-10 backdrop-blur-md">
-                    <span class="mr-2">🌍</span> The first African platform for creative talent
-                </div>
+        <div class="relative z-10 mx-auto max-w-3xl px-6 lg:px-8 text-center">
 
-                <h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-7xl leading-[1.05]">
-                    {{-- Le talent africain<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
-                        mérite une scène mondiale.
-                    </span> --}}
-                    Discover, Showcase and Hire African Talents
-                </h1>
+            <span
+                class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gray-600 ring-1 ring-inset ring-gray-200 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                Portfolio · Missions · Communauté
+            </span>
 
-                <p class="mt-8 text-lg md:text-xl leading-relaxed text-gray-400 font-light max-w-2xl mx-auto">
-                    {{-- Mefolio est la plateforme pensée pour les créatifs et étudiants africains.
-                    Construisez votre portfolio, soyez découverts par des recruteurs,
-                    et monétisez vos compétences avec
-                    <span class="text-gray-200 font-medium">Mobile Money.</span> --}}
+            <h1 class="mt-8 text-5xl sm:text-6xl font-bold tracking-tight text-gray-900 leading-[1.1]">
+                Un espace pour
+                <span class="relative inline-block whitespace-nowrap">
+                    révéler
+                    <svg class="absolute -bottom-1 left-0 w-full" height="10" viewBox="0 0 120 10" preserveAspectRatio="none" fill="none">
+                        <path d="M2 7C20 2 40 2 60 5C80 8 100 8 118 3" stroke="#FACC15" stroke-width="5" stroke-linecap="round" />
+                    </svg>
+                </span>
+                votre talent créatif
+            </h1>
 
-                    The first platform dedicated to students, creatives and developers across Africa.
+            <p class="mt-6 text-lg text-gray-500 max-w-xl mx-auto leading-relaxed">
+                Mefolio aide les créatifs africains à construire leur portfolio, trouver des missions et se connecter
+                à une communauté qui valorise leur travail.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                @guest
+                    <a href="{{ route('register') }}"
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-gray-900/10">
+                        Créer mon profil
+                    </a>
+                    <a href="{{ route('projects.index') }}"
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 px-8 py-3.5 rounded-full text-sm font-bold hover:border-gray-400 transition-all">
+                        Explorer les projets
+                    </a>
+                @endguest
+
+                @auth
+                    @php
+                        $creatif = Auth::user()->creatif;
+                        $profilComplet =
+                            $creatif &&
+                            $creatif->nom &&
+                            $creatif->prenom &&
+                            $creatif->specialite &&
+                            $creatif->localisation &&
+                            $creatif->bio &&
+                            $creatif->portfolio_url &&
+                            $creatif->photo;
+                    @endphp
+                    @if ($profilComplet)
+                        <a href="{{ route('projets.create') }}"
+                            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-gray-900/10">
+                            Partager un projet
+                        </a>
+                    @else
+                        <a href="{{ route('creatifs.edit') }}"
+                            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-gray-900/10">
+                            Compléter mon profil
+                        </a>
+                    @endif
+                    <a href="{{ route('projects.index') }}"
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 px-8 py-3.5 rounded-full text-sm font-bold hover:border-gray-400 transition-all">
+                        Explorer les projets
+                    </a>
+                @endauth
+            </div>
+
+            @if ($creatifCount > 0)
+                <p class="mt-8 text-sm text-gray-400">
+                    Déjà rejoint par <span class="text-gray-900 font-semibold">{{ number_format($creatifCount) }}</span>
+                    créatif{{ $creatifCount > 1 ? 's' : '' }} africain{{ $creatifCount > 1 ? 's' : '' }}
                 </p>
+            @endif
 
-                {{-- Stats rapides --}}
-                <div class="mt-10 flex items-center justify-center gap-8 flex-wrap">
-                    <div class="text-center">
-                        <div class="text-2xl font-extrabold text-white">2 000+</div>
-                        <div class="text-xs text-gray-500 mt-0.5">Créatifs</div>
-                    </div>
-                    <div class="w-px h-8 bg-gray-800"></div>
-                    <div class="text-center">
-                        <div class="text-2xl font-extrabold text-white">5k+</div>
-                        <div class="text-xs text-gray-500 mt-0.5">Projets</div>
-                    </div>
-                    <div class="w-px h-8 bg-gray-800"></div>
-                    <div class="text-center">
-                        <div class="text-2xl font-extrabold text-white">15+</div>
-                        <div class="text-xs text-gray-500 mt-0.5">Pays</div>
-                    </div>
-                    <div class="w-px h-8 bg-gray-800"></div>
-                    <div class="text-center">
-                        <div class="text-2xl font-extrabold text-white">100%</div>
-                        <div class="text-xs text-gray-500 mt-0.5">Africain</div>
-                    </div>
-                </div>
+        </div>
+    </section>
 
-                <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5">
-                    @guest
-                        <a href="{{ route('register') }}"
-                            class="w-full sm:w-auto group relative inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-sm font-bold text-gray-950 shadow-2xl transition-all hover:bg-gray-100 hover:scale-[1.02] active:scale-95">
-                            Join as Talent
-                            <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-                        </a>
-                        <a href="{{ route('projects.index') }}"
-                            class="group flex items-center gap-2 text-sm font-bold text-gray-300 hover:text-white transition-colors py-3">
-                            Explore Talents
-                            <span class="group-hover:translate-x-1 transition-transform">→</span>
-                        </a>
-                    @endguest
-
-                    @auth
-                        <a href="{{ route('projects.index') }}"
-                            class="w-full sm:w-auto rounded-full bg-blue-600 px-10 py-4 text-sm font-bold text-white shadow-lg shadow-blue-900/20 hover:bg-blue-500 transition-all hover:scale-[1.02]">
-                            Explorer les projets
-                        </a>
-                        @php
-                            $creatif = Auth::user()->creatif;
-                            $profilComplet =
-                                $creatif &&
-                                $creatif->nom &&
-                                $creatif->prenom &&
-                                $creatif->specialite &&
-                                $creatif->localisation &&
-                                $creatif->bio &&
-                                $creatif->portfolio_url &&
-                                $creatif->photo;
-                        @endphp
-                        @if ($profilComplet)
-                            <a href="{{ route('projets.create') }}"
-                                class="group flex items-center gap-2 text-sm font-bold text-gray-300 hover:text-white transition-colors py-3">
-                                Partager un projet
-                                <span class="group-hover:translate-x-1 transition-transform">→</span>
-                            </a>
-                        @else
-                            <a href="{{ route('creatifs.edit') }}"
-                                class="group flex items-center gap-2 text-sm font-bold text-amber-400 hover:text-amber-300 transition-colors py-3">
-                                ⚠️ Compléter mon profil
-                                <span class="group-hover:translate-x-1 transition-transform">→</span>
-                            </a>
-                        @endif
-                    @endauth
-                </div>
-
-                <div class="mt-12 flex items-center justify-center gap-3">
-                    <div class="flex -space-x-2">
-                        <div
-                            class="w-8 h-8 rounded-full bg-indigo-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
-                            D</div>
-                        <div
-                            class="w-8 h-8 rounded-full bg-blue-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
-                            A</div>
-                        <div
-                            class="w-8 h-8 rounded-full bg-purple-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
-                            S</div>
-                        <div
-                            class="w-8 h-8 rounded-full bg-pink-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
-                            K</div>
-                        <div
-                            class="w-8 h-8 rounded-full bg-green-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
-                            M</div>
-                    </div>
-                    <p class="text-sm text-gray-400">
-                        Rejoignez <span class="text-white font-semibold">+2 000 créatifs</span> africains
-                    </p>
-                </div>
-
-            </div>
+    {{-- Avantages : un seul espace pour tout le parcours créatif --}}
+    <section class="bg-[#FAFAF8] py-24 px-6 overflow-hidden">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Pourquoi Mefolio</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+                Tout votre parcours créatif, <span class="text-indigo-600">connecté</span>.
+            </h2>
+            <p class="text-slate-500 mt-4 max-w-xl mx-auto">
+                Portfolio, missions, communauté, classement : plus besoin de jongler entre dix outils différents.
+            </p>
         </div>
 
-        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050810] to-transparent z-10"></div>
+        @php
+            $avantages = [
+                ['label' => 'Portfolio', 'href' => route('projects.index'), 'pos' => 'left-[6%] top-[2%]', 'icon' => 'M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-19.5 0v6a2.25 2.25 0 002.25 2.25h15a2.25 2.25 0 002.25-2.25v-6m-19.5 0h19.5M8.25 21v-9'],
+                ['label' => 'Créatifs', 'href' => route('creatifs.index'), 'pos' => 'left-[1%] top-[44%]', 'icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z'],
+                ['label' => 'Missions', 'href' => route('missions.index'), 'pos' => 'left-[6%] top-[86%]', 'icon' => 'M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18a48.55 48.55 0 01-12.756 0C4.537 20.436 3.75 19.494 3.75 18.4v-4.25m16.5 0a2.18 2.18 0 00.75-1.653v-3.32a2.25 2.25 0 00-1.5-2.121l-6.75-2.25a2.25 2.25 0 00-1.5 0l-6.75 2.25a2.25 2.25 0 00-1.5 2.121v3.32c0 .659.281 1.244.75 1.653'],
+                ['label' => 'Classement', 'href' => route('classement.index'), 'pos' => 'right-[6%] top-[2%]', 'icon' => 'M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172'],
+                ['label' => 'Programmes', 'href' => route('hackathons.index'), 'pos' => 'right-[1%] top-[44%]', 'icon' => 'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347M12 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0a50.717 50.717 0 00-2.658-.814 59.906 59.906 0 0110.399-5.84'],
+                ['label' => 'Blog', 'href' => route('blog'), 'pos' => 'right-[6%] top-[86%]', 'icon' => 'M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6 12l-1.5 1.5m1.5-1.5l1.5 1.5m-6-1.5l-1.5 1.5m0 0l-1.5-1.5m1.5 1.5V9'],
+            ];
+        @endphp
+
+        {{-- Diagramme (desktop) --}}
+        <div class="hidden md:block relative max-w-4xl mx-auto aspect-[1100/460]">
+            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1100 460" preserveAspectRatio="none" fill="none">
+                <path d="M150 40 C 400 40, 420 230, 550 230" stroke="#E5E5E0" stroke-width="2" />
+                <path d="M85 208 C 320 208, 400 230, 550 230" stroke="#E5E5E0" stroke-width="2" />
+                <path d="M150 420 C 400 420, 420 230, 550 230" stroke="#E5E5E0" stroke-width="2" />
+                <path d="M950 40 C 700 40, 680 230, 550 230" stroke="#E5E5E0" stroke-width="2" />
+                <path d="M1015 208 C 780 208, 700 230, 550 230" stroke="#E5E5E0" stroke-width="2" />
+                <path d="M950 420 C 700 420, 680 230, 550 230" stroke="#E5E5E0" stroke-width="2" />
+            </svg>
+
+            {{-- Noeud central --}}
+            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                <div class="w-20 h-20 rounded-full bg-gray-900 shadow-xl flex items-center justify-center ring-8 ring-white">
+                    <x-application-logo class="h-9 w-auto text-white" />
+                </div>
+            </div>
+
+            @foreach ($avantages as $a)
+                <a href="{{ $a['href'] }}" class="absolute {{ $a['pos'] }} z-10 flex flex-col items-center gap-2 group">
+                    <span class="w-14 h-14 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-gray-700 group-hover:border-indigo-300 group-hover:text-indigo-600 group-hover:shadow-md transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="{{ $a['icon'] }}" />
+                        </svg>
+                    </span>
+                    <span class="text-xs font-semibold text-gray-600 group-hover:text-indigo-600 transition-colors">{{ $a['label'] }}</span>
+                </a>
+            @endforeach
+        </div>
+
+        {{-- Grille (mobile) --}}
+        <div class="grid grid-cols-3 gap-4 md:hidden max-w-sm mx-auto">
+            @foreach ($avantages as $a)
+                <a href="{{ $a['href'] }}" class="flex flex-col items-center gap-2 group">
+                    <span class="w-14 h-14 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-gray-700 group-hover:border-indigo-300 group-hover:text-indigo-600 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="{{ $a['icon'] }}" />
+                        </svg>
+                    </span>
+                    <span class="text-xs font-semibold text-gray-600 text-center">{{ $a['label'] }}</span>
+                </a>
+            @endforeach
+        </div>
     </section>
 
     <section class="bg-white py-24 px-6">
@@ -188,6 +237,43 @@
                             City & ASIN</span> regroupés au même endroit.
                     </p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- Comment ça marche : section minimaliste --}}
+    <section class="bg-white py-24 px-6 border-t border-gray-100">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-20">
+                <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Comment ça marche</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+                    Trois étapes vers votre carrière créative.
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-8 relative">
+                <div class="hidden md:block absolute top-6 left-[16.5%] right-[16.5%] h-px bg-gray-200"></div>
+
+                @foreach ([
+                    ['num' => '01', 'title' => 'Créez votre profil', 'desc' => 'Renseignez votre spécialité, votre bio et votre portfolio en quelques minutes.'],
+                    ['num' => '02', 'title' => 'Publiez vos projets', 'desc' => 'Montrez votre travail, recevez des likes et des commentaires de la communauté.'],
+                    ['num' => '03', 'title' => 'Soyez repéré', 'desc' => 'Postulez à des missions, grimpez le classement et faites-vous remarquer.'],
+                ] as $step)
+                    <div class="relative text-center md:text-left">
+                        <div class="relative z-10 inline-flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-gray-900 text-sm font-bold text-gray-900 mb-6">
+                            {{ $step['num'] }}
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $step['title'] }}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">{{ $step['desc'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="{{ route(auth()->check() ? 'dashboard' : 'register') }}"
+                    class="inline-flex items-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02]">
+                    Commencer maintenant
+                </a>
             </div>
         </div>
     </section>
@@ -285,15 +371,30 @@
                                 </div>
                             </a>
 
-                            <button
-                                class="flex items-center gap-1.5 px-2 py-1 text-gray-400 hover:text-red-500 transition-all duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                                <span class="text-[11px] font-bold">24</span>
-                            </button>
+                            @auth
+                                <form method="POST" action="{{ route('projects.like', $project) }}">
+                                    @csrf
+                                    <button
+                                        class="flex items-center gap-1.5 px-2 py-1 transition-all duration-300 {{ $project->isLikedBy(auth()->user()) ? 'text-red-500' : 'text-gray-400 hover:text-red-500' }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
+                                            fill="{{ $project->isLikedBy(auth()->user()) ? 'currentColor' : 'none' }}"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                        </svg>
+                                        <span class="text-[11px] font-bold">{{ $project->likes->count() }}</span>
+                                    </button>
+                                </form>
+                            @else
+                                <div class="flex items-center gap-1.5 px-2 py-1 text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                    <span class="text-[11px] font-bold">{{ $project->likes->count() }}</span>
+                                </div>
+                            @endauth
                         </div>
                     </article>
                 @endforeach
@@ -311,7 +412,7 @@
                         <span class="text-blue-600">créatifs</span>
                     </h2>
 
-                    <div class="mt-'' flex gap-6">
+                    <div class="mt-4 flex gap-6">
                         <p class="mt-3 text-gray-500 dark:text-gray-400 font-light max-w-md">
                             L'élite de notre communauté. Des esprits audacieux qui repoussent les limites du possible.
                         </p>
@@ -408,75 +509,69 @@
 
     </section>
 
-    <section class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-6">
-            <div class="max-w-xl">
-                <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-                    L'expérience <span class="text-indigo-600">MeFolio</span>
-                </h2>
-                <p class="text-slate-500 mt-3 text-lg">
-                    Ce que disent les talents qui font bouger les lignes.
-                </p>
-            </div>
+    @if ($testimonials->count())
+        <section class="py-24 px-6 max-w-6xl mx-auto">
+            <div x-data="{ i: 0, total: {{ $testimonials->count() }} }" class="bg-[#FAFAF8] rounded-[2rem] overflow-hidden grid grid-cols-1 md:grid-cols-2">
 
-            <a href="#"
-                class="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-indigo-600 transition-all duration-300">
-                Partager mon avis
-            </a>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-            <div
-                class="bg-slate-50 p-8 rounded-3xl border border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-xl hover:shadow-indigo-50/50 transition-all duration-500">
-                <div class="flex items-center gap-3 mb-6">
-                    <img src="https://storage.googleapis.com/monecocmsfiles/thumbnail_Reussir_en_tant_que_freelance_en_Afrique_1f1130c913/thumbnail_Reussir_en_tant_que_freelance_en_Afrique_1f1130c913.jpg"
-                        class="w-10 h-10 rounded-xl" alt="Koffi Mensah">
+                {{-- Colonne gauche --}}
+                <div class="p-10 md:p-14 flex flex-col justify-between">
                     <div>
-                        <h4 class="text-sm font-bold text-slate-900">Koffi Mensah</h4>
-                        <p class="text-[10px] text-indigo-600 font-black uppercase tracking-widest">Fullstack Dev</p>
+                        <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-4">Témoignages</p>
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight leading-snug">
+                            Des histoires de créatifs qui ont trouvé leur visibilité, avancé plus vite et
+                            travaillé avec plus de sérénité.
+                        </h2>
                     </div>
-                </div>
-                <p class="text-slate-600 leading-relaxed text-sm">
-                    "Grâce à <span class="font-bold text-slate-900">MeFolio</span>, mes projets sont présentés avec le
-                    prestige qu'ils méritent. C'est l'outil qui manquait à notre écosystème."
-                </p>
-            </div>
 
-            <div
-                class="bg-slate-50 p-8 rounded-3xl border border-transparent hover:border-purple-100 hover:bg-white hover:shadow-xl hover:shadow-purple-50/50 transition-all duration-500">
-                <div class="flex items-center gap-3 mb-6">
-                    <img src="https://nexlance.net/assets/uploads/media-uploader/IMAGE%20011751291135.jpg"
-                        class="w-10 h-10 rounded-xl" alt="Aïcha Diallo">
-                    <div>
-                        <h4 class="text-sm font-bold text-slate-900">Aïcha Diallo</h4>
-                        <p class="text-[10px] text-purple-600 font-black uppercase tracking-widest">UX Designer</p>
-                    </div>
+                    @if ($testimonials->count() > 1)
+                        <div class="flex items-center gap-3 mt-10">
+                            <button @click="i = (i - 1 + total) % total"
+                                class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-gray-900 hover:text-gray-900 transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                </svg>
+                            </button>
+                            <button @click="i = (i + 1) % total"
+                                class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-gray-900 hover:text-gray-900 transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </button>
+                        </div>
+                    @endif
                 </div>
-                <p class="text-slate-600 leading-relaxed text-sm">
-                    "Une visibilité immédiate auprès des recruteurs locaux. L’interface est une masterclass de
-                    minimalisme. Je recommande sans hésiter !"
-                </p>
-            </div>
 
-            <div
-                class="bg-slate-50 p-8 rounded-3xl border border-transparent hover:border-amber-100 hover:bg-white hover:shadow-xl hover:shadow-amber-50/50 transition-all duration-500">
-                <div class="flex items-center gap-3 mb-6">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThjfdhNte8pAfRXIZjkMjczmSn8icmhUiCtA&s"
-                        class="w-10 h-10 rounded-xl" alt="Jean H.">
-                    <div>
-                        <h4 class="text-sm font-bold text-slate-900">Jean H.</h4>
-                        <p class="text-[10px] text-amber-600 font-black uppercase tracking-widest">Tech Student</p>
-                    </div>
+                {{-- Colonne droite : citation active --}}
+                <div class="bg-white p-10 md:p-14 flex flex-col justify-between border-t md:border-t-0 md:border-l border-gray-100">
+                    @foreach ($testimonials as $index => $testimonial)
+                        <div x-show="i === {{ $index }}" x-cloak x-transition.opacity>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">
+                                {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }} / {{ str_pad($testimonials->count(), 2, '0', STR_PAD_LEFT) }}
+                            </p>
+                            <p class="text-2xl md:text-[28px] font-bold text-slate-900 leading-tight mb-8">
+                                {{ $testimonial->quote }}
+                            </p>
+                            <div class="flex items-center gap-3">
+                                @if ($testimonial->photo)
+                                    <img src="{{ $testimonial->photo }}" class="w-10 h-10 rounded-full object-cover" alt="{{ $testimonial->name }}">
+                                @else
+                                    <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-bold">
+                                        {{ strtoupper(substr($testimonial->name, 0, 1)) }}
+                                    </div>
+                                @endif
+                                <div>
+                                    <p class="text-sm font-bold text-slate-900">{{ $testimonial->name }}</p>
+                                    @if ($testimonial->role)
+                                        <p class="text-xs text-gray-400">{{ $testimonial->role }}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <p class="text-slate-600 leading-relaxed text-sm">
-                    "C’est devenu mon CV numérique ultime. Idéal pour sortir du lot et monétiser mes premières missions
-                    en freelance."
-                </p>
             </div>
-
-        </div>
-    </section>
+        </section>
+    @endif
 
     <section class="py-24 px-6 max-w-4xl mx-auto">
         <div class="text-center mb-16">
@@ -591,7 +686,7 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center gap-6">
-                    <a href="#"
+                    <a href="{{ route(auth()->check() ? 'dashboard' : 'register') }}"
                         class="group inline-flex items-center justify-center px-10 py-3 font-bold text-white bg-indigo-600 rounded-full md:rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl">
                         Créer mon portfolio
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -606,9 +701,6 @@
             </div>
         </div>
     </section>
-
-
-    @extends('layouts.footer')
 
 
 </x-app-layout>

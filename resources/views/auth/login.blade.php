@@ -19,7 +19,7 @@
                 </div>
 
                 <h2 class="text-5xl xl:text-5xl font-black text-white leading-relaxed mb-4">
-                    Bon retour parmi <br> nous. 👋
+                    Bon retour parmi <br> nous. 
                 </h2>
 
                 <p class="text-gray-400 text-base leading-relaxed max-w-sm mb-10">
@@ -38,7 +38,7 @@
                         </div>
                         <div>
                             <p class="text-white text-sm font-bold">Kofi A.</p>
-                            <p class="text-gray-500 text-xs text-indigo-400/80">Designer · Accra, Ghana 🇬🇭</p>
+                            <p class="text-gray-500 text-xs text-indigo-400/80">Designer · Accra, Ghana </p>
                         </div>
                     </div>
                 </div>
@@ -48,8 +48,9 @@
         <div class="flex-1 lg:w-1/2 flex flex-col justify-center px-6 py-4 sm:px-12 lg:px-20 xl:px-32 bg-white">
             <div class="w-full max-w-md mx-auto">
 
-                <a href="{{ route('home') }}" class="inline-block mb-4 transition-transform hover:scale-105">
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-4 transition-transform hover:scale-105">
                     <x-application-logo class="h-9 w-auto text-indigo-600" />
+                    <span class="font-bold text-xl text-gray-900">Mefolio</span>
                 </a>
 
                 <h1 class="text-3xl font-black text-gray-900 mb-2">Se connecter</h1>

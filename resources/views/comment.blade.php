@@ -12,13 +12,13 @@
     @if (session('success'))
         <div
             class="mb-6 flex items-center gap-3 p-4 bg-green-50 border border-green-100 text-green-700 rounded-2xl text-sm font-medium">
-            ✅ {{ session('success') }}
+             {{ session('success') }}
         </div>
     @endif
     @if (session('error'))
         <div
             class="mb-6 flex items-center gap-3 p-4 bg-red-50 border border-red-100 text-red-700 rounded-2xl text-sm font-medium">
-            ⚠️ {{ session('error') }}
+             {{ session('error') }}
         </div>
     @endif
 

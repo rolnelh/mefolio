@@ -49,7 +49,7 @@
                             <label class="block text-xs font-bold text-gray-600 mb-1.5">Catégorie</label>
                             <select name="category"
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                                @foreach (['Design' => '🎨 Design / UI-UX', 'Web' => '💻 Développement Web', 'Mobile' => '📱 App Mobile', 'Photo' => '📸 Photo', 'Video' => '🎥 Vidéo', 'Branding' => '🏷️ Branding', 'Autre' => '🔧 Autre'] as $val => $label)
+                                @foreach (['Design' => 'Design / UI-UX', 'Web' => 'Développement Web', 'Mobile' => 'App Mobile', 'Photo' => 'Photo', 'Video' => 'Vidéo', 'Branding' => 'Branding', 'Autre' => 'Autre'] as $val => $label)
                                     <option value="{{ $val }}"
                                         {{ ($project->category ?? '') === $val ? 'selected' : '' }}>{{ $label }}
                                     </option>
@@ -71,13 +71,11 @@
                     <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Liens</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="relative">
-                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm">🌐</span>
                             <input type="url" name="lien_site" value="{{ old('lien_site', $project->lien_site) }}"
                                 placeholder="https://mon-projet.com"
                                 class="w-full pl-9 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                         </div>
                         <div class="relative">
-                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm">⚙️</span>
                             <input type="url" name="lien_github"
                                 value="{{ old('lien_github', $project->lien_github) }}"
                                 placeholder="https://github.com/..."
