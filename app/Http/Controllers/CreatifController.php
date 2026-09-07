@@ -96,9 +96,10 @@ class CreatifController extends Controller
 
     public function edit()
     {
-        $creatif = auth()->user()->creatif ?? new \App\Models\Creatif();
-
-        return view('creatifs.edit', compact('creatif'));
+        // Le formulaire de profil vit désormais directement dans le tableau
+        // de bord (onglet "Mon profil"), pour rester à côté de la navigation
+        // au lieu de naviguer vers une page séparée.
+        return redirect()->route('dashboard', ['tab' => 'profil']);
     }
 
     public function update(Request $request)
@@ -149,7 +150,7 @@ class CreatifController extends Controller
             ));
         }
 
-        return redirect()->route('dashboard')
+        return redirect()->route('dashboard', ['tab' => 'profil'])
             ->with('success', 'Profil mis à jour avec succès !');
     }
 

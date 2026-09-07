@@ -15,7 +15,7 @@
         [
             'key' => 'profil',
             'label' => 'Mon profil',
-            'href' => route('creatifs.edit'),
+            'href' => route('dashboard', ['tab' => 'profil']),
             'count' => null,
             'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />',
         ],
@@ -71,39 +71,91 @@
     ];
 @endphp
 
-<div class="bg-[#15171c] rounded-2xl p-3 shadow-xl shadow-gray-900/10">
-    <div class="flex items-center gap-2.5 px-3 pt-2 pb-4">
-        <x-application-logo class="h-6 w-auto text-white" />
-        <div class="min-w-0">
-            <p class="text-white text-sm font-bold leading-none truncate">Mefolio</p>
-            <p class="text-white/40 text-[10px] font-semibold uppercase tracking-wider mt-1">Espace créatif</p>
-        </div>
-    </div>
+<div x-data="{ open: false }" @keydown.escape.window="open = false" class="relative flex-shrink-0">
 
-    <nav class="space-y-1">
+    {{-- Rail : icônes seules, toujours visible --}}
+    <div class="w-16 bg-[#15171c] rounded-2xl p-2.5 shadow-xl shadow-gray-900/10 flex flex-col items-center gap-1">
+        <div class="mb-1 pb-2.5 border-b border-white/5 w-full flex justify-center">
+            <x-application-logo class="h-6 w-auto text-white" />
+        </div>
+
+        <button type="button" @click="open = true" title="Ouvrir le menu"
+            class="w-11 h-11 flex items-center justify-center rounded-xl text-white/40 hover:bg-white/5 hover:text-white/80 transition-all mb-1">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+            </svg>
+        </button>
+
         @foreach ($navItems as $item)
-            <a href="{{ $item['href'] }}"
-                class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all
-                    {{ $active === $item['key'] ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/80' }}">
-                <svg class="w-[18px] h-[18px] flex-shrink-0 {{ $active === $item['key'] ? 'text-indigo-400' : 'text-white/40' }}"
+            <a href="{{ $item['href'] }}" title="{{ $item['label'] }}"
+                class="relative w-11 h-11 flex items-center justify-center rounded-xl transition-all
+                    {{ $active === $item['key'] ? 'bg-white/10' : 'hover:bg-white/5' }}">
+                <svg class="w-[18px] h-[18px] {{ $active === $item['key'] ? 'text-indigo-400' : 'text-white/40' }}"
                     fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
                     {!! $item['icon'] !!}
                 </svg>
-                <span class="text-sm font-semibold flex-1 truncate">{{ $item['label'] }}</span>
-                @if ($item['count'] !== null)
-                    <span
-                        class="text-[11px] font-bold px-2 py-0.5 rounded-full
-                            {{ $active === $item['key'] ? 'bg-white/15 text-white' : 'bg-white/5 text-white/40' }}">
-                        {{ $item['count'] }}
-                    </span>
+                @if ($item['count'])
+                    <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-indigo-400 rounded-full"></span>
                 @endif
             </a>
         @endforeach
-    </nav>
+    </div>
 
-    <div class="mt-3 pt-3 border-t border-white/5 px-3">
-        <span class="inline-flex items-center gap-1.5 text-white/25 text-[11px] font-semibold">
-            Promotion de profil — bientôt disponible
-        </span>
+    {{-- Fond semi-transparent quand le menu est ouvert --}}
+    <div x-show="open" x-cloak x-transition.opacity @click="open = false"
+        class="fixed inset-0 z-40 bg-gray-900/30"></div>
+
+    {{-- Menu déplié : icônes + labels, superposé au-dessus du rail --}}
+    <div x-show="open" x-cloak @click.outside="open = false"
+        x-transition:enter="transition ease-out duration-150"
+        x-transition:enter-start="opacity-0 -translate-x-2"
+        x-transition:enter-end="opacity-100 translate-x-0"
+        x-transition:leave="transition ease-in duration-100"
+        x-transition:leave-start="opacity-100 translate-x-0"
+        x-transition:leave-end="opacity-0 -translate-x-2"
+        class="absolute top-0 left-0 z-50 w-64 bg-[#15171c] rounded-2xl p-3 shadow-2xl shadow-gray-900/30">
+
+        <div class="flex items-center justify-between gap-2.5 px-3 pt-2 pb-4">
+            <div class="flex items-center gap-2.5 min-w-0">
+                <x-application-logo class="h-6 w-auto text-white" />
+                <div class="min-w-0">
+                    <p class="text-white text-sm font-bold leading-none truncate">Mefolio</p>
+                    <p class="text-white/40 text-[10px] font-semibold uppercase tracking-wider mt-1">Espace créatif</p>
+                </div>
+            </div>
+            <button type="button" @click="open = false" title="Fermer le menu"
+                class="text-white/40 hover:text-white p-1 rounded-lg hover:bg-white/5 transition-all flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <nav class="space-y-1">
+            @foreach ($navItems as $item)
+                <a href="{{ $item['href'] }}"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all
+                        {{ $active === $item['key'] ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/80' }}">
+                    <svg class="w-[18px] h-[18px] flex-shrink-0 {{ $active === $item['key'] ? 'text-indigo-400' : 'text-white/40' }}"
+                        fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                        {!! $item['icon'] !!}
+                    </svg>
+                    <span class="text-sm font-semibold flex-1 truncate">{{ $item['label'] }}</span>
+                    @if ($item['count'] !== null)
+                        <span
+                            class="text-[11px] font-bold px-2 py-0.5 rounded-full
+                                {{ $active === $item['key'] ? 'bg-white/15 text-white' : 'bg-white/5 text-white/40' }}">
+                            {{ $item['count'] }}
+                        </span>
+                    @endif
+                </a>
+            @endforeach
+        </nav>
+
+        <div class="mt-3 pt-3 border-t border-white/5 px-3">
+            <span class="inline-flex items-center gap-1.5 text-white/25 text-[11px] font-semibold">
+                Promotion de profil — bientôt disponible
+            </span>
+        </div>
     </div>
 </div>
