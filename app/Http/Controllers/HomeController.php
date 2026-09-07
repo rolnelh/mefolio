@@ -20,7 +20,7 @@ class HomeController extends Controller
         ->orderBy('created_at', 'desc')
         ->paginate(8);
 
-    $creatifs = Creatif::where('is_paused', false)->orderBy('created_at', 'desc')->take(5)->get();
+    $creatifs = Creatif::where('is_paused', false)->orderBy('created_at', 'desc')->take(8)->get();
     $creatifCount = Creatif::where('is_paused', false)->count();
 
     $testimonials = Testimonial::active()->orderBy('position')->orderBy('created_at', 'desc')->get();
