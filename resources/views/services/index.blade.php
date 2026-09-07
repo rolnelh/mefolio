@@ -35,10 +35,9 @@
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
-            @foreach ([['emoji' => '🎨', 'titre' => 'Design & Identité', 'desc' => 'Logo, charte graphique, branding'], ['emoji' => '💻', 'titre' => 'Développement Web', 'desc' => 'Sites, apps, landing pages'], ['emoji' => '📸', 'titre' => 'Photographie', 'desc' => 'Portrait, produit, événement'], ['emoji' => '🎥', 'titre' => 'Vidéo & Montage', 'desc' => 'Publicité, reels, motion'], ['emoji' => '✍️', 'titre' => 'Rédaction', 'desc' => 'Contenu, copywriting, SEO'], ['emoji' => '📱', 'titre' => 'Réseaux Sociaux', 'desc' => 'Gestion, stratégie, contenu'], ['emoji' => '🎵', 'titre' => 'Audio & Musique', 'desc' => 'Jingle, podcast, mixage'], ['emoji' => '🖨️', 'titre' => 'Print & Affiches', 'desc' => 'Flyers, kakémono, packaging']] as $cat)
+            @foreach ([['titre' => 'Design & Identité', 'desc' => 'Logo, charte graphique, branding'], ['titre' => 'Développement Web', 'desc' => 'Sites, apps, landing pages'], ['titre' => 'Photographie', 'desc' => 'Portrait, produit, événement'], ['titre' => 'Vidéo & Montage', 'desc' => 'Publicité, reels, motion'], ['titre' => 'Rédaction', 'desc' => 'Contenu, copywriting, SEO'], ['titre' => 'Réseaux Sociaux', 'desc' => 'Gestion, stratégie, contenu'], ['titre' => 'Audio & Musique', 'desc' => 'Jingle, podcast, mixage'], ['titre' => 'Print & Affiches', 'desc' => 'Flyers, kakémono, packaging']] as $cat)
                 <div
                     class="group bg-white border border-gray-100 rounded-2xl p-5 hover:border-indigo-200 hover:shadow-lg transition-all cursor-default">
-                    <div class="text-3xl mb-3">{{ $cat['emoji'] }}</div>
                     <h3 class="font-bold text-gray-900 text-sm mb-1">{{ $cat['titre'] }}</h3>
                     <p class="text-xs text-gray-400">{{ $cat['desc'] }}</p>
                     <span
@@ -52,9 +51,8 @@
                 <h2 class="text-2xl font-black text-gray-900">Comment ça va fonctionner</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                @foreach ([['num' => '01', 'titre' => 'Trouvez un talent', 'desc' => 'Parcourez les profils et sélectionnez le créatif qui correspond à votre besoin.', 'emoji' => '🔍'], ['num' => '02', 'titre' => 'Commandez', 'desc' => 'Définissez votre projet, vos délais et votre budget directement sur la plateforme.', 'emoji' => '📋'], ['num' => '03', 'titre' => 'Collaborez', 'desc' => 'Échangez, suivez l\'avancement et donnez vos retours en temps réel.', 'emoji' => '💬'], ['num' => '04', 'titre' => 'Payez en Mobile Money', 'desc' => 'Réglez en toute sécurité via MTN, Moov, Wave ou tout autre moyen local.', 'emoji' => '📲']] as $step)
+                @foreach ([['num' => '01', 'titre' => 'Trouvez un talent', 'desc' => 'Parcourez les profils et sélectionnez le créatif qui correspond à votre besoin.'], ['num' => '02', 'titre' => 'Commandez', 'desc' => 'Définissez votre projet, vos délais et votre budget directement sur la plateforme.'], ['num' => '03', 'titre' => 'Collaborez', 'desc' => 'Échangez, suivez l\'avancement et donnez vos retours en temps réel.'], ['num' => '04', 'titre' => 'Payez en Mobile Money', 'desc' => 'Réglez en toute sécurité via MTN, Moov, Wave ou tout autre moyen local.']] as $step)
                     <div class="text-center">
-                        <div class="text-3xl mb-3">{{ $step['emoji'] }}</div>
                         <div class="text-xs font-black text-indigo-500 mb-2 tracking-widest">{{ $step['num'] }}</div>
                         <h3 class="font-bold text-gray-900 mb-2">{{ $step['titre'] }}</h3>
                         <p class="text-sm text-gray-500 leading-relaxed">{{ $step['desc'] }}</p>
@@ -73,18 +71,17 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ([
-        ['titre' => 'Création de logo professionnel', 'cat' => 'Design', 'prix' => 'À partir de 25 000 FCFA', 'delai' => '3 jours', 'note' => '4.9', 'emoji' => '🎨', 'vendeur' => 'Kofi A.', 'pays' => '🇧🇯'],
-        ['titre' => 'Site vitrine moderne & responsive', 'cat' => 'Dev Web', 'prix' => 'À partir de 80 000 FCFA', 'delai' => '7 jours', 'note' => '5.0', 'emoji' => '💻', 'vendeur' => 'Ama K.', 'pays' => '🇨🇮'],
-        ['titre' => 'Shooting photo produits', 'cat' => 'Photo', 'prix' => 'À partir de 30 000 FCFA', 'delai' => '2 jours', 'note' => '4.8', 'emoji' => '📸', 'vendeur' => 'Moussa D.', 'pays' => '🇸🇳'],
-        ['titre' => 'Montage vidéo publicitaire', 'cat' => 'Vidéo', 'prix' => 'À partir de 40 000 FCFA', 'delai' => '5 jours', 'note' => '4.7', 'emoji' => '🎥', 'vendeur' => 'Fatou B.', 'pays' => '🇲🇱'],
-        ['titre' => 'Gestion réseaux sociaux 1 mois', 'cat' => 'Social Media', 'prix' => 'À partir de 50 000 FCFA', 'delai' => '30 jours', 'note' => '4.9', 'emoji' => '📱', 'vendeur' => 'Yemi O.', 'pays' => '🇳🇬'],
-        ['titre' => 'Charte graphique complète', 'cat' => 'Branding', 'prix' => 'À partir de 60 000 FCFA', 'delai' => '5 jours', 'note' => '5.0', 'emoji' => '🖌️', 'vendeur' => 'Adjoa M.', 'pays' => '🇬🇭'],
+        ['titre' => 'Création de logo professionnel', 'cat' => 'Design', 'prix' => 'À partir de 25 000 FCFA', 'delai' => '3 jours', 'note' => '4.9', 'vendeur' => 'Kofi A.'],
+        ['titre' => 'Site vitrine moderne & responsive', 'cat' => 'Dev Web', 'prix' => 'À partir de 80 000 FCFA', 'delai' => '7 jours', 'note' => '5.0', 'vendeur' => 'Ama K.'],
+        ['titre' => 'Shooting photo produits', 'cat' => 'Photo', 'prix' => 'À partir de 30 000 FCFA', 'delai' => '2 jours', 'note' => '4.8', 'vendeur' => 'Moussa D.'],
+        ['titre' => 'Montage vidéo publicitaire', 'cat' => 'Vidéo', 'prix' => 'À partir de 40 000 FCFA', 'delai' => '5 jours', 'note' => '4.7', 'vendeur' => 'Fatou B.'],
+        ['titre' => 'Gestion réseaux sociaux 1 mois', 'cat' => 'Social Media', 'prix' => 'À partir de 50 000 FCFA', 'delai' => '30 jours', 'note' => '4.9', 'vendeur' => 'Yemi O.'],
+        ['titre' => 'Charte graphique complète', 'cat' => 'Branding', 'prix' => 'À partir de 60 000 FCFA', 'delai' => '5 jours', 'note' => '5.0', 'vendeur' => 'Adjoa M.'],
     ] as $service)
                     <div
                         class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all group">
                         <div
-                            class="h-40 bg-gradient-to-br from-indigo-50 to-violet-50 flex items-center justify-center text-6xl relative">
-                            {{ $service['emoji'] }}
+                            class="h-40 bg-gradient-to-br from-indigo-50 to-violet-50 flex items-center justify-center relative">
                             <span
                                 class="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest text-indigo-500 bg-indigo-50 border border-indigo-100 px-2 py-1 rounded-lg">{{ $service['cat'] }}</span>
                             <span
@@ -97,9 +94,8 @@
                                     class="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600">
                                     {{ substr($service['vendeur'], 0, 1) }}
                                 </div>
-                                <span class="text-sm text-gray-600 font-medium">{{ $service['vendeur'] }}
-                                    {{ $service['pays'] }}</span>
-                                <span class="ml-auto text-xs text-amber-500 font-bold">⭐ {{ $service['note'] }}</span>
+                                <span class="text-sm text-gray-600 font-medium">{{ $service['vendeur'] }}</span>
+                                <span class="ml-auto text-xs text-amber-500 font-bold">{{ $service['note'] }}</span>
                             </div>
                             <div class="flex items-center justify-between pt-4 border-t border-gray-50">
                                 <div>

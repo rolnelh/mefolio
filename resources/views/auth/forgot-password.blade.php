@@ -49,7 +49,7 @@
                 @if (session('status'))
                     <div
                         class="mb-6 flex items-center gap-3 p-4 bg-green-50 border border-green-200 text-green-700 rounded-2xl text-sm font-semibold">
-                        ✅ {{ session('status') }}
+                         {{ session('status') }}
                     </div>
                 @endif
 

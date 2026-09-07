@@ -28,7 +28,7 @@
 
                 <div
                     class="inline-flex items-center rounded-full bg-blue-500/5 px-4 py-1.5 text-xs font-semibold text-blue-400 ring-1 ring-inset ring-blue-500/20 mb-10 backdrop-blur-md">
-                    <span class="mr-2">🌍</span> The first African platform for creative talent
+                    The first African platform for creative talent
                 </div>
 
                 <h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-7xl leading-[1.05]">
@@ -111,7 +111,7 @@
                         @else
                             <a href="{{ route('creatifs.edit') }}"
                                 class="group flex items-center gap-2 text-sm font-bold text-amber-400 hover:text-amber-300 transition-colors py-3">
-                                ⚠️ Compléter mon profil
+                                 Compléter mon profil
                                 <span class="group-hover:translate-x-1 transition-transform">→</span>
                             </a>
                         @endif
@@ -419,10 +419,17 @@
                 </p>
             </div>
 
-            <a href="#"
-                class="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-indigo-600 transition-all duration-300">
-                Partager mon avis
-            </a>
+            @auth
+                <a href="{{ route('dashboard') }}"
+                    class="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-indigo-600 transition-all duration-300">
+                    Partager mon avis
+                </a>
+            @else
+                <a href="{{ route('register') }}"
+                    class="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-indigo-600 transition-all duration-300">
+                    Partager mon avis
+                </a>
+            @endauth
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -591,7 +598,7 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center gap-6">
-                    <a href="#"
+                    <a href="{{ route(auth()->check() ? 'dashboard' : 'register') }}"
                         class="group inline-flex items-center justify-center px-10 py-3 font-bold text-white bg-indigo-600 rounded-full md:rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl">
                         Créer mon portfolio
                         <svg xmlns="http://www.w3.org/2000/svg"

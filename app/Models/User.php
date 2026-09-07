@@ -15,6 +15,19 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * Rôles disponibles pour un utilisateur.
+     */
+    public const ROLE_CREATIF = 'creatif';
+    public const ROLE_CLIENT = 'client';
+    public const ROLE_ADMIN = 'admin';
+
+    public const ROLES = [
+        self::ROLE_CREATIF,
+        self::ROLE_CLIENT,
+        self::ROLE_ADMIN,
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -23,6 +36,15 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'role',
+        'avatar',
+        'bio',
+        'location',
+        'social_links',
+        'is_banned',
+        'payment_methods',
+        'payment_phone_prefix',
+        'payment_phone',
     ];
 
     /**
@@ -43,17 +65,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'social_links' => 'array',
+        'is_banned' => 'boolean',
+        'payment_methods' => 'array',
     ];
 
     public function skills(): BelongsToMany
     {
         return $this->belongsToMany(Skill::class);
-    }
-
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
     }
 
     // Pour récupérer tous les projets d'un utilisateur
@@ -77,5 +96,38 @@ class User extends Authenticatable
         return $this->hasMany(Project::class, 'user_id');
     }
 
+    public function missions()
+    {
+        return $this->hasMany(Mission::class, 'user_id');
+    }
 
+    public function missionApplications()
+    {
+        return $this->hasMany(MissionApplication::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'author_id');
+    }
+
+    public function talentNominations()
+    {
+        return $this->hasMany(TalentNomination::class, 'nominated_by');
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isCreatif(): bool
+    {
+        return $this->role === self::ROLE_CREATIF;
+    }
+
+    public function isClient(): bool
+    {
+        return $this->role === self::ROLE_CLIENT;
+    }
 }

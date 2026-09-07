@@ -63,6 +63,27 @@
                         </div>
                         <h1 class="text-3xl sm:text-4xl font-black text-gray-900 leading-tight">{{ $project->title }}
                         </h1>
+
+                        <div class="flex items-center gap-3 mt-4">
+                            @auth
+                                <form method="POST" action="{{ route('projects.like', $project) }}">
+                                    @csrf
+                                    <button type="submit"
+                                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-100 text-sm font-semibold transition-all {{ $project->isLikedBy(auth()->user()) ? 'bg-red-50 text-red-600 border-red-100' : 'bg-white text-gray-600 hover:border-red-200 hover:text-red-500' }}">
+                                        <svg class="w-4 h-4" fill="{{ $project->isLikedBy(auth()->user()) ? 'currentColor' : 'none' }}"
+                                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                        </svg>
+                                        {{ $project->likes->count() }} j'aime
+                                    </button>
+                                </form>
+                            @else
+                                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-100 text-sm font-semibold text-gray-500">
+                                    {{ $project->likes->count() }} j'aime
+                                </span>
+                            @endauth
+                        </div>
                     </div>
 
                     {{-- Galerie média --}}
@@ -253,7 +274,7 @@
                                             {{ $project->creatif->specialite }}</p>
                                     @endif
                                     @if ($project->creatif->localisation)
-                                        <p class="text-xs text-gray-400 mt-0.5">📍
+                                        <p class="text-xs text-gray-400 mt-0.5">
                                             {{ $project->creatif->localisation }}</p>
                                     @endif
                                 </div>
@@ -276,8 +297,8 @@
                             </a>
 
                             @auth
-                                @if (Auth::user()->creatif?->id !== $project->creatif->id)
-                                    <button
+                                @if (Auth::user()->creatif?->id !== $project->creatif->id && $project->creatif->user?->email)
+                                    <a href="mailto:{{ $project->creatif->user->email }}?subject={{ urlencode('À propos de votre projet « ' . $project->title . ' » sur Mefolio') }}"
                                         class="flex items-center justify-center gap-2 w-full py-2.5 mt-2 bg-gray-50 hover:bg-gray-100 text-gray-700 font-semibold text-sm rounded-2xl transition-all border border-gray-100">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                                             viewBox="0 0 24 24">
@@ -285,7 +306,7 @@
                                                 d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                         </svg>
                                         Contacter
-                                    </button>
+                                    </a>
                                 @endif
                             @endauth
                         </div>

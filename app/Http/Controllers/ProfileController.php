@@ -38,6 +38,27 @@ class ProfileController extends Controller
     }
 
     /**
+     * Update the user's preferred payment methods.
+     */
+    public function updatePaymentMethods(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'paiements' => 'nullable|array',
+            'paiements.*' => 'string',
+            'payment_phone_prefix' => 'nullable|string|max:10',
+            'payment_phone' => 'nullable|string|max:30',
+        ]);
+
+        $request->user()->update([
+            'payment_methods' => $validated['paiements'] ?? [],
+            'payment_phone_prefix' => $validated['payment_phone_prefix'] ?? null,
+            'payment_phone' => $validated['payment_phone'] ?? null,
+        ]);
+
+        return back()->with('success', 'Vos moyens de paiement ont été enregistrés.');
+    }
+
+    /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse

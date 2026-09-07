@@ -45,7 +45,7 @@
                 <button @click="open = !open" @click.outside="open = false"
                     :class="domaine ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-700 border-gray-200'"
                     class="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold hover:border-indigo-300 transition-all">
-                    🎯 Domaine
+                     Domaine
                     <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
                         stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -54,7 +54,7 @@
                 <div x-show="open" x-transition:enter="transition ease-out duration-150"
                     x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                     class="absolute top-full left-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 z-40">
-                    @foreach ([['val' => 'design', 'label' => '🎨 Design & UI/UX'], ['val' => 'dev-web', 'label' => '💻 Développement Web'], ['val' => 'dev-mobile', 'label' => '📱 Développement Mobile'], ['val' => 'photo', 'label' => '📸 Photographie'], ['val' => 'video', 'label' => '🎥 Vidéo & Montage'], ['val' => 'marketing', 'label' => '📣 Marketing Digital'], ['val' => 'redaction', 'label' => '✍️ Rédaction'], ['val' => 'audio', 'label' => '🎵 Audio & Musique']] as $opt)
+                    @foreach ([['val' => 'design', 'label' => ' Design & UI/UX'], ['val' => 'dev-web', 'label' => ' Développement Web'], ['val' => 'dev-mobile', 'label' => ' Développement Mobile'], ['val' => 'photo', 'label' => ' Photographie'], ['val' => 'video', 'label' => ' Vidéo & Montage'], ['val' => 'marketing', 'label' => ' Marketing Digital'], ['val' => 'redaction', 'label' => ' Rédaction'], ['val' => 'audio', 'label' => ' Audio & Musique']] as $opt)
                         <button
                             @click="domaine = (domaine === '{{ $opt['val'] }}' ? '' : '{{ $opt['val'] }}'); open = false"
                             :class="domaine === '{{ $opt['val'] }}' ? 'bg-indigo-50 text-indigo-600' :
@@ -75,7 +75,7 @@
                 <button @click="open = !open" @click.outside="open = false"
                     :class="pays ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-700 border-gray-200'"
                     class="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold hover:border-indigo-300 transition-all">
-                    🌍 Pays
+                     Pays
                     <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
                         stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -84,7 +84,7 @@
                 <div x-show="open" x-transition:enter="transition ease-out duration-150"
                     x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                     class="absolute top-full left-0 mt-2 w-44 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 z-40">
-                    @foreach ([['val' => 'bj', 'label' => '🇧🇯 Bénin'], ['val' => 'sn', 'label' => '🇸🇳 Sénégal'], ['val' => 'ci', 'label' => '🇨🇮 Côte d\'Ivoire'], ['val' => 'gh', 'label' => '🇬🇭 Ghana'], ['val' => 'ml', 'label' => '🇲🇱 Mali'], ['val' => 'ng', 'label' => '🇳🇬 Nigeria'], ['val' => 'cm', 'label' => '🇨🇲 Cameroun']] as $opt)
+                    @foreach ([['val' => 'bj', 'label' => ' Bénin'], ['val' => 'sn', 'label' => ' Sénégal'], ['val' => 'ci', 'label' => ' Côte d\'Ivoire'], ['val' => 'gh', 'label' => ' Ghana'], ['val' => 'ml', 'label' => ' Mali'], ['val' => 'ng', 'label' => ' Nigeria'], ['val' => 'cm', 'label' => ' Cameroun']] as $opt)
                         <button
                             @click="pays = (pays === '{{ $opt['val'] }}' ? '' : '{{ $opt['val'] }}'); open = false"
                             :class="pays === '{{ $opt['val'] }}' ? 'bg-indigo-50 text-indigo-600' :
@@ -123,9 +123,9 @@
                 <span class="text-xs text-gray-400">Trier par</span>
                 <select x-model="tri"
                     class="text-sm font-semibold text-gray-700 border border-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white cursor-pointer">
-                    <option value="recent">🕐 Plus récents</option>
-                    <option value="populaire">🔥 Plus populaires</option>
-                    <option value="projets">🎨 Plus de projets</option>
+                    <option value="recent"> Plus récents</option>
+                    <option value="populaire"> Plus populaires</option>
+                    <option value="projets"> Plus de projets</option>
                 </select>
             </div>
         </div>

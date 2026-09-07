@@ -21,7 +21,7 @@
                 </a>
                 <a href="{{ route('vision') }}"
                     class="hidden lg:inline-flex items-center gap-1.5 bg-indigo-950 border border-indigo-800 text-indigo-300 text-[10px] font-bold px-2.5 py-1 rounded-full hover:border-indigo-600 transition-all">
-                    🚧 2.0
+                    Bientôt 2.0
                 </a>
 
                 <div class="hidden lg:flex items-center gap-1 ml-4">
@@ -41,7 +41,6 @@
                             class="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 z-50">
                             <a href="{{ route('projects.index') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                <span class="text-lg">🎨</span>
                                 <div>
                                     <p class="text-sm font-semibold text-gray-900">Projets créatifs</p>
                                     <p class="text-xs text-gray-400">Explorez les réalisations</p>
@@ -49,7 +48,6 @@
                             </a>
                             <a href="{{ route('services.index') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                <span class="text-lg">🛠️</span>
                                 <div>
                                     <p class="text-sm font-semibold text-gray-900">Services <span
                                             class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span>
@@ -59,7 +57,6 @@
                             </a>
                             <a href="{{ route('talentoftheweek.index') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                <span class="text-lg">🏆</span>
                                 <div>
                                     <p class="text-sm font-semibold text-gray-900">Talent of the Week</p>
                                     <p class="text-xs text-gray-400">Le talent de la semaine</p>
@@ -83,7 +80,6 @@
                             class="absolute top-full left-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 z-50">
                             <a href="{{ route('creatifs.index') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                <span class="text-lg">👥</span>
                                 <div>
                                     <p class="text-sm font-semibold text-gray-900">Tous les créatifs</p>
                                     <p class="text-xs text-gray-400">Découvrez les talents</p>
@@ -91,7 +87,6 @@
                             </a>
                             <a href="{{ route('creatifs.localisation') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 opacity-60 transition-colors">
-                                <span class="text-lg">📍</span>
                                 <div>
                                     <p class="text-sm font-semibold text-gray-900">Par localisation <span
                                             class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span>
@@ -101,7 +96,6 @@
                             </a>
                             <a href="{{ route('creatifs.domaine') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 opacity-60 transition-colors">
-                                <span class="text-lg">🎯</span>
                                 <div>
                                     <p class="text-sm font-semibold text-gray-900">Par domaine <span
                                             class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span>
@@ -132,7 +126,6 @@
                             class="absolute top-full left-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-2 z-50">
                             <a href="{{ route('blog') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                <span class="text-lg">📝</span>
                                 <div>
                                     <p class="text-sm font-semibold text-gray-900">Blog</p>
                                     <p class="text-xs text-gray-400">Actualités et inspiration</p>
@@ -140,7 +133,6 @@
                             </a>
                             <a href="{{ route('challenges.index') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 opacity-60 transition-colors">
-                                <span class="text-lg">⚡</span>
                                 <div>
                                     <p class="text-sm font-semibold text-gray-900">Challenges <span
                                             class="text-[10px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full ml-1">Bientôt</span>
@@ -150,7 +142,6 @@
                             </a>
                             <a href="{{ route('hackathons.index') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                <span class="text-lg">🚀</span>
                                 <div>
                                     <p class="text-sm font-semibold text-gray-900">Programmes & Hackathons</p>
                                     <p class="text-xs text-gray-400">ASSIN, Sèmè City et plus</p>
@@ -159,7 +150,6 @@
                             <div class="border-t border-gray-100 my-2"></div>
                             <a href="{{ route('vision') }}"
                                 class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                <span class="text-lg">🌍</span>
                                 <div>
                                     <p class="text-sm font-semibold text-gray-900">Notre Vision</p>
                                     <p class="text-xs text-gray-400">Africa 2030</p>
@@ -208,7 +198,7 @@
                     @else
                         <a href="{{ route('creatifs.edit') }}"
                             class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-600 border border-amber-200 text-xs font-semibold px-4 py-2 rounded-full transition-all hover:bg-amber-100">
-                            ⚠️ Compléter profil
+                             Compléter profil
                         </a>
                     @endif --}}
 
@@ -269,11 +259,11 @@
                                 <p class="text-xs text-gray-400">Connecté en tant que</p>
                                 <p class="text-sm font-bold truncate text-gray-800">{{ Auth::user()->email }}</p>
                             </div>
-                            <x-dropdown-link :href="route('dashboard')">🏠 Tableau de bord</x-dropdown-link>
-                            <x-dropdown-link :href="route('profile.edit')">👤 Mon Profil</x-dropdown-link>
+                            <x-dropdown-link :href="route('dashboard')">Tableau de bord</x-dropdown-link>
+                            <x-dropdown-link :href="route('profile.edit')">Mon Profil</x-dropdown-link>
                             @if (!$profilComplet)
                                 <x-dropdown-link :href="route('creatifs.edit')" class="text-amber-600 font-semibold">
-                                    ⚠️ Compléter mon profil
+                                     Compléter mon profil
                                 </x-dropdown-link>
                             @endif
                             <hr class="border-gray-100">
@@ -356,32 +346,31 @@
                             <div class="p-2">
                                 <a href="{{ route('dashboard') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                    <span>🏠</span><span class="text-sm font-semibold text-gray-700">Dashboard</span>
+                                    <span class="text-sm font-semibold text-gray-700">Dashboard</span>
                                 </a>
                                 <a href="{{ route('talentoftheweek.index') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                    <span>🏆</span><span class="text-sm font-semibold text-gray-700">Talent of the
+                                    <span class="text-sm font-semibold text-gray-700">Talent of the
                                         Week</span>
                                 </a>
                                 <a href="{{ route('hackathons.index') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                    <span>🚀</span><span class="text-sm font-semibold text-gray-700">Programmes &
+                                    <span class="text-sm font-semibold text-gray-700">Programmes &
                                         Hackathons</span>
                                 </a>
                                 <a href="{{ route('blog') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                    <span>📝</span><span class="text-sm font-semibold text-gray-700">Blog</span>
+                                    <span class="text-sm font-semibold text-gray-700">Blog</span>
                                 </a>
                                 <a href="{{ route('challenges.index') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                    <span>⚡</span>
                                     <span class="text-sm font-semibold text-gray-700">Challenges</span>
                                     <span
                                         class="ml-auto text-[10px] bg-amber-100 text-amber-600 font-semibold px-1.5 py-0.5 rounded-full">Bientôt</span>
                                 </a>
                                 <a href="{{ route('vision') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors">
-                                    <span>🌍</span><span class="text-sm font-semibold text-gray-700">Notre Vision</span>
+                                    <span class="text-sm font-semibold text-gray-700">Notre Vision</span>
                                 </a>
 
                                 <div class="border-t border-gray-100 my-2"></div>
@@ -389,7 +378,7 @@
                                 @if (!$profilComplet)
                                     <a href="{{ route('creatifs.edit') }}"
                                         class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 transition-colors mb-1">
-                                        <span>⚠️</span><span class="text-sm font-semibold text-amber-700">Compléter mon
+                                        <span class="text-sm font-semibold text-amber-700">Compléter mon
                                             profil</span>
                                     </a>
                                 @endif
@@ -398,7 +387,7 @@
                                     @csrf
                                     <button onclick="event.preventDefault(); this.closest('form').submit();"
                                         class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 transition-colors text-red-500">
-                                        <span>🚪</span><span class="text-sm font-semibold">Déconnexion</span>
+                                        <span class="text-sm font-semibold">Déconnexion</span>
                                     </button>
                                 </form>
                             </div>

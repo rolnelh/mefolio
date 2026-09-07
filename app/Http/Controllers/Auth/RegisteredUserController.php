@@ -31,30 +31,26 @@ class RegisteredUserController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'string', 'in:creatif,client'], // Validation stricte du rôle
+            'role' => ['required', 'string', 'in:creatif,client'],
         ]);
 
-        // Création de l'utilisateur avec le rôle
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role, // On enregistre le rôle choisi
+            'role' => $request->role,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        // REDIRECTION PERSONNALISÉE
-        // Si c'est un créatif, on peut l'envoyer vers la création de son profil/portfolio
-        // Si c'est un client, on l'envoie explorer les projets
+        // Redirection personnalisée selon le rôle choisi : un créatif est envoyé
+        // compléter son portfolio, un client explore directement les projets.
         if ($user->role === 'creatif') {
-    // Redirige vers un formulaire spécial pour remplir son portfolio
-    return redirect()->route('dashboard'); 
-    } else {
-        // Redirige vers la page d'accueil des projets
-        return redirect()->route('projects.index'); 
-    }
+            return redirect()->route('dashboard');
         }
+
+        return redirect()->route('projects.index');
+    }
 }

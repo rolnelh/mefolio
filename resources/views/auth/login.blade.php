@@ -19,7 +19,7 @@
                 </div>
 
                 <h2 class="text-5xl xl:text-5xl font-black text-white leading-relaxed mb-4">
-                    Bon retour parmi <br> nous. 👋
+                    Bon retour parmi <br> nous. 
                 </h2>
 
                 <p class="text-gray-400 text-base leading-relaxed max-w-sm mb-10">
@@ -38,7 +38,7 @@
                         </div>
                         <div>
                             <p class="text-white text-sm font-bold">Kofi A.</p>
-                            <p class="text-gray-500 text-xs text-indigo-400/80">Designer · Accra, Ghana 🇬🇭</p>
+                            <p class="text-gray-500 text-xs text-indigo-400/80">Designer · Accra, Ghana </p>
                         </div>
                     </div>
                 </div>

@@ -7,11 +7,11 @@ use App\Models\Creatif;
 class BuilderScoreService
 {
     const LEVELS = [
-        ['min' => 0,    'max' => 100,  'slug' => 'new_builder',    'label' => 'New Builder',    'emoji' => '🌱'],
-        ['min' => 100,  'max' => 300,  'slug' => 'active_builder', 'label' => 'Active Builder', 'emoji' => '⚡'],
-        ['min' => 300,  'max' => 700,  'slug' => 'rising_builder', 'label' => 'Rising Builder', 'emoji' => '🚀'],
-        ['min' => 700,  'max' => 1500, 'slug' => 'pro_builder',    'label' => 'Pro Builder',    'emoji' => '🔥'],
-        ['min' => 1500, 'max' => PHP_INT_MAX, 'slug' => 'elite_builder', 'label' => 'Elite Builder', 'emoji' => '👑'],
+        ['min' => 0,    'max' => 100,  'slug' => 'new_builder',    'label' => 'New Builder'],
+        ['min' => 100,  'max' => 300,  'slug' => 'active_builder', 'label' => 'Active Builder'],
+        ['min' => 300,  'max' => 700,  'slug' => 'rising_builder', 'label' => 'Rising Builder'],
+        ['min' => 700,  'max' => 1500, 'slug' => 'pro_builder',    'label' => 'Pro Builder'],
+        ['min' => 1500, 'max' => PHP_INT_MAX, 'slug' => 'elite_builder', 'label' => 'Elite Builder'],
     ];
 
     public function getLevel(Creatif $creatif): array

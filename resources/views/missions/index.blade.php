@@ -6,16 +6,10 @@
             <div class="absolute inset-0 pointer-events-none">
                 <div class="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-indigo-600/10 blur-[120px]">
                 </div>
-                <div
-                    class="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-violet-600/10 blur-[100px]">
+                <div class="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-violet-600/10 blur-[100px]">
                 </div>
             </div>
             <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-                <div
-                    class="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold px-4 py-1.5 rounded-full mb-8 uppercase tracking-widest">
-                    <span class="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-pulse"></span>
-                    Bientôt disponible
-                </div>
                 <h1 class="text-5xl sm:text-6xl font-black text-white tracking-tight leading-none mb-6">
                     Missions<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
@@ -23,552 +17,161 @@
                     </span>
                 </h1>
                 <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                    Trouvez des missions, proposez vos services, soyez rémunérés via
-                    <span class="text-white font-semibold">Mobile Money.</span>
+                    Trouvez des missions, proposez vos services, connectez-vous directement avec des clients africains.
                 </p>
 
-                {{-- Barre de recherche principale --}}
-                <div class="mt-10 flex gap-3 max-w-2xl mx-auto">
-                    <div class="flex-1 relative">
-                        <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none"
-                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        <input type="text" placeholder="Ex: développeur web, designer logo..."
-                            class="w-full pl-11 pr-4 py-3.5 bg-white/10 border border-white/20 text-white placeholder:text-gray-500 rounded-2xl text-sm focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all">
-                    </div>
-                    <button
-                        class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl transition-all hover:scale-105 text-sm">
-                        Rechercher
-                    </button>
+                <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+                    <form method="GET" class="flex-1 relative max-w-md">
+                        <input type="text" name="q" value="{{ request('q') }}" placeholder="Ex: développeur web, designer logo..."
+                            class="w-full pl-4 pr-4 py-3.5 bg-white/10 border border-white/20 text-white placeholder:text-gray-500 rounded-2xl text-sm focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all">
+                    </form>
+                    @auth
+                        <a href="{{ route('missions.create') }}"
+                            class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl transition-all hover:scale-105 text-sm whitespace-nowrap">
+                            Publier une mission
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl transition-all hover:scale-105 text-sm whitespace-nowrap">
+                            Publier une mission
+                        </a>
+                    @endauth
                 </div>
             </div>
         </section>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10" x-data="{
-            domaine: '',
-            budget: '',
-            duree: '',
-            lieu: '',
-            niveau: '',
-            tri: 'recent',
-            showFilters: false,
-            activeFilters: 0,
-            updateCount() {
-                this.activeFilters = [this.domaine, this.budget, this.duree, this.lieu, this.niveau].filter(v => v !== '').length;
-            }
-        }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-            {{-- BARRE DE FILTRES --}}
-            <div class="mb-8">
+            {{-- FILTRES --}}
+            <form method="GET" class="flex flex-wrap items-center gap-3 mb-8">
+                <input type="hidden" name="q" value="{{ request('q') }}">
 
-                {{-- Filtres rapides (pills) --}}
-                <div class="flex items-center gap-3 flex-wrap mb-4">
+                <select name="domaine" onchange="this.form.submit()"
+                    class="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">Tous les domaines</option>
+                    @foreach ($domaines as $domaine)
+                        <option value="{{ $domaine }}" @selected(request('domaine') === $domaine)>{{ $domaine }}</option>
+                    @endforeach
+                </select>
 
-                    {{-- Domaine --}}
-                    <div x-data="{ open: false }" class="relative">
-                        <button @click="open = !open" @click.outside="open = false"
-                            :class="domaine ? 'bg-indigo-600 text-white border-indigo-600' :
-                                'bg-white text-gray-700 border-gray-200 hover:border-indigo-300'"
-                            class="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all">
-                            🎨 {{ 'Domaine' }}
-                            <span x-show="domaine" x-text="domaine" class="max-w-[80px] truncate"></span>
-                            <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </button>
-                        <div x-show="open" x-transition:enter="transition ease-out duration-150"
-                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                            class="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 z-40">
-                            @foreach ([['val' => 'design', 'label' => 'Design & UI/UX', 'emoji' => '🎨'], ['val' => 'dev-web', 'label' => 'Développement Web', 'emoji' => '💻'], ['val' => 'dev-mobile', 'label' => 'Développement Mobile', 'emoji' => '📱'], ['val' => 'photo', 'label' => 'Photographie', 'emoji' => '📸'], ['val' => 'video', 'label' => 'Vidéo & Montage', 'emoji' => '🎥'], ['val' => 'marketing', 'label' => 'Marketing Digital', 'emoji' => '📣'], ['val' => 'redaction', 'label' => 'Rédaction & Contenu', 'emoji' => '✍️'], ['val' => 'audio', 'label' => 'Audio & Musique', 'emoji' => '🎵'], ['val' => 'branding', 'label' => 'Branding & Identité', 'emoji' => '🏷️']] as $opt)
-                                <button
-                                    @click="domaine = (domaine === '{{ $opt['val'] }}' ? '' : '{{ $opt['val'] }}'); open = false; updateCount()"
-                                    :class="domaine === '{{ $opt['val'] }}' ? 'bg-indigo-50 text-indigo-600' :
-                                        'text-gray-700 hover:bg-gray-50'"
-                                    class="flex items-center gap-2.5 w-full px-3 py-2 rounded-xl text-sm font-medium transition-colors">
-                                    <span>{{ $opt['emoji'] }}</span>
-                                    <span>{{ $opt['label'] }}</span>
-                                    <svg x-show="domaine === '{{ $opt['val'] }}'"
-                                        class="w-4 h-4 ml-auto text-indigo-600" fill="none" stroke="currentColor"
-                                        stroke-width="2.5" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
-                                </button>
-                            @endforeach
-                        </div>
-                    </div>
+                <select name="niveau" onchange="this.form.submit()"
+                    class="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">Tous niveaux</option>
+                    <option value="Junior" @selected(request('niveau') === 'Junior')>Junior</option>
+                    <option value="Intermédiaire" @selected(request('niveau') === 'Intermédiaire')>Intermédiaire</option>
+                    <option value="Senior" @selected(request('niveau') === 'Senior')>Senior</option>
+                </select>
 
-                    {{-- Budget --}}
-                    <div x-data="{ open: false }" class="relative">
-                        <button @click="open = !open" @click.outside="open = false"
-                            :class="budget ? 'bg-indigo-600 text-white border-indigo-600' :
-                                'bg-white text-gray-700 border-gray-200 hover:border-indigo-300'"
-                            class="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all">
-                            💰 Budget
-                            <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </button>
-                        <div x-show="open" x-transition:enter="transition ease-out duration-150"
-                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                            class="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 z-40">
-                            @foreach ([['val' => 'moins-25k', 'label' => 'Moins de 25 000 FCFA'], ['val' => '25k-50k', 'label' => '25 000 – 50 000 FCFA'], ['val' => '50k-100k', 'label' => '50 000 – 100 000 FCFA'], ['val' => '100k-250k', 'label' => '100 000 – 250 000 FCFA'], ['val' => 'plus-250k', 'label' => 'Plus de 250 000 FCFA']] as $opt)
-                                <button
-                                    @click="budget = (budget === '{{ $opt['val'] }}' ? '' : '{{ $opt['val'] }}'); open = false; updateCount()"
-                                    :class="budget === '{{ $opt['val'] }}' ? 'bg-indigo-50 text-indigo-600' :
-                                        'text-gray-700 hover:bg-gray-50'"
-                                    class="flex items-center justify-between w-full px-3 py-2 rounded-xl text-sm font-medium transition-colors">
-                                    <span>{{ $opt['label'] }}</span>
-                                    <svg x-show="budget === '{{ $opt['val'] }}'" class="w-4 h-4 text-indigo-600"
-                                        fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
-                                </button>
-                            @endforeach
-                        </div>
-                    </div>
+                <input type="text" name="lieu" value="{{ request('lieu') }}" placeholder="Lieu (remote, Cotonou...)"
+                    onchange="this.form.submit()"
+                    class="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
 
-                    {{-- Durée --}}
-                    <div x-data="{ open: false }" class="relative">
-                        <button @click="open = !open" @click.outside="open = false"
-                            :class="duree ? 'bg-indigo-600 text-white border-indigo-600' :
-                                'bg-white text-gray-700 border-gray-200 hover:border-indigo-300'"
-                            class="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all">
-                            ⏱️ Durée
-                            <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </button>
-                        <div x-show="open" x-transition:enter="transition ease-out duration-150"
-                            x-transition:enter-start="opacity-0 scale-95"
-                            x-transition:enter-end="opacity-100 scale-100"
-                            class="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 z-40">
-                            @foreach ([['val' => '1-3j', 'label' => '1 à 3 jours'], ['val' => '1sem', 'label' => '1 semaine'], ['val' => '2sem', 'label' => '2 semaines'], ['val' => '1mois', 'label' => '1 mois'], ['val' => 'plus-1mois', 'label' => 'Plus d\'1 mois']] as $opt)
-                                <button
-                                    @click="duree = (duree === '{{ $opt['val'] }}' ? '' : '{{ $opt['val'] }}'); open = false; updateCount()"
-                                    :class="duree === '{{ $opt['val'] }}' ? 'bg-indigo-50 text-indigo-600' :
-                                        'text-gray-700 hover:bg-gray-50'"
-                                    class="flex items-center justify-between w-full px-3 py-2 rounded-xl text-sm font-medium transition-colors">
-                                    <span>{{ $opt['label'] }}</span>
-                                    <svg x-show="duree === '{{ $opt['val'] }}'" class="w-4 h-4 text-indigo-600"
-                                        fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
-                                </button>
-                            @endforeach
-                        </div>
-                    </div>
+                <select name="tri" onchange="this.form.submit()"
+                    class="ml-auto px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="recent" @selected(request('tri', 'recent') === 'recent')>Plus récentes</option>
+                    <option value="budget-desc" @selected(request('tri') === 'budget-desc')>Budget décroissant</option>
+                    <option value="budget-asc" @selected(request('tri') === 'budget-asc')>Budget croissant</option>
+                </select>
 
-                    {{-- Localisation --}}
-                    <div x-data="{ open: false }" class="relative">
-                        <button @click="open = !open" @click.outside="open = false"
-                            :class="lieu ? 'bg-indigo-600 text-white border-indigo-600' :
-                                'bg-white text-gray-700 border-gray-200 hover:border-indigo-300'"
-                            class="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all">
-                            📍 Lieu
-                            <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }"
-                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </button>
-                        <div x-show="open" x-transition:enter="transition ease-out duration-150"
-                            x-transition:enter-start="opacity-0 scale-95"
-                            x-transition:enter-end="opacity-100 scale-100"
-                            class="absolute top-full left-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 z-40">
-                            @foreach ([['val' => 'remote', 'label' => '🌐 Remote / En ligne'], ['val' => 'cotonou', 'label' => '🇧🇯 Cotonou'], ['val' => 'dakar', 'label' => '🇸🇳 Dakar'], ['val' => 'abidjan', 'label' => '🇨🇮 Abidjan'], ['val' => 'bamako', 'label' => '🇲🇱 Bamako'], ['val' => 'lagos', 'label' => '🇳🇬 Lagos'], ['val' => 'accra', 'label' => '🇬🇭 Accra']] as $opt)
-                                <button
-                                    @click="lieu = (lieu === '{{ $opt['val'] }}' ? '' : '{{ $opt['val'] }}'); open = false; updateCount()"
-                                    :class="lieu === '{{ $opt['val'] }}' ? 'bg-indigo-50 text-indigo-600' :
-                                        'text-gray-700 hover:bg-gray-50'"
-                                    class="flex items-center justify-between w-full px-3 py-2 rounded-xl text-sm font-medium transition-colors">
-                                    <span>{{ $opt['label'] }}</span>
-                                    <svg x-show="lieu === '{{ $opt['val'] }}'" class="w-4 h-4 text-indigo-600"
-                                        fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
-                                </button>
-                            @endforeach
-                        </div>
-                    </div>
+                @if (request()->anyFilled(['domaine', 'niveau', 'lieu', 'q']))
+                    <a href="{{ route('missions.index') }}"
+                        class="px-4 py-2 rounded-full border border-red-200 bg-red-50 text-red-600 text-sm font-semibold hover:bg-red-100 transition-all">
+                        Effacer les filtres
+                    </a>
+                @endif
+            </form>
 
-                    {{-- Niveau --}}
-                    <div x-data="{ open: false }" class="relative">
-                        <button @click="open = !open" @click.outside="open = false"
-                            :class="niveau ? 'bg-indigo-600 text-white border-indigo-600' :
-                                'bg-white text-gray-700 border-gray-200 hover:border-indigo-300'"
-                            class="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all">
-                            🎓 Niveau
-                            <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }"
-                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </button>
-                        <div x-show="open" x-transition:enter="transition ease-out duration-150"
-                            x-transition:enter-start="opacity-0 scale-95"
-                            x-transition:enter-end="opacity-100 scale-100"
-                            class="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 z-40">
-                            @foreach ([['val' => 'tous', 'label' => '✅ Tous niveaux'], ['val' => 'junior', 'label' => '🌱 Junior'], ['val' => 'intermediaire', 'label' => '⚡ Intermédiaire'], ['val' => 'senior', 'label' => '🚀 Senior']] as $opt)
-                                <button
-                                    @click="niveau = (niveau === '{{ $opt['val'] }}' ? '' : '{{ $opt['val'] }}'); open = false; updateCount()"
-                                    :class="niveau === '{{ $opt['val'] }}' ? 'bg-indigo-50 text-indigo-600' :
-                                        'text-gray-700 hover:bg-gray-50'"
-                                    class="flex items-center justify-between w-full px-3 py-2 rounded-xl text-sm font-medium transition-colors">
-                                    <span>{{ $opt['label'] }}</span>
-                                    <svg x-show="niveau === '{{ $opt['val'] }}'" class="w-4 h-4 text-indigo-600"
-                                        fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
-                                </button>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    {{-- Reset si filtres actifs --}}
-                    <button x-show="activeFilters > 0"
-                        @click="domaine=''; budget=''; duree=''; lieu=''; niveau=''; updateCount()"
-                        class="flex items-center gap-1.5 px-4 py-2 rounded-full border border-red-200 bg-red-50 text-red-600 text-sm font-semibold hover:bg-red-100 transition-all">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                        Effacer (<span x-text="activeFilters"></span>)
-                    </button>
-
-                    {{-- Séparateur + Tri --}}
-                    <div class="ml-auto flex items-center gap-2">
-                        <span class="text-xs text-gray-400 font-medium">Trier par</span>
-                        <select x-model="tri"
-                            class="text-sm font-semibold text-gray-700 border border-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white cursor-pointer">
-                            <option value="recent">🕐 Plus récentes</option>
-                            <option value="budget-desc">💰 Budget décroissant</option>
-                            <option value="budget-asc">💰 Budget croissant</option>
-                            <option value="duree">⏱️ Durée courte</option>
-                            <option value="populaire">🔥 Plus populaires</option>
-                        </select>
-                    </div>
-                </div>
-
-                {{-- Tags actifs --}}
-                <div x-show="activeFilters > 0" class="flex flex-wrap gap-2 pt-3 border-t border-gray-100">
-                    <span class="text-xs text-gray-400 font-semibold pt-1">Filtres actifs :</span>
-                    <span x-show="domaine"
-                        class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded-full">
-                        🎨 <span x-text="domaine"></span>
-                        <button @click="domaine=''; updateCount()" class="ml-1 hover:text-red-500">×</button>
-                    </span>
-                    <span x-show="budget"
-                        class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded-full">
-                        💰 <span x-text="budget"></span>
-                        <button @click="budget=''; updateCount()" class="ml-1 hover:text-red-500">×</button>
-                    </span>
-                    <span x-show="duree"
-                        class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded-full">
-                        ⏱️ <span x-text="duree"></span>
-                        <button @click="duree=''; updateCount()" class="ml-1 hover:text-red-500">×</button>
-                    </span>
-                    <span x-show="lieu"
-                        class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded-full">
-                        📍 <span x-text="lieu"></span>
-                        <button @click="lieu=''; updateCount()" class="ml-1 hover:text-red-500">×</button>
-                    </span>
-                    <span x-show="niveau"
-                        class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded-full">
-                        🎓 <span x-text="niveau"></span>
-                        <button @click="niveau=''; updateCount()" class="ml-1 hover:text-red-500">×</button>
-                    </span>
-                </div>
-            </div>
-
-            {{-- RÉSULTATS --}}
-            <div class="flex items-center justify-between mb-6">
-                <p class="text-sm text-gray-500">
-                    <span class="font-bold text-gray-900">6</span> missions disponibles
-                    <span x-show="activeFilters > 0" class="text-indigo-600 font-semibold"> · filtrées</span>
-                </p>
-            </div>
+            <p class="text-sm text-gray-500 mb-6">
+                <span class="font-bold text-gray-900">{{ $missions->total() }}</span> mission(s) disponible(s)
+            </p>
 
             {{-- GRILLE MISSIONS --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                @foreach ([
-        [
-            'titre' => 'Créer une identité visuelle complète',
-            'domaine' => 'Design & Branding',
-            'emoji' => '🎨',
-            'budget' => '80 000 FCFA',
-            'duree' => '2 semaines',
-            'niveau' => 'Intermédiaire',
-            'lieu' => '🌐 Remote',
-            'client' => 'StartupBJ',
-            'pays' => '🇧🇯',
-            'date' => 'Il y a 2h',
-            'urgence' => true,
-            'tags' => ['Logo', 'Charte', 'Figma'],
-        ],
-        [
-            'titre' => 'Développement landing page produit SaaS',
-            'domaine' => 'Développement Web',
-            'emoji' => '💻',
-            'budget' => '150 000 FCFA',
-            'duree' => '1 semaine',
-            'niveau' => 'Senior',
-            'lieu' => '🌐 Remote',
-            'client' => 'TechDakar',
-            'pays' => '🇸🇳',
-            'date' => 'Il y a 5h',
-            'urgence' => false,
-            'tags' => ['Next.js', 'Tailwind', 'TypeScript'],
-        ],
-        [
-            'titre' => 'Shooting photo produits cosmétiques',
-            'domaine' => 'Photographie',
-            'emoji' => '📸',
-            'budget' => '50 000 FCFA',
-            'duree' => '3 jours',
-            'niveau' => 'Tous niveaux',
-            'lieu' => '📍 Abidjan',
-            'client' => 'BeautyCI',
-            'pays' => '🇨🇮',
-            'date' => 'Il y a 1j',
-            'urgence' => true,
-            'tags' => ['Studio', 'Produit', 'Retouche'],
-        ],
-        [
-            'titre' => 'Montage vidéo publicité réseaux sociaux',
-            'domaine' => 'Vidéo & Montage',
-            'emoji' => '🎥',
-            'budget' => '60 000 FCFA',
-            'duree' => '5 jours',
-            'niveau' => 'Junior',
-            'lieu' => '🌐 Remote',
-            'client' => 'AgroMali',
-            'pays' => '🇲🇱',
-            'date' => 'Il y a 2j',
-            'urgence' => false,
-            'tags' => ['Premiere', 'Reels', 'After Effects'],
-        ],
-        [
-            'titre' => 'Application mobile de livraison',
-            'domaine' => 'Développement Mobile',
-            'emoji' => '📱',
-            'budget' => '500 000 FCFA',
-            'duree' => '2 mois',
-            'niveau' => 'Senior',
-            'lieu' => '📍 Cotonou',
-            'client' => 'QuickBJ',
-            'pays' => '🇧🇯',
-            'date' => 'Il y a 3j',
-            'urgence' => false,
-            'tags' => ['React Native', 'Laravel', 'Mobile Money'],
-        ],
-        [
-            'titre' => 'Gestion community manager 1 mois',
-            'domaine' => 'Marketing Digital',
-            'emoji' => '📣',
-            'budget' => '75 000 FCFA',
-            'duree' => '1 mois',
-            'niveau' => 'Intermédiaire',
-            'lieu' => '🌐 Remote',
-            'client' => 'FashionGH',
-            'pays' => '🇬🇭',
-            'date' => 'Il y a 4j',
-            'urgence' => false,
-            'tags' => ['Instagram', 'TikTok', 'Canva'],
-        ],
-    ] as $mission)
-                    <div
+                @forelse ($missions as $mission)
+                    <a href="{{ route('missions.show', $mission) }}"
                         class="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-lg hover:border-indigo-100 transition-all duration-300">
 
-                        {{-- Header card --}}
                         <div class="p-5 pb-4">
                             <div class="flex items-start justify-between gap-3 mb-4">
-                                <div
-                                    class="w-11 h-11 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl flex-shrink-0">
-                                    {{ $mission['emoji'] }}
+                                <div class="w-11 h-11 rounded-xl bg-indigo-50 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18a48.55 48.55 0 01-12.756 0C4.537 20.436 3.75 19.494 3.75 18.4v-4.25m16.5 0a2.18 2.18 0 00.75-1.653v-3.32a2.25 2.25 0 00-1.5-2.121l-6.75-2.25a2.25 2.25 0 00-1.5 0l-6.75 2.25a2.25 2.25 0 00-1.5 2.121v3.32c0 .659.281 1.244.75 1.653" />
+                                    </svg>
                                 </div>
-                                <div class="flex items-center gap-2">
-                                    @if ($mission['urgence'])
-                                        <span
-                                            class="text-[10px] bg-red-50 text-red-600 border border-red-100 font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
-                                            🔥 Urgent
+                                @if ($mission->urgent)
+                                    <span class="text-[10px] bg-red-50 text-red-600 border border-red-100 font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
+                                        Urgent
+                                    </span>
+                                @endif
+                            </div>
+
+                            <h3 class="font-bold text-gray-900 text-sm leading-snug mb-2 group-hover:text-indigo-600 transition-colors">
+                                {{ $mission->title }}
+                            </h3>
+
+                            <p class="text-[11px] font-bold text-indigo-500 mb-3">{{ $mission->domaine }}</p>
+
+                            <div class="space-y-1.5 mb-4 text-xs text-gray-500">
+                                <p>{{ $mission->lieu ?: ($mission->remote ? 'Remote' : '—') }}</p>
+                                @if ($mission->duree)
+                                    <p>{{ $mission->duree }}</p>
+                                @endif
+                                @if ($mission->niveau)
+                                    <p>{{ $mission->niveau }}</p>
+                                @endif
+                            </div>
+
+                            @if (!empty($mission->tags))
+                                <div class="flex flex-wrap gap-1.5">
+                                    @foreach ($mission->tags as $tag)
+                                        <span class="text-[11px] bg-gray-50 text-gray-600 font-medium px-2 py-0.5 rounded-full border border-gray-100">
+                                            {{ $tag }}
                                         </span>
-                                    @endif
-                                    <span
-                                        class="text-[10px] bg-amber-50 text-amber-600 border border-amber-100 font-bold px-2 py-0.5 rounded-full">
-                                        Bientôt
-                                    </span>
+                                    @endforeach
                                 </div>
-                            </div>
-
-                            <h3
-                                class="font-bold text-gray-900 text-sm leading-snug mb-2 group-hover:text-indigo-600 transition-colors">
-                                {{ $mission['titre'] }}
-                            </h3>
-
-                            <p class="text-[11px] font-bold text-indigo-500 mb-3">{{ $mission['domaine'] }}</p>
-
-                            {{-- Infos --}}
-                            <div class="space-y-1.5 mb-4">
-                                <div class="flex items-center gap-2 text-xs text-gray-500">
-                                    <svg class="w-3.5 h-3.5 flex-shrink-0 text-gray-300" fill="none"
-                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0zM19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                                    </svg>
-                                    {{ $mission['lieu'] }}
-                                </div>
-                                <div class="flex items-center gap-2 text-xs text-gray-500">
-                                    <svg class="w-3.5 h-3.5 flex-shrink-0 text-gray-300" fill="none"
-                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    {{ $mission['duree'] }}
-                                </div>
-                                <div class="flex items-center gap-2 text-xs text-gray-500">
-                                    <svg class="w-3.5 h-3.5 flex-shrink-0 text-gray-300" fill="none"
-                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 013.741-1.342" />
-                                    </svg>
-                                    {{ $mission['niveau'] }}
-                                </div>
-                            </div>
-
-                            {{-- Tags --}}
-                            <div class="flex flex-wrap gap-1.5">
-                                @foreach ($mission['tags'] as $tag)
-                                    <span
-                                        class="text-[11px] bg-gray-50 text-gray-600 font-medium px-2 py-0.5 rounded-full border border-gray-100">
-                                        {{ $tag }}
-                                    </span>
-                                @endforeach
-                            </div>
+                            @endif
                         </div>
 
-                        {{-- Footer card --}}
                         <div class="px-5 py-3.5 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <div
-                                    class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center text-[10px] font-black text-indigo-600">
-                                    {{ substr($mission['client'], 0, 1) }}
+                            <div class="flex items-center gap-2 min-w-0">
+                                <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center text-[10px] font-black text-indigo-600 flex-shrink-0">
+                                    {{ substr($mission->user->username ?? '?', 0, 1) }}
                                 </div>
-                                <div>
-                                    <p class="text-xs font-bold text-gray-900">{{ $mission['client'] }}
-                                        {{ $mission['pays'] }}</p>
-                                    <p class="text-[10px] text-gray-400">{{ $mission['date'] }}</p>
+                                <div class="min-w-0">
+                                    <p class="text-xs font-bold text-gray-900 truncate">{{ $mission->user->username ?? '—' }}</p>
+                                    <p class="text-[10px] text-gray-400">{{ $mission->created_at->diffForHumans() }}</p>
                                 </div>
                             </div>
-                            <div class="text-right">
-                                <p class="text-sm font-black text-gray-900">{{ $mission['budget'] }}</p>
-                                <button disabled
-                                    class="text-[10px] bg-indigo-100 text-indigo-400 font-bold px-3 py-1 rounded-full cursor-not-allowed mt-1">
-                                    Postuler →
-                                </button>
+                            <div class="text-right flex-shrink-0">
+                                @if ($mission->budget_min || $mission->budget_max)
+                                    <p class="text-sm font-black text-gray-900">
+                                        {{ number_format($mission->budget_min ?? $mission->budget_max) }}
+                                        @if ($mission->budget_max && $mission->budget_min && $mission->budget_max != $mission->budget_min)
+                                            – {{ number_format($mission->budget_max) }}
+                                        @endif
+                                        FCFA
+                                    </p>
+                                @endif
+                                <span class="text-[10px] text-gray-400">{{ $mission->applications_count }} candidature(s)</span>
                             </div>
                         </div>
+                    </a>
+                @empty
+                    <div class="col-span-full text-center py-20 text-gray-400">
+                        <p class="text-sm font-medium">Aucune mission ne correspond à votre recherche pour le moment.</p>
+                        @auth
+                            <a href="{{ route('missions.create') }}" class="inline-block mt-4 text-indigo-600 font-semibold text-sm hover:underline">
+                                Publier la première mission →
+                            </a>
+                        @endauth
                     </div>
-                @endforeach
+                @endforelse
             </div>
 
+            <div class="mt-10">{{ $missions->links() }}</div>
         </div>
 
-        {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-
-            @foreach ([
-        ['titre' => 'Création d\'une identité visuelle', 'budget' => '150.000 FCFA', 'domaine' => 'Design', 'lieu' => 'Cotonou, Bénin', 'emoji' => '🎨', 'duree' => '2 semaines', 'niveau' => 'Intermédiaire'],
-        ['titre' => 'Développement d\'une landing page', 'budget' => '200.000 FCFA', 'domaine' => 'Développement Web', 'lieu' => 'Remote', 'emoji' => '💻', 'duree' => '1 semaine', 'niveau' => 'Junior'],
-        ['titre' => 'Shooting photo produits cosmétiques', 'budget' => '80.000 FCFA', 'domaine' => 'Photographie', 'lieu' => 'Abidjan, CI', 'emoji' => '📸', 'duree' => '3 jours', 'niveau' => 'Tous niveaux'],
-        ['titre' => 'Montage vidéo promotionnel', 'budget' => '120.000 FCFA', 'domaine' => 'Vidéo', 'lieu' => 'Remote', 'emoji' => '🎥', 'duree' => '1 semaine', 'niveau' => 'Intermédiaire'],
-        ['titre' => 'Création de contenu réseaux sociaux', 'budget' => '60.000 FCFA', 'domaine' => 'Marketing Digital', 'lieu' => 'Remote', 'emoji' => '📱', 'duree' => '1 mois', 'niveau' => 'Junior'],
-        ['titre' => 'Application mobile de livraison', 'budget' => '500.000 FCFA', 'domaine' => 'Développement Mobile', 'lieu' => 'Dakar, SN', 'emoji' => '📲', 'duree' => '2 mois', 'niveau' => 'Senior'],
-    ] as $mission)
-                <div
-                    class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-6 overflow-hidden">
-
-                    <div
-                        class="absolute top-3 right-3 bg-amber-50 text-amber-600 text-xs font-semibold px-2 py-1 rounded-full">
-                        Bientôt
-                    </div>
-
-                    <div class="flex items-start gap-4 mb-4">
-                        <div
-                            class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl flex-shrink-0">
-                            {{ $mission['emoji'] }}
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-gray-900 text-base leading-snug">{{ $mission['titre'] }}
-                            </h3>
-                            <span class="text-xs text-indigo-600 font-semibold">{{ $mission['domaine'] }}</span>
-                        </div>
-                    </div>
-
-                    <div class="space-y-2 mb-5">
-                        <div class="flex items-center gap-2 text-sm text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                            </svg>
-                            {{ $mission['lieu'] }}
-                        </div>
-                        <div class="flex items-center gap-2 text-sm text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                            </svg>
-                            {{ $mission['duree'] }}
-                        </div>
-                        <div class="flex items-center gap-2 text-sm text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 3.741-1.342" />
-                            </svg>
-                            {{ $mission['niveau'] }}
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-between pt-4 border-t border-gray-50">
-                        <span class="text-lg font-bold text-gray-900">{{ $mission['budget'] }}</span>
-                        <button disabled
-                            class="bg-gray-100 text-gray-400 text-sm font-semibold px-4 py-2 rounded-xl cursor-not-allowed">
-                            Postuler bientôt
-                        </button>
-                    </div>
-                </div>
-            @endforeach
-
-        </div> --}}
-
-
-        <div class="mt-12 bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl p-8 text-center text-white">
-            <h2 class="text-xl font-black mb-2">🔔 Soyez notifié en premier</h2>
-            <p class="text-indigo-200 text-sm mb-6">Inscrivez-vous pour recevoir les premières missions dès le
-                lancement.
-
-            </p>
-            <div class="flex gap-3 max-w-sm mx-auto">
-                <input type="email" placeholder="votre@email.com"
-                    class="flex-1 px-4 py-3 rounded-xl text-gray-900 text-sm focus:outline-none">
-                <button
-                    class="bg-white text-indigo-600 font-bold px-5 py-3 rounded-xl hover:bg-indigo-50 transition whitespace-nowrap text-sm">
-                    M'alerter
-                </button>
-            </div>
-        </div>
+        <x-newsletter-cta title="Soyez notifié en premier"
+            description="Inscrivez-vous pour recevoir les nouvelles missions publiées sur Mefolio." source="missions" />
     </div>
 </x-app-layout>

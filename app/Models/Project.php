@@ -17,9 +17,11 @@ class Project extends Model
         'description',
         'image',
         'slug',
-        // 'category',
-        'fichiers', 
+        'category',
+        'fichiers',
         'technologies',
+        'lien_site',
+        'lien_github',
     ];
 
     protected $casts = [
@@ -47,6 +49,19 @@ class Project extends Model
 {
     return $this->hasMany(Comment::class)->whereNull('parent_id')->with('replies.user.creatif', 'user.creatif')->latest();
 }
+
+    public function likes()
+    {
+        return $this->hasMany(ProjectLike::class);
+    }
+
+    public function isLikedBy(?User $user): bool
+    {
+        if (! $user) {
+            return false;
+        }
+        return $this->likes->contains('user_id', $user->id);
+    }
 
    
     protected static function boot()

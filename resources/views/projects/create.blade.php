@@ -21,22 +21,12 @@
                 <div class="relative z-10">
                     <span
                         class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
-                        ✨ Nouveau projet
+                         Nouveau projet
                     </span>
                     <h1 class="text-3xl font-black text-white leading-tight">Partagez votre<br>réalisation</h1>
                     <p class="text-indigo-200 text-sm mt-2">Montrez ce que vous savez faire à la communauté Mefolio.</p>
                 </div>
             </div>
-
-            @if (Session::has('success'))
-                <div
-                    class="mb-6 flex items-center justify-between p-4 bg-green-50 border border-green-200 text-green-700 rounded-2xl">
-                    <div class="flex items-center gap-3">
-                        <span class="text-xl">🚀</span>
-                        <span class="font-semibold text-sm">{{ Session::get('success') }}</span>
-                    </div>
-                </div>
-            @endif
 
             <form action="{{ route('projets.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
                 @csrf
@@ -44,7 +34,7 @@
                 {{-- Titre --}}
                 <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
                     <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
-                        📌 Titre du projet
+                        Titre du projet
                     </label>
                     <input type="text" name="title" required value="{{ old('title') }}"
                         placeholder="Ex: Refonte UI d'une app mobile fintech"
@@ -57,7 +47,7 @@
                 {{-- Description --}}
                 <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
                     <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
-                        📝 Description du projet
+                        Description du projet
                     </label>
                     <textarea name="description" rows="5" required
                         placeholder="Décrivez votre démarche créative, les outils utilisés, les défis relevés..."
@@ -70,19 +60,19 @@
                 {{-- Catégorie + Technologies --}}
                 <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
                     <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
-                        🎯 Catégorie & Technologies
+                        Catégorie & Technologies
                     </label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <select name="category"
                             class="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                             <option value="">-- Catégorie --</option>
-                            <option value="Design">🎨 Design / UI-UX</option>
-                            <option value="Web">💻 Développement Web</option>
-                            <option value="Mobile">📱 Application Mobile</option>
-                            <option value="Photo">📸 Photographie</option>
-                            <option value="Video">🎥 Vidéo & Montage</option>
-                            <option value="Branding">🏷️ Branding</option>
-                            <option value="Autre">🔧 Autre</option>
+                            <option value="Design">Design / UI-UX</option>
+                            <option value="Web">Développement Web</option>
+                            <option value="Mobile">Application Mobile</option>
+                            <option value="Photo">Photographie</option>
+                            <option value="Video">Vidéo &amp; Montage</option>
+                            <option value="Branding">Branding</option>
+                            <option value="Autre">Autre</option>
                         </select>
                         <input type="text" name="technologies" value="{{ old('technologies') }}"
                             placeholder="Figma, Laravel, React..."
@@ -93,17 +83,15 @@
                 {{-- Liens --}}
                 <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
                     <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
-                        🔗 Liens (optionnel)
+                        Liens (optionnel)
                     </label>
                     <div class="space-y-3">
                         <div class="relative">
-                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🌐</span>
                             <input type="url" name="lien_site" value="{{ old('lien_site') }}"
                                 placeholder="https://mon-projet.com"
                                 class="w-full pl-9 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                         </div>
                         <div class="relative">
-                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">⚙️</span>
                             <input type="url" name="lien_github" value="{{ old('lien_github') }}"
                                 placeholder="https://github.com/..."
                                 class="w-full pl-9 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
@@ -114,7 +102,7 @@
                 {{-- Médias --}}
                 <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm" x-data="{ count: 0, previews: [] }">
                     <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
-                        📁 Médias du projet
+                        Médias du projet
                     </label>
                     <div class="relative">
                         <div
