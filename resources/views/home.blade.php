@@ -197,79 +197,66 @@
     </section>
 
     <section class="bg-white py-24 px-6">
-        <div class="max-w-4xl mx-auto">
-            <div class="mb-20">
-                <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="max-w-2xl mb-16">
+                <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Pourquoi maintenant</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
                     Les vrais problèmes. <span class="text-slate-400 font-medium">Les vraies solutions.</span>
                 </h2>
-                <div class="w-12 h-1 bg-indigo-600 rounded"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
-                <div class="space-y-3">
-                    <h3 class="text-lg font-bold text-slate-900">Visibilité sans frontières</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">
-                        Sortez de l'ombre. Un profil MeFolio optimisé pour connecter les talents aux recruteurs
-                        locaux et internationaux.
-                    </p>
-                </div>
-
-                <div class="space-y-3">
-                    <h3 class="text-lg font-bold text-slate-900">Paiements locaux intégrés</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">
-                        L'argent arrive là où vous êtes. Retraits directs via <span
-                            class="text-slate-900 font-medium">MTN MoMo, Wave, Kkiapay, Fedapay, Moov ...</span> sans détours.
-                    </p>
-                </div>
-
-                <div class="space-y-3">
-                    <h3 class="text-lg font-bold text-slate-900">Marketplace de missions</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">
-                        Ne cherchez plus, postulez. Un accès direct aux missions freelance pour décrocher vos futurs
-                        contrats en un clic.
-                    </p>
-                </div>
-
-                <div class="space-y-3">
-                    <h3 class="text-lg font-bold text-slate-900">Écosystème startup africain fragmenté</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">
-                        L'élite de l'écosystème. Hackathons, challenges créatifs et programmes <span class="text-slate-900 font-medium">Sèmè
-                            City & ASIN</span> regroupés au même endroit.
-                    </p>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                @foreach ([
+                    ['num' => '01', 'title' => 'Visibilité sans frontières', 'desc' => "Sortez de l'ombre. Un profil MeFolio optimisé pour connecter les talents aux recruteurs locaux et internationaux."],
+                    ['num' => '02', 'title' => 'Paiements locaux intégrés', 'desc' => "L'argent arrive là où vous êtes. Retraits directs via MTN MoMo, Wave, Kkiapay, Fedapay, Moov ... sans détours."],
+                    ['num' => '03', 'title' => 'Marketplace de missions', 'desc' => 'Ne cherchez plus, postulez. Un accès direct aux missions freelance pour décrocher vos futurs contrats en un clic.'],
+                    ['num' => '04', 'title' => 'Écosystème startup fragmenté', 'desc' => 'Hackathons, challenges créatifs et programmes Sèmè City & ASIN regroupés au même endroit.'],
+                ] as $item)
+                    <div
+                        class="group rounded-2xl border border-gray-100 p-7 hover:border-indigo-200 hover:shadow-lg hover:shadow-gray-900/5 transition-all">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span
+                                class="flex-shrink-0 w-8 h-8 rounded-lg bg-gray-900 group-hover:bg-indigo-600 text-white text-xs font-bold flex items-center justify-center transition-colors">
+                                {{ $item['num'] }}
+                            </span>
+                            <h3 class="text-base font-bold text-slate-900">{{ $item['title'] }}</h3>
+                        </div>
+                        <p class="text-slate-500 text-sm leading-relaxed">{{ $item['desc'] }}</p>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    {{-- Comment ça marche : section minimaliste --}}
-    <section class="bg-white py-24 px-6 border-t border-gray-100">
+    {{-- Comment ça marche : parcours en cartes numérotées --}}
+    <section class="bg-[#FAFAF8] py-24 px-6 border-t border-gray-100">
         <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-20">
+            <div class="text-center mb-16">
                 <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Comment ça marche</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
                     Trois étapes vers votre carrière créative.
                 </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-8 relative">
-                <div class="hidden md:block absolute top-6 left-[16.5%] right-[16.5%] h-px bg-gray-200"></div>
-
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                 @foreach ([
                     ['num' => '01', 'title' => 'Créez votre profil', 'desc' => 'Renseignez votre spécialité, votre bio et votre portfolio en quelques minutes.'],
                     ['num' => '02', 'title' => 'Publiez vos projets', 'desc' => 'Montrez votre travail, recevez des likes et des commentaires de la communauté.'],
                     ['num' => '03', 'title' => 'Soyez repéré', 'desc' => 'Postulez à des missions, grimpez le classement et faites-vous remarquer.'],
                 ] as $step)
-                    <div class="relative text-center md:text-left">
-                        <div class="relative z-10 inline-flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-gray-900 text-sm font-bold text-gray-900 mb-6">
+                    <div
+                        class="bg-white rounded-2xl border border-gray-100 p-7 hover:shadow-lg hover:shadow-gray-900/5 hover:-translate-y-0.5 transition-all">
+                        <span
+                            class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gray-900 text-white text-xs font-bold mb-5">
                             {{ $step['num'] }}
-                        </div>
+                        </span>
                         <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $step['title'] }}</h3>
                         <p class="text-slate-500 text-sm leading-relaxed">{{ $step['desc'] }}</p>
                     </div>
                 @endforeach
             </div>
 
-            <div class="mt-16 text-center">
+            <div class="mt-14 text-center">
                 <a href="{{ route(auth()->check() ? 'dashboard' : 'register') }}"
                     class="inline-flex items-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02]">
                     Commencer maintenant
