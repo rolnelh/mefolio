@@ -198,11 +198,18 @@
 
     <section class="bg-white py-24 px-6">
         <div class="max-w-5xl mx-auto">
-            <div class="max-w-2xl mb-16">
-                <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Pourquoi maintenant</p>
+            <div class="max-w-xl mx-auto text-center mb-16">
+                <span
+                    class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-4">
+                    [ Pourquoi maintenant ]
+                </span>
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
                     Les vrais problèmes. <span class="text-slate-400 font-medium">Les vraies solutions.</span>
                 </h2>
+                <p class="text-slate-500 mt-4 text-sm leading-relaxed">
+                    Une plateforme pensée pour nos réalités : moins d'outils dispersés, plus d'opportunités concrètes
+                    pour les créatifs africains.
+                </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -213,7 +220,7 @@
                     ['num' => '04', 'title' => 'Écosystème startup fragmenté', 'desc' => 'Hackathons, challenges créatifs et programmes Sèmè City & ASIN regroupés au même endroit.'],
                 ] as $item)
                     <div
-                        class="group rounded-2xl border border-gray-100 p-7 hover:border-indigo-200 hover:shadow-lg hover:shadow-gray-900/5 transition-all">
+                        class="group rounded-2xl bg-gray-50 hover:bg-white p-7 border border-transparent hover:border-gray-100 hover:shadow-lg hover:shadow-gray-900/5 transition-all">
                         <div class="flex items-center gap-3 mb-3">
                             <span
                                 class="flex-shrink-0 w-8 h-8 rounded-lg bg-gray-900 group-hover:bg-indigo-600 text-white text-xs font-bold flex items-center justify-center transition-colors">
@@ -225,42 +232,82 @@
                     </div>
                 @endforeach
             </div>
+
+            <div class="mt-12 text-center">
+                <a href="{{ route(auth()->check() ? 'dashboard' : 'register') }}"
+                    class="inline-flex items-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02]">
+                    Créer mon profil
+                </a>
+            </div>
         </div>
     </section>
 
-    {{-- Comment ça marche : parcours en cartes numérotées --}}
-    <section class="bg-[#FAFAF8] py-24 px-6 border-t border-gray-100">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16">
-                <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Comment ça marche</p>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-                    Trois étapes vers votre carrière créative.
-                </h2>
-            </div>
+    {{-- Comment ça marche : parcours circulaire --}}
+    <section class="bg-[#FAFAF8] py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="relative overflow-hidden rounded-[2.5rem] bg-[#0a0d0a] p-10 md:p-16">
+                <div aria-hidden="true" class="absolute inset-0">
+                    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-72 h-72 bg-lime-400/10 rounded-full blur-3xl"></div>
+                </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                @foreach ([
-                    ['num' => '01', 'title' => 'Créez votre profil', 'desc' => 'Renseignez votre spécialité, votre bio et votre portfolio en quelques minutes.'],
-                    ['num' => '02', 'title' => 'Publiez vos projets', 'desc' => 'Montrez votre travail, recevez des likes et des commentaires de la communauté.'],
-                    ['num' => '03', 'title' => 'Soyez repéré', 'desc' => 'Postulez à des missions, grimpez le classement et faites-vous remarquer.'],
-                ] as $step)
-                    <div
-                        class="bg-white rounded-2xl border border-gray-100 p-7 hover:shadow-lg hover:shadow-gray-900/5 hover:-translate-y-0.5 transition-all">
-                        <span
-                            class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gray-900 text-white text-xs font-bold mb-5">
-                            {{ $step['num'] }}
-                        </span>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $step['title'] }}</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">{{ $step['desc'] }}</p>
-                    </div>
-                @endforeach
-            </div>
+                <div class="relative z-10 text-center mb-4">
+                    <span class="text-xs font-bold uppercase tracking-[0.3em] text-lime-400">[ Comment ça marche ]</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight mt-3">
+                        Trois étapes vers votre carrière créative.
+                    </h2>
+                </div>
 
-            <div class="mt-14 text-center">
-                <a href="{{ route(auth()->check() ? 'dashboard' : 'register') }}"
-                    class="inline-flex items-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02]">
-                    Commencer maintenant
-                </a>
+                @php
+                    $steps = [
+                        ['num' => '01', 'title' => 'Créez votre profil', 'desc' => 'Renseignez votre spécialité, votre bio et votre portfolio en quelques minutes.', 'pos' => 'top-[2%] left-1/2 -translate-x-1/2'],
+                        ['num' => '02', 'title' => 'Publiez vos projets', 'desc' => 'Montrez votre travail, recevez des likes et des commentaires de la communauté.', 'pos' => 'bottom-[10%] right-[4%]'],
+                        ['num' => '03', 'title' => 'Soyez repéré', 'desc' => 'Postulez à des missions, grimpez le classement et faites-vous remarquer.', 'pos' => 'bottom-[10%] left-[4%]'],
+                    ];
+                @endphp
+
+                {{-- Roue circulaire (desktop) --}}
+                <div class="hidden md:block relative mx-auto mt-14 mb-8" style="width: 340px; height: 340px;">
+                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 340 340">
+                        <circle cx="170" cy="170" r="140" fill="none" stroke="#ffffff1f" stroke-width="1.5"
+                            stroke-dasharray="3 7" />
+                    </svg>
+
+                    <a href="{{ route(auth()->check() ? 'dashboard' : 'register') }}"
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-white/5 border border-white/10 flex flex-col items-center justify-center gap-1.5 text-center hover:bg-white/10 transition-all">
+                        <x-application-logo class="h-6 w-auto text-lime-400" />
+                        <span class="text-white text-[11px] font-bold leading-tight">Commencer<br>maintenant</span>
+                    </a>
+
+                    @foreach ($steps as $step)
+                        <div class="absolute {{ $step['pos'] }} flex flex-col items-center gap-2">
+                            <span
+                                class="w-10 h-10 rounded-full bg-lime-400 text-gray-900 text-sm font-black flex items-center justify-center shadow-lg shadow-lime-400/20">
+                                {{ $step['num'] }}
+                            </span>
+                            <span class="text-white text-xs font-bold whitespace-nowrap">{{ $step['title'] }}</span>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- Détails (desktop + mobile) --}}
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 mt-10 md:mt-4 pt-10 border-t border-white/10">
+                    @foreach ($steps as $step)
+                        <div class="text-center md:text-left">
+                            <span class="inline-flex md:hidden items-center justify-center w-7 h-7 rounded-full bg-lime-400 text-gray-900 text-xs font-black mb-2">
+                                {{ $step['num'] }}
+                            </span>
+                            <h3 class="text-white font-bold text-sm mb-1.5">{{ $step['title'] }}</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">{{ $step['desc'] }}</p>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="relative z-10 mt-10 text-center md:hidden">
+                    <a href="{{ route(auth()->check() ? 'dashboard' : 'register') }}"
+                        class="inline-flex items-center gap-2 bg-lime-400 hover:bg-lime-300 text-gray-900 px-8 py-3.5 rounded-full text-sm font-bold transition-all">
+                        Commencer maintenant
+                    </a>
+                </div>
             </div>
         </div>
     </section>
