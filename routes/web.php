@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\SpotlightController as AdminSpotlightController;
 use App\Http\Controllers\Admin\TalentNominationController as AdminTalentNominationController;
 use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
+use App\Http\Controllers\AIAssistantController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/projects/{project}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::post('/projects/{project}/comments/ajax', [CommentController::class, 'storeAjax'])->name('comments.store.ajax');
     Route::post('/projects/{project}/like', [ProjectController::class, 'toggleLike'])->name('projects.like');
+
+    Route::post('/dashboard/assistant', [AIAssistantController::class, 'chat'])
+        ->middleware('throttle:15,1')
+        ->name('assistant.chat');
 });
 
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
