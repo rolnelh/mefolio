@@ -57,7 +57,6 @@
                 <div class="lg:col-span-2">
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Ressources</h3>
                     <ul class="space-y-3 text-sm font-semibold text-slate-600">
-                        <li><a href="{{ route('vision') }}" class="hover:text-indigo-600 transition-colors">À propos</a></li>
                         <li>
                             <a href="mailto:contact@mefolio.com" class="hover:text-indigo-600 transition-colors">
                                 contact@mefolio.com

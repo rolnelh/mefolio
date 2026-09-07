@@ -31,6 +31,7 @@ class ProgramSeeder extends Seeder
                 'type' => 'Programme continu',
                 'description' => "Cité de l'innovation et du savoir du Bénin, Sèmè City est un écosystème unique qui réunit créateurs, chercheurs et entrepreneurs africains pour co-construire l'avenir du continent à travers des résidences, labs et programmes d'accélération.",
                 'tags' => ['Innovation', 'Résidence', 'Créativité', 'Recherche', 'Afrique'],
+                'url' => 'https://semecity.bj',
                 'featured' => true,
             ],
             [
@@ -56,6 +57,8 @@ class ProgramSeeder extends Seeder
                 'type' => 'Financement panafricain',
                 'description' => 'Le plus grand programme philanthropique dédié aux entrepreneurs africains — 5 000 $ de financement de départ.',
                 'tags' => ['Financement', 'Panafricain', '5000 USD'],
+                'url' => 'https://www.tefconnect.com',
+                'featured' => true,
             ],
             [
                 'name' => 'Orange Fab',
