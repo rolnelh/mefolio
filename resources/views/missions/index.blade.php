@@ -9,34 +9,46 @@
                 <div class="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-violet-600/10 blur-[100px]">
                 </div>
             </div>
-            <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-                <h1 class="text-5xl sm:text-6xl font-black text-white tracking-tight leading-none mb-6">
-                    Missions<br>
+            <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
+                <h1 class="text-5xl sm:text-6xl font-black text-white tracking-tight leading-[1.05] mb-6">
+                    Votre prochaine<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
-                        Freelance
+                        mission freelance
                     </span>
                 </h1>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                    Trouvez des missions, proposez vos services, connectez-vous directement avec des clients africains.
+                <p class="text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
+                    Proposez vos services et connectez-vous directement avec des clients africains.
                 </p>
 
-                <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-                    <form method="GET" class="flex-1 relative max-w-md">
-                        <input type="text" name="q" value="{{ request('q') }}" placeholder="Ex: développeur web, designer logo..."
-                            class="w-full pl-4 pr-4 py-3.5 bg-white/10 border border-white/20 text-white placeholder:text-gray-500 rounded-2xl text-sm focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all">
-                    </form>
+                <div class="mt-10 flex justify-center">
                     @auth
                         <a href="{{ route('missions.create') }}"
-                            class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl transition-all hover:scale-105 text-sm whitespace-nowrap">
-                            Publier une mission
+                            class="inline-flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition-all hover:scale-105 text-sm">
+                            Publier une mission →
                         </a>
                     @else
                         <a href="{{ route('login') }}"
-                            class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl transition-all hover:scale-105 text-sm whitespace-nowrap">
-                            Publier une mission
+                            class="inline-flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition-all hover:scale-105 text-sm">
+                            Publier une mission →
                         </a>
                     @endauth
                 </div>
+
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-gray-500">
+                    @foreach (['Publication gratuite', 'Candidature en un clic', 'Directement avec le client'] as $point)
+                        <span class="inline-flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                            {{ $point }}
+                        </span>
+                    @endforeach
+                </div>
+
+                <form method="GET" class="mt-8 relative max-w-md mx-auto">
+                    <input type="text" name="q" value="{{ request('q') }}" placeholder="Ex: développeur web, designer logo..."
+                        class="w-full pl-4 pr-4 py-3 bg-white/10 border border-white/20 text-white placeholder:text-gray-500 rounded-2xl text-sm focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all">
+                </form>
             </div>
         </section>
 
