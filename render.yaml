@@ -15,16 +15,20 @@ services:
         generateValue: true
       - key: DB_CONNECTION
         value: mysql
+      # Identifiants de connexion à la base MySQL (Clever Cloud) : renseignés
+      # manuellement dans le dashboard Render (Environment), jamais dans ce
+      # fichier commité publiquement. "sync: false" indique à Render de ne
+      # jamais écraser ni lire ces valeurs depuis ce Blueprint.
       - key: DB_HOST
-        value: bdudwxu4b44cytajop0u-mysql.services.clever-cloud.com
+        sync: false
       - key: DB_PORT
-        value: 3306
+        sync: false
       - key: DB_DATABASE
-        value: bdudwxu4b44cytajop0u
+        sync: false
       - key: DB_USERNAME
-        value: un3flv9v57wvjyec
+        sync: false
       - key: DB_PASSWORD
-        value: lvh3dGmQflT264otvdck
+        sync: false
       - key: FILESYSTEM_DISK
         value: public
       - key: SESSION_DRIVER
