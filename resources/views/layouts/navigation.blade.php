@@ -1,3 +1,4 @@
+<div class="sticky top-0 z-50 pt-3 sm:pt-4 px-2 sm:px-6 lg:px-8 pointer-events-none">
 <nav x-data="{
     open: false,
     lastPos: window.scrollY,
@@ -9,10 +10,10 @@
     showNav = currentPos < lastPos || currentPos < 50;
     lastPos = currentPos;
 })"
-    :class="{ 'translate-y-0': showNav, '-translate-y-full': !showNav && !open }"
-    class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 transition-transform duration-300 ease-in-out">
+    :class="{ 'translate-y-0': showNav, '-translate-y-24': !showNav && !open }"
+    class="pointer-events-auto max-w-6xl mx-auto bg-white/95 backdrop-blur-md border border-gray-100 rounded-full shadow-lg shadow-gray-900/5 transition-transform duration-300 ease-in-out">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-6">
         <div class="flex justify-between items-center h-16">
 
             <div class="flex items-center gap-8">
@@ -54,8 +55,9 @@
                     {{-- Missions & services --}}
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open" @click.outside="open = false"
-                            class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 rounded-lg hover:bg-gray-50 transition-all">
+                            class="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 rounded-lg hover:bg-gray-50 transition-all">
                             Missions
+                            <span class="bg-indigo-100 text-indigo-600 text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-full">Nouveau</span>
                             <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
                                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -365,6 +367,7 @@
         </div>
     </div>
 </nav>
+</div>
 
 
 <div class="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-sm">

@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\ProgramController as AdminProgramController;
 use App\Http\Controllers\Admin\SpotlightController as AdminSpotlightController;
 use App\Http\Controllers\Admin\TalentNominationController as AdminTalentNominationController;
 use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
+use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -169,6 +170,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::get('/newsletter', [AdminNewsletterController::class, 'index'])->name('newsletter.index');
     Route::delete('/newsletter/{subscriber}', [AdminNewsletterController::class, 'destroy'])->name('newsletter.destroy');
+
+    Route::resource('testimonials', AdminTestimonialController::class)->except(['show']);
 });
 
 require __DIR__.'/auth.php';

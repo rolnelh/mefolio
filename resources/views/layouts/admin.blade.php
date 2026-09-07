@@ -31,6 +31,7 @@
             ['route' => 'admin.spotlights.index', 'label' => 'Talent de la semaine', 'icon' => 'star'],
             ['route' => 'admin.nominations.index', 'label' => 'Nominations', 'icon' => 'flag'],
             ['route' => 'admin.newsletter.index', 'label' => 'Newsletter', 'icon' => 'mail'],
+            ['route' => 'admin.testimonials.index', 'label' => 'Témoignages', 'icon' => 'chat'],
         ];
 
         $icons = [
