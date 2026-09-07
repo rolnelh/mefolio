@@ -13,9 +13,9 @@
 <x-app-layout>
 
     @php
-        // Les créatifs avec une vraie photo passent en priorité, pour ne jamais
-        // masquer un profil réel derrière les avatars par initiales.
-        $heroPool = $creatifs->sortByDesc(fn ($c) => $c->photo ? 1 : 0)->values();
+        // Seuls les créatifs avec une vraie photo apparaissent dans le hero :
+        // pas d'avatars par initiales (cercles bleus) dans ces grappes.
+        $heroPool = $heroCreatifs;
         $heroHautGauche = $heroPool->slice(0, 2)->values();
         $heroBasGauche = $heroPool->slice(2, 2)->values();
         $heroHautDroit = $heroPool->slice(4, 2)->values();
@@ -45,7 +45,7 @@
                         @foreach ($cluster['creatifs'] as $j => $hc)
                             <a href="{{ route('creatifs.show', $hc->slug) }}"
                                 class="absolute {{ $j === 0 ? 'top-0 left-0 z-10' : 'top-9 left-9 z-20' }} hover:z-30 hover:scale-110 transition-all duration-300">
-                                <img src="{{ $hc->photo ?: 'https://ui-avatars.com/api/?name=' . urlencode($hc->prenom ?? 'M') . '&background=6366f1&color=fff' }}"
+                                <img src="{{ $hc->photo }}"
                                     class="w-16 h-16 rounded-full object-cover shadow-xl ring-4 ring-[#F7F6F1]">
                             </a>
                         @endforeach
