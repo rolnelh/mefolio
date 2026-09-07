@@ -130,19 +130,6 @@
                             $creatif->photo;
                     @endphp
 
-                    <a href="{{ route('dashboard') }}"
-                        class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 rounded-lg hover:bg-gray-50 transition-all">
-                        Tableau de bord
-                    </a>
-
-                    <a href="{{ $profilComplet ? route('projets.create') : route('creatifs.edit') }}"
-                        class="inline-flex items-center gap-1.5 bg-gray-900 hover:bg-black text-white text-sm font-semibold pl-3.5 pr-4 py-2 rounded-full transition-all">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.25" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                        Créer
-                    </a>
-
                     {{-- Recherche rapide --}}
                     <div class="relative" x-data="{ openSearch: false }">
                         <button @click="openSearch = !openSearch; $nextTick(() => openSearch && $refs.navSearchInput.focus())"
