@@ -44,17 +44,6 @@
                         </span>
                     @endforeach
                 </div>
-
-                <form method="GET" class="mt-8 flex items-center gap-2 max-w-md mx-auto">
-                    <input type="text" name="q" value="{{ request('q') }}" placeholder="Ex: développeur web, designer logo..."
-                        class="flex-1 min-w-0 pl-4 pr-4 py-3 bg-white/10 border border-white/20 text-white placeholder:text-gray-500 rounded-2xl text-sm focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all">
-                    <button type="submit"
-                        class="flex-shrink-0 w-[46px] h-[46px] flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl transition-all">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </button>
-                </form>
             </div>
         </section>
 
@@ -62,7 +51,14 @@
 
             {{-- FILTRES --}}
             <form method="GET" class="flex flex-wrap items-center gap-3 mb-8">
-                <input type="hidden" name="q" value="{{ request('q') }}">
+                <div class="relative">
+                    <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none"
+                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" name="q" value="{{ request('q') }}" placeholder="Rechercher une mission..."
+                        class="w-52 pl-9 pr-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
 
                 <select name="domaine" onchange="this.form.submit()"
                     class="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
