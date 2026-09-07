@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mission;
 use App\Models\MissionApplication;
 use App\Models\Project;
+use App\Notifications\ActivityNotification;
 use App\Services\BuilderScoreService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -60,6 +61,15 @@ class ProjectController extends Controller
             $like->delete();
         } else {
             $project->likes()->create(['user_id' => auth()->id()]);
+
+            if ($project->user && $project->user_id !== auth()->id()) {
+                $project->user->notify(new ActivityNotification(
+                    title: 'Nouveau like',
+                    message: auth()->user()->username . ' a aimé votre projet « ' . $project->title . ' ».',
+                    url: route('projects.show', $project->slug),
+                    icon: 'like',
+                ));
+            }
         }
 
         return back();
@@ -155,6 +165,13 @@ class ProjectController extends Controller
             $scorer->addPoints($creatif, 'new_project');
         }
 
+        auth()->user()->notify(new ActivityNotification(
+            title: 'Projet publié',
+            message: 'Votre projet « ' . $project->title . ' » a été publié avec succès.',
+            url: route('projects.show', $project->slug),
+            icon: 'project',
+        ));
+
         return redirect()->route('dashboard')->with('success', "Votre projet a été publié avec succès.");
     }
 
@@ -218,6 +235,13 @@ class ProjectController extends Controller
             $scorer->addPoints($project->creatif, 'update_project');
         }
 
+        auth()->user()->notify(new ActivityNotification(
+            title: 'Projet modifié',
+            message: 'Votre projet « ' . $project->title . ' » a été mis à jour.',
+            url: route('projects.show', $project->slug),
+            icon: 'project',
+        ));
+
         return redirect()->route('projects.show', $project->slug)
             ->with('success', 'Projet mis à jour !');
     }
@@ -243,7 +267,15 @@ class ProjectController extends Controller
         if ($project->user_id !== auth()->id()) {
             abort(403);
         }
+        $title = $project->title;
         $project->delete();
+
+        auth()->user()->notify(new ActivityNotification(
+            title: 'Projet supprimé',
+            message: 'Votre projet « ' . $title . ' » a été supprimé.',
+            icon: 'project',
+        ));
+
         return redirect()->route('dashboard')->with('success', 'Projet supprimé définitivement.');
     }
 }
