@@ -61,6 +61,15 @@ class ProgramSeeder extends Seeder
                 'featured' => true,
             ],
             [
+                'name' => 'Epitech Bénin',
+                'full_name' => "École de l'innovation et de l'expertise informatique",
+                'country' => 'Bénin',
+                'type' => 'École / Formation',
+                'description' => "Campus béninois du réseau Epitech, école d'informatique et d'innovation qui forme aux métiers du numérique par la pédagogie par projets.",
+                'tags' => ['Formation', 'Tech', 'Numérique', 'Éducation'],
+                'featured' => true,
+            ],
+            [
                 'name' => 'Orange Fab',
                 'full_name' => 'Orange Digital Center',
                 'country' => 'Panafricain',
