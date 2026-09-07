@@ -13,11 +13,6 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center">
 
                 <div class="text-left order-2 lg:order-1">
-                    <div class="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 text-orange-600 text-[10px] font-black px-4 py-1.5 rounded-full mb-6 uppercase tracking-[0.2em]">
-                        <span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                        Hub des opportunités africaines
-                    </div>
-
                     <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[0.95] mb-6">
                         Programmes &<br>
                         <span class="text-orange-500">Hackathons</span>

@@ -10,11 +10,6 @@
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
                 <div class="text-left">
-                    <div
-                        class="inline-flex items-center gap-2 bg-slate-950 border border-indigo-500/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-8 uppercase tracking-widest">
-                        Mefolio 2.0 — Africa's Talent Ecosystem
-                    </div>
-
                     <h1 class="text-5xl sm:text-7xl font-black text-slate-900 tracking-tight leading-[1.05] mb-8">
                         Vision<br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
