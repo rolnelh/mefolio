@@ -13,7 +13,7 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        $email = env('MEFOLIO_ADMIN_EMAIL', 'koudadjefiacre09@gmail.com');
+        $email = env('MEFOLIO_ADMIN_EMAIL', 'houndagnondieudonne4@gmail.com');
 
         $admin = User::where('email', $email)->first();
 

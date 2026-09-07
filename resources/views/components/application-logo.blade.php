@@ -1,1 +1,7 @@
-<a href="{{route('home')}}" class="text-blue-600 hover:text-blue-800 text-md font-bold">MEFOLIO</a>
+{{-- Marque Mefolio : à composer avec un <a href="{{ route('home') }}"> et, si besoin, un
+     libellé texte "Mefolio" à côté (le composant ne rend que le pictogramme). --}}
+<svg {{ $attributes }} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="30" height="30" rx="9" fill="currentColor" fill-opacity="0.12" />
+    <path d="M9 22V10l7 7 7-7v12" stroke="currentColor" stroke-width="2.75" stroke-linecap="round"
+        stroke-linejoin="round" />
+</svg>

@@ -20,8 +20,9 @@ class HomeController extends Controller
         ->paginate(8);
 
     $creatifs = Creatif::where('is_paused', false)->orderBy('created_at', 'desc')->take(5)->get();
+    $creatifCount = Creatif::where('is_paused', false)->count();
 
-    return view('home', compact('projects', 'creatifs'));
+    return view('home', compact('projects', 'creatifs', 'creatifCount'));
 }
 
 }

@@ -9,12 +9,14 @@
     <title>Administration · {{ config('app.name', 'Mefolio') }}</title>
 
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-syne antialiased bg-gray-50">
+<body class="font-jakarta antialiased bg-gray-50">
     @php
         $adminNav = [
             ['route' => 'admin.dashboard', 'label' => 'Tableau de bord', 'icon' => 'home'],

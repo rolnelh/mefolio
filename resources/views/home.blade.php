@@ -12,139 +12,120 @@
 </style>
 <x-app-layout>
 
-    <section class="relative bg-[#050810] py-20 sm:py-28 overflow-hidden">
+    @php
+        $heroCreatifs = $creatifs->filter(fn ($c) => $c->photo)->take(4)->values();
+    @endphp
 
-        <div class="absolute inset-0 z-0 pointer-events-none">
-            <div class="absolute -top-[10%] -right-[10%] w-[70%] h-[70%] rounded-full bg-blue-600/10 blur-[120px]"></div>
-            <div class="absolute -bottom-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-indigo-600/10 blur-[100px]">
-            </div>
-            <div
-                class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay">
-            </div>
+    <section class="relative bg-[#F7F6F1] py-24 sm:py-32 overflow-hidden">
+
+        {{-- Trame de points --}}
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-60"
+            style="background-image: radial-gradient(#00000014 1px, transparent 1px); background-size: 28px 28px;">
+        </div>
+        <div class="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-[#F7F6F1]">
         </div>
 
-        <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-6xl text-center">
+        {{-- Avatars flottants --}}
+        @foreach ($heroCreatifs as $i => $hc)
+            @php
+                $positions = [
+                    'top-[14%] left-[6%] lg:left-[12%]',
+                    'top-[18%] right-[6%] lg:right-[13%]',
+                    'bottom-[14%] left-[9%] lg:left-[16%]',
+                    'bottom-[16%] right-[8%] lg:right-[15%]',
+                ];
+                $rotations = ['-rotate-6', 'rotate-6', 'rotate-3', '-rotate-3'];
+            @endphp
+            <a href="{{ route('creatifs.show', $hc->slug) }}"
+                class="hidden md:block absolute {{ $positions[$i] }} z-10 {{ $rotations[$i] }} hover:scale-105 hover:rotate-0 transition-all duration-300">
+                <span class="relative block">
+                    <img src="{{ $hc->photo }}"
+                        class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl object-cover shadow-xl ring-4 ring-white">
+                    <span
+                        class="absolute -top-2 -right-2 w-7 h-7 bg-gray-900 rounded-full flex items-center justify-center shadow-md">
+                        <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </span>
+                </span>
+            </a>
+        @endforeach
 
-                <div
-                    class="inline-flex items-center rounded-full bg-blue-500/5 px-4 py-1.5 text-xs font-semibold text-blue-400 ring-1 ring-inset ring-blue-500/20 mb-10 backdrop-blur-md">
-                    The first African platform for creative talent
-                </div>
+        <div class="relative z-10 mx-auto max-w-3xl px-6 lg:px-8 text-center">
 
-                <h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-7xl leading-[1.05]">
-                    {{-- Le talent africain<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
-                        mérite une scène mondiale.
-                    </span> --}}
-                    Discover, Showcase and Hire African Talents
-                </h1>
+            <span
+                class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gray-600 ring-1 ring-inset ring-gray-200 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                Portfolio · Missions · Communauté
+            </span>
 
-                <p class="mt-8 text-lg md:text-xl leading-relaxed text-gray-400 font-light max-w-2xl mx-auto">
-                    {{-- Mefolio est la plateforme pensée pour les créatifs et étudiants africains.
-                    Construisez votre portfolio, soyez découverts par des recruteurs,
-                    et monétisez vos compétences avec
-                    <span class="text-gray-200 font-medium">Mobile Money.</span> --}}
+            <h1 class="mt-8 text-5xl sm:text-6xl font-bold tracking-tight text-gray-900 leading-[1.1]">
+                Un espace pour
+                <span class="relative inline-block whitespace-nowrap">
+                    révéler
+                    <svg class="absolute -bottom-1 left-0 w-full" height="10" viewBox="0 0 120 10" preserveAspectRatio="none" fill="none">
+                        <path d="M2 7C20 2 40 2 60 5C80 8 100 8 118 3" stroke="#FACC15" stroke-width="5" stroke-linecap="round" />
+                    </svg>
+                </span>
+                votre talent créatif
+            </h1>
 
-                    The first platform dedicated to students, creatives and developers across Africa.
+            <p class="mt-6 text-lg text-gray-500 max-w-xl mx-auto leading-relaxed">
+                Mefolio aide les créatifs africains à construire leur portfolio, trouver des missions et se connecter
+                à une communauté qui valorise leur travail.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                @guest
+                    <a href="{{ route('register') }}"
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-gray-900/10">
+                        Créer mon profil
+                    </a>
+                    <a href="{{ route('projects.index') }}"
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 px-8 py-3.5 rounded-full text-sm font-bold hover:border-gray-400 transition-all">
+                        Explorer les projets
+                    </a>
+                @endguest
+
+                @auth
+                    @php
+                        $creatif = Auth::user()->creatif;
+                        $profilComplet =
+                            $creatif &&
+                            $creatif->nom &&
+                            $creatif->prenom &&
+                            $creatif->specialite &&
+                            $creatif->localisation &&
+                            $creatif->bio &&
+                            $creatif->portfolio_url &&
+                            $creatif->photo;
+                    @endphp
+                    @if ($profilComplet)
+                        <a href="{{ route('projets.create') }}"
+                            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-gray-900/10">
+                            Partager un projet
+                        </a>
+                    @else
+                        <a href="{{ route('creatifs.edit') }}"
+                            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-gray-900/10">
+                            Compléter mon profil
+                        </a>
+                    @endif
+                    <a href="{{ route('projects.index') }}"
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 px-8 py-3.5 rounded-full text-sm font-bold hover:border-gray-400 transition-all">
+                        Explorer les projets
+                    </a>
+                @endauth
+            </div>
+
+            @if ($creatifCount > 0)
+                <p class="mt-8 text-sm text-gray-400">
+                    Déjà rejoint par <span class="text-gray-900 font-semibold">{{ number_format($creatifCount) }}</span>
+                    créatif{{ $creatifCount > 1 ? 's' : '' }} africain{{ $creatifCount > 1 ? 's' : '' }}
                 </p>
+            @endif
 
-                {{-- Stats rapides --}}
-                <div class="mt-10 flex items-center justify-center gap-8 flex-wrap">
-                    <div class="text-center">
-                        <div class="text-2xl font-extrabold text-white">2 000+</div>
-                        <div class="text-xs text-gray-500 mt-0.5">Créatifs</div>
-                    </div>
-                    <div class="w-px h-8 bg-gray-800"></div>
-                    <div class="text-center">
-                        <div class="text-2xl font-extrabold text-white">5k+</div>
-                        <div class="text-xs text-gray-500 mt-0.5">Projets</div>
-                    </div>
-                    <div class="w-px h-8 bg-gray-800"></div>
-                    <div class="text-center">
-                        <div class="text-2xl font-extrabold text-white">15+</div>
-                        <div class="text-xs text-gray-500 mt-0.5">Pays</div>
-                    </div>
-                    <div class="w-px h-8 bg-gray-800"></div>
-                    <div class="text-center">
-                        <div class="text-2xl font-extrabold text-white">100%</div>
-                        <div class="text-xs text-gray-500 mt-0.5">Africain</div>
-                    </div>
-                </div>
-
-                <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5">
-                    @guest
-                        <a href="{{ route('register') }}"
-                            class="w-full sm:w-auto group relative inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-sm font-bold text-gray-950 shadow-2xl transition-all hover:bg-gray-100 hover:scale-[1.02] active:scale-95">
-                            Join as Talent
-                            <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-                        </a>
-                        <a href="{{ route('projects.index') }}"
-                            class="group flex items-center gap-2 text-sm font-bold text-gray-300 hover:text-white transition-colors py-3">
-                            Explore Talents
-                            <span class="group-hover:translate-x-1 transition-transform">→</span>
-                        </a>
-                    @endguest
-
-                    @auth
-                        <a href="{{ route('projects.index') }}"
-                            class="w-full sm:w-auto rounded-full bg-blue-600 px-10 py-4 text-sm font-bold text-white shadow-lg shadow-blue-900/20 hover:bg-blue-500 transition-all hover:scale-[1.02]">
-                            Explorer les projets
-                        </a>
-                        @php
-                            $creatif = Auth::user()->creatif;
-                            $profilComplet =
-                                $creatif &&
-                                $creatif->nom &&
-                                $creatif->prenom &&
-                                $creatif->specialite &&
-                                $creatif->localisation &&
-                                $creatif->bio &&
-                                $creatif->portfolio_url &&
-                                $creatif->photo;
-                        @endphp
-                        @if ($profilComplet)
-                            <a href="{{ route('projets.create') }}"
-                                class="group flex items-center gap-2 text-sm font-bold text-gray-300 hover:text-white transition-colors py-3">
-                                Partager un projet
-                                <span class="group-hover:translate-x-1 transition-transform">→</span>
-                            </a>
-                        @else
-                            <a href="{{ route('creatifs.edit') }}"
-                                class="group flex items-center gap-2 text-sm font-bold text-amber-400 hover:text-amber-300 transition-colors py-3">
-                                 Compléter mon profil
-                                <span class="group-hover:translate-x-1 transition-transform">→</span>
-                            </a>
-                        @endif
-                    @endauth
-                </div>
-
-                <div class="mt-12 flex items-center justify-center gap-3">
-                    <div class="flex -space-x-2">
-                        <div
-                            class="w-8 h-8 rounded-full bg-indigo-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
-                            D</div>
-                        <div
-                            class="w-8 h-8 rounded-full bg-blue-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
-                            A</div>
-                        <div
-                            class="w-8 h-8 rounded-full bg-purple-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
-                            S</div>
-                        <div
-                            class="w-8 h-8 rounded-full bg-pink-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
-                            K</div>
-                        <div
-                            class="w-8 h-8 rounded-full bg-green-500 border-2 border-[#050810] flex items-center justify-center text-white text-xs font-bold">
-                            M</div>
-                    </div>
-                    <p class="text-sm text-gray-400">
-                        Rejoignez <span class="text-white font-semibold">+2 000 créatifs</span> africains
-                    </p>
-                </div>
-
-            </div>
         </div>
-
-        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050810] to-transparent z-10"></div>
     </section>
 
     <section class="bg-white py-24 px-6">
