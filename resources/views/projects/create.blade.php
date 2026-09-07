@@ -19,10 +19,6 @@
                     class="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2">
                 </div>
                 <div class="relative z-10">
-                    <span
-                        class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
-                         Nouveau projet
-                    </span>
                     <h1 class="text-3xl font-black text-white leading-tight">Partagez votre<br>réalisation</h1>
                     <p class="text-indigo-200 text-sm mt-2">Montrez ce que vous savez faire à la communauté Mefolio.</p>
                 </div>

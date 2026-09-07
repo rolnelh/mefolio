@@ -41,9 +41,9 @@
                             class="w-40 h-40 rounded-3xl object-cover shadow-2xl ring-4 ring-yellow-200">
                     </div>
                     <div class="flex-1 text-center md:text-left">
-                        <div class="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
+                        <p class="text-yellow-700 text-xs font-bold uppercase tracking-widest mb-3">
                             Talent of the Week — {{ $current->week_label }}
-                        </div>
+                        </p>
                         <h2 class="text-3xl font-black text-gray-900 mb-1">{{ $c->prenom }} {{ $c->nom }}</h2>
                         <p class="text-indigo-600 font-semibold mb-3">{{ $c->specialite }}</p>
                         @if ($c->localisation)

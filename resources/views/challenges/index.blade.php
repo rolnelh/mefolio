@@ -1,34 +1,35 @@
 <x-app-layout>
 
-    <section class="relative bg-[#050810] py-20 overflow-hidden">
-        <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute top-0 right-0 w-[50%] h-[60%] rounded-full bg-yellow-500/10 blur-[120px]"></div>
-            <div class="absolute bottom-0 left-0 w-[40%] h-[50%] rounded-full bg-indigo-600/10 blur-[100px]"></div>
+    <section class="relative bg-[#F7F6F1] py-20 overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-60"
+            style="background-image: radial-gradient(#00000014 1px, transparent 1px); background-size: 28px 28px;">
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="text-center lg:text-left">
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-relaxed mb-6">
+                <div class="flex justify-center lg:justify-start order-2 lg:order-1">
+                    <img src="{{ asset('/images/challenges.webp') }}" alt="Challenges Mefolio"
+                        class="w-full max-w-md rounded-2xl shadow-xl">
+                </div>
+                <div class="text-center lg:text-left order-1 lg:order-2">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-relaxed mb-6">
                         Prouvez votre<br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">
-                            talent.
-                        </span>
+                        <span class="text-amber-500">talent.</span>
                     </h1>
-                    <p class="text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                    <p class="text-lg text-slate-500 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8">
                         Participez à des défis créatifs, gagnez des prix et faites reconnaître vos compétences par la
                         communauté Mefolio.
                     </p>
-                </div>
-                <div class="flex justify-center lg:justify-end">
-                    <img src="{{ asset('/images/challenges.webp') }}" alt="Challenges Mefolio"
-                        class="w-full max-w-lg rounded-xl shadow-2xl">
+                    <a href="#defis"
+                        class="inline-flex items-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02]">
+                        Découvrir les défis
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div id="defis" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24">
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse ($challenges as $challenge)

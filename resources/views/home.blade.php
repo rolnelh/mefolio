@@ -53,13 +53,7 @@
 
         <div class="relative z-10 mx-auto max-w-3xl px-6 lg:px-8 text-center">
 
-            <span
-                class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gray-600 ring-1 ring-inset ring-gray-200 shadow-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-                Portfolio · Missions · Communauté
-            </span>
-
-            <h1 class="mt-8 text-5xl sm:text-6xl font-bold tracking-tight text-gray-900 leading-[1.1]">
+            <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-gray-900 leading-[1.1]">
                 Un espace pour
                 <span class="relative inline-block whitespace-nowrap">
                     révéler

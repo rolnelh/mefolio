@@ -9,11 +9,7 @@
         </div>
 
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <div
-                class="inline-flex items-center gap-2 bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-bold px-4 py-1.5 rounded-full mb-8 uppercase tracking-widest">
-                <span class="w-1.5 h-1.5 bg-violet-400 rounded-full animate-pulse"></span>
-                Bientôt disponible
-            </div>
+            <p class="text-violet-400 text-xs font-bold uppercase tracking-[0.3em] mb-4">Bientôt disponible</p>
             <h1 class="text-5xl sm:text-7xl font-black text-white tracking-tight leading-none mb-6">
                 Le marché des<br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
