@@ -13,7 +13,7 @@
 <x-app-layout>
 
     @php
-        $heroCreatifs = $creatifs->filter(fn ($c) => $c->photo)->take(4)->values();
+        $heroCreatifs = $creatifs->take(4)->values();
     @endphp
 
     <section class="relative bg-[#F7F6F1] py-24 sm:py-32 overflow-hidden">
@@ -39,7 +39,7 @@
             <a href="{{ route('creatifs.show', $hc->slug) }}"
                 class="hidden md:block absolute {{ $positions[$i] }} z-10 {{ $rotations[$i] }} hover:scale-105 hover:rotate-0 transition-all duration-300">
                 <span class="relative block">
-                    <img src="{{ $hc->photo }}"
+                    <img src="{{ $hc->photo ?: 'https://ui-avatars.com/api/?name=' . urlencode($hc->prenom ?? 'M') . '&background=6366f1&color=fff' }}"
                         class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl object-cover shadow-xl ring-4 ring-white">
                     <span
                         class="absolute -top-2 -right-2 w-7 h-7 bg-gray-900 rounded-full flex items-center justify-center shadow-md">
@@ -560,98 +560,66 @@
         </section>
     @endif
 
-    <section class="py-24 px-6 max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-                Questions fréquentes
-            </h2>
-            <p class="text-slate-500 mt-4 font-medium">
-                Tout ce que vous devez savoir pour propulser votre carrière sur MeFolio.
-            </p>
-        </div>
+    <section class="py-24 px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-10 lg:gap-16 items-start">
 
-        <div class="space-y-4">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+                    Questions fréquentes posées par nos créatifs.
+                </h2>
+                <p class="text-slate-500 mt-6 text-sm leading-relaxed max-w-xs">
+                    Notre équipe est toujours disponible pour des réponses rapides, claires et fiables.
+                </p>
+                <a href="mailto:contact@mefolio.com"
+                    class="inline-flex items-center gap-2 mt-8 bg-gray-900 hover:bg-black text-white text-sm font-bold px-6 py-3 rounded-full transition-all hover:scale-[1.02]">
+                    Contacter l'équipe
+                </a>
+            </div>
 
-            <details class="group border-b border-slate-100 pb-4" open>
-                <summary class="flex items-center justify-between cursor-pointer list-none py-4">
-                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
-                        Comment créer mon portfolio ?
-                    </h3>
-                    <span class="text-slate-400 group-open:rotate-180 transition-transform duration-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </span>
-                </summary>
-                <div class="text-slate-500 leading-relaxed text-base pb-4">
-                    Le processus est instantané. Cliquez sur « S’inscrire », validez votre email et personnalisez votre
-                    espace. Pas de configuration complexe, juste votre talent mis en avant.
-                </div>
-            </details>
-
-            <details class="group border-b border-slate-100 pb-4">
-                <summary class="flex items-center justify-between cursor-pointer list-none py-4">
-                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
-                        Est-ce vraiment gratuit ?
-                    </h3>
-                    <span class="text-slate-400 group-open:rotate-180 transition-transform duration-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </span>
-                </summary>
-                <div class="text-slate-500 leading-relaxed text-base pb-4">
-                    Oui, l'accès de base et la publication de projets sont 100% gratuits. Nous croyons en
-                    l'accessibilité du talent local pour dynamiser l'écosystème tech en Afrique.
-                </div>
-            </details>
-
-            <details class="group border-b border-slate-100 pb-4">
-                <summary class="flex items-center justify-between cursor-pointer list-none py-4">
-                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
-                        Comment les recruteurs me trouvent-ils ?
-                    </h3>
-                    <span class="text-slate-400 group-open:rotate-180 transition-transform duration-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </span>
-                </summary>
-                <div class="text-slate-500 leading-relaxed text-base pb-4">
-                    Votre profil est indexé dans notre moteur de recherche de talents. Vous disposez aussi d'une URL
-                    personnalisée professionnelle que vous pouvez partager directement sur votre CV ou LinkedIn.
-                </div>
-            </details>
-
-            <details class="group border-b border-slate-100 pb-4">
-                <summary class="flex items-center justify-between cursor-pointer list-none py-4">
-                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
-                        Quels types de fichiers puis-je publier ?
-                    </h3>
-                    <span class="text-slate-400 group-open:rotate-180 transition-transform duration-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </span>
-                </summary>
-                <div class="text-slate-500 leading-relaxed text-base pb-4">
-                    Vous pouvez importer des images (JPG, PNG), lier des dépôts GitHub pour le code, ou intégrer des
-                    liens externes comme Figma, Behance ou des vidéos de démonstration.
-                </div>
-            </details>
+            <div class="space-y-3">
+                @foreach ([
+                    ['q' => 'Comment créer mon portfolio ?', 'a' => "Le processus est instantané. Cliquez sur « S'inscrire », validez votre email et personnalisez votre espace. Pas de configuration complexe, juste votre talent mis en avant."],
+                    ['q' => 'Est-ce vraiment gratuit ?', 'a' => "Oui, l'accès de base et la publication de projets sont 100% gratuits. Nous croyons en l'accessibilité du talent local pour dynamiser l'écosystème tech en Afrique."],
+                    ['q' => 'Comment les recruteurs me trouvent-ils ?', 'a' => "Votre profil est indexé dans notre moteur de recherche de talents. Vous disposez aussi d'une URL personnalisée professionnelle que vous pouvez partager directement sur votre CV ou LinkedIn."],
+                    ['q' => 'Quels types de fichiers puis-je publier ?', 'a' => 'Vous pouvez importer des images (JPG, PNG), lier des dépôts GitHub pour le code, ou intégrer des liens externes comme Figma, Behance ou des vidéos de démonstration.'],
+                ] as $i => $faq)
+                    <details class="group bg-white border border-gray-100 rounded-2xl px-6 hover:border-gray-200 transition-colors" @if ($i === 0) open @endif>
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none py-5">
+                            <h3 class="text-base font-bold text-slate-900">{{ $faq['q'] }}</h3>
+                            <span class="relative flex-shrink-0 w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center">
+                                <span class="absolute w-3 h-0.5 bg-gray-900 rounded-full"></span>
+                                <span class="absolute w-0.5 h-3 bg-gray-900 rounded-full group-open:opacity-0 transition-opacity"></span>
+                            </span>
+                        </summary>
+                        <div class="text-slate-500 leading-relaxed text-sm pb-5">
+                            {{ $faq['a'] }}
+                        </div>
+                    </details>
+                @endforeach
+            </div>
 
         </div>
 
-        {{-- <div class="mt-16 p-8 bg-slate-50 rounded-[2rem] text-center border border-slate-100">
-            <p class="text-slate-900 font-bold mb-4">Vous avez d'autres questions ?</p>
-            <a href="mailto:support@mefolio.com" class="text-indigo-600 font-bold hover:underline">
-                Contactez notre équipe &rarr;
-            </a>
-        </div> --}}
+        <div class="max-w-3xl mx-auto mt-8">
+            <div class="relative overflow-hidden rounded-[2rem] p-10 text-center bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50 border border-indigo-100">
+                <div class="w-12 h-12 mx-auto mb-5 rounded-2xl bg-gray-900 flex items-center justify-center shadow-lg">
+                    <x-application-logo class="h-6 w-auto text-white" />
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 mb-2">Encore des questions ?</h3>
+                <p class="text-slate-500 text-sm max-w-sm mx-auto mb-6">
+                    Notre équipe est là pour vous accompagner et répondre à vos besoins spécifiques.
+                </p>
+                <div class="flex -space-x-2 justify-center mb-6">
+                    @foreach (['bg-indigo-500', 'bg-violet-500', 'bg-amber-500'] as $c)
+                        <div class="w-8 h-8 rounded-full {{ $c }} border-2 border-white"></div>
+                    @endforeach
+                </div>
+                <a href="mailto:contact@mefolio.com"
+                    class="inline-flex items-center gap-2 bg-gray-900 hover:bg-black text-white text-sm font-bold px-6 py-3 rounded-full transition-all hover:scale-[1.02]">
+                    Contacter l'équipe
+                </a>
+            </div>
+        </div>
     </section>
 
     <section class="max-w-6xl mx-auto px-6 py-24">
