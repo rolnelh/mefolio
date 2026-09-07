@@ -65,9 +65,11 @@
                                 @endif
                                 @if ($program->url)
                                     <a href="{{ $program->url }}" target="_blank" rel="noopener"
-                                        class="inline-flex items-center gap-2 text-sm font-bold text-white border-b-2 border-white/40 hover:border-white transition-colors">
-                                        Voir le programme →
+                                        class="inline-flex items-center gap-2 bg-white text-slate-900 text-sm font-bold px-5 py-2.5 rounded-full hover:bg-indigo-50 transition-all">
+                                        Participer →
                                     </a>
+                                @else
+                                    <p class="text-xs text-indigo-300">Lien officiel bientôt disponible</p>
                                 @endif
                             </div>
                         </div>
@@ -100,8 +102,9 @@
                             </div>
                         @endif
                         @if ($program->url)
-                            <a href="{{ $program->url }}" target="_blank" rel="noopener" class="text-xs font-bold text-indigo-600 hover:underline">
-                                Site officiel →
+                            <a href="{{ $program->url }}" target="_blank" rel="noopener"
+                                class="inline-flex items-center gap-1.5 bg-gray-900 hover:bg-black text-white text-xs font-bold px-4 py-2 rounded-full transition-all">
+                                Participer →
                             </a>
                         @endif
                     </div>

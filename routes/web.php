@@ -129,10 +129,6 @@ Route::get('/services', function () {
     ]);
 })->name('services.index');
 
-Route::get('/vision', function () {
-    return view('vision.index');
-})->name('vision');
-
 /*
 |--------------------------------------------------------------------------
 | Espace administrateur

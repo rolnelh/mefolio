@@ -100,7 +100,6 @@
                             </div>
                             <div>
                                 <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">À propos</p>
-                                <x-nav-dropdown-item :href="route('vision')" title="Notre Vision" description="Africa 2030" />
                                 <a href="mailto:contact@mefolio.com"
                                     class="flex items-start px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group">
                                     <span class="min-w-0">
@@ -191,12 +190,28 @@
                             </button>
                         </x-slot>
                         <x-slot name="content">
-                            <div class="px-4 py-2 border-b border-gray-100">
-                                <p class="text-xs text-gray-400">Connecté en tant que</p>
-                                <p class="text-sm font-bold truncate text-gray-800">{{ Auth::user()->email }}</p>
+                            <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100">
+                                <span class="flex-shrink-0">
+                                    @if ($creatif?->photo)
+                                        <img src="{{ $creatif->photo }}" class="h-9 w-9 rounded-full object-cover">
+                                    @else
+                                        <div class="h-9 w-9 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-black">
+                                            {{ strtoupper(substr(Auth::user()->username, 0, 1)) }}
+                                        </div>
+                                    @endif
+                                </span>
+                                <div class="min-w-0">
+                                    <p class="text-sm font-bold truncate text-gray-800">
+                                        Bonjour, {{ $creatif?->prenom ?? Auth::user()->username }}
+                                    </p>
+                                    <p class="text-xs text-gray-400 truncate">{{ Auth::user()->email }}</p>
+                                </div>
                             </div>
                             <x-dropdown-link :href="route('dashboard')">Tableau de bord</x-dropdown-link>
                             <x-dropdown-link :href="route('profile.edit')">Mon Profil</x-dropdown-link>
+                            @if ($creatif?->slug)
+                                <x-dropdown-link :href="route('creatifs.show', $creatif->slug)">Voir mon profil public</x-dropdown-link>
+                            @endif
                             @if (Auth::user()->isAdmin())
                                 <x-dropdown-link :href="route('admin.dashboard')">Administration</x-dropdown-link>
                             @endif
@@ -206,6 +221,7 @@
                                 </x-dropdown-link>
                             @endif
                             <hr class="border-gray-100">
+                            <x-dropdown-link href="mailto:contact@mefolio.com">Aide</x-dropdown-link>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <x-dropdown-link :href="route('logout')"
@@ -294,6 +310,12 @@
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
                                     <span class="text-sm font-semibold text-gray-700">Créer un projet</span>
                                 </a>
+                                @if ($creatif?->slug)
+                                    <a href="{{ route('creatifs.show', $creatif->slug) }}"
+                                        class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                        <span class="text-sm font-semibold text-gray-700">Voir mon profil public</span>
+                                    </a>
+                                @endif
                                 <a href="{{ route('missions.index') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
                                     <span class="text-sm font-semibold text-gray-700">Missions</span>
@@ -315,10 +337,6 @@
                                 <a href="{{ route('challenges.index') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
                                     <span class="text-sm font-semibold text-gray-700">Challenges</span>
-                                </a>
-                                <a href="{{ route('vision') }}"
-                                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Notre Vision</span>
                                 </a>
                                 @if (Auth::user()->isAdmin())
                                     <a href="{{ route('admin.dashboard') }}"
