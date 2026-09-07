@@ -10,6 +10,24 @@
                 </div>
             </div>
             <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
+
+                @if ($creatifCount > 0)
+                    <div class="inline-flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-full pl-2 pr-4 py-1.5 mb-6">
+                        @if ($badgeCreatifs->count())
+                            <div class="flex -space-x-2.5">
+                                @foreach ($badgeCreatifs as $bc)
+                                    <img src="{{ $bc->photo }}"
+                                        class="w-6 h-6 rounded-full object-cover ring-2 ring-[#050810]">
+                                @endforeach
+                            </div>
+                        @endif
+                        <span class="text-xs font-semibold text-gray-300">
+                            <span class="text-white font-bold">{{ number_format($creatifCount) }}</span>
+                            créatif{{ $creatifCount > 1 ? 's' : '' }} déjà sur Mefolio
+                        </span>
+                    </div>
+                @endif
+
                 <h1 class="text-5xl sm:text-6xl font-black text-white tracking-tight leading-[1.05] mb-6">
                     Votre prochaine<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">

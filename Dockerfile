@@ -6,6 +6,16 @@ RUN apt-get update && apt-get install -y \
 
 RUN a2enmod rewrite
 
+# Les formulaires (photo de profil, couverture) autorisent des fichiers jusqu'à
+# 3 Mo côté Laravel : les limites par défaut de PHP (upload_max_filesize=2M)
+# sont plus basses et rejetaient silencieusement l'upload avant même que la
+# validation Laravel ne s'exécute. On les aligne au-dessus des limites de
+# l'application.
+RUN { \
+        echo 'upload_max_filesize=10M'; \
+        echo 'post_max_size=12M'; \
+    } > /usr/local/etc/php/conf.d/uploads.ini
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
