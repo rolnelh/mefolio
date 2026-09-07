@@ -86,8 +86,8 @@
                     {{-- CTA --}}
                     <div class="px-6 py-4 space-y-2">
                         @auth
-                            @if (Auth::user()->creatif?->id !== $creatif->id)
-                                <a href="#contact"
+                            @if (Auth::user()->creatif?->id !== $creatif->id && $creatif->user)
+                                <a href="{{ route('messages.show', $creatif->user) }}"
                                     class="flex items-center justify-center gap-2 w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl transition-all">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
                                         viewBox="0 0 24 24">
@@ -233,8 +233,8 @@
                     <h3 class="text-xl font-black mb-2">Vous voulez travailler avec {{ $creatif->prenom }} ?</h3>
                     <p class="text-indigo-200 text-sm mb-6">Contactez ce créatif directement via Mefolio.</p>
                     @auth
-                        @if ($creatif->user?->email)
-                            <a href="mailto:{{ $creatif->user->email }}?subject={{ urlencode('Contact via Mefolio') }}"
+                        @if ($creatif->user && $creatif->user->id !== Auth::id())
+                            <a href="{{ route('messages.show', $creatif->user) }}"
                                 class="inline-flex items-center gap-2 bg-white text-indigo-600 font-bold px-8 py-3 rounded-full hover:bg-indigo-50 transition-all hover:scale-105">
                                 Envoyer un message →
                             </a>
