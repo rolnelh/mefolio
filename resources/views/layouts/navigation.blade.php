@@ -143,6 +143,38 @@
                         Créer
                     </a>
 
+                    {{-- Recherche rapide --}}
+                    <div class="relative" x-data="{ openSearch: false }">
+                        <button @click="openSearch = !openSearch; $nextTick(() => openSearch && $refs.navSearchInput.focus())"
+                            class="p-2 text-gray-500 hover:text-indigo-600 transition-colors">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                        </button>
+                        <div x-show="openSearch" @click.outside="openSearch = false"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            class="absolute right-0 mt-3 w-72 bg-white rounded-2xl shadow-xl p-3 border border-gray-100 z-50">
+                            <form method="GET" action="{{ route('projects.index') }}">
+                                <input x-ref="navSearchInput" type="text" name="q" placeholder="Rechercher un projet..."
+                                    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </form>
+                        </div>
+                    </div>
+
+                    {{-- Messages --}}
+                    @php $navUnreadMessages = \App\Models\Message::where('recipient_id', Auth::id())->whereNull('read_at')->count(); @endphp
+                    <a href="{{ route('messages.index') }}" class="p-2 text-gray-500 hover:text-indigo-600 transition-colors relative">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                        @if ($navUnreadMessages > 0)
+                            <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                        @endif
+                    </a>
+
                     {{-- Notifs --}}
                     @php
                         $navNotifications = Auth::user()->notifications()->latest()->take(8)->get();
@@ -151,6 +183,7 @@
                             'project' => 'M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18a48.55 48.55 0 01-12.756 0C4.537 20.436 3.75 19.494 3.75 18.4v-4.25m16.5 0a2.18 2.18 0 00.75-1.653v-3.32a2.25 2.25 0 00-1.5-2.121l-6.75-2.25a2.25 2.25 0 00-1.5 0l-6.75 2.25a2.25 2.25 0 00-1.5 2.121v3.32c0 .659.281 1.244.75 1.653',
                             'like' => 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
                             'photo' => 'M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9zM15 13a3 3 0 11-6 0 3 3 0 016 0z',
+                            'message' => 'M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75',
                         ];
                     @endphp
                     <div class="relative" x-data="{ openNotify: false }">

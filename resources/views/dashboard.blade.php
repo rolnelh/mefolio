@@ -264,7 +264,7 @@
                         </div>
 
                         @if ($aDesProjets)
-                            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mt-8">
+                            <div class="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5 mt-8">
 
                                 @foreach ($projects as $project)
                                     <div
@@ -501,7 +501,7 @@
                                 Mes candidatures ({{ $appliedMissions->count() }})
                             </h3>
                             @if ($appliedMissions->count())
-                                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                                <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
                                     @foreach ($appliedMissions as $i => $application)
                                         @php $mission = $application->mission; @endphp
                                         <a href="{{ $mission ? route('missions.show', $mission) : '#' }}"
@@ -541,7 +541,7 @@
                                 Mes missions publiées ({{ $postedMissions->count() }})
                             </h3>
                             @if ($postedMissions->count())
-                                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                                <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
                                     @foreach ($postedMissions as $i => $mission)
                                         <a href="{{ route('missions.show', $mission) }}"
                                             class="block border rounded-2xl p-5 hover:shadow-md transition-all {{ $espaceCouleurs[$i % count($espaceCouleurs)] }}">

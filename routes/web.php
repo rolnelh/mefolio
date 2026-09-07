@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -65,6 +66,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/projects/{project}/like', [ProjectController::class, 'toggleLike'])->name('projects.like');
 
     Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
+
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{user:username}', [MessageController::class, 'show'])->name('messages.show');
+    Route::post('/messages/{user:username}', [MessageController::class, 'store'])->name('messages.store');
 
     Route::post('/dashboard/assistant', [AIAssistantController::class, 'chat'])
         ->middleware('throttle:15,1')
