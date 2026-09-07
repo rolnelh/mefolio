@@ -399,12 +399,14 @@
                                     <div>
                                         <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">Bannière
                                             de couverture</label>
-                                        <div
+                                        <div x-data="{ preview: null }"
                                             class="relative group h-36 w-full rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center overflow-hidden transition-all hover:border-indigo-400 bg-gray-50 dark:bg-gray-950">
                                             @if ($creatif && $creatif->couverture)
-                                                <img src="{{ $creatif->couverture }}"
+                                                <img x-show="!preview" src="{{ $creatif->couverture }}"
                                                     class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity">
                                             @endif
+                                            <img x-show="preview" x-cloak :src="preview"
+                                                class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity">
                                             <div class="relative z-10 text-center p-4">
                                                 <svg class="mx-auto h-8 w-8 text-gray-400 group-hover:text-indigo-500 transition-colors"
                                                     stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -412,7 +414,8 @@
                                                         d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                                <input type="file" name="couverture" id="couverture"
+                                                <input type="file" name="couverture" id="couverture" accept="image/*"
+                                                    @change="preview = $event.target.files[0] ? URL.createObjectURL($event.target.files[0]) : preview"
                                                     class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                                                 <p class="mt-1 text-xs font-medium text-gray-600 dark:text-gray-400">Cliquez
                                                     pour modifier la bannière</p>
@@ -421,10 +424,10 @@
                                     </div>
 
                                     <div class="flex items-center gap-5">
-                                        <div class="relative group flex-shrink-0">
+                                        <div x-data="{ preview: null }" class="relative group flex-shrink-0">
                                             <div
                                                 class="w-16 h-16 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm">
-                                                <img src="{{ $creatif?->photo ?: asset('images/avatar.webp') }}"
+                                                <img :src="preview || '{{ $creatif?->photo ?: asset('images/avatar.webp') }}'"
                                                     class="w-full h-full object-cover" alt="Photo de profil">
                                             </div>
                                             <label
@@ -436,7 +439,8 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 </svg>
-                                                <input type="file" name="photo" class="hidden">
+                                                <input type="file" name="photo" accept="image/*" class="hidden"
+                                                    @change="preview = $event.target.files[0] ? URL.createObjectURL($event.target.files[0]) : preview">
                                             </label>
                                         </div>
                                         <div>

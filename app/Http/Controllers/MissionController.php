@@ -37,7 +37,16 @@ class MissionController extends Controller
 
         $domaines = Mission::open()->whereNotNull('domaine')->distinct()->pluck('domaine');
 
-        return view('missions.index', compact('missions', 'domaines'));
+        // Bandeau de confiance du hero : uniquement des données réelles (pas
+        // d'avatars ni de notes inventées).
+        $creatifCount = \App\Models\Creatif::where('is_paused', false)->count();
+        $badgeCreatifs = \App\Models\Creatif::where('is_paused', false)
+            ->whereNotNull('photo')
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('missions.index', compact('missions', 'domaines', 'creatifCount', 'badgeCreatifs'));
     }
 
     public function show(Mission $mission)
