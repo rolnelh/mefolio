@@ -27,6 +27,13 @@
             'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />',
         ],
         [
+            'key' => 'missions',
+            'label' => 'Mes missions',
+            'href' => route('dashboard', ['tab' => 'missions']),
+            'count' => null,
+            'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18a48.55 48.55 0 01-12.756 0C4.537 20.436 3.75 19.494 3.75 18.4v-4.25m16.5 0a2.18 2.18 0 00.75-1.653v-3.32a2.25 2.25 0 00-1.5-2.121l-6.75-2.25a2.25 2.25 0 00-1.5 0l-6.75 2.25a2.25 2.25 0 00-1.5 2.121v3.32c0 .659.281 1.244.75 1.653" />',
+        ],
+        [
             'key' => 'assistant',
             'label' => 'Assistant IA',
             'href' => route('dashboard', ['tab' => 'assistant']),
