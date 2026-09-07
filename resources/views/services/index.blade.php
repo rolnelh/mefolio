@@ -1,31 +1,44 @@
 <x-app-layout>
 
-    <section class="relative bg-[#050810] py-24 overflow-hidden">
+    <section class="relative bg-white py-24 overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-60"
+            style="background-image: radial-gradient(#00000014 1px, transparent 1px); background-size: 28px 28px;">
+        </div>
         <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-violet-600/10 blur-[120px]">
+            <div class="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-violet-100/60 blur-[120px]">
             </div>
-            <div class="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-600/10 blur-[100px]">
+            <div class="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-100/60 blur-[100px]">
             </div>
         </div>
 
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <p class="text-violet-400 text-xs font-bold uppercase tracking-[0.3em] mb-4">Bientôt disponible</p>
-            <h1 class="text-5xl sm:text-7xl font-black text-white tracking-tight leading-none mb-6">
+            <p class="text-indigo-500 text-xs font-bold uppercase tracking-[0.3em] mb-4">Bientôt disponible</p>
+            <h1 class="text-5xl sm:text-7xl font-black text-slate-900 tracking-tight leading-none mb-6">
                 Le marché des<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600">
                     services créatifs
                 </span>
             </h1>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed mb-10">
                 Commandez des services créatifs directement aux meilleurs talents africains.
-                Logo, site web, vidéo, photo — payez en <span class="text-white font-semibold">Mobile Money.</span>
+                Logo, site web, vidéo, photo — payez en <span class="text-slate-900 font-semibold">Mobile Money.</span>
             </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="{{ route('register') }}"
+                    class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02]">
+                    Créer mon profil
+                </a>
+                <a href="#categories"
+                    class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 px-8 py-3.5 rounded-full text-sm font-bold hover:border-gray-400 transition-all">
+                    Voir les catégories
+                </a>
+            </div>
         </div>
     </section>
 
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
 
-        <div class="text-center mb-16">
+        <div id="categories" class="text-center mb-16 scroll-mt-24">
             <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Ce qui arrive</p>
             <h2 class="text-3xl font-black text-gray-900">Les catégories de services</h2>
         </div>
