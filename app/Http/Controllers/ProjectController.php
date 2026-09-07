@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mission;
+use App\Models\MissionApplication;
 use App\Models\Project;
 use App\Services\BuilderScoreService;
 use Illuminate\Http\Request;
@@ -70,7 +72,21 @@ class ProjectController extends Controller
         $projects = $creatif ? $creatif->projects()->withCount(['likes', 'comments'])->latest()->get() : collect();
         $totalLikes = $projects->sum('likes_count');
         $totalComments = $projects->sum('comments_count');
-        return view('dashboard', compact('creatif', 'projects', 'totalLikes', 'totalComments', 'scorer'));
+
+        $postedMissions = Mission::where('user_id', $user->id)
+            ->with('applications.user')
+            ->withCount('applications')
+            ->latest()
+            ->get();
+        $appliedMissions = MissionApplication::with('mission.user')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->get();
+
+        return view('dashboard', compact(
+            'creatif', 'projects', 'totalLikes', 'totalComments', 'scorer',
+            'postedMissions', 'appliedMissions'
+        ));
     }
 
     public function create()
