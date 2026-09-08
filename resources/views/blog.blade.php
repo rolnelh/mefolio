@@ -4,7 +4,6 @@
 
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
             <div>
-                <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Mefolio Blog</p>
                 <h1 class="text-4xl sm:text-5xl font-black text-gray-900 leading-none">
                     Actualités &
                     <span class="text-indigo-600">Inspiration.</span>
