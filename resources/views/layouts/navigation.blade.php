@@ -66,7 +66,6 @@
                             <div>
                                 <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Freelance</p>
                                 <x-nav-dropdown-item :href="route('missions.index')" title="Trouver des missions" description="Freelance rémunéré" />
-                                <x-nav-dropdown-item :href="route('challenges.index')" title="Challenges" description="Compétitions et défis" />
                             </div>
                             <div>
                                 <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Gérer</p>
@@ -78,6 +77,12 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- Challenges --}}
+                    <a href="{{ route('challenges.index') }}"
+                        class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 rounded-lg hover:bg-gray-50 transition-all">
+                        Challenges
+                    </a>
 
                     {{-- Communauté --}}
                     <div x-data="{ open: false }" class="relative">
