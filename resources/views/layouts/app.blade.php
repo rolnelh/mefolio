@@ -19,7 +19,8 @@
 
 </head>
 
-<body class="font-jakarta antialiased {{ request()->routeIs('home') ? 'bg-[#F7F6F1]' : 'bg-white' }}">
+<body
+    class="font-jakarta antialiased {{ request()->routeIs('home', 'challenges.index') ? 'bg-[#F7F6F1]' : 'bg-white' }}">
     <div class="min-h-screen">
 
         @include('layouts.navigation')
