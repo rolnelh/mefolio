@@ -280,7 +280,7 @@
                                             </div>
                                             <div
                                                 class="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <a href="{{ route('projets.edit', $project->id) }}"
+                                                <a href="{{ route('projets.edit', $project) }}"
                                                     class="p-1.5 bg-white/90 text-gray-700 hover:text-indigo-600 rounded-lg transition-all shadow-sm">
                                                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
                                                         stroke="currentColor">
@@ -290,7 +290,7 @@
                                                     </svg>
                                                 </a>
                                                 <form method="POST"
-                                                    action="{{ route('projets.destroy', $project->id) }}"
+                                                    action="{{ route('projets.destroy', $project) }}"
                                                     onsubmit="return confirm('Supprimer ce projet ?')">
                                                     @csrf
                                                     @method('DELETE')
