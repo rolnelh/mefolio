@@ -19,8 +19,9 @@ class AuthenticatedSessionController extends Controller
     public function create(): View
     {
         $creatifCount = Creatif::where('is_paused', false)->count();
+        $recentCreatifs = Creatif::where('is_paused', false)->latest()->take(3)->get();
 
-        return view('auth.login', compact('creatifCount'));
+        return view('auth.login', compact('creatifCount', 'recentCreatifs'));
     }
 
     /**

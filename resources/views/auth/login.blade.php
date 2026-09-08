@@ -267,7 +267,13 @@
             </div>
 
             {{-- Panneau droit : identité de marque --}}
-            <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-10 bg-gradient-to-br from-indigo-50 via-white to-amber-50 overflow-hidden">
+            <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-10 overflow-hidden">
+                {{-- Image de fond --}}
+                <div aria-hidden="true" class="absolute inset-0 bg-cover bg-center opacity-40"
+                    style="background-image: url('{{ asset('images/vision.png') }}');"></div>
+                <div aria-hidden="true"
+                    class="absolute inset-0 bg-gradient-to-br from-indigo-50/80 via-white/70 to-amber-50/80"></div>
+
                 <div aria-hidden="true" class="absolute inset-0">
                     <div class="absolute -top-8 -right-8 w-72 h-72 bg-indigo-200/40 rounded-full blur-3xl"></div>
                     <div class="absolute -bottom-8 -left-8 w-80 h-80 bg-violet-200/40 rounded-full blur-3xl"></div>
@@ -309,11 +315,23 @@
 
                 <div class="relative z-10 flex items-center gap-3 bg-white/80 border border-white shadow-sm backdrop-blur-sm rounded-full pl-2 pr-4 py-2 w-fit">
                     <div class="flex -space-x-2">
-                        @foreach (['bg-indigo-400', 'bg-violet-400', 'bg-pink-400'] as $c)
-                            <div class="w-7 h-7 rounded-full {{ $c }} border-2 border-white"></div>
-                        @endforeach
+                        @forelse ($recentCreatifs as $rc)
+                            @if ($rc->photo)
+                                <img src="{{ $rc->photo }}" alt="{{ $rc->prenom }}"
+                                    class="w-7 h-7 rounded-full object-cover border-2 border-white">
+                            @else
+                                <div
+                                    class="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-black border-2 border-white">
+                                    {{ strtoupper(substr($rc->prenom ?: '?', 0, 1)) }}
+                                </div>
+                            @endif
+                        @empty
+                            @foreach (['bg-indigo-400', 'bg-violet-400', 'bg-pink-400'] as $c)
+                                <div class="w-7 h-7 rounded-full {{ $c }} border-2 border-white"></div>
+                            @endforeach
+                        @endforelse
                     </div>
-                    <p class="text-gray-700 text-xs font-semibold">{{ number_format($creatifCount) }} créatif{{ $creatifCount > 1 ? 's' : '' }} nous ont rejoint</p>
+                    <p class="text-gray-700 text-xs font-semibold">{{ $creatifCount > 10 ? '10+' : $creatifCount }} créatif{{ $creatifCount > 1 ? 's' : '' }} nous ont rejoint</p>
                 </div>
             </div>
         </div>

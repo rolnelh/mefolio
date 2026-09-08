@@ -21,8 +21,9 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         $creatifCount = Creatif::where('is_paused', false)->count();
+        $recentCreatifs = Creatif::where('is_paused', false)->latest()->take(3)->get();
 
-        return view('auth.register', compact('creatifCount'));
+        return view('auth.register', compact('creatifCount', 'recentCreatifs'));
     }
 
     /**
