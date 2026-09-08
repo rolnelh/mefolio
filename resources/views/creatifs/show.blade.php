@@ -1,6 +1,10 @@
 <x-app-layout>
-    {{-- COVER --}}
-    <div class="relative w-full h-52 sm:h-64 overflow-hidden bg-gray-900">
+    @php
+        $hasFlash = session('success') || session('error') || $errors->any();
+    @endphp
+
+    {{-- COVER : remonte derrière la nav flottante transparente --}}
+    <div class="relative z-0 w-full h-52 sm:h-64 overflow-hidden bg-gray-900 {{ $hasFlash ? '' : '-mt-[76px] sm:-mt-[80px]' }}">
         <img src="{{ $creatif->couverture ?: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop' }}"
             alt="Couverture" class="w-full h-full object-cover object-center">
         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -20,7 +24,8 @@
                                 alt="{{ $creatif->prenom }}"
                                 class="w-24 h-24 rounded-2xl object-cover ring-4 ring-indigo-50 shadow-md mx-auto">
                             <div
-                                class="absolute -bottom-1.5 -right-1.5 bg-green-500 w-4 h-4 rounded-full border-2 border-white">
+                                class="absolute -bottom-1.5 -right-1.5 w-4 h-4 rounded-full border-2 border-white {{ $creatif->available_for_work ? 'bg-green-500' : 'bg-gray-300' }}"
+                                title="{{ $creatif->available_for_work ? 'Disponible pour de nouvelles missions' : 'Actuellement indisponible' }}">
                             </div>
                         </div>
                         <h1 class="text-lg font-black text-gray-900">{{ $creatif->prenom }} {{ $creatif->nom }}</h1>
@@ -36,6 +41,20 @@
                                 {{ $creatif->localisation }}
                             </p>
                         @endif
+
+                        <div class="flex items-center justify-center gap-1.5 mt-3">
+                            <span
+                                class="text-[10px] font-bold uppercase tracking-wide bg-indigo-50 text-indigo-600 px-2 py-1 rounded-full">
+                                {{ $level['label'] }}
+                            </span>
+                            <span
+                                class="text-[10px] font-bold uppercase tracking-wide bg-amber-50 text-amber-600 px-2 py-1 rounded-full">
+                                Top {{ $topPct }}%
+                            </span>
+                        </div>
+                        <p class="text-[11px] mt-2 font-semibold {{ $creatif->available_for_work ? 'text-green-600' : 'text-gray-400' }}">
+                            {{ $creatif->available_for_work ? 'Disponible pour de nouvelles missions' : 'Actuellement indisponible' }}
+                        </p>
                     </div>
 
                     {{-- Bio --}}
@@ -66,7 +85,7 @@
                     </div>
 
                     {{-- Liens sociaux --}}
-                    <div class="px-6 py-4 border-b border-gray-50">
+                    <div class="px-6 py-4 border-b border-gray-50" x-data="{ copied: false }">
                         <div class="flex justify-center gap-2">
                             @if ($creatif->portfolio_url)
                                 <a href="{{ $creatif->portfolio_url }}" target="_blank"
@@ -79,6 +98,21 @@
                                     </svg>
                                 </a>
                             @endif
+                            <button type="button"
+                                @click="navigator.clipboard.writeText(window.location.href); copied = true; setTimeout(() => copied = false, 2000)"
+                                class="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                                title="Partager le profil">
+                                <svg x-show="!copied" class="w-4 h-4" fill="none" stroke="currentColor"
+                                    stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                </svg>
+                                <svg x-show="copied" x-cloak class="w-4 h-4 text-green-600" fill="none"
+                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
@@ -124,10 +158,33 @@
                     </div>
                 </div>
 
+                {{-- Services --}}
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+                    <div class="px-6 py-4 flex items-center justify-between border-b border-gray-50">
+                        <h3 class="text-xs font-black text-gray-900 uppercase tracking-wide">Services</h3>
+                        <span
+                            class="text-[10px] font-bold uppercase bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full">Bientôt</span>
+                    </div>
+                    <div class="px-6 py-5 text-center">
+                        <p class="text-xs text-gray-400 leading-relaxed mb-3">
+                            {{ $creatif->prenom }} pourra bientôt proposer des services à la commande directement sur
+                            Mefolio.
+                        </p>
+                        <a href="{{ route('services.index') }}"
+                            class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:text-indigo-700">
+                            En savoir plus
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
                 {{-- Badge Mefolio --}}
                 <div
                     class="bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100 rounded-2xl p-4 text-center">
-                    <p class="text-xs text-indigo-600 font-bold mb-1"> Profil vérifié Mefolio</p>
+                    <p class="text-xs text-indigo-600 font-bold mb-1">Profil vérifié Mefolio</p>
                     <p class="text-[11px] text-gray-400">Ce créatif est membre actif de la communauté africaine Mefolio.
                     </p>
                 </div>
@@ -149,7 +206,7 @@
                         @if (Auth::user()->creatif?->id === $creatif->id)
                             <a href="{{ route('dashboard') }}"
                                 class="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all">
-                                 Modifier mon profil
+                                Modifier mon profil
                             </a>
                         @endif
                     @endauth
@@ -235,12 +292,22 @@
                         @if ($creatif->user && $creatif->user->id !== Auth::id())
                             <a href="{{ route('messages.show', $creatif->user) }}"
                                 class="inline-flex items-center gap-2 bg-white text-indigo-600 font-bold px-8 py-3 rounded-full hover:bg-indigo-50 transition-all hover:scale-105">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
                                 Envoyer un message →
                             </a>
                         @endif
                     @else
                         <a href="{{ route('register') }}"
                             class="inline-flex items-center gap-2 bg-white text-indigo-600 font-bold px-8 py-3 rounded-full hover:bg-indigo-50 transition-all hover:scale-105">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
                             S'inscrire pour contacter →
                         </a>
                     @endauth
