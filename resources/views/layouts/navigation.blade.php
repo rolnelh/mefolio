@@ -441,61 +441,72 @@
 
 <div class="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-sm">
     <div
-        class="bg-white/95 backdrop-blur-xl rounded-full shadow-2xl border border-gray-100 px-2 py-2 flex items-center justify-around">
+        class="bg-white/95 backdrop-blur-xl rounded-full shadow-2xl border border-gray-100 px-1.5 py-1.5 flex items-center gap-0 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
 
         {{-- Accueil --}}
         <a href="{{ route('home') }}"
-            class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full {{ request()->routeIs('home') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
-            <svg class="w-5 h-5" fill="{{ request()->routeIs('home') ? 'currentColor' : 'none' }}"
+            class="flex flex-col items-center gap-0.5 px-1.5 py-1.5 rounded-full shrink-0 {{ request()->routeIs('home') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
+            <svg class="w-[18px] h-[18px]" fill="{{ request()->routeIs('home') ? 'currentColor' : 'none' }}"
                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
-            <span class="text-[10px] font-bold">Accueil</span>
+            <span class="text-[9px] font-bold">Accueil</span>
         </a>
 
         {{-- Projets --}}
         <a href="{{ route('projects.index') }}"
-            class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full {{ request()->routeIs('projects.index') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
-            <svg class="w-5 h-5" fill="{{ request()->routeIs('projects.index') ? 'currentColor' : 'none' }}"
+            class="flex flex-col items-center gap-0.5 px-1.5 py-1.5 rounded-full shrink-0 {{ request()->routeIs('projects.index') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
+            <svg class="w-[18px] h-[18px]" fill="{{ request()->routeIs('projects.index') ? 'currentColor' : 'none' }}"
                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
-            <span class="text-[10px] font-bold">Projets</span>
+            <span class="text-[9px] font-bold">Projets</span>
         </a>
 
         {{-- Talents --}}
         <a href="{{ route('creatifs.index') }}"
-            class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full {{ request()->routeIs('creatifs.index') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
-            <svg class="w-5 h-5" fill="{{ request()->routeIs('creatifs.index') ? 'currentColor' : 'none' }}"
+            class="flex flex-col items-center gap-0.5 px-1.5 py-1.5 rounded-full shrink-0 {{ request()->routeIs('creatifs.index') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
+            <svg class="w-[18px] h-[18px]" fill="{{ request()->routeIs('creatifs.index') ? 'currentColor' : 'none' }}"
                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            <span class="text-[10px] font-bold">Talents</span>
+            <span class="text-[9px] font-bold">Talents</span>
         </a>
 
         {{-- Missions --}}
         <a href="{{ route('missions.index') }}"
-            class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full {{ request()->routeIs('missions.index') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
-            <svg class="w-5 h-5" fill="{{ request()->routeIs('missions.index') ? 'currentColor' : 'none' }}"
+            class="flex flex-col items-center gap-0.5 px-1.5 py-1.5 rounded-full shrink-0 {{ request()->routeIs('missions.index') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
+            <svg class="w-[18px] h-[18px]" fill="{{ request()->routeIs('missions.index') ? 'currentColor' : 'none' }}"
                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
-            <span class="text-[10px] font-bold">Missions</span>
+            <span class="text-[9px] font-bold">Missions</span>
+        </a>
+
+        {{-- Challenges --}}
+        <a href="{{ route('challenges.index') }}"
+            class="flex flex-col items-center gap-0.5 px-1.5 py-1.5 rounded-full shrink-0 {{ request()->routeIs('challenges.*') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
+            <svg class="w-[18px] h-[18px]" fill="{{ request()->routeIs('challenges.*') ? 'currentColor' : 'none' }}"
+                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+            </svg>
+            <span class="text-[9px] font-bold">Challenges</span>
         </a>
 
         {{-- Services --}}
         <a href="{{ route('services.index') }}"
-            class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full {{ request()->routeIs('services.index') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
-            <svg class="w-5 h-5" fill="{{ request()->routeIs('services.index') ? 'currentColor' : 'none' }}"
+            class="flex flex-col items-center gap-0.5 px-1.5 py-1.5 rounded-full shrink-0 {{ request()->routeIs('services.index') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
+            <svg class="w-[18px] h-[18px]" fill="{{ request()->routeIs('services.index') ? 'currentColor' : 'none' }}"
                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
             </svg>
-            <span class="text-[10px] font-bold">Services</span>
+            <span class="text-[9px] font-bold">Services</span>
         </a>
 
     </div>
