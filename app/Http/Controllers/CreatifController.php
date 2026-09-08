@@ -32,9 +32,64 @@ class CreatifController extends Controller
         return $result['secure_url'];
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $creatifs = Creatif::where('is_paused', false)->latest()->paginate(4);
+        // Mots-clés utilisés pour rapprocher un domaine du champ "spécialité",
+        // qui reste un texte libre saisi par chaque créatif.
+        $domaineKeywords = [
+            'design'      => 'design',
+            'dev-web'     => 'web',
+            'dev-mobile'  => 'mobile',
+            'photo'       => 'photo',
+            'video'       => 'vidéo',
+            'marketing'   => 'marketing',
+            'redaction'   => 'rédaction',
+            'audio'       => 'audio',
+        ];
+
+        // Idem pour le pays, rapproché du champ "localisation" ("Ville, Pays").
+        $paysNoms = [
+            'bj' => 'Bénin',
+            'sn' => 'Sénégal',
+            'ci' => "Côte d'Ivoire",
+            'gh' => 'Ghana',
+            'ml' => 'Mali',
+            'ng' => 'Nigeria',
+            'cm' => 'Cameroun',
+        ];
+
+        $query = Creatif::where('is_paused', false)->withCount('projects');
+
+        if ($request->filled('q')) {
+            $search = $request->q;
+            $query->where(function ($sub) use ($search) {
+                $sub->where('nom', 'like', "%{$search}%")
+                    ->orWhere('prenom', 'like', "%{$search}%")
+                    ->orWhere('specialite', 'like', "%{$search}%")
+                    ->orWhere('bio', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('domaine') && isset($domaineKeywords[$request->domaine])) {
+            $query->where('specialite', 'like', '%' . $domaineKeywords[$request->domaine] . '%');
+        }
+
+        if ($request->filled('pays') && isset($paysNoms[$request->pays])) {
+            $query->where('localisation', 'like', '%' . $paysNoms[$request->pays] . '%');
+        }
+
+        if ($request->boolean('disponible')) {
+            $query->where('available_for_work', true);
+        }
+
+        match ($request->get('tri', 'recent')) {
+            'populaire' => $query->orderByDesc('builder_score'),
+            'projets'   => $query->orderByDesc('projects_count'),
+            default     => $query->latest(),
+        };
+
+        $creatifs = $query->paginate(9)->withQueryString();
+
         return view('creatifs.index', compact('creatifs'));
     }
 
