@@ -100,14 +100,16 @@
                                     <x-input-error :messages="$errors->get('password')" />
                                 </div>
 
-                                <div class="flex items-center">
+                                <div>
                                     <label class="flex items-center gap-2 cursor-pointer group">
-                                        <input type="checkbox" name="remember"
+                                        <input type="checkbox" name="remember" checked
                                             class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500/20 transition-all">
                                         <span
                                             class="text-xs text-gray-500 font-medium group-hover:text-gray-700 transition-colors">Rester
                                             connecté</span>
                                     </label>
+                                    <p class="text-[11px] text-gray-400 mt-1 ml-6">Vous n'aurez plus à retaper votre
+                                        mot de passe la prochaine fois.</p>
                                 </div>
 
                                 <button type="submit"
@@ -216,14 +218,16 @@
                                     <x-input-error :messages="$errors->get('password')" />
                                 </div>
 
-                                <div class="flex items-center">
+                                <div>
                                     <label class="flex items-center gap-2 cursor-pointer group">
-                                        <input type="checkbox" name="remember"
+                                        <input type="checkbox" name="remember" checked
                                             class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500/20 transition-all">
                                         <span
                                             class="text-xs text-gray-500 font-medium group-hover:text-gray-700 transition-colors">Rester
                                             connecté</span>
                                     </label>
+                                    <p class="text-[11px] text-gray-400 mt-1 ml-6">Vous n'aurez plus à retaper votre
+                                        mot de passe la prochaine fois.</p>
                                 </div>
 
                                 <button type="submit"
