@@ -25,7 +25,7 @@
     {{-- Formulaire en haut --}}
     <div class="mb-8 pb-8 border-b border-gray-100">
         @auth
-            <form action="{{ route('comments.store', $project->id) }}" method="POST">
+            <form action="{{ route('comments.store', $project) }}" method="POST">
                 @csrf
                 <div class="flex gap-4 items-start">
                     @php $userPhoto = Auth::user()->creatif?->photo; @endphp
@@ -147,7 +147,7 @@
                     <div x-show="showReply" x-transition:enter="transition ease-out duration-200"
                         x-transition:enter-start="opacity-0 -translate-y-1"
                         x-transition:enter-end="opacity-100 translate-y-0" class="mt-4">
-                        <form action="{{ route('comments.store', $project->id) }}" method="POST">
+                        <form action="{{ route('comments.store', $project) }}" method="POST">
                             @csrf
                             <input type="hidden" name="parent_id" value="{{ $comment->id }}">
                             <div class="flex gap-3">
