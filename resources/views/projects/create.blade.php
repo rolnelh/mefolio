@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="min-h-screen bg-gray-50/40 py-10 px-4">
-        <div class="max-w-2xl mx-auto">
+        <div class="max-w-5xl mx-auto">
 
             {{-- Back --}}
             <a href="{{ route('dashboard') }}"
@@ -24,120 +24,131 @@
                 </div>
             </div>
 
-            <form action="{{ route('projets.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+            <form action="{{ route('projets.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                {{-- Titre --}}
-                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                    <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
-                        Titre du projet
-                    </label>
-                    <input type="text" name="title" required value="{{ old('title') }}"
-                        placeholder="Ex: Refonte UI d'une app mobile fintech"
-                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
-                    @error('title')
-                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                    @enderror
-                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-5 items-start">
 
-                {{-- Description --}}
-                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                    <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
-                        Description du projet
-                    </label>
-                    <textarea name="description" rows="5" required
-                        placeholder="Décrivez votre démarche créative, les outils utilisés, les défis relevés..."
-                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all resize-none">{{ old('description') }}</textarea>
-                    @error('description')
-                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                    @enderror
-                </div>
+                    {{-- Colonne gauche : contenu --}}
+                    <div class="space-y-5 min-w-0">
 
-                {{-- Catégorie + Technologies --}}
-                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                    <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
-                        Catégorie & Technologies
-                    </label>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <select name="category"
-                            class="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                            <option value="">-- Catégorie --</option>
-                            <option value="Design">Design / UI-UX</option>
-                            <option value="Web">Développement Web</option>
-                            <option value="Mobile">Application Mobile</option>
-                            <option value="Photo">Photographie</option>
-                            <option value="Video">Vidéo &amp; Montage</option>
-                            <option value="Branding">Branding</option>
-                            <option value="Autre">Autre</option>
-                        </select>
-                        <x-tech-tag-input :value="old('technologies')"
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" />
-                    </div>
-                </div>
+                        {{-- Infos principales --}}
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm space-y-5">
+                            <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest">Informations</h2>
 
-                {{-- Liens --}}
-                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                    <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
-                        Liens (optionnel)
-                    </label>
-                    <div class="space-y-3">
-                        <div class="relative">
-                            <input type="url" name="lien_site" value="{{ old('lien_site') }}"
-                                placeholder="https://mon-projet.com"
-                                class="w-full pl-9 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                        </div>
-                        <div class="relative">
-                            <input type="url" name="lien_github" value="{{ old('lien_github') }}"
-                                placeholder="https://github.com/..."
-                                class="w-full pl-9 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Médias --}}
-                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm" x-data="{ count: 0, previews: [] }">
-                    <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
-                        Médias du projet
-                    </label>
-                    <div class="relative">
-                        <div
-                            class="flex flex-col items-center justify-center min-h-[180px] border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50 hover:bg-indigo-50/30 hover:border-indigo-300 transition-all cursor-pointer">
-                            <div class="text-center px-6 py-8 pointer-events-none">
-                                <div
-                                    class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                                    <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor"
-                                        stroke-width="1.5" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                                    </svg>
-                                </div>
-                                <p class="text-sm font-bold text-gray-700"
-                                    x-text="count === 0 ? 'Glissez vos fichiers ou cliquez pour sélectionner' : count + ' fichier(s) sélectionné(s)'">
-                                </p>
-                                <p class="text-xs text-gray-400 mt-1">JPG, PNG, MP4 — Max 10 Mo par fichier</p>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 mb-1.5">Titre du projet</label>
+                                <input type="text" name="title" required value="{{ old('title') }}"
+                                    placeholder="Ex: Refonte UI d'une app mobile fintech"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                                @error('title')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
-                            <input type="file" name="media[]" multiple @change="count = $event.target.files.length"
-                                accept="image/*,video/*" class="absolute inset-0 opacity-0 cursor-pointer" required>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 mb-1.5">Description</label>
+                                <textarea name="description" rows="6" required
+                                    placeholder="Décrivez votre démarche créative, les outils utilisés, les défis relevés..."
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all resize-none">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-600 mb-1.5">Catégorie</label>
+                                    <select name="category"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                        <option value="">-- Catégorie --</option>
+                                        <option value="Design">Design / UI-UX</option>
+                                        <option value="Web">Développement Web</option>
+                                        <option value="Mobile">Application Mobile</option>
+                                        <option value="Photo">Photographie</option>
+                                        <option value="Video">Vidéo &amp; Montage</option>
+                                        <option value="Branding">Branding</option>
+                                        <option value="Autre">Autre</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-600 mb-1.5">Technologies</label>
+                                    <x-tech-tag-input :value="old('technologies')"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Liens --}}
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                            <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Liens
+                                (optionnel)</h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="relative">
+                                    <input type="url" name="lien_site" value="{{ old('lien_site') }}"
+                                        placeholder="https://mon-projet.com"
+                                        class="w-full pl-9 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                </div>
+                                <div class="relative">
+                                    <input type="url" name="lien_github" value="{{ old('lien_github') }}"
+                                        placeholder="https://github.com/..."
+                                        class="w-full pl-9 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    @error('media')
-                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                    @enderror
+
+                    {{-- Colonne droite : visuels --}}
+                    <div class="space-y-5 min-w-0">
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"
+                            x-data="{ count: 0 }">
+                            <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-5">Médias du
+                                projet</h2>
+                            <div class="relative">
+                                <div
+                                    class="flex flex-col items-center justify-center min-h-[220px] border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50 hover:bg-indigo-50/30 hover:border-indigo-300 transition-all cursor-pointer">
+                                    <div class="text-center px-6 py-8 pointer-events-none">
+                                        <div
+                                            class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                            <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor"
+                                                stroke-width="1.5" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                            </svg>
+                                        </div>
+                                        <p class="text-sm font-bold text-gray-700"
+                                            x-text="count === 0 ? 'Glissez vos fichiers ou cliquez pour sélectionner' : count + ' fichier(s) sélectionné(s)'">
+                                        </p>
+                                        <p class="text-xs text-gray-400 mt-1">JPG, PNG, MP4 — Max 10 Mo par fichier</p>
+                                    </div>
+                                    <input type="file" name="media[]" multiple
+                                        @change="count = $event.target.files.length" accept="image/*,video/*"
+                                        class="absolute inset-0 opacity-0 cursor-pointer" required>
+                                </div>
+                            </div>
+                            @error('media')
+                                <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    {{-- Submit --}}
+                    <div class="lg:col-span-2">
+                        <button type="submit"
+                            class="w-full flex items-center justify-center gap-2 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-sm rounded-2xl transition-all shadow-lg shadow-indigo-200 hover:scale-[1.01] active:scale-95">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                            </svg>
+                            Publier le projet
+                        </button>
+
+                        <p class="text-center text-xs text-gray-400 mt-3">
+                            Votre projet sera visible sur votre profil public après publication.
+                        </p>
+                    </div>
                 </div>
-
-                {{-- Submit --}}
-                <button type="submit"
-                    class="w-full flex items-center justify-center gap-2 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-sm rounded-2xl transition-all shadow-lg shadow-indigo-200 hover:scale-[1.01] active:scale-95">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-                    </svg>
-                    Publier le projet
-                </button>
-
-                <p class="text-center text-xs text-gray-400">
-                    Votre projet sera visible sur votre profil public après publication.
-                </p>
             </form>
         </div>
     </div>

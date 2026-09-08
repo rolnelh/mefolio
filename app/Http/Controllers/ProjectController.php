@@ -245,7 +245,7 @@ class ProjectController extends Controller
             title: 'Projet modifié',
             message: 'Votre projet « ' . $project->title . ' » a été mis à jour.',
             url: route('projects.show', $project->slug),
-            icon: 'project',
+            icon: 'project_updated',
         ));
 
         return redirect()->route('projects.show', $project->slug)
@@ -279,7 +279,7 @@ class ProjectController extends Controller
         auth()->user()->notify(new ActivityNotification(
             title: 'Projet supprimé',
             message: 'Votre projet « ' . $title . ' » a été supprimé.',
-            icon: 'project',
+            icon: 'project_deleted',
         ));
 
         return redirect()->route('dashboard')->with('success', 'Projet supprimé définitivement.');
