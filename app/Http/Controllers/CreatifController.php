@@ -93,7 +93,7 @@ class CreatifController extends Controller
         return view('creatifs.index', compact('creatifs'));
     }
 
-    public function show($slug)
+    public function show($slug, BuilderScoreService $scorer)
     {
         $creatif = Creatif::where('slug', $slug)->firstOrFail();
 
@@ -105,7 +105,10 @@ class CreatifController extends Controller
 
         $projects = $creatif->projects()->withCount('likes')->latest()->get();
         $totalLikes = $projects->sum('likes_count');
-        return view('creatifs.show', compact('creatif', 'projects', 'totalLikes'));
+        $level = $scorer->getLevel($creatif);
+        $topPct = $scorer->getTopPercentage($creatif);
+
+        return view('creatifs.show', compact('creatif', 'projects', 'totalLikes', 'level', 'topPct'));
     }
 
     public function create()
