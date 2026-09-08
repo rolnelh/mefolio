@@ -147,7 +147,7 @@
             <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-10 overflow-hidden">
                 {{-- Image de fond --}}
                 <div aria-hidden="true" class="absolute inset-0 bg-cover bg-center opacity-40"
-                    style="background-image: url('{{ asset('images/vision.png') }}');"></div>
+                    style="background-image: url('{{ asset('images/talentoftheweek.png') }}');"></div>
                 <div aria-hidden="true"
                     class="absolute inset-0 bg-gradient-to-br from-indigo-50/80 via-white/70 to-amber-50/80"></div>
 
