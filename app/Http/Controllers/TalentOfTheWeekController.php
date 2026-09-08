@@ -33,6 +33,6 @@ class TalentOfTheWeekController extends Controller
             'nominated_by' => Auth::id(),
         ]);
 
-        return back()->with('success', 'Merci ! Votre nomination a bien été envoyée à notre équipe.');
+        return back()->with('nomination_success', true);
     }
 }

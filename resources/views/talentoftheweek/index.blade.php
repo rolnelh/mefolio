@@ -104,37 +104,83 @@
             </div>
         @endif
 
-        <div class="bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl p-10 text-center text-white">
-            <h2 class="text-2xl font-black mb-2">Nominez un talent africain</h2>
-            <p class="text-indigo-200 mb-6 max-w-lg mx-auto">Vous connaissez un créatif africain exceptionnel ?
-                Nominez-le pour le Talent of the Week et aidez-le à briller.</p>
+    </div>
 
-            @auth
-                <form method="POST" action="{{ route('talentoftheweek.nominate') }}" class="max-w-lg mx-auto text-left space-y-3 bg-white/10 rounded-2xl p-6">
-                    @csrf
-                    <div>
-                        <input type="text" name="creatif_name" required placeholder="Nom du talent"
-                            class="w-full px-4 py-2.5 rounded-xl text-gray-900 text-sm focus:outline-none">
-                    </div>
-                    <div>
-                        <input type="email" name="contact_email" placeholder="Email de contact (optionnel)"
-                            class="w-full px-4 py-2.5 rounded-xl text-gray-900 text-sm focus:outline-none">
-                    </div>
-                    <div>
-                        <textarea name="reason" rows="3" required placeholder="Pourquoi ce talent mérite d'être mis en avant ?"
-                            class="w-full px-4 py-2.5 rounded-xl text-gray-900 text-sm focus:outline-none"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-white text-indigo-600 font-bold px-6 py-2.5 rounded-xl hover:bg-indigo-50 transition-all">
-                        Envoyer la nomination
+    {{-- Badge flottant : nominer un talent --}}
+    <div x-data="{
+            open: {{ $errors->any() || session('nomination_success') ? 'true' : 'false' }},
+            success: {{ session('nomination_success') ? 'true' : 'false' }}
+        }"
+        x-init="if (success) { setTimeout(() => { open = false; success = false }, 6000) }"
+        class="fixed bottom-6 right-6 z-50">
+
+        <div x-show="open" x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 translate-y-4 scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-4 scale-95"
+            class="absolute bottom-full right-0 mb-4 w-80 max-w-[calc(100vw-3rem)]" x-cloak>
+
+            {{-- État succès --}}
+            <div x-show="success" x-cloak class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 text-center">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-emerald-100 flex items-center justify-center">
+                    <svg class="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </svg>
+                </div>
+                <h3 class="font-black text-gray-900 mb-1">Nomination envoyée !</h3>
+                <p class="text-sm text-gray-500">Merci, notre équipe va l'examiner avec attention.</p>
+            </div>
+
+            {{-- État formulaire --}}
+            <div x-show="!success" x-cloak class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-black text-gray-900">Nominer un talent</h3>
+                    <button type="button" @click="open = false" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
                     </button>
-                </form>
-            @else
-                <a href="{{ route('login') }}"
-                    class="inline-flex items-center gap-2 bg-white text-indigo-600 font-bold px-8 py-3 rounded-full hover:bg-indigo-50 transition-all hover:scale-105">
-                    Se connecter pour nominer →
-                </a>
-            @endauth
+                </div>
+                @auth
+                    <form method="POST" action="{{ route('talentoftheweek.nominate') }}" class="space-y-3">
+                        @csrf
+                        <input type="text" name="creatif_name" required value="{{ old('creatif_name') }}"
+                            placeholder="Nom du talent"
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        <input type="email" name="contact_email" value="{{ old('contact_email') }}"
+                            placeholder="Email de contact (optionnel)"
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        <textarea name="reason" rows="3" required placeholder="Pourquoi ce talent mérite d'être mis en avant ?"
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">{{ old('reason') }}</textarea>
+                        <button type="submit"
+                            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-xl transition-all">
+                            Envoyer la nomination
+                        </button>
+                    </form>
+                @else
+                    <p class="text-sm text-gray-500 mb-4">Vous connaissez un créatif africain exceptionnel ?
+                        Connectez-vous pour le nominer.</p>
+                    <a href="{{ route('login') }}"
+                        class="block text-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-xl transition-all">
+                        Se connecter pour nominer
+                    </a>
+                @endauth
+            </div>
         </div>
 
+        <button type="button" @click="open = !open; if (!open) success = false"
+            class="flex items-center gap-2.5 bg-gray-900 hover:bg-black text-white pl-3 pr-5 py-3 rounded-full shadow-xl transition-all hover:scale-105">
+            <span class="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+                </svg>
+            </span>
+            <span class="text-sm font-bold">Nominer un talent</span>
+        </button>
     </div>
 </x-app-layout>
