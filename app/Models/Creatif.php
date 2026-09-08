@@ -31,6 +31,7 @@ class Creatif extends Model
         'available_for_work' => 'boolean',
         'is_paused' => 'boolean',
         'builder_score' => 'integer',
+        'profile_views' => 'integer',
     ];
 
     public function user()

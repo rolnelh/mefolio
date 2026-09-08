@@ -115,7 +115,7 @@
 
                     {{-- Stats --}}
                     <div
-                        class="grid grid-cols-3 divide-x divide-gray-50 dark:divide-gray-800 border-b border-gray-50 dark:border-gray-800">
+                        class="grid grid-cols-4 divide-x divide-gray-50 dark:divide-gray-800 border-b border-gray-50 dark:border-gray-800">
                         <div class="py-3 text-center">
                             <p class="text-lg font-black text-gray-900 dark:text-white">{{ count($projects) }}</p>
                             <p class="text-[10px] text-gray-400 uppercase tracking-wider">Projets</p>
@@ -127,6 +127,10 @@
                         <div class="py-3 text-center">
                             <p class="text-lg font-black text-gray-900 dark:text-white">{{ $totalLikes }}</p>
                             <p class="text-[10px] text-gray-400 uppercase tracking-wider">Likes</p>
+                        </div>
+                        <div class="py-3 text-center">
+                            <p class="text-lg font-black text-gray-900 dark:text-white">{{ number_format($creatif->profile_views ?? 0) }}</p>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Vues</p>
                         </div>
                     </div>
 
@@ -218,12 +222,13 @@
 
                     {{-- Statistiques réelles : uniquement une fois qu'il y a de l'activité à montrer --}}
                     @if ($aDesProjets)
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
                             @foreach ([
                                 ['label' => 'Projets publiés', 'val' => count($projects)],
                                 ['label' => 'Builder Score', 'val' => number_format($creatif->builder_score ?? 0)],
                                 ['label' => 'Likes reçus', 'val' => $totalLikes],
                                 ['label' => 'Commentaires', 'val' => $totalComments],
+                                ['label' => 'Vues du profil', 'val' => number_format($creatif->profile_views ?? 0)],
                             ] as $stat)
                                 <div class="bg-white border border-gray-100 rounded-2xl p-4 text-center">
                                     <div class="text-xl font-black text-gray-900">{{ $stat['val'] }}</div>
@@ -867,8 +872,8 @@
                 @if ($activeTab === 'stats')
                     <div>
                         <h2 class="text-lg font-black text-gray-900 mb-5">Statistiques</h2>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                            @foreach ([['label' => 'Projets publiés', 'val' => count($projects)], ['label' => 'Builder Score', 'val' => number_format($creatif->builder_score ?? 0)], ['label' => 'Likes reçus', 'val' => $totalLikes], ['label' => 'Commentaires', 'val' => $totalComments]] as $stat)
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+                            @foreach ([['label' => 'Projets publiés', 'val' => count($projects)], ['label' => 'Builder Score', 'val' => number_format($creatif->builder_score ?? 0)], ['label' => 'Likes reçus', 'val' => $totalLikes], ['label' => 'Commentaires', 'val' => $totalComments], ['label' => 'Vues du profil', 'val' => number_format($creatif->profile_views ?? 0)]] as $stat)
                                 <div class="bg-white border border-gray-100 rounded-2xl p-5 text-center">
                                     <div class="text-3xl font-black text-gray-900">{{ $stat['val'] }}</div>
                                     <div class="text-xs text-gray-400 mt-1">{{ $stat['label'] }}</div>

@@ -96,6 +96,13 @@ class CreatifController extends Controller
     public function show($slug)
     {
         $creatif = Creatif::where('slug', $slug)->firstOrFail();
+
+        // Vue réelle : uniquement des visiteurs, jamais quand le créatif
+        // consulte son propre profil.
+        if (! Auth::check() || Auth::id() !== $creatif->user_id) {
+            $creatif->increment('profile_views');
+        }
+
         $projects = $creatif->projects()->withCount('likes')->latest()->get();
         $totalLikes = $projects->sum('likes_count');
         return view('creatifs.show', compact('creatif', 'projects', 'totalLikes'));

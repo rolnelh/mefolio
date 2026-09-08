@@ -1,9 +1,4 @@
 <x-app-layout>
-    @php
-        $totalVues = 0;
-        $totalLikes = 0;
-    @endphp
-
     {{-- COVER --}}
     <div class="relative w-full h-52 sm:h-64 overflow-hidden bg-gray-900">
         <img src="{{ $creatif->couverture ?: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop' }}"
@@ -51,7 +46,7 @@
                     @endif
 
                     {{-- Stats --}}
-                    <div class="grid grid-cols-3 divide-x divide-gray-50 border-b border-gray-50">
+                    <div class="grid grid-cols-4 divide-x divide-gray-50 border-b border-gray-50">
                         <div class="py-3 text-center">
                             <p class="text-lg font-black text-gray-900">{{ count($projects) }}</p>
                             <p class="text-[10px] text-gray-400 uppercase tracking-wider">Projets</p>
@@ -63,6 +58,10 @@
                         <div class="py-3 text-center">
                             <p class="text-lg font-black text-gray-900">{{ $totalLikes }}</p>
                             <p class="text-[10px] text-gray-400 uppercase tracking-wider">Likes</p>
+                        </div>
+                        <div class="py-3 text-center">
+                            <p class="text-lg font-black text-gray-900">{{ number_format($creatif->profile_views) }}</p>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Vues</p>
                         </div>
                     </div>
 
