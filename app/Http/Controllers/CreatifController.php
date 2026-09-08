@@ -146,7 +146,7 @@ class CreatifController extends Controller
                 title: 'Photo de profil mise à jour',
                 message: 'Votre photo de profil a bien été changée.',
                 url: $creatif->slug ? route('creatifs.show', $creatif->slug) : null,
-                icon: 'photo',
+                icon: 'profile',
             ));
         }
 
