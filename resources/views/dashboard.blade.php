@@ -37,10 +37,17 @@
         $pourcentage = ($progression / $total) * 100;
 
         $activeTab = request()->get('tab', 'projets');
+
+        // Le bandeau de couverture remonte visuellement derrière la nav
+        // flottante (comme le hero de l'accueil), sauf s'il y a un message
+        // flash au-dessus : dans ce cas on ne le fait pas remonter, pour ne
+        // pas passer sous le message.
+        $hasFlash = session('success') || session('error') || $errors->any();
     @endphp
 
 
-    <div class="relative w-full h-48 sm:h-56 overflow-hidden bg-gray-200">
+    <div
+        class="relative z-0 w-full h-48 sm:h-56 overflow-hidden bg-gray-200 {{ $hasFlash ? '' : '-mt-[76px] sm:-mt-[80px]' }}">
         <img src="{{ $couverturePath }}" alt="Couverture" class="w-full h-full object-cover object-center">
         <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
         <div class="absolute bottom-3 right-3">
