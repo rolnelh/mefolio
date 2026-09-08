@@ -30,7 +30,7 @@
                             <p class="font-semibold text-gray-900">{{ $program->name }}</p>
                             <p class="text-xs text-gray-400">{{ $program->full_name }}</p>
                         </td>
-                        <td class="px-5 py-3 text-gray-500">{{ $program->country ?? '—' }}</td>
+                        <td class="px-5 py-3 text-gray-500">{{ $program->country ?? '-' }}</td>
                         <td class="px-5 py-3 text-gray-500">{{ $program->featured ? 'Oui' : 'Non' }}</td>
                         <td class="px-5 py-3">
                             @if ($program->status === 'active')

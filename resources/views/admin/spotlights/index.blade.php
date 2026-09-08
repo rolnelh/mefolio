@@ -13,7 +13,7 @@
                 <select name="creatif_id" required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     <option value="">Sélectionner un créatif</option>
                     @foreach ($creatifs as $creatif)
-                        <option value="{{ $creatif->id }}">{{ $creatif->prenom }} {{ $creatif->nom }} — {{ $creatif->specialite }}</option>
+                        <option value="{{ $creatif->id }}">{{ $creatif->prenom }} {{ $creatif->nom }} · {{ $creatif->specialite }}</option>
                     @endforeach
                 </select>
             </div>
@@ -46,7 +46,7 @@
                 @forelse ($spotlights as $spotlight)
                     <tr class="hover:bg-gray-50/60">
                         <td class="px-5 py-3 font-semibold text-gray-900">
-                            {{ $spotlight->creatif->prenom ?? '—' }} {{ $spotlight->creatif->nom ?? '' }}
+                            {{ $spotlight->creatif->prenom ?? '-' }} {{ $spotlight->creatif->nom ?? '' }}
                         </td>
                         <td class="px-5 py-3 text-gray-500">{{ $spotlight->week_label }}</td>
                         <td class="px-5 py-3">

@@ -20,7 +20,7 @@
             </h1>
             <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed mb-10">
                 Commandez des services créatifs directement aux meilleurs talents africains.
-                Logo, site web, vidéo, photo — payez en <span class="text-slate-900 font-semibold">Mobile Money.</span>
+                Logo, site web, vidéo, photo : payez en <span class="text-slate-900 font-semibold">Mobile Money.</span>
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a href="{{ route('register') }}"

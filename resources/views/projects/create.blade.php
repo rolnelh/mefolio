@@ -119,7 +119,7 @@
                                         <p class="text-sm font-bold text-gray-700"
                                             x-text="count === 0 ? 'Glissez vos fichiers ou cliquez pour sélectionner' : count + ' fichier(s) sélectionné(s)'">
                                         </p>
-                                        <p class="text-xs text-gray-400 mt-1">JPG, PNG, MP4 — Max 10 Mo par fichier</p>
+                                        <p class="text-xs text-gray-400 mt-1">JPG, PNG, MP4 · Max 10 Mo par fichier</p>
                                     </div>
                                     <input type="file" name="media[]" multiple
                                         @change="count = $event.target.files.length" accept="image/*,video/*"

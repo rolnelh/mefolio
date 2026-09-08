@@ -635,7 +635,7 @@
                             <div>
                                 <h2 class="text-lg font-black text-gray-900">Productivité</h2>
                                 <p class="text-xs text-gray-400 mt-0.5">Votre activité détermine votre Builder Score
-                                    — et votre place dans le classement.</p>
+                                    et votre place dans le classement.</p>
                             </div>
                             <a href="{{ route('classement.index') }}"
                                 class="text-xs font-semibold text-indigo-600 hover:underline whitespace-nowrap">
@@ -783,7 +783,7 @@
                                                 {{ $mission->title ?? 'Mission supprimée' }}
                                             </p>
                                             <p class="text-xs text-gray-500">
-                                                {{ $mission?->user?->username ?? '—' }} ·
+                                                {{ $mission?->user?->username ?? '-' }} ·
                                                 envoyée {{ $application->created_at->diffForHumans() }}
                                             </p>
                                         </a>
@@ -883,7 +883,7 @@
                         <div
                             class="bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100 rounded-2xl p-6 text-center">
                             <h3 class="font-bold text-gray-900 mb-1">Analytics détaillées bientôt</h3>
-                            <p class="text-sm text-gray-500">Vues par projet, provenance géographique, performance —
+                            <p class="text-sm text-gray-500">Vues par projet, provenance géographique, performance,
                                 tout ça arrive très bientôt.</p>
                         </div>
                     </div>

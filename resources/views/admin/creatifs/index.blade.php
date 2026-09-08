@@ -28,9 +28,9 @@
                     <tr class="hover:bg-gray-50/60">
                         <td class="px-5 py-3">
                             <p class="font-semibold text-gray-900">{{ $creatif->prenom }} {{ $creatif->nom }}</p>
-                            <p class="text-xs text-gray-400">{{ $creatif->user->email ?? '—' }}</p>
+                            <p class="text-xs text-gray-400">{{ $creatif->user->email ?? '-' }}</p>
                         </td>
-                        <td class="px-5 py-3 text-gray-500">{{ $creatif->specialite ?? '—' }}</td>
+                        <td class="px-5 py-3 text-gray-500">{{ $creatif->specialite ?? '-' }}</td>
                         <td class="px-5 py-3 text-gray-500">{{ number_format($creatif->builder_score) }} pts</td>
                         <td class="px-5 py-3 text-gray-500">{{ $creatif->projects()->count() }}</td>
                         <td class="px-5 py-3">

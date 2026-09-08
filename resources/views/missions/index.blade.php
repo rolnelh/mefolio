@@ -147,7 +147,7 @@
                             <p class="text-[11px] font-bold text-indigo-500 mb-3">{{ $mission->domaine }}</p>
 
                             <div class="space-y-1.5 mb-4 text-xs text-gray-500">
-                                <p>{{ $mission->lieu ?: ($mission->remote ? 'Remote' : '—') }}</p>
+                                <p>{{ $mission->lieu ?: ($mission->remote ? 'Remote' : '-') }}</p>
                                 @if ($mission->duree)
                                     <p>{{ $mission->duree }}</p>
                                 @endif
@@ -173,7 +173,7 @@
                                     {{ substr($mission->user->username ?? '?', 0, 1) }}
                                 </div>
                                 <div class="min-w-0">
-                                    <p class="text-xs font-bold text-gray-900 truncate">{{ $mission->user->username ?? '—' }}</p>
+                                    <p class="text-xs font-bold text-gray-900 truncate">{{ $mission->user->username ?? '-' }}</p>
                                     <p class="text-[10px] text-gray-400">{{ $mission->created_at->diffForHumans() }}</p>
                                 </div>
                             </div>

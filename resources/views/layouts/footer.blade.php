@@ -11,7 +11,7 @@
                         <span class="text-xl font-bold text-slate-900 tracking-tight">Mefolio</span>
                     </a>
                     <p class="text-sm text-slate-500 leading-relaxed mt-4 max-w-xs">
-                        La plateforme portfolio et marketplace des créatifs africains — designers, développeurs,
+                        La plateforme portfolio et marketplace des créatifs africains : designers, développeurs,
                         photographes, vidéastes.
                     </p>
 

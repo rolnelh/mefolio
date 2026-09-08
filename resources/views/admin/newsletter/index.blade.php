@@ -18,7 +18,7 @@
                 @forelse ($subscribers as $subscriber)
                     <tr class="hover:bg-gray-50/60">
                         <td class="px-5 py-3 font-semibold text-gray-900">{{ $subscriber->email }}</td>
-                        <td class="px-5 py-3 text-gray-500">{{ $subscriber->source ?? '—' }}</td>
+                        <td class="px-5 py-3 text-gray-500">{{ $subscriber->source ?? '-' }}</td>
                         <td class="px-5 py-3 text-gray-500">{{ $subscriber->created_at->format('d/m/Y') }}</td>
                         <td class="px-5 py-3 text-right">
                             <form method="POST" action="{{ route('admin.newsletter.destroy', $subscriber) }}"

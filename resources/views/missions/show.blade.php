@@ -38,15 +38,15 @@
                 </div>
                 <div>
                     <p class="text-[10px] uppercase font-bold text-gray-400">Durée</p>
-                    <p class="font-bold text-gray-900">{{ $mission->duree ?: '—' }}</p>
+                    <p class="font-bold text-gray-900">{{ $mission->duree ?: '-' }}</p>
                 </div>
                 <div>
                     <p class="text-[10px] uppercase font-bold text-gray-400">Lieu</p>
-                    <p class="font-bold text-gray-900">{{ $mission->lieu ?: ($mission->remote ? 'Remote' : '—') }}</p>
+                    <p class="font-bold text-gray-900">{{ $mission->lieu ?: ($mission->remote ? 'Remote' : '-') }}</p>
                 </div>
                 <div>
                     <p class="text-[10px] uppercase font-bold text-gray-400">Niveau</p>
-                    <p class="font-bold text-gray-900">{{ $mission->niveau ?: '—' }}</p>
+                    <p class="font-bold text-gray-900">{{ $mission->niveau ?: '-' }}</p>
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
                     {{ substr($mission->user->username ?? '?', 0, 1) }}
                 </div>
                 <div>
-                    <p class="text-sm font-bold text-gray-900">{{ $mission->user->username ?? '—' }}</p>
+                    <p class="text-sm font-bold text-gray-900">{{ $mission->user->username ?? '-' }}</p>
                     <p class="text-xs text-gray-400">Publié {{ $mission->created_at->diffForHumans() }}</p>
                 </div>
             </div>

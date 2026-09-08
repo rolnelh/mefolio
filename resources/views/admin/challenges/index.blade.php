@@ -27,7 +27,7 @@
                 @forelse ($challenges as $challenge)
                     <tr class="hover:bg-gray-50/60">
                         <td class="px-5 py-3 font-semibold text-gray-900">{{ $challenge->title }}</td>
-                        <td class="px-5 py-3 text-gray-500">{{ $challenge->sponsor ?? '—' }}</td>
+                        <td class="px-5 py-3 text-gray-500">{{ $challenge->sponsor ?? '-' }}</td>
                         <td class="px-5 py-3 text-gray-500">{{ $challenge->participants_count }}</td>
                         <td class="px-5 py-3">
                             @if ($challenge->status === 'open')
