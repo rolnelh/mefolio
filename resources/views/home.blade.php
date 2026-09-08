@@ -644,61 +644,26 @@
         </div>
 
         <div class="max-w-3xl mx-auto mt-8">
-            <div class="relative overflow-hidden rounded-[2rem] p-10 text-center bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50 border border-indigo-100">
+            <div class="relative overflow-hidden rounded-[2rem] p-10 sm:p-14 text-center bg-gradient-to-br from-indigo-50 via-violet-50 to-amber-50 border border-indigo-100">
                 <div class="w-12 h-12 mx-auto mb-5 rounded-2xl bg-gray-900 flex items-center justify-center shadow-lg">
                     <x-application-logo class="h-6 w-auto text-white" />
                 </div>
-                <h3 class="text-2xl font-black text-slate-900 mb-2">Encore des questions ?</h3>
-                <p class="text-slate-500 text-sm max-w-sm mx-auto mb-6">
-                    Notre équipe est là pour vous accompagner et répondre à vos besoins spécifiques.
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-2">Prêt à booster votre visibilité ?</h3>
+                <p class="text-slate-500 text-sm max-w-sm mx-auto mb-8">
+                    Rejoignez la communauté des créatifs qui transforment leur passion en carrière sur Mefolio.
                 </p>
-                <div class="flex -space-x-2 justify-center mb-6">
-                    @foreach (['bg-indigo-500', 'bg-violet-500', 'bg-amber-500'] as $c)
-                        <div class="w-8 h-8 rounded-full {{ $c }} border-2 border-white"></div>
-                    @endforeach
-                </div>
-                <a href="mailto:contact@mefolio.com"
-                    class="inline-flex items-center gap-2 bg-gray-900 hover:bg-black text-white text-sm font-bold px-6 py-3 rounded-full transition-all hover:scale-[1.02]">
-                    Contacter l'équipe
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="max-w-6xl mx-auto px-6 py-24">
-        <div
-            class="relative overflow-hidden bg-slate-900 rounded-[2.5rem] md:rounded-[3.5rem] p-12 md:p-20 shadow-2xl shadow-indigo-100/20">
-
-            <div
-                class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
-
-                <div class="max-w-xl">
-                    <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.1]">
-                        Prêt à booster <br />
-                        <span class="text-indigo-400">votre visibilité ?</span>
-                    </h2>
-                    <p class="text-lg text-white mt-6 max-w-md leading-relaxed">
-                        Rejoignez la communauté des <span class="font-bold text-white">créatifs</span> qui transforment
-                        leur passion en carrière sur MeFolio.
-                    </p>
-                </div>
-
-                <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
                     <a href="{{ route(auth()->check() ? 'dashboard' : 'register') }}"
-                        class="group inline-flex items-center justify-center px-10 py-3 font-bold text-white bg-indigo-600 rounded-full md:rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl">
-                        Créer mon portfolio
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
+                        class="inline-flex items-center gap-2 bg-gray-900 hover:bg-black text-white text-sm font-bold px-7 py-3 rounded-full transition-all hover:scale-[1.02]">
+                        Créer mon profil
+                    </a>
+                    <a href="mailto:contact@mefolio.com"
+                        class="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 text-sm font-semibold px-7 py-3 rounded-full transition-all">
+                        Contacter l'équipe
                     </a>
                 </div>
-
             </div>
         </div>
     </section>
-
 
 </x-app-layout>
