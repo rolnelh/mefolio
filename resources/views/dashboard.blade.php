@@ -76,8 +76,15 @@
                     {{-- Avatar --}}
                     <div class="px-6 pt-6 pb-4 text-center border-b border-gray-50 dark:border-gray-800">
                         <div class="relative inline-block mb-3">
-                            <img src="{{ $creatif?->photo ?: asset('images/avatar.webp') }}" alt="Profil"
-                                class="w-20 h-20 rounded-2xl object-cover ring-4 ring-indigo-50 dark:ring-indigo-900/20 shadow-md mx-auto">
+                            @if ($creatif?->photo)
+                                <img src="{{ $creatif->photo }}" alt="Profil"
+                                    class="w-20 h-20 rounded-2xl object-cover ring-4 ring-indigo-50 dark:ring-indigo-900/20 shadow-md mx-auto">
+                            @else
+                                <div
+                                    class="w-20 h-20 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl font-black ring-4 ring-indigo-50 dark:ring-indigo-900/20 shadow-md mx-auto">
+                                    {{ strtoupper(substr($creatif?->prenom ?: Auth::user()->username, 0, 1)) }}
+                                </div>
+                            @endif
                             <div
                                 class="absolute -bottom-1.5 -right-1.5 bg-green-500 w-4 h-4 rounded-full border-2 border-white">
                             </div>
@@ -180,15 +187,17 @@
 
                 @if ($activeTab === 'projets')
                     {{-- Raccourcis --}}
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div class="bg-violet-100 rounded-2xl p-4">
-                            <p class="text-sm font-bold text-gray-900">Complétez votre profil</p>
-                            <p class="text-xs text-gray-600 mt-0.5 mb-3">Soyez repéré par les clients.</p>
-                            <a href="{{ route('dashboard', ['tab' => 'profil']) }}"
-                                class="inline-flex items-center gap-1 bg-gray-900 hover:bg-black text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                Modifier mon profil
-                            </a>
-                        </div>
+                    <div class="grid grid-cols-1 {{ $profilComplet ? 'sm:grid-cols-2' : 'sm:grid-cols-3' }} gap-3">
+                        @unless ($profilComplet)
+                            <div class="bg-violet-100 rounded-2xl p-4">
+                                <p class="text-sm font-bold text-gray-900">Complétez votre profil</p>
+                                <p class="text-xs text-gray-600 mt-0.5 mb-3">Soyez repéré par les clients.</p>
+                                <a href="{{ route('dashboard', ['tab' => 'profil']) }}"
+                                    class="inline-flex items-center gap-1 bg-gray-900 hover:bg-black text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
+                                    Modifier mon profil
+                                </a>
+                            </div>
+                        @endunless
                         <div class="bg-emerald-100 rounded-2xl p-4">
                             <p class="text-sm font-bold text-gray-900">Trouvez votre prochaine mission</p>
                             <p class="text-xs text-gray-600 mt-0.5 mb-3">Explorez les opportunités du moment.</p>
@@ -481,7 +490,16 @@
                                         <div x-data="{ preview: null }" class="relative group flex-shrink-0">
                                             <div
                                                 class="w-16 h-16 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm">
-                                                <img :src="preview || '{{ $creatif?->photo ?: asset('images/avatar.webp') }}'"
+                                                @if ($creatif?->photo)
+                                                    <img x-show="!preview" src="{{ $creatif->photo }}"
+                                                        class="w-full h-full object-cover" alt="Photo de profil">
+                                                @else
+                                                    <div x-show="!preview"
+                                                        class="w-full h-full bg-indigo-600 text-white flex items-center justify-center text-xl font-black">
+                                                        {{ strtoupper(substr($creatif?->prenom ?: Auth::user()->username, 0, 1)) }}
+                                                    </div>
+                                                @endif
+                                                <img x-show="preview" x-cloak :src="preview"
                                                     class="w-full h-full object-cover" alt="Photo de profil">
                                             </div>
                                             <label

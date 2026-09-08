@@ -8,9 +8,15 @@
 
     <div class="relative p-7 flex flex-col items-center text-center">
         <a href="{{ route('creatifs.show', $creatif->slug) }}" class="block mb-4">
-            <img src="{{ $creatif->photo ?: asset('images/avatar.webp') }}"
-                alt="{{ $creatif->prenom }} {{ $creatif->nom }}"
-                class="w-20 h-20 rounded-full object-cover ring-4 ring-white shadow-md group-hover:scale-105 transition-transform duration-300">
+            @if ($creatif->photo)
+                <img src="{{ $creatif->photo }}" alt="{{ $creatif->prenom }} {{ $creatif->nom }}"
+                    class="w-20 h-20 rounded-full object-cover ring-4 ring-white shadow-md group-hover:scale-105 transition-transform duration-300">
+            @else
+                <div
+                    class="w-20 h-20 rounded-full bg-indigo-600 text-white flex items-center justify-center text-2xl font-black ring-4 ring-white shadow-md group-hover:scale-105 transition-transform duration-300 mx-auto">
+                    {{ strtoupper(substr($creatif->prenom ?: '?', 0, 1)) }}
+                </div>
+            @endif
         </a>
 
         <a href="{{ route('creatifs.show', $creatif->slug) }}" class="block">
