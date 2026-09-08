@@ -12,7 +12,6 @@
         </div>
 
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <p class="text-indigo-500 text-xs font-bold uppercase tracking-[0.3em] mb-4">Bientôt disponible</p>
             <h1 class="text-5xl sm:text-7xl font-black text-slate-900 tracking-tight leading-none mb-6">
                 Le marché des<br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600">
@@ -39,7 +38,6 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
 
         <div id="categories" class="text-center mb-16 scroll-mt-24">
-            <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Ce qui arrive</p>
             <h2 class="text-3xl font-black text-gray-900">Les catégories de services</h2>
         </div>
 

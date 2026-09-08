@@ -3,7 +3,6 @@
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
     <div class="text-center mb-12">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 mb-3">Mefolio · Rankings</p>
         <h1 class="text-4xl sm:text-5xl font-black text-gray-900 mb-4">
             Classement des<br>
             <span class="text-indigo-600">talents africains</span>
