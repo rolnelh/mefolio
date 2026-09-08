@@ -1,20 +1,12 @@
 <x-guest-layout>
-    <div class="min-h-screen bg-[#F4F3EF] flex flex-col items-center justify-center px-4 py-10 sm:py-14">
+    <div class="min-h-screen bg-[#F4F3EF] flex flex-col items-center justify-center px-4 py-6">
 
-        <a href="{{ route('home') }}"
-            class="w-full max-w-5xl mb-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Retour à l'accueil
-        </a>
-
-        <div class="w-full max-w-5xl bg-white rounded-[2rem] shadow-2xl shadow-gray-900/10 overflow-hidden flex flex-col lg:flex-row">
+        <div class="w-full max-w-5xl bg-white rounded-[2rem] shadow-2xl shadow-gray-900/10 overflow-hidden flex flex-col lg:flex-row lg:max-h-[92vh]">
 
             {{-- Panneau gauche : formulaire --}}
-            <div class="w-full lg:w-1/2 p-8 sm:p-12 lg:p-14 flex flex-col justify-center">
+            <div class="w-full lg:w-1/2 p-6 sm:p-10 lg:p-12 flex flex-col justify-center overflow-y-auto">
 
-                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-8 w-fit transition-transform hover:scale-105">
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-5 w-fit transition-transform hover:scale-105">
                     <x-application-logo class="h-8 w-auto text-indigo-600" />
                     <span class="font-bold text-lg text-gray-900">Mefolio</span>
                 </a>
@@ -39,7 +31,7 @@
                     <template x-if="remembered && !useAnother">
                         <div>
                             <h1 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">Bon retour !</h1>
-                            <p class="text-sm text-gray-500 mb-8">Connectez-vous avec votre dernier compte utilisé.</p>
+                            <p class="text-sm text-gray-500 mb-5">Connectez-vous avec votre dernier compte utilisé.</p>
 
                             <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -124,9 +116,15 @@
                             </form>
 
                             <button type="button" @click="useAnother = true"
-                                class="w-full text-center text-sm text-gray-500 font-semibold hover:text-indigo-600 transition-colors mt-5">
+                                class="w-full text-center text-sm text-gray-500 font-semibold hover:text-indigo-600 transition-colors mt-4">
                                 Se connecter avec un autre compte
                             </button>
+
+                            <p class="text-center text-sm text-gray-500 mt-4">
+                                Pas encore de compte ?
+                                <a href="{{ route('register') }}" class="text-indigo-600 font-bold hover:underline">S'inscrire
+                                    gratuitement</a>
+                            </p>
                         </div>
                     </template>
 
@@ -134,7 +132,7 @@
                     <template x-if="!remembered || useAnother">
                         <div>
                             <h1 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">Bienvenue sur Mefolio</h1>
-                            <p class="text-sm text-gray-500 mb-8">
+                            <p class="text-sm text-gray-500 mb-5">
                                 Pas encore de compte ?
                                 <a href="{{ route('register') }}" class="text-indigo-600 font-bold hover:underline">S'inscrire
                                     gratuitement</a>
@@ -233,7 +231,7 @@
                                 </button>
                             </form>
 
-                            <div class="relative my-6">
+                            <div class="relative my-4">
                                 <div class="absolute inset-0 flex items-center">
                                     <div class="w-full border-t border-gray-100"></div>
                                 </div>
@@ -269,57 +267,53 @@
             </div>
 
             {{-- Panneau droit : identité de marque --}}
-            <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-10 bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-800 overflow-hidden">
+            <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-10 bg-gradient-to-br from-indigo-50 via-white to-amber-50 overflow-hidden">
                 <div aria-hidden="true" class="absolute inset-0">
-                    <div class="absolute -top-24 -right-24 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
-                    <div class="absolute top-1/3 -left-20 w-80 h-80 bg-violet-400/20 rounded-full blur-3xl"></div>
-                    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-pink-400/10 rounded-full blur-3xl"></div>
-                    <div class="absolute inset-0 opacity-[0.15]"
-                        style="background-image: radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 26px 26px;">
-                    </div>
-                    <svg class="absolute top-20 right-14 w-20 h-20 text-white/10" fill="none" stroke="currentColor"
+                    <div class="absolute -top-8 -right-8 w-72 h-72 bg-indigo-200/40 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-8 -left-8 w-80 h-80 bg-violet-200/40 rounded-full blur-3xl"></div>
+                    <svg class="absolute top-20 right-14 w-20 h-20 text-indigo-900/5" fill="none" stroke="currentColor"
                         stroke-width="1.5" viewBox="0 0 100 100">
                         <path d="M10 60 C 30 20, 60 90, 90 40" stroke-linecap="round" />
                     </svg>
-                    <div class="absolute bottom-32 right-24 w-10 h-10 border border-white/20 rounded-lg rotate-12"></div>
+                    <div class="absolute bottom-32 right-24 w-10 h-10 border border-indigo-900/10 rounded-lg rotate-12"></div>
                 </div>
 
                 <span class="relative z-10"></span>
 
                 <div class="relative z-10">
-                    <h2 class="text-4xl font-black text-white leading-tight mb-4">
+                    <h2 class="text-4xl font-black text-gray-900 leading-tight mb-4">
                         Votre portfolio<br>vous attend.
                     </h2>
-                    <p class="text-indigo-100 text-base leading-relaxed max-w-sm mb-10">
+                    <p class="text-gray-500 text-base leading-relaxed max-w-sm mb-10">
                         Vos projets, vos opportunités, votre communauté — tout est là où vous
                         l'avez laissé.
                     </p>
 
-                    <div class="bg-white/10 border border-white/10 backdrop-blur-sm rounded-2xl p-6 max-w-md">
-                        <p class="text-white text-sm italic leading-relaxed">
+                    <div class="bg-white/80 border border-white shadow-sm backdrop-blur-sm rounded-2xl p-6 max-w-md">
+                        <p class="text-gray-700 text-sm italic leading-relaxed">
                             "Mefolio m'a permis de décrocher mon premier contrat freelance en 2 semaines. La plateforme
                             parle vraiment à notre réalité africaine."
                         </p>
                         <div class="flex items-center gap-3 mt-5">
                             <div
-                                class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-300 to-violet-300 flex items-center justify-center text-indigo-900 text-xs font-black shadow-lg">
+                                class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-500 to-violet-500 flex items-center justify-center text-white text-xs font-black shadow-lg">
                                 K
                             </div>
                             <div>
-                                <p class="text-white text-sm font-bold">Kofi A.</p>
-                                <p class="text-indigo-200 text-xs">Designer · Accra, Ghana</p>
+                                <p class="text-gray-900 text-sm font-bold">Kofi A.</p>
+                                <p class="text-gray-400 text-xs">Designer · Accra, Ghana</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="relative z-10 flex items-center gap-3 bg-white/10 border border-white/10 backdrop-blur-sm rounded-full pl-2 pr-4 py-2 w-fit">
+                <div class="relative z-10 flex items-center gap-3 bg-white/80 border border-white shadow-sm backdrop-blur-sm rounded-full pl-2 pr-4 py-2 w-fit">
                     <div class="flex -space-x-2">
-                        @foreach (['bg-indigo-300', 'bg-violet-300', 'bg-pink-300'] as $c)
-                            <div class="w-7 h-7 rounded-full {{ $c }} border-2 border-indigo-700"></div>
+                        @foreach (['bg-indigo-400', 'bg-violet-400', 'bg-pink-400'] as $c)
+                            <div class="w-7 h-7 rounded-full {{ $c }} border-2 border-white"></div>
                         @endforeach
                     </div>
-                    <p class="text-white text-xs font-semibold">{{ number_format($creatifCount) }} créatif{{ $creatifCount > 1 ? 's' : '' }} nous ont rejoint</p>
+                    <p class="text-gray-700 text-xs font-semibold">{{ number_format($creatifCount) }} créatif{{ $creatifCount > 1 ? 's' : '' }} nous ont rejoint</p>
                 </div>
             </div>
         </div>
