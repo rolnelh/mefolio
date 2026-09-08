@@ -190,6 +190,8 @@ class ProjectController extends Controller
             'lien_github' => 'nullable|url|max:255',
             'image'       => 'nullable|image|max:4096',
             'media.*'     => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4,mov,avi|max:20480',
+            'remove_fichiers'   => 'nullable|array',
+            'remove_fichiers.*' => 'string',
         ]);
 
         $cloudinary = new \Cloudinary\Cloudinary([
@@ -209,6 +211,10 @@ class ProjectController extends Controller
         }
 
         $currentFiles = json_decode($project->fichiers ?? '[]', true) ?: [];
+
+        if ($request->filled('remove_fichiers')) {
+            $currentFiles = array_values(array_diff($currentFiles, $validated['remove_fichiers']));
+        }
 
         if ($request->hasFile('media')) {
             foreach ($request->file('media') as $file) {

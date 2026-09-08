@@ -33,4 +33,4 @@ RUN echo '<Directory /var/www/html/public>\n    Options Indexes FollowSymLinks\n
 
 EXPOSE 80
 
-CMD php artisan storage:link && php artisan migrate --force && php artisan db:seed --force && apache2-foreground
+CMD php artisan storage:link && php artisan migrate --force && php artisan app:seed-once && apache2-foreground
