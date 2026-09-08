@@ -2,51 +2,54 @@
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
 
         {{-- HERO --}}
-        <section class="relative bg-[#050810] py-20 overflow-hidden rounded-2xl">
+        <section class="relative bg-white py-20 overflow-hidden rounded-2xl border border-gray-100">
+            <div class="absolute inset-0 z-0 pointer-events-none opacity-60"
+                style="background-image: radial-gradient(#00000014 1px, transparent 1px); background-size: 28px 28px;">
+            </div>
             <div class="absolute inset-0 pointer-events-none">
-                <div class="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-indigo-600/10 blur-[120px]">
+                <div class="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-violet-100/60 blur-[120px]">
                 </div>
-                <div class="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-violet-600/10 blur-[100px]">
+                <div class="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-100/60 blur-[100px]">
                 </div>
             </div>
             <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
 
                 @if ($creatifCount > 0)
-                    <div class="inline-flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-full pl-2 pr-4 py-1.5 mb-6">
+                    <div class="inline-flex items-center gap-2.5 bg-gray-50 border border-gray-100 rounded-full pl-2 pr-4 py-1.5 mb-6">
                         @if ($badgeCreatifs->count())
                             <div class="flex -space-x-2.5">
                                 @foreach ($badgeCreatifs as $bc)
                                     <img src="{{ $bc->photo }}"
-                                        class="w-6 h-6 rounded-full object-cover ring-2 ring-[#050810]">
+                                        class="w-6 h-6 rounded-full object-cover ring-2 ring-gray-50">
                                 @endforeach
                             </div>
                         @endif
-                        <span class="text-xs font-semibold text-gray-300">
-                            <span class="text-white font-bold">{{ number_format($creatifCount) }}</span>
+                        <span class="text-xs font-semibold text-gray-500">
+                            <span class="text-gray-900 font-bold">{{ number_format($creatifCount) }}</span>
                             créatif{{ $creatifCount > 1 ? 's' : '' }} déjà sur Mefolio
                         </span>
                     </div>
                 @endif
 
-                <h1 class="text-5xl sm:text-6xl font-black text-white tracking-tight leading-[1.05] mb-6">
+                <h1 class="text-5xl sm:text-6xl font-black text-slate-900 tracking-tight leading-[1.05] mb-6">
                     Votre prochaine<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">
                         mission freelance
                     </span>
                 </h1>
-                <p class="text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
+                <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
                     Proposez vos services et connectez-vous directement avec des clients africains.
                 </p>
 
                 <div class="mt-10 flex justify-center">
                     @auth
                         <a href="{{ route('missions.create') }}"
-                            class="inline-flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition-all hover:scale-105 text-sm">
+                            class="inline-flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-full transition-all hover:scale-105 text-sm">
                             Publier une mission →
                         </a>
                     @else
                         <a href="{{ route('login') }}"
-                            class="inline-flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition-all hover:scale-105 text-sm">
+                            class="inline-flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-full transition-all hover:scale-105 text-sm">
                             Publier une mission →
                         </a>
                     @endauth
@@ -55,7 +58,7 @@
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-gray-500">
                     @foreach (['Publication gratuite', 'Candidature en un clic', 'Directement avec le client'] as $point)
                         <span class="inline-flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <svg class="w-3.5 h-3.5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                             {{ $point }}
