@@ -178,6 +178,53 @@
 
             <main class="flex-1 min-w-0 space-y-6">
 
+                @if ($activeTab === 'projets')
+                    {{-- Raccourcis --}}
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="bg-violet-100 rounded-2xl p-4">
+                            <p class="text-sm font-bold text-gray-900">Complétez votre profil</p>
+                            <p class="text-xs text-gray-600 mt-0.5 mb-3">Soyez repéré par les clients.</p>
+                            <a href="{{ route('dashboard', ['tab' => 'profil']) }}"
+                                class="inline-flex items-center gap-1 bg-gray-900 hover:bg-black text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
+                                Modifier mon profil
+                            </a>
+                        </div>
+                        <div class="bg-emerald-100 rounded-2xl p-4">
+                            <p class="text-sm font-bold text-gray-900">Trouvez votre prochaine mission</p>
+                            <p class="text-xs text-gray-600 mt-0.5 mb-3">Explorez les opportunités du moment.</p>
+                            <a href="{{ route('missions.index') }}"
+                                class="inline-flex items-center gap-1 bg-gray-900 hover:bg-black text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
+                                Explorer les missions
+                            </a>
+                        </div>
+                        <div class="bg-amber-100 rounded-2xl p-4">
+                            <p class="text-sm font-bold text-gray-900">Partagez votre travail</p>
+                            <p class="text-xs text-gray-600 mt-0.5 mb-3">Ajoutez un projet à votre portfolio.</p>
+                            <a href="{{ $profilComplet ? route('projets.create') : route('dashboard', ['tab' => 'profil']) }}"
+                                class="inline-flex items-center gap-1 bg-gray-900 hover:bg-black text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
+                                {{ $profilComplet ? 'Ajouter un projet' : 'Compléter mon profil' }}
+                            </a>
+                        </div>
+                    </div>
+
+                    {{-- Statistiques réelles : uniquement une fois qu'il y a de l'activité à montrer --}}
+                    @if ($aDesProjets)
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            @foreach ([
+                                ['label' => 'Projets publiés', 'val' => count($projects)],
+                                ['label' => 'Builder Score', 'val' => number_format($creatif->builder_score ?? 0)],
+                                ['label' => 'Likes reçus', 'val' => $totalLikes],
+                                ['label' => 'Commentaires', 'val' => $totalComments],
+                            ] as $stat)
+                                <div class="bg-white border border-gray-100 rounded-2xl p-4 text-center">
+                                    <div class="text-xl font-black text-gray-900">{{ $stat['val'] }}</div>
+                                    <div class="text-[11px] text-gray-400 mt-0.5">{{ $stat['label'] }}</div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                @endif
+
                 {{-- Onboarding --}}
                 @if ($pourcentage < 100)
                     <div class="bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100 rounded-2xl p-5">
