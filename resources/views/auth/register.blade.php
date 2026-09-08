@@ -1,62 +1,25 @@
 <x-guest-layout>
-    <div class="min-h-screen flex bg-white">
+    <div class="min-h-screen bg-[#F4F3EF] flex flex-col items-center justify-center px-4 py-10 sm:py-14">
 
-        {{-- Panneau gauche : identité de marque --}}
-        <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-10 bg-[#050810] overflow-hidden">
-            <div aria-hidden="true" class="absolute inset-0">
-                <div class="absolute -top-24 -right-24 w-72 h-72 bg-indigo-600/30 rounded-full blur-3xl"></div>
-                <div class="absolute top-1/3 -left-20 w-80 h-80 bg-violet-600/20 rounded-full blur-3xl"></div>
-                <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl"></div>
-                <div class="absolute inset-0 opacity-[0.15]"
-                    style="background-image: radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 26px 26px;">
-                </div>
-                <svg class="absolute bottom-24 left-14 w-20 h-20 text-white/10" fill="none" stroke="currentColor"
-                    stroke-width="1.5" viewBox="0 0 100 100">
-                    <path d="M10 40 C 40 10, 60 80, 90 55" stroke-linecap="round" />
-                </svg>
-                <div class="absolute top-32 left-24 w-10 h-10 border border-white/10 rounded-lg -rotate-12"></div>
-            </div>
+        <a href="{{ route('home') }}"
+            class="w-full max-w-5xl mb-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Retour à l'accueil
+        </a>
 
-            <a href="{{ route('home') }}" class="relative z-10 inline-flex items-center gap-2 w-fit transition-transform hover:scale-105">
-                <x-application-logo class="h-8 w-auto text-white" />
-                <span class="font-bold text-lg text-white">Mefolio</span>
-            </a>
+        <div class="w-full max-w-5xl bg-white rounded-[2rem] shadow-2xl shadow-gray-900/10 overflow-hidden flex flex-col lg:flex-row">
 
-            <div class="relative z-10 py-16">
-                <h2 class="text-4xl font-black text-white leading-tight mb-5">
-                    Valorisons les talents africains<br>
-                    <span class="text-indigo-400">à l'échelle mondiale.</span>
-                </h2>
+            {{-- Panneau gauche : formulaire --}}
+            <div class="w-full lg:w-1/2 p-8 sm:p-12 lg:p-14 flex flex-col justify-center">
 
-                <p class="text-gray-400 text-sm leading-relaxed max-w-md">
-                    Mefolio connecte les talents africains aux recruteurs, aux opportunités
-                    et aux missions réelles — sans barrières techniques, sans blocages de
-                    paiement, pensé pour nos réalités.
-                </p>
-
-                <div class="flex items-center gap-3 mt-10">
-                    <div class="flex -space-x-2">
-                        @foreach (['bg-indigo-500', 'bg-violet-500', 'bg-pink-500', 'bg-blue-500'] as $c)
-                            <div class="w-8 h-8 rounded-full {{ $c }} border-2 border-[#050810]"></div>
-                        @endforeach
-                    </div>
-                    <p class="text-gray-400 text-xs">+2 000 créatifs nous ont rejoint</p>
-                </div>
-            </div>
-
-            <p class="relative z-10 text-gray-600 text-xs">© {{ now()->year }} Mefolio</p>
-        </div>
-
-        {{-- Panneau droit : formulaire --}}
-        <div class="flex-1 lg:w-1/2 flex items-center justify-center px-8 py-3 sm:px-12 lg:px-16">
-            <div class="w-full max-w-md">
-
-                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-6 transition-transform hover:scale-105">
-                    <x-application-logo class="h-9 w-auto text-indigo-600" />
-                    <span class="font-bold text-xl text-gray-900">Mefolio</span>
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-6 w-fit transition-transform hover:scale-105">
+                    <x-application-logo class="h-8 w-auto text-indigo-600" />
+                    <span class="font-bold text-lg text-gray-900">Mefolio</span>
                 </a>
 
-                <h1 class="text-3xl font-black text-gray-900 mb-2">Créer votre compte</h1>
+                <h1 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">Créer votre compte</h1>
                 <p class="text-sm text-gray-500 mb-6">
                     Déjà membre ?
                     <a href="{{ route('login') }}" class="text-indigo-600 font-bold hover:underline">Se
@@ -68,31 +31,6 @@
                         {{ session('google_error') }}
                     </div>
                 @endif
-
-                <a href="{{ route('google.redirect') }}"
-                    class="w-full flex items-center justify-center gap-3 border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all mb-4">
-                    <svg class="w-5 h-5" viewBox="0 0 48 48">
-                        <path fill="#FFC107"
-                            d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
-                        <path fill="#FF3D00"
-                            d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
-                        <path fill="#4CAF50"
-                            d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
-                        <path fill="#1976D2"
-                            d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
-                    </svg>
-                    Continuer avec Google
-                </a>
-
-                <div class="relative mb-4">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-100"></div>
-                    </div>
-                    <div class="relative flex justify-center">
-                        <span class="px-4 bg-white text-[10px] text-gray-800 font-bold uppercase">ou avec votre
-                            email</span>
-                    </div>
-                </div>
 
                 <form method="POST" action="{{ route('register') }}" class="space-y-3">
                     @csrf
@@ -122,27 +60,46 @@
 
                     {{-- USERNAME --}}
                     <div class="space-y-1">
-                        <input type="text" name="username" value="{{ old('username') }}" required
-                            placeholder="Nom d'utilisateur"
-                            class="w-full h-12 px-4 rounded-xl border border-gray-200 text-sm outline-none
-                   focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
+                        <div class="relative">
+                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                            </svg>
+                            <input type="text" name="username" value="{{ old('username') }}" required
+                                placeholder="Nom d'utilisateur"
+                                class="w-full h-12 pl-11 pr-4 rounded-xl border border-gray-200 text-sm outline-none
+                       focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
+                        </div>
                         <x-input-error :messages="$errors->get('username')" />
                     </div>
 
                     {{-- EMAIL --}}
                     <div class="space-y-1">
-                        <input type="email" name="email" value="{{ old('email') }}" required
-                            placeholder="votre@email.com"
-                            class="w-full h-12 px-4 rounded-xl border border-gray-200 text-sm outline-none
-                   focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
+                        <div class="relative">
+                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                            <input type="email" name="email" value="{{ old('email') }}" required
+                                placeholder="votre@email.com"
+                                class="w-full h-12 pl-11 pr-4 rounded-xl border border-gray-200 text-sm outline-none
+                       focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
+                        </div>
                         <x-input-error :messages="$errors->get('email')" />
                     </div>
 
                     {{-- PASSWORD --}}
                     <div class="space-y-1">
                         <div class="relative">
+                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                            </svg>
                             <input type="password" id="password" name="password" required placeholder="Mot de passe"
-                                class="w-full h-12 px-4 pr-12 rounded-xl border border-gray-200 text-sm outline-none
+                                class="w-full h-12 pl-11 pr-12 rounded-xl border border-gray-200 text-sm outline-none
                    focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
                             <button type="button" onclick="togglePwd('password', 'eye-open-1', 'eye-close-1')"
                                 class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-indigo-600">
@@ -164,10 +121,75 @@
                     </div>
 
                     <button type="submit"
-                        class="w-full bg-[#050810] hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-xl shadow-indigo-100 text-sm">
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-xl shadow-indigo-100 text-sm">
                         Créer mon compte gratuitement →
                     </button>
                 </form>
+
+                <div class="relative my-5">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-100"></div>
+                    </div>
+                    <div class="relative flex justify-center">
+                        <span class="px-4 bg-white text-[10px] text-gray-800 font-bold uppercase">ou</span>
+                    </div>
+                </div>
+
+                <a href="{{ route('google.redirect') }}"
+                    class="w-full flex items-center justify-center gap-3 border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all">
+                    <svg class="w-5 h-5" viewBox="0 0 48 48">
+                        <path fill="#FFC107"
+                            d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
+                        <path fill="#FF3D00"
+                            d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
+                        <path fill="#4CAF50"
+                            d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
+                        <path fill="#1976D2"
+                            d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
+                    </svg>
+                    Continuer avec Google
+                </a>
+            </div>
+
+            {{-- Panneau droit : identité de marque --}}
+            <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-10 bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-800 overflow-hidden">
+                <div aria-hidden="true" class="absolute inset-0">
+                    <div class="absolute -top-24 -right-24 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
+                    <div class="absolute top-1/3 -left-20 w-80 h-80 bg-violet-400/20 rounded-full blur-3xl"></div>
+                    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-pink-400/10 rounded-full blur-3xl"></div>
+                    <div class="absolute inset-0 opacity-[0.15]"
+                        style="background-image: radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 26px 26px;">
+                    </div>
+                    <svg class="absolute bottom-24 left-14 w-20 h-20 text-white/10" fill="none" stroke="currentColor"
+                        stroke-width="1.5" viewBox="0 0 100 100">
+                        <path d="M10 40 C 40 10, 60 80, 90 55" stroke-linecap="round" />
+                    </svg>
+                    <div class="absolute top-32 left-24 w-10 h-10 border border-white/20 rounded-lg -rotate-12"></div>
+                </div>
+
+                <span class="relative z-10"></span>
+
+                <div class="relative z-10">
+                    <h2 class="text-4xl font-black text-white leading-tight mb-5">
+                        Valorisons les talents africains<br>
+                        <span class="text-indigo-200">à l'échelle mondiale.</span>
+                    </h2>
+
+                    <p class="text-indigo-100 text-sm leading-relaxed max-w-md">
+                        Mefolio connecte les talents africains aux recruteurs, aux opportunités
+                        et aux missions réelles — sans barrières techniques, sans blocages de
+                        paiement, pensé pour nos réalités.
+                    </p>
+                </div>
+
+                <div class="relative z-10 flex items-center gap-3 bg-white/10 border border-white/10 backdrop-blur-sm rounded-full pl-2 pr-4 py-2 w-fit">
+                    <div class="flex -space-x-2">
+                        @foreach (['bg-indigo-300', 'bg-violet-300', 'bg-pink-300'] as $c)
+                            <div class="w-7 h-7 rounded-full {{ $c }} border-2 border-indigo-700"></div>
+                        @endforeach
+                    </div>
+                    <p class="text-white text-xs font-semibold">{{ number_format($creatifCount) }} créatif{{ $creatifCount > 1 ? 's' : '' }} nous ont rejoint</p>
+                </div>
             </div>
         </div>
     </div>
