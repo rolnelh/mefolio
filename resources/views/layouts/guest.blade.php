@@ -22,7 +22,7 @@
 </head>
 
 <body class="text-gray-900 font-jakarta">
-    <div class="h-screen flex flex-col sm:justify-center items-center">
+    <div class="min-h-screen flex flex-col sm:justify-center items-center">
 
         <div class="w-full bg-white overflow-hidden sm:rounded-xs">
             {{ $slot }}

@@ -4,7 +4,7 @@
         <div class="w-full max-w-5xl bg-white rounded-[2rem] shadow-2xl shadow-gray-900/10 overflow-hidden flex flex-col lg:flex-row lg:max-h-[92vh]">
 
             {{-- Panneau gauche : formulaire --}}
-            <div class="w-full lg:w-1/2 p-6 sm:p-10 lg:p-12 flex flex-col justify-center overflow-y-auto">
+            <div class="w-full lg:w-1/2 p-6 sm:p-10 lg:p-12 flex flex-col justify-center overflow-y-auto hide-scrollbar">
 
                 <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-5 w-fit transition-transform hover:scale-105">
                     <x-application-logo class="h-8 w-auto text-indigo-600" />
@@ -336,4 +336,14 @@
             }
         }
     </script>
+
+    <style>
+        html, body, .hide-scrollbar {
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar, body::-webkit-scrollbar, .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
 </x-guest-layout>
