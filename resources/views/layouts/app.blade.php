@@ -41,6 +41,21 @@
 
         @include('layouts.footer')
     </div>
+
+    @auth
+        @php
+            $rememberedCreatif = Auth::user()->creatif;
+        @endphp
+        <script>
+            try {
+                localStorage.setItem('mefolio_last_account', JSON.stringify({
+                    email: @json(Auth::user()->email),
+                    name: @json($rememberedCreatif ? trim($rememberedCreatif->prenom . ' ' . $rememberedCreatif->nom) : Auth::user()->username),
+                    photo: @json($rememberedCreatif?->photo),
+                }));
+            } catch (e) {}
+        </script>
+    @endauth
 </body>
 
 </html>
