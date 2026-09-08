@@ -27,7 +27,7 @@
                 @forelse ($posts as $post)
                     <tr class="hover:bg-gray-50/60">
                         <td class="px-5 py-3 font-semibold text-gray-900">{{ $post->title }}</td>
-                        <td class="px-5 py-3 text-gray-500">{{ $post->category ?? '—' }}</td>
+                        <td class="px-5 py-3 text-gray-500">{{ $post->category ?? '-' }}</td>
                         <td class="px-5 py-3">
                             @if ($post->status === 'published')
                                 <span class="text-[10px] font-bold uppercase bg-green-50 text-green-600 px-2 py-1 rounded-full">Publié</span>
@@ -35,7 +35,7 @@
                                 <span class="text-[10px] font-bold uppercase bg-gray-100 text-gray-500 px-2 py-1 rounded-full">Brouillon</span>
                             @endif
                         </td>
-                        <td class="px-5 py-3 text-gray-500">{{ $post->author->username ?? '—' }}</td>
+                        <td class="px-5 py-3 text-gray-500">{{ $post->author->username ?? '-' }}</td>
                         <td class="px-5 py-3">
                             <div class="flex items-center justify-end gap-3">
                                 @if ($post->status === 'published')

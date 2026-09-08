@@ -29,12 +29,12 @@ class SeedOnce extends Command
     public function handle(): int
     {
         if (User::query()->exists()) {
-            $this->info('Base de données déjà initialisée — seeders ignorés.');
+            $this->info('Base de données déjà initialisée, seeders ignorés.');
 
             return self::SUCCESS;
         }
 
-        $this->info('Base de données vide — exécution des seeders (premier démarrage).');
+        $this->info('Base de données vide, exécution des seeders (premier démarrage).');
 
         return $this->call('db:seed', ['--force' => true]);
     }

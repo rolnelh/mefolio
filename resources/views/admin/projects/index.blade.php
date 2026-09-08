@@ -26,7 +26,7 @@
                 @forelse ($projects as $project)
                     <tr class="hover:bg-gray-50/60">
                         <td class="px-5 py-3 font-semibold text-gray-900">{{ $project->title }}</td>
-                        <td class="px-5 py-3 text-gray-500">{{ $project->user->username ?? '—' }}</td>
+                        <td class="px-5 py-3 text-gray-500">{{ $project->user->username ?? '-' }}</td>
                         <td class="px-5 py-3 text-gray-500">{{ $project->created_at->format('d/m/Y') }}</td>
                         <td class="px-5 py-3">
                             <div class="flex items-center justify-end gap-3">

@@ -73,7 +73,7 @@
                                         <button class="text-xs font-semibold text-red-500 hover:text-red-700">Supprimer</button>
                                     </form>
                                 @else
-                                    <span class="text-xs text-gray-300">—</span>
+                                    <span class="text-xs text-gray-300">-</span>
                                 @endunless
                             </div>
                         </td>

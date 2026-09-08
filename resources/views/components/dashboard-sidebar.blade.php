@@ -154,7 +154,7 @@
 
         <div class="mt-3 pt-3 border-t border-white/5 px-3">
             <span class="inline-flex items-center gap-1.5 text-white/25 text-[11px] font-semibold">
-                Promotion de profil — bientôt disponible
+                Promotion de profil · bientôt disponible
             </span>
         </div>
     </div>

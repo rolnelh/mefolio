@@ -63,7 +63,7 @@
                 @forelse ($recentProjects as $project)
                     <a href="{{ route('projects.show', $project->slug) }}" class="block px-5 py-3 hover:bg-gray-50">
                         <p class="text-sm font-semibold text-gray-900 truncate">{{ $project->title }}</p>
-                        <p class="text-xs text-gray-400 truncate">par {{ $project->user->username ?? '—' }}</p>
+                        <p class="text-xs text-gray-400 truncate">par {{ $project->user->username ?? '-' }}</p>
                     </a>
                 @empty
                     <p class="px-5 py-6 text-sm text-gray-400">Aucun projet pour le moment.</p>
@@ -80,7 +80,7 @@
                     <div class="px-5 py-3">
                         <p class="text-sm text-gray-700 line-clamp-2">{{ $comment->body }}</p>
                         <p class="text-xs text-gray-400 mt-1">
-                            {{ $comment->user->username ?? '—' }} sur « {{ $comment->project->title ?? '—' }} »
+                            {{ $comment->user->username ?? '-' }} sur « {{ $comment->project->title ?? '-' }} »
                         </p>
                     </div>
                 @empty

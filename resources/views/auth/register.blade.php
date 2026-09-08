@@ -171,7 +171,7 @@
 
                     <p class="text-gray-500 text-sm leading-relaxed max-w-md">
                         Mefolio connecte les talents africains aux recruteurs, aux opportunités
-                        et aux missions réelles — sans barrières techniques, sans blocages de
+                        et aux missions réelles, sans barrières techniques, sans blocages de
                         paiement, pensé pour nos réalités.
                     </p>
                 </div>

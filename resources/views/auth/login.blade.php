@@ -288,11 +288,10 @@
 
                 <div class="relative z-10">
                     <h2 class="text-4xl font-black text-gray-900 leading-tight mb-4">
-                        Votre portfolio<br>vous attend.
+                        {{ $tagline['line1'] }}<br>{{ $tagline['line2'] }}
                     </h2>
                     <p class="text-gray-500 text-base leading-relaxed max-w-sm mb-10">
-                        Vos projets, vos opportunités, votre communauté — tout est là où vous
-                        l'avez laissé.
+                        {{ $tagline['text'] }}
                     </p>
 
                     <div class="bg-white/80 border border-white shadow-sm backdrop-blur-sm rounded-2xl p-6 max-w-md">

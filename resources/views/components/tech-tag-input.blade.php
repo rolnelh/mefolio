@@ -33,7 +33,7 @@
         @keydown.enter.prevent="add()"
         @keydown.backspace="if (input === '' && tags.length) tags.pop()"
         @blur="add()"
-        placeholder="Ex : Figma — Entrée pour ajouter"
+        placeholder="Ex : Figma · Entrée pour ajouter"
         class="{{ $class }}">
     <input type="hidden" name="technologies" :value="tags.join(', ')">
 </div>

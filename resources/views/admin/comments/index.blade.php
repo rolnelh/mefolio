@@ -18,7 +18,7 @@
             <tbody class="divide-y divide-gray-50">
                 @forelse ($comments as $comment)
                     <tr class="hover:bg-gray-50/60">
-                        <td class="px-5 py-3 font-semibold text-gray-900">{{ $comment->user->username ?? '—' }}</td>
+                        <td class="px-5 py-3 font-semibold text-gray-900">{{ $comment->user->username ?? '-' }}</td>
                         <td class="px-5 py-3 text-gray-600 max-w-sm">
                             <p class="line-clamp-2">{{ $comment->body }}</p>
                         </td>
@@ -28,7 +28,7 @@
                                     {{ $comment->project->title }}
                                 </a>
                             @else
-                                —
+                                -
                             @endif
                         </td>
                         <td class="px-5 py-3 text-gray-500">{{ $comment->created_at->format('d/m/Y H:i') }}</td>

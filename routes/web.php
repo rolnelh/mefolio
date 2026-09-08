@@ -98,7 +98,7 @@ Route::get('/creatifs/localisation', function () {
 Route::get('/creatifs/domaine', function () {
     return view('coming-soon', [
         'page' => 'Talents par domaine',
-        'description' => 'Design, Développement, Photographie, Vidéo — trouvez le bon profil.',
+        'description' => 'Design, Développement, Photographie, Vidéo : trouvez le bon profil.',
     ]);
 })->name('creatifs.domaine');
 Route::get('/creatifs/{slug}', [CreatifController::class, 'show'])->name('creatifs.show');

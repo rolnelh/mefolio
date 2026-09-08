@@ -39,7 +39,7 @@ class ProgramSeeder extends Seeder
                 'full_name' => 'Semaine du Numérique',
                 'country' => 'Bénin',
                 'type' => 'Événement annuel',
-                'description' => 'La grande semaine nationale dédiée au numérique au Bénin — conférences, hackathons, expositions tech.',
+                'description' => 'La grande semaine nationale dédiée au numérique au Bénin : conférences, hackathons, expositions tech.',
                 'tags' => ['Numérique', 'Tech', 'Hackathon'],
             ],
             [
@@ -55,7 +55,7 @@ class ProgramSeeder extends Seeder
                 'full_name' => 'TEF Entrepreneurship Programme',
                 'country' => 'Panafricain',
                 'type' => 'Financement panafricain',
-                'description' => 'Le plus grand programme philanthropique dédié aux entrepreneurs africains — 5 000 $ de financement de départ.',
+                'description' => 'Le plus grand programme philanthropique dédié aux entrepreneurs africains, avec 5 000 $ de financement de départ.',
                 'tags' => ['Financement', 'Panafricain', '5000 USD'],
                 'url' => 'https://www.tefconnect.com',
                 'featured' => true,

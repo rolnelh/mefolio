@@ -19,7 +19,7 @@
                 @forelse ($missions as $mission)
                     <tr class="hover:bg-gray-50/60">
                         <td class="px-5 py-3 font-semibold text-gray-900">{{ $mission->title }}</td>
-                        <td class="px-5 py-3 text-gray-500">{{ $mission->user->username ?? '—' }}</td>
+                        <td class="px-5 py-3 text-gray-500">{{ $mission->user->username ?? '-' }}</td>
                         <td class="px-5 py-3 text-gray-500">{{ $mission->applications_count }}</td>
                         <td class="px-5 py-3">
                             <form method="POST" action="{{ route('admin.missions.status', $mission) }}" class="inline">

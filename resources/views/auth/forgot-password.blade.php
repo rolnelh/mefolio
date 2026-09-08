@@ -43,7 +43,7 @@
 
                 <h1 class="text-2xl font-black text-gray-900 mb-1">Mot de passe oublié ?</h1>
                 <p class="text-sm text-gray-500 mb-8">
-                    Pas de panique — ça arrive à tout le monde.
+                    Pas de panique, ça arrive à tout le monde.
                 </p>
 
                 {{-- Status --}}

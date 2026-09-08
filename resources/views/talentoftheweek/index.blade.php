@@ -42,7 +42,7 @@
                     </div>
                     <div class="flex-1 text-center md:text-left">
                         <p class="text-yellow-700 text-xs font-bold uppercase tracking-widest mb-3">
-                            Talent of the Week — {{ $current->week_label }}
+                            Talent of the Week · {{ $current->week_label }}
                         </p>
                         <h2 class="text-3xl font-black text-gray-900 mb-1">{{ $c->prenom }} {{ $c->nom }}</h2>
                         <p class="text-indigo-600 font-semibold mb-3">{{ $c->specialite }}</p>

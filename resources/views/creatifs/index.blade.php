@@ -6,7 +6,7 @@
                 <h1 class="text-4xl font-black text-gray-900">Découvrez les
                     talents.</h1>
             </div>
-            <p class="text-sm text-gray-700 max-w-xs">Designers, développeurs, photographes — les meilleurs créatifs
+            <p class="text-sm text-gray-700 max-w-xs">Designers, développeurs, photographes : les meilleurs créatifs
                 africains sont sur Mefolio.</p>
         </div>
 
