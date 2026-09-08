@@ -35,7 +35,8 @@
 
                             <x-auth-session-status class="mb-4" :status="session('status')" />
 
-                            <div class="flex items-center gap-3 p-4 border border-gray-200 rounded-2xl mb-5">
+                            <div @click="$refs.passwordQuick.focus()"
+                                class="flex items-center gap-3 p-4 border border-gray-200 rounded-2xl mb-5 cursor-pointer hover:border-indigo-200 hover:bg-indigo-50/30 transition-colors">
                                 <span class="flex-shrink-0">
                                     <img x-show="remembered && remembered.photo" :src="remembered && remembered.photo"
                                         class="w-11 h-11 rounded-full object-cover">
@@ -47,7 +48,7 @@
                                     <p class="text-sm font-bold text-gray-900 truncate" x-text="remembered ? remembered.name : ''"></p>
                                     <p class="text-xs text-gray-400 truncate" x-text="remembered ? remembered.email : ''"></p>
                                 </div>
-                                <button type="button" @click="forget()"
+                                <button type="button" @click.stop="forget()"
                                     class="flex-shrink-0 text-gray-300 hover:text-gray-500 transition-colors" title="Oublier ce compte">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -76,7 +77,7 @@
                                                 d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                                         </svg>
                                         <input type="password" id="password-quick" name="password" required
-                                            autofocus placeholder="••••••••"
+                                            autofocus x-ref="passwordQuick" placeholder="••••••••"
                                             class="w-full h-12 pl-11 pr-12 rounded-xl border border-gray-200 text-sm outline-none
                        focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition" />
                                         <button type="button"
