@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +44,18 @@ class LoginRequest extends FormRequest
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
+
+            // Compte créé (ou relié) via Google : personne n'a jamais choisi de
+            // mot de passe, un hash aléatoire est stocké côté serveur pour que
+            // la connexion classique échoue proprement (voir
+            // GoogleAuthController::storeRole). Le message générique laisserait
+            // croire à un mot de passe simplement oublié : on oriente plutôt
+            // vers le bouton Google ou la réinitialisation.
+            if (User::where('email', $this->string('email'))->whereNotNull('google_id')->exists()) {
+                throw ValidationException::withMessages([
+                    'email' => 'Ce compte a été créé avec Google. Utilisez le bouton "Continuer avec Google" ci-dessous, ou définissez un mot de passe via "Mot de passe oublié ?".',
+                ]);
+            }
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
