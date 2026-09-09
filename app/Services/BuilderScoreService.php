@@ -4,8 +4,20 @@ namespace App\Services;
 
 use App\Models\Creatif;
 
+/**
+ * Calcule le niveau, la progression et le classement d'un créatif à
+ * partir de son builder_score (colonne sur Creatif, mise à jour ailleurs
+ * dans l'app à chaque action qui rapporte des points — voir la grille de
+ * points affichée dans l'onglet "Productivité" du tableau de bord,
+ * resources/views/dashboard/tabs/productivite.blade.php).
+ */
 class BuilderScoreService
 {
+    /**
+     * Paliers de score. Un niveau est actif quand
+     * min <= builder_score < max ; le dernier niveau n'a pas de plafond
+     * réel (max = PHP_INT_MAX).
+     */
     const LEVELS = [
         ['min' => 0,    'max' => 100,  'slug' => 'new_builder',    'label' => 'New Builder'],
         ['min' => 100,  'max' => 300,  'slug' => 'active_builder', 'label' => 'Active Builder'],

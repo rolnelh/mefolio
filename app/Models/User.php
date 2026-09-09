@@ -10,6 +10,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Compte de connexion (email/mot de passe ou Google OAuth).
+ *
+ * Un User a un rôle (creatif|client|admin, voir ROLES) et, s'il est
+ * créatif, un profil public associé via la relation creatif() vers
+ * \App\Models\Creatif — c'est ce modèle Creatif, pas User, qui porte la
+ * bio, la spécialité, le portfolio, etc. affichés publiquement.
+ *
+ * Un compte créé via Google (google_id non nul) reçoit un mot de passe
+ * aléatoire côté serveur : personne ne le connaît, la connexion classique
+ * par email/mot de passe est donc censée échouer pour ces comptes (voir
+ * App\Http\Requests\Auth\LoginRequest::authenticate()).
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
