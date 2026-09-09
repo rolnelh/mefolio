@@ -406,6 +406,10 @@
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
                                     <span class="text-sm font-semibold text-gray-700">Challenges</span>
                                 </a>
+                                <a href="{{ route('services.index') }}"
+                                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                    <span class="text-sm font-semibold text-gray-700">Services</span>
+                                </a>
                                 @if (Auth::user()->isAdmin())
                                     <a href="{{ route('admin.dashboard') }}"
                                         class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
@@ -434,7 +438,71 @@
                         </div>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm font-semibold text-indigo-600">Connexion</a>
+                    <div class="relative flex items-center gap-1" x-data="{ openMobileMenu: false }">
+                        <button @click="openMobileMenu = !openMobileMenu" @click.outside="openMobileMenu = false"
+                            class="p-2 text-gray-600 hover:text-indigo-600 transition-colors" aria-label="Menu">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+                            </svg>
+                        </button>
+                        <a href="{{ route('login') }}" class="p-2 text-gray-600 hover:text-indigo-600 transition-colors" aria-label="Connexion">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                            </svg>
+                        </a>
+
+                        {{-- Menu mobile (invité) --}}
+                        <div x-show="openMobileMenu" @click.outside="openMobileMenu = false"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            class="absolute right-0 top-full mt-3 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden">
+                            <div class="p-2 max-h-[70vh] overflow-y-auto">
+                                <p class="px-3 pt-2 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Découvrir</p>
+                                <a href="{{ route('projects.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                    <span class="text-sm font-semibold text-gray-700">Projets créatifs</span>
+                                </a>
+                                <a href="{{ route('creatifs.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                    <span class="text-sm font-semibold text-gray-700">Tous les créatifs</span>
+                                </a>
+                                <a href="{{ route('classement.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                    <span class="text-sm font-semibold text-gray-700">Classement</span>
+                                </a>
+                                <a href="{{ route('talentoftheweek.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                    <span class="text-sm font-semibold text-gray-700">Talent of the Week</span>
+                                </a>
+
+                                <p class="px-3 pt-3 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Missions & services</p>
+                                <a href="{{ route('missions.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                    <span class="text-sm font-semibold text-gray-700">Trouver des missions</span>
+                                </a>
+                                <a href="{{ route('challenges.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                    <span class="text-sm font-semibold text-gray-700">Challenges</span>
+                                </a>
+                                <a href="{{ route('services.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                    <span class="text-sm font-semibold text-gray-700">Services</span>
+                                </a>
+
+                                <p class="px-3 pt-3 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Communauté</p>
+                                <a href="{{ route('blog') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                    <span class="text-sm font-semibold text-gray-700">Blog</span>
+                                </a>
+                                <a href="{{ route('hackathons.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                    <span class="text-sm font-semibold text-gray-700">Programmes & Hackathons</span>
+                                </a>
+                                <a href="mailto:contact@mefolio.com" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+                                    <span class="text-sm font-semibold text-gray-700">Nous contacter</span>
+                                </a>
+
+                                <div class="border-t border-gray-100 my-2"></div>
+
+                                <a href="{{ route('register') }}"
+                                    class="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-gray-900 hover:bg-black transition-colors">
+                                    <span class="text-sm font-bold text-white">S'inscrire gratuitement</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 @endauth
             </div>
 
@@ -490,28 +558,6 @@
                     d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
             <span class="text-[9px] font-bold">Missions</span>
-        </a>
-
-        {{-- Challenges --}}
-        <a href="{{ route('challenges.index') }}"
-            class="flex flex-col items-center gap-0.5 px-1.5 py-1.5 rounded-full shrink-0 {{ request()->routeIs('challenges.*') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
-            <svg class="w-[18px] h-[18px]" fill="{{ request()->routeIs('challenges.*') ? 'currentColor' : 'none' }}"
-                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
-            </svg>
-            <span class="text-[9px] font-bold">Challenges</span>
-        </a>
-
-        {{-- Services --}}
-        <a href="{{ route('services.index') }}"
-            class="flex flex-col items-center gap-0.5 px-1.5 py-1.5 rounded-full shrink-0 {{ request()->routeIs('services.index') ? 'bg-indigo-600 text-white' : 'text-gray-500 hover:text-indigo-600' }} transition-all">
-            <svg class="w-[18px] h-[18px]" fill="{{ request()->routeIs('services.index') ? 'currentColor' : 'none' }}"
-                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
-            </svg>
-            <span class="text-[9px] font-bold">Services</span>
         </a>
 
     </div>
