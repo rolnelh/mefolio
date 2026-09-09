@@ -17,9 +17,19 @@ class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
+     *
+     * À la toute première visite (pas encore de cookie "mefolio_onboarded"),
+     * on redirige vers l'onboarding plutôt que d'afficher le formulaire
+     * directement — quel que soit le lien qui a mené jusqu'ici. Le cookie est
+     * posé dès que l'onboarding est affiché, donc ça ne se déclenche qu'une
+     * fois par visiteur.
      */
-    public function create(): View
+    public function create(Request $request): View|RedirectResponse
     {
+        if (! $request->cookie('mefolio_onboarded')) {
+            return redirect()->route('onboarding');
+        }
+
         $creatifCount = Creatif::where('is_paused', false)->count();
         $recentCreatifs = Creatif::where('is_paused', false)->latest()->take(3)->get();
 

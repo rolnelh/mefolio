@@ -496,7 +496,7 @@
 
                                 <div class="border-t border-gray-100 my-2"></div>
 
-                                <a href="{{ route('onboarding') }}"
+                                <a href="{{ route('register') }}"
                                     class="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-gray-900 hover:bg-black transition-colors">
                                     <span class="text-sm font-bold text-white">S'inscrire gratuitement</span>
                                 </a>
