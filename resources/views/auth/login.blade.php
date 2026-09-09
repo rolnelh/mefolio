@@ -9,11 +9,10 @@
                     <span class="font-bold text-lg text-gray-900">Mefolio</span>
                 </a>
 
-                <h1 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">Bienvenue sur Mefolio</h1>
+                <h1 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">{{ __('Bienvenue sur Mefolio') }}</h1>
                 <p class="text-sm text-gray-500 mb-5">
-                    Pas encore de compte ?
-                    <a href="{{ route('register') }}" class="text-indigo-600 font-bold hover:underline">S'inscrire
-                        gratuitement</a>
+                    {{ __('Pas encore de compte ?') }}
+                    <a href="{{ route('register') }}" class="text-indigo-600 font-bold hover:underline">{{ __("S'inscrire gratuitement") }}</a>
                 </p>
 
                 <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -36,7 +35,7 @@
                         <path fill="#1976D2"
                             d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
                     </svg>
-                    Continuer avec Google
+                    {{ __('Continuer avec Google') }}
                 </a>
 
                 <div class="relative my-4">
@@ -44,7 +43,7 @@
                         <div class="w-full border-t border-gray-100"></div>
                     </div>
                     <div class="relative flex justify-center">
-                        <span class="px-4 bg-white text-[10px] text-gray-800 font-bold uppercase">ou</span>
+                        <span class="px-4 bg-white text-[10px] text-gray-800 font-bold uppercase">{{ __('ou') }}</span>
                     </div>
                 </div>
 
@@ -53,7 +52,7 @@
 
                     {{-- Email --}}
                     <div class="space-y-1">
-                        <label class="block text-sm font-bold text-gray-700 ml-1">Adresse Email</label>
+                        <label class="block text-sm font-bold text-gray-700 ml-1">{{ __('Adresse Email') }}</label>
                         <div class="relative">
                             <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
                                 fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -70,12 +69,12 @@
 
                     <div class="space-y-1">
                         <div class="flex items-center justify-between ml-1">
-                            <label class="text-sm font-bold text-gray-700">Mot de passe</label>
+                            <label class="text-sm font-bold text-gray-700">{{ __('Mot de passe') }}</label>
 
                             @if (Route::has('password.request'))
                                 <a href="{{ route('password.request') }}"
                                     class="text-xs text-indigo-600 font-bold hover:underline">
-                                    Oublié ?
+                                    {{ __('Oublié ?') }}
                                 </a>
                             @endif
                         </div>
@@ -121,16 +120,14 @@
                             <input type="checkbox" name="remember" checked
                                 class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500/20 transition-all">
                             <span
-                                class="text-xs text-gray-500 font-medium group-hover:text-gray-700 transition-colors">Rester
-                                connecté</span>
+                                class="text-xs text-gray-500 font-medium group-hover:text-gray-700 transition-colors">{{ __('Rester connecté') }}</span>
                         </label>
-                        <p class="text-[11px] text-gray-400 mt-1 ml-6">Vous n'aurez plus à retaper votre
-                            mot de passe la prochaine fois.</p>
+                        <p class="text-[11px] text-gray-400 mt-1 ml-6">{{ __("Vous n'aurez plus à retaper votre mot de passe la prochaine fois.") }}</p>
                     </div>
 
                     <button type="submit"
                         class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-xl shadow-indigo-100 text-sm">
-                        Se connecter →
+                        {{ __('Se connecter') }} →
                     </button>
                 </form>
             </div>
@@ -165,8 +162,7 @@
 
                     <div class="bg-white/80 border border-white shadow-sm backdrop-blur-sm rounded-2xl p-6 max-w-md">
                         <p class="text-gray-700 text-sm italic leading-relaxed">
-                            "Mefolio m'a permis de décrocher mon premier contrat freelance en 2 semaines. La plateforme
-                            parle vraiment à notre réalité africaine."
+                            {{ __('"Mefolio m\'a permis de décrocher mon premier contrat freelance en 2 semaines. La plateforme parle vraiment à notre réalité africaine."') }}
                         </p>
                         <div class="flex items-center gap-3 mt-5">
                             <div
@@ -199,7 +195,7 @@
                             @endforeach
                         @endforelse
                     </div>
-                    <p class="text-gray-700 text-xs font-semibold">{{ $creatifCount > 10 ? '10+' : $creatifCount }} créatif{{ $creatifCount > 1 ? 's' : '' }} nous ont rejoint</p>
+                    <p class="text-gray-700 text-xs font-semibold">{{ trans_choice(':count créatif nous a rejoint|:count créatifs nous ont rejoint', $creatifCount, ['count' => $creatifCount > 10 ? '10+' : $creatifCount]) }}</p>
                 </div>
             </div>
     </div>

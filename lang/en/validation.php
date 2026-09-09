@@ -194,6 +194,8 @@ return [
         'description' => 'description',
         'image' => 'image',
         'slug' => 'unique identifier',
+        'username' => 'username',
+        'role' => 'role',
     ],
 
 ];

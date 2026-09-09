@@ -6,9 +6,8 @@
     style="height: calc(100vh - 220px); min-height: 480px;">
 
     <div class="mb-4">
-        <h2 class="text-lg font-black text-gray-900">Assistant IA</h2>
-        <p class="text-xs text-gray-400 mt-0.5">Un coup de main pour peaufiner votre profil créatif :
-            bio, spécialité, présentation de votre portfolio.</p>
+        <h2 class="text-lg font-black text-gray-900">{{ __('Assistant IA') }}</h2>
+        <p class="text-xs text-gray-400 mt-0.5">{{ __('Un coup de main pour peaufiner votre profil créatif : bio, spécialité, présentation de votre portfolio.') }}</p>
     </div>
 
     <div class="flex-1 min-h-0 bg-white border border-gray-100 rounded-2xl flex flex-col overflow-hidden">
@@ -21,9 +20,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
                         </svg>
                     </div>
-                    <h3 class="text-sm font-bold text-gray-900 mb-1">Comment puis-je vous aider ?</h3>
-                    <p class="text-xs text-gray-400 max-w-xs mb-5">Posez une question ou choisissez une
-                        suggestion pour commencer.</p>
+                    <h3 class="text-sm font-bold text-gray-900 mb-1">{{ __('Comment puis-je vous aider ?') }}</h3>
+                    <p class="text-xs text-gray-400 max-w-xs mb-5">{{ __('Posez une question ou choisissez une suggestion pour commencer.') }}</p>
                     <div class="flex flex-wrap justify-center gap-2 max-w-md">
                         <template x-for="suggestion in suggestions" :key="suggestion">
                             <button type="button" @click="send(suggestion)"
@@ -58,11 +56,11 @@
         <form @submit.prevent="send(input); input = ''"
             class="flex items-center gap-2 p-3 border-t border-gray-100">
             <input type="text" x-model="input" :disabled="loading"
-                placeholder="Ex : aide-moi à écrire ma bio..."
+                placeholder="{{ __('Ex : aide-moi à écrire ma bio...') }}"
                 class="flex-1 border-gray-200 rounded-xl text-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:opacity-50">
             <button type="submit" :disabled="loading || !input.trim()"
                 class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-bold rounded-xl transition-all">
-                Envoyer
+                {{ __('Envoyer') }}
             </button>
         </form>
     </div>
@@ -77,9 +75,9 @@
             input: '',
             loading: false,
             suggestions: [
-                'Aide-moi à écrire ma bio',
-                'Quels champs compléter en priorité ?',
-                'Comment formuler ma spécialité ?',
+                @json(__('Aide-moi à écrire ma bio')),
+                @json(__('Quels champs compléter en priorité ?')),
+                @json(__('Comment formuler ma spécialité ?')),
             ],
             init() {},
             async send(text) {
@@ -110,10 +108,10 @@
                     if (res.ok) {
                         this.messages.push({ role: 'assistant', content: data.reply });
                     } else {
-                        this.messages.push({ role: 'assistant', content: data.message || 'Une erreur est survenue.', isError: true });
+                        this.messages.push({ role: 'assistant', content: data.message || @json(__('Une erreur est survenue.')), isError: true });
                     }
                 } catch (e) {
-                    this.messages.push({ role: 'assistant', content: 'Connexion impossible. Vérifiez votre connexion et réessayez.', isError: true });
+                    this.messages.push({ role: 'assistant', content: @json(__('Connexion impossible. Vérifiez votre connexion et réessayez.')), isError: true });
                 } finally {
                     this.loading = false;
                     this.scrollDown();

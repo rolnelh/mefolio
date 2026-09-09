@@ -3,7 +3,7 @@
 
         <div class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-600 font-semibold px-4 py-1.5 rounded-full text-sm mb-6">
             <span class="w-2 h-2 bg-indigo-600 rounded-full animate-pulse"></span>
-            En cours de développement
+            {{ __('En cours de développement') }}
         </div>
 
         <h1 class="text-4xl font-black text-gray-900 mb-4">{{ $page }}</h1>
@@ -11,11 +11,11 @@
             {{ $description }}
         </p>
 
-        <x-newsletter-cta title="Soyez notifié en premier" description="Laissez votre email pour être alerté dès le lancement." source="{{ $page }}" />
+        <x-newsletter-cta :title="__('Soyez notifié en premier')" :description="__('Laissez votre email pour être alerté dès le lancement.')" source="{{ $page }}" />
 
         <a href="{{ route('home') }}"
             class="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors mt-8">
-            ← Retour à l'accueil
+            ← {{ __("Retour à l'accueil") }}
         </a>
     </div>
 </x-app-layout>

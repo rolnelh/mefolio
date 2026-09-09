@@ -4,9 +4,8 @@
 --}}
 <div class="flex items-center justify-between mb-5">
     <div>
-        <h2 class="text-lg font-black text-gray-900 dark:text-white">Mes projets</h2>
-        <p class="text-xs text-gray-400 mt-0.5">{{ count($projects) }}
-            projet{{ count($projects) > 1 ? 's' : '' }} dans votre portfolio</p>
+        <h2 class="text-lg font-black text-gray-900 dark:text-white">{{ __('Mes projets') }}</h2>
+        <p class="text-xs text-gray-400 mt-0.5">{{ trans_choice(':count projet dans votre portfolio|:count projets dans votre portfolio', count($projects), ['count' => count($projects)]) }}</p>
     </div>
     @if ($profilComplet)
         <a href="{{ route('projets.create') }}"
@@ -15,7 +14,7 @@
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
-            Nouveau projet
+            {{ __('Nouveau projet') }}
         </a>
     @endif
 </div>
@@ -70,7 +69,7 @@
                         class="flex items-center justify-between mt-3 pt-3 border-t border-gray-50 dark:border-gray-700">
                         <a href="{{ route('projects.show', $project->slug) }}"
                             class="text-indigo-600 text-xs font-semibold hover:text-indigo-700 transition-colors">
-                            Voir le projet →
+                            {{ __('Voir le projet') }} →
                         </a>
                         <span
                             class="text-[11px] text-gray-400">{{ $project->created_at->diffForHumans() }}</span>
@@ -92,26 +91,24 @@
                 </svg>
             </div>
             <span
-                class="mt-3 text-sm font-semibold text-gray-500 group-hover:text-indigo-600 transition-colors">Nouveau
-                projet</span>
+                class="mt-3 text-sm font-semibold text-gray-500 group-hover:text-indigo-600 transition-colors">{{ __('Nouveau projet') }}</span>
         </a>
 
     </div>
 @else
     <div
         class="flex flex-col items-center justify-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
-        <h3 class="text-lg font-bold text-gray-900 mb-2">Aucun projet pour le moment</h3>
-        <p class="text-sm text-gray-400 text-center max-w-xs mb-6">Ajoutez votre première
-            réalisation pour impressionner vos visiteurs.</p>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ __('Aucun projet pour le moment') }}</h3>
+        <p class="text-sm text-gray-400 text-center max-w-xs mb-6">{{ __('Ajoutez votre première réalisation pour impressionner vos visiteurs.') }}</p>
         @if ($profilComplet)
             <a href="{{ route('projets.create') }}"
                 class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-full transition-all">
-                + Créer mon premier projet
+                + {{ __('Créer mon premier projet') }}
             </a>
         @else
             <a href="{{ route('creatifs.edit') }}"
                 class="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-full transition-all">
-                Compléter mon profil d'abord
+                {{ __("Compléter mon profil d'abord") }}
             </a>
         @endif
     </div>

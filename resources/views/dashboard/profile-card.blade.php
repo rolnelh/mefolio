@@ -54,19 +54,19 @@
         class="grid grid-cols-4 divide-x divide-gray-50 dark:divide-gray-800 border-b border-gray-50 dark:border-gray-800">
         <div class="py-3 text-center">
             <p class="text-lg font-black text-gray-900 dark:text-white">{{ count($projects) }}</p>
-            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Projets</p>
+            <p class="text-[10px] text-gray-400 uppercase tracking-wider">{{ __('Projets') }}</p>
         </div>
         <div class="py-3 text-center">
             <p class="text-lg font-black text-gray-900 dark:text-white">{{ number_format($creatif->builder_score ?? 0) }}</p>
-            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Score</p>
+            <p class="text-[10px] text-gray-400 uppercase tracking-wider">{{ __('Score') }}</p>
         </div>
         <div class="py-3 text-center">
             <p class="text-lg font-black text-gray-900 dark:text-white">{{ $totalLikes }}</p>
-            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Likes</p>
+            <p class="text-[10px] text-gray-400 uppercase tracking-wider">{{ __('Likes') }}</p>
         </div>
         <div class="py-3 text-center">
             <p class="text-lg font-black text-gray-900 dark:text-white">{{ number_format($creatif->profile_views ?? 0) }}</p>
-            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Vues</p>
+            <p class="text-[10px] text-gray-400 uppercase tracking-wider">{{ __('Vues') }}</p>
         </div>
     </div>
 
@@ -76,7 +76,7 @@
             @if ($creatif?->portfolio_url)
                 <a href="{{ $creatif->portfolio_url }}" target="_blank"
                     class="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
-                    title="Portfolio">
+                    title="{{ __('Portfolio') }}">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -96,7 +96,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg>
-            Modifier mon profil
+            {{ __('Modifier mon profil') }}
         </a>
         @if ($creatif?->slug)
             <a href="{{ route('creatifs.show', $creatif->slug) }}" target="_blank"
@@ -106,7 +106,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-                Voir mon profil public
+                {{ __('Voir mon profil public') }}
             </a>
         @endif
     </div>
@@ -114,7 +114,7 @@
     {{-- Membre depuis --}}
     <div class="px-6 pb-4">
         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-300 text-center">
-            Membre depuis {{ Auth::user()->created_at->translatedFormat('F Y') }}
+            {{ __('Membre depuis :date', ['date' => Auth::user()->created_at->translatedFormat('F Y')]) }}
         </p>
     </div>
 </div>

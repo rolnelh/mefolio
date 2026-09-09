@@ -13,23 +13,22 @@
 
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
             <h1 class="text-5xl sm:text-7xl font-black text-slate-900 tracking-tight leading-none mb-6">
-                Le marché des<br>
+                {{ __('Le marché des') }}<br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600">
-                    services créatifs
+                    {{ __('services créatifs') }}
                 </span>
             </h1>
             <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed mb-10">
-                Commandez des services créatifs directement aux meilleurs talents africains.
-                Logo, site web, vidéo, photo : payez en <span class="text-slate-900 font-semibold">Mobile Money.</span>
+                {{ __('Commandez des services créatifs directement aux meilleurs talents africains. Logo, site web, vidéo, photo : payez en') }} <span class="text-slate-900 font-semibold">Mobile Money.</span>
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a href="{{ route('register') }}"
                     class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02]">
-                    Créer mon profil
+                    {{ __('Créer mon profil') }}
                 </a>
                 <a href="#categories"
                     class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 px-8 py-3.5 rounded-full text-sm font-bold hover:border-gray-400 transition-all">
-                    Voir les catégories
+                    {{ __('Voir les catégories') }}
                 </a>
             </div>
         </div>
@@ -38,27 +37,27 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
 
         <div id="categories" class="text-center mb-16 scroll-mt-24">
-            <h2 class="text-3xl font-black text-gray-900">Les catégories de services</h2>
+            <h2 class="text-3xl font-black text-gray-900">{{ __('Les catégories de services') }}</h2>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
-            @foreach ([['titre' => 'Design & Identité', 'desc' => 'Logo, charte graphique, branding'], ['titre' => 'Développement Web', 'desc' => 'Sites, apps, landing pages'], ['titre' => 'Photographie', 'desc' => 'Portrait, produit, événement'], ['titre' => 'Vidéo & Montage', 'desc' => 'Publicité, reels, motion'], ['titre' => 'Rédaction', 'desc' => 'Contenu, copywriting, SEO'], ['titre' => 'Réseaux Sociaux', 'desc' => 'Gestion, stratégie, contenu'], ['titre' => 'Audio & Musique', 'desc' => 'Jingle, podcast, mixage'], ['titre' => 'Print & Affiches', 'desc' => 'Flyers, kakémono, packaging']] as $cat)
+            @foreach ([['titre' => __('Design & Identité'), 'desc' => __('Logo, charte graphique, branding')], ['titre' => __('Développement Web'), 'desc' => __('Sites, apps, landing pages')], ['titre' => __('Photographie'), 'desc' => __('Portrait, produit, événement')], ['titre' => __('Vidéo & Montage'), 'desc' => __('Publicité, reels, motion')], ['titre' => __('Rédaction'), 'desc' => __('Contenu, copywriting, SEO')], ['titre' => __('Réseaux Sociaux'), 'desc' => __('Gestion, stratégie, contenu')], ['titre' => __('Audio & Musique'), 'desc' => __('Jingle, podcast, mixage')], ['titre' => __('Print & Affiches'), 'desc' => __('Flyers, kakémono, packaging')]] as $cat)
                 <div
                     class="group bg-white border border-gray-100 rounded-2xl p-5 hover:border-indigo-200 hover:shadow-lg transition-all cursor-default">
                     <h3 class="font-bold text-gray-900 text-sm mb-1">{{ $cat['titre'] }}</h3>
                     <p class="text-xs text-gray-400">{{ $cat['desc'] }}</p>
                     <span
-                        class="inline-block mt-3 text-[10px] bg-amber-50 text-amber-600 font-semibold px-2 py-0.5 rounded-full">Bientôt</span>
+                        class="inline-block mt-3 text-[10px] bg-amber-50 text-amber-600 font-semibold px-2 py-0.5 rounded-full">{{ __('Bientôt') }}</span>
                 </div>
             @endforeach
         </div>
 
         <div class="bg-gray-50 rounded-3xl p-10 mb-20">
             <div class="text-center mb-12">
-                <h2 class="text-2xl font-black text-gray-900">Comment ça va fonctionner</h2>
+                <h2 class="text-2xl font-black text-gray-900">{{ __('Comment ça va fonctionner') }}</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                @foreach ([['num' => '01', 'titre' => 'Trouvez un talent', 'desc' => 'Parcourez les profils et sélectionnez le créatif qui correspond à votre besoin.'], ['num' => '02', 'titre' => 'Commandez', 'desc' => 'Définissez votre projet, vos délais et votre budget directement sur la plateforme.'], ['num' => '03', 'titre' => 'Collaborez', 'desc' => 'Échangez, suivez l\'avancement et donnez vos retours en temps réel.'], ['num' => '04', 'titre' => 'Payez en Mobile Money', 'desc' => 'Réglez en toute sécurité via MTN, Moov, Wave ou tout autre moyen local.']] as $step)
+                @foreach ([['num' => '01', 'titre' => __('Trouvez un talent'), 'desc' => __('Parcourez les profils et sélectionnez le créatif qui correspond à votre besoin.')], ['num' => '02', 'titre' => __('Commandez'), 'desc' => __('Définissez votre projet, vos délais et votre budget directement sur la plateforme.')], ['num' => '03', 'titre' => __('Collaborez'), 'desc' => __('Échangez, suivez l\'avancement et donnez vos retours en temps réel.')], ['num' => '04', 'titre' => __('Payez en Mobile Money'), 'desc' => __('Réglez en toute sécurité via MTN, Moov, Wave ou tout autre moyen local.')]] as $step)
                     <div class="text-center">
                         <div class="text-xs font-black text-indigo-500 mb-2 tracking-widest">{{ $step['num'] }}</div>
                         <h3 class="font-bold text-gray-900 mb-2">{{ $step['titre'] }}</h3>
@@ -70,10 +69,9 @@
 
         <div class="mb-20">
             <div class="flex items-center justify-between mb-8">
-                <h2 class="text-2xl font-black text-gray-900">Aperçu des services à venir</h2>
+                <h2 class="text-2xl font-black text-gray-900">{{ __('Aperçu des services à venir') }}</h2>
                 <span
-                    class="text-xs bg-amber-50 text-amber-600 font-semibold px-3 py-1.5 rounded-full border border-amber-100">Données
-                    de démo</span>
+                    class="text-xs bg-amber-50 text-amber-600 font-semibold px-3 py-1.5 rounded-full border border-amber-100">{{ __('Données de démo') }}</span>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -92,7 +90,7 @@
                             <span
                                 class="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest text-indigo-500 bg-indigo-50 border border-indigo-100 px-2 py-1 rounded-lg">{{ $service['cat'] }}</span>
                             <span
-                                class="absolute top-3 right-3 text-xs bg-amber-50 text-amber-600 font-semibold px-2 py-1 rounded-lg border border-amber-100">Bientôt</span>
+                                class="absolute top-3 right-3 text-xs bg-amber-50 text-amber-600 font-semibold px-2 py-1 rounded-lg border border-amber-100">{{ __('Bientôt') }}</span>
                         </div>
                         <div class="p-5">
                             <h3 class="font-bold text-gray-900 mb-3 leading-snug">{{ $service['titre'] }}</h3>
@@ -106,12 +104,12 @@
                             </div>
                             <div class="flex items-center justify-between pt-4 border-t border-gray-50">
                                 <div>
-                                    <p class="text-xs text-gray-400">Délai : {{ $service['delai'] }}</p>
+                                    <p class="text-xs text-gray-400">{{ __('Délai :') }} {{ $service['delai'] }}</p>
                                     <p class="text-sm font-bold text-gray-900 mt-0.5">{{ $service['prix'] }}</p>
                                 </div>
                                 <button disabled
                                     class="bg-gray-100 text-gray-400 text-xs font-bold px-4 py-2 rounded-xl cursor-not-allowed">
-                                    Commander
+                                    {{ __('Commander') }}
                                 </button>
                             </div>
                         </div>
@@ -121,12 +119,11 @@
         </div>
 
         <div class="bg-gradient-to-r from-violet-600 to-indigo-600 rounded-3xl p-10 text-center text-white">
-            <h2 class="text-2xl font-black mb-2">Tu es un talent créatif ?</h2>
-            <p class="text-violet-200 mb-6 max-w-lg mx-auto">Inscris-toi maintenant et sois parmi les premiers à
-                proposer tes services sur Mefolio dès le lancement.</p>
+            <h2 class="text-2xl font-black mb-2">{{ __('Tu es un talent créatif ?') }}</h2>
+            <p class="text-violet-200 mb-6 max-w-lg mx-auto">{{ __('Inscris-toi maintenant et sois parmi les premiers à proposer tes services sur Mefolio dès le lancement.') }}</p>
             <a href="{{ route('register') }}"
                 class="inline-flex items-center gap-2 bg-white text-indigo-600 font-bold px-8 py-3 rounded-full hover:bg-indigo-50 transition-all hover:scale-105 shadow-lg">
-                Créer mon profil gratuitement →
+                {{ __('Créer mon profil gratuitement') }} →
             </a>
         </div>
 

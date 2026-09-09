@@ -9,13 +9,12 @@
 --}}
 <div class="flex items-center justify-between mb-5">
     <div>
-        <h2 class="text-lg font-black text-gray-900">Productivité</h2>
-        <p class="text-xs text-gray-400 mt-0.5">Votre activité détermine votre Builder Score
-            et votre place dans le classement.</p>
+        <h2 class="text-lg font-black text-gray-900">{{ __('Productivité') }}</h2>
+        <p class="text-xs text-gray-400 mt-0.5">{{ __('Votre activité détermine votre Builder Score et votre place dans le classement.') }}</p>
     </div>
     <a href="{{ route('classement.index') }}"
         class="text-xs font-semibold text-indigo-600 hover:underline whitespace-nowrap">
-        Voir le classement →
+        {{ __('Voir le classement') }} →
     </a>
 </div>
 
@@ -48,17 +47,16 @@
                 </svg>
                 <div class="absolute inset-0 flex flex-col items-center justify-center">
                     <span class="text-2xl font-black text-gray-900">{{ $progress }}%</span>
-                    <span class="text-[9px] text-gray-400 uppercase tracking-wider text-center leading-tight">niveau<br>suivant</span>
+                    <span class="text-[9px] text-gray-400 uppercase tracking-wider text-center leading-tight">{{ __('niveau') }}<br>{{ __('suivant') }}</span>
                 </div>
             </div>
             <p class="mt-4 text-sm font-bold text-indigo-600">{{ $level['label'] }}</p>
             @if ($nextLevel)
                 <p class="text-[11px] text-gray-400 mt-0.5">
-                    {{ number_format(max(0, $nextLevel['min'] - ($creatif->builder_score ?? 0))) }}
-                    pts avant « {{ $nextLevel['label'] }} »
+                    {{ __(':points pts avant « :level »', ['points' => number_format(max(0, $nextLevel['min'] - ($creatif->builder_score ?? 0))), 'level' => $nextLevel['label']]) }}
                 </p>
             @else
-                <p class="text-[11px] text-gray-400 mt-0.5">Niveau maximum atteint</p>
+                <p class="text-[11px] text-gray-400 mt-0.5">{{ __('Niveau maximum atteint') }}</p>
             @endif
         </div>
 
@@ -66,9 +64,9 @@
         <div class="grid grid-cols-2 gap-4">
             @foreach ([
                 ['label' => 'Builder Score', 'val' => number_format($creatif->builder_score ?? 0)],
-                ['label' => 'Position sur Mefolio', 'val' => 'Top ' . $topPct . '%'],
-                ['label' => 'Projets publiés', 'val' => count($projects)],
-                ['label' => 'Interactions reçues', 'val' => $totalLikes + $totalComments],
+                ['label' => __('Position sur Mefolio'), 'val' => __('Top :pct%', ['pct' => $topPct])],
+                ['label' => __('Projets publiés'), 'val' => count($projects)],
+                ['label' => __('Interactions reçues'), 'val' => $totalLikes + $totalComments],
             ] as $stat)
                 <div class="bg-white border border-gray-100 rounded-2xl p-5">
                     <div class="text-2xl font-black text-gray-900">{{ $stat['val'] }}</div>
@@ -80,17 +78,16 @@
 
     {{-- Comment gagner des points --}}
     <div class="bg-white border border-gray-100 rounded-2xl p-6">
-        <h3 class="font-bold text-gray-900 mb-1">Comment faire progresser votre score</h3>
-        <p class="text-xs text-gray-400 mb-4">Chaque action sur Mefolio vous rapporte des
-            points, qui déterminent votre niveau et votre rang dans le classement.</p>
+        <h3 class="font-bold text-gray-900 mb-1">{{ __('Comment faire progresser votre score') }}</h3>
+        <p class="text-xs text-gray-400 mb-4">{{ __('Chaque action sur Mefolio vous rapporte des points, qui déterminent votre niveau et votre rang dans le classement.') }}</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             @foreach ([
-                ['label' => 'Compléter son profil', 'pts' => 30],
-                ['label' => 'Publier un nouveau projet', 'pts' => 20],
-                ['label' => 'Terminer une mission', 'pts' => 50],
-                ['label' => 'Mettre à jour un projet', 'pts' => 5],
-                ['label' => 'Recevoir un commentaire', 'pts' => 3],
-                ['label' => 'Recevoir un like', 'pts' => 1],
+                ['label' => __('Compléter son profil'), 'pts' => 30],
+                ['label' => __('Publier un nouveau projet'), 'pts' => 20],
+                ['label' => __('Terminer une mission'), 'pts' => 50],
+                ['label' => __('Mettre à jour un projet'), 'pts' => 5],
+                ['label' => __('Recevoir un commentaire'), 'pts' => 3],
+                ['label' => __('Recevoir un like'), 'pts' => 1],
             ] as $action)
                 <div class="flex items-center justify-between px-4 py-3 bg-gray-50 rounded-xl">
                     <span class="text-sm text-gray-700">{{ $action['label'] }}</span>
@@ -101,12 +98,11 @@
     </div>
 @else
     <div class="flex flex-col items-center justify-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
-        <h3 class="text-lg font-bold text-gray-900 mb-2">Créez d'abord votre profil créatif</h3>
-        <p class="text-sm text-gray-400 text-center max-w-xs mb-6">Votre productivité et
-            votre Builder Score se calculent à partir de votre activité de créatif.</p>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ __("Créez d'abord votre profil créatif") }}</h3>
+        <p class="text-sm text-gray-400 text-center max-w-xs mb-6">{{ __('Votre productivité et votre Builder Score se calculent à partir de votre activité de créatif.') }}</p>
         <a href="{{ route('creatifs.edit') }}"
             class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-full transition-all">
-            Compléter mon profil
+            {{ __('Compléter mon profil') }}
         </a>
     </div>
 @endif

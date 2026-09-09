@@ -7,7 +7,7 @@
             {{-- Passer --}}
             <a href="{{ route('register') }}"
                 class="absolute top-5 right-5 z-20 text-xs font-bold text-gray-400 hover:text-gray-600 transition-colors">
-                Passer
+                {{ __('Passer') }}
             </a>
 
             {{-- Slide 1 : Portfolio --}}
@@ -24,10 +24,9 @@
                     </div>
                 </div>
                 <div class="px-8 pt-8 pb-6 text-center">
-                    <h1 class="text-2xl font-black text-gray-900 mb-3">Construisez votre portfolio</h1>
+                    <h1 class="text-2xl font-black text-gray-900 mb-3">{{ __('Construisez votre portfolio') }}</h1>
                     <p class="text-sm text-gray-500 leading-relaxed">
-                        Montrez vos meilleurs projets et faites-vous remarquer par les recruteurs et
-                        clients qui comptent.
+                        {{ __('Montrez vos meilleurs projets et faites-vous remarquer par les recruteurs et clients qui comptent.') }}
                     </p>
                 </div>
             </div>
@@ -46,10 +45,9 @@
                     </div>
                 </div>
                 <div class="px-8 pt-8 pb-6 text-center">
-                    <h1 class="text-2xl font-black text-gray-900 mb-3">Trouvez des missions rémunérées</h1>
+                    <h1 class="text-2xl font-black text-gray-900 mb-3">{{ __('Trouvez des missions rémunérées') }}</h1>
                     <p class="text-sm text-gray-500 leading-relaxed">
-                        Postulez à des missions freelance réelles, avec des clients qui paient en
-                        Mobile Money.
+                        {{ __('Postulez à des missions freelance réelles, avec des clients qui paient en Mobile Money.') }}
                     </p>
                 </div>
             </div>
@@ -68,10 +66,9 @@
                     </div>
                 </div>
                 <div class="px-8 pt-8 pb-6 text-center">
-                    <h1 class="text-2xl font-black text-gray-900 mb-3">Rejoignez une communauté qui vous valorise</h1>
+                    <h1 class="text-2xl font-black text-gray-900 mb-3">{{ __('Rejoignez une communauté qui vous valorise') }}</h1>
                     <p class="text-sm text-gray-500 leading-relaxed">
-                        Classement, Talent of the Week, challenges : votre travail est vu et
-                        reconnu.
+                        {{ __('Classement, Talent of the Week, challenges : votre travail est vu et reconnu.') }}
                     </p>
                 </div>
             </div>
@@ -88,17 +85,17 @@
 
                 <button x-show="slide < total - 1" @click="slide++"
                     class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-xl shadow-indigo-100 text-sm">
-                    Suivant →
+                    {{ __('Suivant') }} →
                 </button>
 
                 <a x-show="slide === total - 1" href="{{ route('register') }}"
                     class="w-full flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-xl shadow-indigo-100 text-sm">
-                    Créer mon compte gratuitement →
+                    {{ __('Créer mon compte gratuitement') }} →
                 </a>
 
                 <p class="text-center text-sm text-gray-500 mt-4">
-                    Déjà un compte ?
-                    <a href="{{ route('login') }}" class="text-indigo-600 font-bold hover:underline">Se connecter</a>
+                    {{ __('Déjà un compte ?') }}
+                    <a href="{{ route('login') }}" class="text-indigo-600 font-bold hover:underline">{{ __('Se connecter') }}</a>
                 </p>
             </div>
         </div>

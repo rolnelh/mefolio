@@ -53,7 +53,7 @@ class LoginRequest extends FormRequest
             // vers le bouton Google ou la réinitialisation.
             if (User::where('email', $this->string('email'))->whereNotNull('google_id')->exists()) {
                 throw ValidationException::withMessages([
-                    'email' => 'Ce compte a été créé avec Google. Utilisez le bouton "Continuer avec Google" ci-dessous, ou définissez un mot de passe via "Mot de passe oublié ?".',
+                    'email' => __('Ce compte a été créé avec Google. Utilisez le bouton "Continuer avec Google" ci-dessous, ou définissez un mot de passe via "Mot de passe oublié ?".'),
                 ]);
             }
 
