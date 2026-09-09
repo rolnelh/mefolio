@@ -1,4 +1,4 @@
-<footer class="bg-slate-50 pt-16 pb-10 px-4 sm:px-6">
+<footer class="pt-16 pb-10 px-4 sm:px-6">
     <div class="max-w-7xl mx-auto">
         <div class="bg-white border border-gray-100 rounded-[2rem] shadow-sm shadow-gray-900/[0.02] p-8 sm:p-12">
 
