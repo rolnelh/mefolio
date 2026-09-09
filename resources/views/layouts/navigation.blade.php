@@ -439,18 +439,18 @@
                     </div>
                 @else
                     <div class="relative flex items-center gap-1" x-data="{ openMobileMenu: false }">
-                        <button @click="openMobileMenu = !openMobileMenu" @click.outside="openMobileMenu = false"
-                            class="p-2 text-gray-600 hover:text-indigo-600 transition-colors" aria-label="Menu">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
-                            </svg>
-                        </button>
                         <a href="{{ route('login') }}" class="p-2 text-gray-600 hover:text-indigo-600 transition-colors" aria-label="Connexion">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                             </svg>
                         </a>
+                        <button @click="openMobileMenu = !openMobileMenu" @click.outside="openMobileMenu = false"
+                            class="p-2 text-gray-600 hover:text-indigo-600 transition-colors" aria-label="Menu">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+                            </svg>
+                        </button>
 
                         {{-- Menu mobile (invité) --}}
                         <div x-show="openMobileMenu" @click.outside="openMobileMenu = false"
@@ -496,7 +496,7 @@
 
                                 <div class="border-t border-gray-100 my-2"></div>
 
-                                <a href="{{ route('register') }}"
+                                <a href="{{ route('onboarding') }}"
                                     class="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-gray-900 hover:bg-black transition-colors">
                                     <span class="text-sm font-bold text-white">S'inscrire gratuitement</span>
                                 </a>
