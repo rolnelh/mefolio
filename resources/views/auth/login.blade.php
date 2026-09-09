@@ -1,10 +1,8 @@
 <x-guest-layout>
-    <div class="min-h-screen bg-[#F4F3EF] flex flex-col items-center justify-center px-4 py-6">
-
-        <div class="w-full max-w-5xl bg-white rounded-[2rem] shadow-2xl shadow-gray-900/10 overflow-hidden flex flex-col lg:flex-row lg:max-h-[92vh]">
+    <div class="min-h-screen bg-white flex flex-col lg:flex-row">
 
             {{-- Panneau gauche : formulaire --}}
-            <div class="w-full lg:w-1/2 p-6 sm:p-10 lg:p-12 flex flex-col justify-center overflow-y-auto hide-scrollbar">
+            <div class="w-full lg:w-1/2 min-h-screen px-6 sm:px-12 lg:px-16 py-10 flex flex-col justify-center">
 
                 <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-5 w-fit transition-transform hover:scale-105">
                     <x-application-logo class="h-8 w-auto text-indigo-600" />
@@ -138,7 +136,7 @@
             </div>
 
             {{-- Panneau droit : identité de marque --}}
-            <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-10 overflow-hidden">
+            <div class="hidden lg:flex lg:w-1/2 min-h-screen relative flex-col justify-between p-12 xl:p-16 overflow-hidden">
                 {{-- Image de fond --}}
                 <div aria-hidden="true" class="absolute inset-0 bg-cover bg-center opacity-40"
                     style="background-image: url('{{ asset('images/talentoftheweek.png') }}');"></div>
@@ -204,7 +202,6 @@
                     <p class="text-gray-700 text-xs font-semibold">{{ $creatifCount > 10 ? '10+' : $creatifCount }} créatif{{ $creatifCount > 1 ? 's' : '' }} nous ont rejoint</p>
                 </div>
             </div>
-        </div>
     </div>
 
     <script>
@@ -226,11 +223,11 @@
     </script>
 
     <style>
-        html, body, .hide-scrollbar {
+        html, body {
             scrollbar-width: none;
         }
 
-        html::-webkit-scrollbar, body::-webkit-scrollbar, .hide-scrollbar::-webkit-scrollbar {
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
             display: none;
         }
     </style>
