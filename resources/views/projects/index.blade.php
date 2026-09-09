@@ -5,17 +5,17 @@
 
             <div class="mb-6 md:text-left">
                 <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    Découvrez les meilleures réalisations de nos <span class="text-indigo-600">créatifs</span>
+                    {{ __('Découvrez les meilleures réalisations de nos') }} <span class="text-indigo-600">{{ __('créatifs') }}</span>
                 </h1>
                 <p class="text-gray-500 mt-2 text-base font-medium">
-                    Explorez des projets inspirants réalisés par la communauté africaine.
+                    {{ __('Explorez des projets inspirants réalisés par la communauté africaine.') }}
                 </p>
             </div>
 
             <form method="GET" class="flex flex-wrap items-center gap-3 pt-6 border-t border-gray-100 dark:border-gray-800 mb-10">
                 <a href="{{ route('projects.index') }}"
                     class="px-4 py-1.5 border rounded-full text-xs font-bold transition-all {{ !request('category') ? 'bg-gray-900 text-white border-gray-900' : 'border-gray-200 dark:border-gray-800 text-gray-500 hover:border-indigo-600 hover:text-indigo-600' }}">
-                    Tous
+                    {{ __('Tous') }}
                 </a>
                 @foreach ($categories as $cat)
                     <a href="{{ route('projects.index', ['category' => $cat]) }}"
@@ -26,11 +26,11 @@
 
                 <input type="hidden" name="category" value="{{ request('category') }}">
                 <div class="ml-auto flex-1 max-w-xs">
-                    <input type="text" name="q" value="{{ request('q') }}" placeholder="Rechercher un projet..."
+                    <input type="text" name="q" value="{{ request('q') }}" placeholder="{{ __('Rechercher un projet...') }}"
                         class="w-full bg-gray-100 dark:bg-gray-900 border-none rounded-xl py-2.5 px-4 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
                 </div>
                 <button class="px-4 py-2.5 bg-gray-900 text-white rounded-xl text-sm font-bold hover:bg-indigo-600 transition-all">
-                    Chercher
+                    {{ __('Chercher') }}
                 </button>
             </form>
 
@@ -52,7 +52,7 @@
                         <div class="absolute top-4 left-4 z-20">
                             <span
                                 class="inline-flex items-center rounded-full bg-white/90 dark:bg-gray-900/80 px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-gray-900 dark:text-white backdrop-blur-md border border-white/20">
-                                {{ $project->category ?? 'Créatif' }}
+                                {{ $project->category ?? __('Créatif') }}
                             </span>
                         </div>
 
@@ -141,12 +141,11 @@
                                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 15.803a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Aucun projet trouvé</h3>
-                    <p class="text-sm text-gray-400 max-w-sm">Aucun créatif n'a encore publié de projet correspondant à
-                        vos critères.</p>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ __('Aucun projet trouvé') }}</h3>
+                    <p class="text-sm text-gray-400 max-w-sm">{{ __("Aucun créatif n'a encore publié de projet correspondant à vos critères.") }}</p>
                     <a href="{{ route('projects.index') }}"
                         class="mt-8 px-6 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-bold rounded-full hover:bg-indigo-600 transition-all">
-                        Voir tous les projets
+                        {{ __('Voir tous les projets') }}
                     </a>
                 </div>
             @endforelse

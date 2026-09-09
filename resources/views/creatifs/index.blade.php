@@ -3,11 +3,9 @@
 
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mt-10 mb-4">
             <div>
-                <h1 class="text-4xl font-black text-gray-900">Découvrez les
-                    talents.</h1>
+                <h1 class="text-4xl font-black text-gray-900">{{ __('Découvrez les talents.') }}</h1>
             </div>
-            <p class="text-sm text-gray-700 max-w-xs">Designers, développeurs, photographes : les meilleurs créatifs
-                africains sont sur Mefolio.</p>
+            <p class="text-sm text-gray-700 max-w-xs">{{ __('Designers, développeurs, photographes : les meilleurs créatifs africains sont sur Mefolio.') }}</p>
         </div>
 
         <form method="GET" x-data="{
@@ -23,7 +21,7 @@
                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <input type="text" name="q" value="{{ request('q') }}"
-                    placeholder="Rechercher un créatif, une compétence..."
+                    placeholder="{{ __('Rechercher un créatif, une compétence...') }}"
                     class="w-full pl-11 pr-4 py-3 rounded-2xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white">
             </div>
 
@@ -36,7 +34,7 @@
                     <button type="button" @click="open = !open" @click.outside="open = false"
                         :class="domaine ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-700 border-gray-200'"
                         class="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold hover:border-indigo-300 transition-all">
-                        Domaine
+                        {{ __('Domaine') }}
                         <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
                             stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -45,7 +43,7 @@
                     <div x-show="open" x-transition:enter="transition ease-out duration-150"
                         x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                         class="absolute top-full left-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 z-40">
-                        @foreach ([['val' => 'design', 'label' => 'Design & UI/UX'], ['val' => 'dev-web', 'label' => 'Développement Web'], ['val' => 'dev-mobile', 'label' => 'Développement Mobile'], ['val' => 'photo', 'label' => 'Photographie'], ['val' => 'video', 'label' => 'Vidéo & Montage'], ['val' => 'marketing', 'label' => 'Marketing Digital'], ['val' => 'redaction', 'label' => 'Rédaction'], ['val' => 'audio', 'label' => 'Audio & Musique']] as $opt)
+                        @foreach ([['val' => 'design', 'label' => __('Design & UI/UX')], ['val' => 'dev-web', 'label' => __('Développement Web')], ['val' => 'dev-mobile', 'label' => __('Développement Mobile')], ['val' => 'photo', 'label' => __('Photographie')], ['val' => 'video', 'label' => __('Vidéo & Montage')], ['val' => 'marketing', 'label' => __('Marketing Digital')], ['val' => 'redaction', 'label' => __('Rédaction')], ['val' => 'audio', 'label' => __('Audio & Musique')]] as $opt)
                             <button type="button"
                                 @click="domaine = (domaine === '{{ $opt['val'] }}' ? '' : '{{ $opt['val'] }}'); open = false; $nextTick(() => $el.closest('form').submit())"
                                 :class="domaine === '{{ $opt['val'] }}' ? 'bg-indigo-50 text-indigo-600' :
@@ -67,7 +65,7 @@
                     <button type="button" @click="open = !open" @click.outside="open = false"
                         :class="pays ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-700 border-gray-200'"
                         class="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold hover:border-indigo-300 transition-all">
-                        Pays
+                        {{ __('Pays') }}
                         <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
                             stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -99,7 +97,7 @@
                         'bg-white text-gray-700 border-gray-200 hover:border-green-300'"
                     class="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all">
                     <span class="w-2 h-2 rounded-full" :class="disponible ? 'bg-white' : 'bg-green-400'"></span>
-                    Disponible maintenant
+                    {{ __('Disponible maintenant') }}
                 </button>
 
                 {{-- Reset --}}
@@ -110,20 +108,20 @@
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
-                        Effacer
+                        {{ __('Effacer') }}
                     </a>
                 @endif
 
                 {{-- Tri --}}
                 <div class="ml-auto flex items-center gap-2">
-                    <span class="text-xs text-gray-400">Trier par</span>
+                    <span class="text-xs text-gray-400">{{ __('Trier par') }}</span>
                     <select name="tri" onchange="this.form.submit()"
                         class="text-sm font-semibold text-gray-700 border border-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white cursor-pointer">
-                        <option value="recent" @selected(request('tri', 'recent') === 'recent')>Plus récents
+                        <option value="recent" @selected(request('tri', 'recent') === 'recent')>{{ __('Plus récents') }}
                         </option>
-                        <option value="populaire" @selected(request('tri') === 'populaire')>Plus populaires
+                        <option value="populaire" @selected(request('tri') === 'populaire')>{{ __('Plus populaires') }}
                         </option>
-                        <option value="projets" @selected(request('tri') === 'projets')>Plus de projets</option>
+                        <option value="projets" @selected(request('tri') === 'projets')>{{ __('Plus de projets') }}</option>
                     </select>
                 </div>
             </div>
@@ -135,7 +133,7 @@
                 <x-creatif-card :creatif="$creatif" />
             @empty
                 <div class="col-span-full text-center py-12">
-                    <p class="text-gray-500">Aucun créatif trouvé pour le moment.</p>
+                    <p class="text-gray-500">{{ __('Aucun créatif trouvé pour le moment.') }}</p>
                 </div>
             @endforelse
         </div>

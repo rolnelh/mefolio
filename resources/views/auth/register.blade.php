@@ -9,11 +9,10 @@
                     <span class="font-bold text-lg text-gray-900">Mefolio</span>
                 </a>
 
-                <h1 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">Créer votre compte</h1>
+                <h1 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">{{ __('Créer votre compte') }}</h1>
                 <p class="text-sm text-gray-500 mb-5">
-                    Déjà membre ?
-                    <a href="{{ route('login') }}" class="text-indigo-600 font-bold hover:underline">Se
-                        connecter</a>
+                    {{ __('Déjà membre ?') }}
+                    <a href="{{ route('login') }}" class="text-indigo-600 font-bold hover:underline">{{ __('Se connecter') }}</a>
                 </p>
 
                 @if (session('google_error'))
@@ -33,7 +32,7 @@
                                     @checked(old('role', 'creatif') === 'creatif')>
                                 <div
                                     class="py-2 rounded-lg text-center text-sm font-semibold text-gray-500 peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm transition-all">
-                                    Je suis créatif
+                                    {{ __('Je suis créatif') }}
                                 </div>
                             </label>
                             <label class="cursor-pointer">
@@ -41,7 +40,7 @@
                                     @checked(old('role') === 'client')>
                                 <div
                                     class="py-2 rounded-lg text-center text-sm font-semibold text-gray-500 peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm transition-all">
-                                    Je suis client
+                                    {{ __('Je suis client') }}
                                 </div>
                             </label>
                         </div>
@@ -57,7 +56,7 @@
                                     d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                             </svg>
                             <input type="text" name="username" value="{{ old('username') }}" required
-                                placeholder="Nom d'utilisateur"
+                                placeholder="{{ __("Nom d'utilisateur") }}"
                                 class="w-full h-12 pl-11 pr-4 rounded-xl border border-gray-200 text-sm outline-none
                        focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
                         </div>
@@ -88,7 +87,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                             </svg>
-                            <input type="password" id="password" name="password" required placeholder="Mot de passe"
+                            <input type="password" id="password" name="password" required placeholder="{{ __('Mot de passe') }}"
                                 class="w-full h-12 pl-11 pr-12 rounded-xl border border-gray-200 text-sm outline-none
                    focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
                             <button type="button" onclick="togglePwd('password', 'eye-open-1', 'eye-close-1')"
@@ -112,7 +111,7 @@
 
                     <button type="submit"
                         class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-xl shadow-indigo-100 text-sm">
-                        Créer mon compte gratuitement →
+                        {{ __('Créer mon compte gratuitement') }} →
                     </button>
                 </form>
 
@@ -121,7 +120,7 @@
                         <div class="w-full border-t border-gray-100"></div>
                     </div>
                     <div class="relative flex justify-center">
-                        <span class="px-4 bg-white text-[10px] text-gray-800 font-bold uppercase">ou</span>
+                        <span class="px-4 bg-white text-[10px] text-gray-800 font-bold uppercase">{{ __('ou') }}</span>
                     </div>
                 </div>
 
@@ -137,7 +136,7 @@
                         <path fill="#1976D2"
                             d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
                     </svg>
-                    Continuer avec Google
+                    {{ __('Continuer avec Google') }}
                 </a>
             </div>
 
@@ -163,14 +162,12 @@
 
                 <div class="relative z-10">
                     <h2 class="text-4xl font-black text-gray-900 leading-tight mb-5">
-                        Valorisons les talents africains<br>
-                        <span class="text-indigo-600">à l'échelle mondiale.</span>
+                        {{ __('Valorisons les talents africains') }}<br>
+                        <span class="text-indigo-600">{{ __("à l'échelle mondiale.") }}</span>
                     </h2>
 
                     <p class="text-gray-500 text-sm leading-relaxed max-w-md">
-                        Mefolio connecte les talents africains aux recruteurs, aux opportunités
-                        et aux missions réelles, sans barrières techniques, sans blocages de
-                        paiement, pensé pour nos réalités.
+                        {{ __('Mefolio connecte les talents africains aux recruteurs, aux opportunités et aux missions réelles, sans barrières techniques, sans blocages de paiement, pensé pour nos réalités.') }}
                     </p>
                 </div>
 
@@ -192,7 +189,7 @@
                             @endforeach
                         @endforelse
                     </div>
-                    <p class="text-gray-700 text-xs font-semibold">{{ $creatifCount > 10 ? '10+' : $creatifCount }} créatif{{ $creatifCount > 1 ? 's' : '' }} nous ont rejoint</p>
+                    <p class="text-gray-700 text-xs font-semibold">{{ trans_choice(':count créatif nous a rejoint|:count créatifs nous ont rejoint', $creatifCount, ['count' => $creatifCount > 10 ? '10+' : $creatifCount]) }}</p>
                 </div>
             </div>
     </div>

@@ -26,37 +26,37 @@
                         @endif
                         <span class="text-xs font-semibold text-gray-500">
                             <span class="text-gray-900 font-bold">{{ number_format($creatifCount) }}</span>
-                            créatif{{ $creatifCount > 1 ? 's' : '' }} déjà sur Mefolio
+                            {{ trans_choice('créatif déjà sur Mefolio|créatifs déjà sur Mefolio', $creatifCount) }}
                         </span>
                     </div>
                 @endif
 
                 <h1 class="text-5xl sm:text-6xl font-black text-slate-900 tracking-tight leading-[1.05] mb-6">
-                    Votre prochaine<br>
+                    {{ __('Votre prochaine') }}<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">
-                        mission freelance
+                        {{ __('mission freelance') }}
                     </span>
                 </h1>
                 <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
-                    Proposez vos services et connectez-vous directement avec des clients africains.
+                    {{ __('Proposez vos services et connectez-vous directement avec des clients africains.') }}
                 </p>
 
                 <div class="mt-10 flex justify-center">
                     @auth
                         <a href="{{ route('missions.create') }}"
                             class="inline-flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-full transition-all hover:scale-105 text-sm">
-                            Publier une mission →
+                            {{ __('Publier une mission') }} →
                         </a>
                     @else
                         <a href="{{ route('login') }}"
                             class="inline-flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-full transition-all hover:scale-105 text-sm">
-                            Publier une mission →
+                            {{ __('Publier une mission') }} →
                         </a>
                     @endauth
                 </div>
 
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-gray-500">
-                    @foreach (['Publication gratuite', 'Candidature en un clic', 'Directement avec le client'] as $point)
+                    @foreach ([__('Publication gratuite'), __('Candidature en un clic'), __('Directement avec le client')] as $point)
                         <span class="inline-flex items-center gap-1.5">
                             <svg class="w-3.5 h-3.5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -77,13 +77,13 @@
                         stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
-                    <input type="text" name="q" value="{{ request('q') }}" placeholder="Rechercher une mission..."
+                    <input type="text" name="q" value="{{ request('q') }}" placeholder="{{ __('Rechercher une mission...') }}"
                         class="w-52 pl-9 pr-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 </div>
 
                 <select name="domaine" onchange="this.form.submit()"
                     class="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="">Tous les domaines</option>
+                    <option value="">{{ __('Tous les domaines') }}</option>
                     @foreach ($domaines as $domaine)
                         <option value="{{ $domaine }}" @selected(request('domaine') === $domaine)>{{ $domaine }}</option>
                     @endforeach
@@ -91,33 +91,33 @@
 
                 <select name="niveau" onchange="this.form.submit()"
                     class="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="">Tous niveaux</option>
-                    <option value="Junior" @selected(request('niveau') === 'Junior')>Junior</option>
-                    <option value="Intermédiaire" @selected(request('niveau') === 'Intermédiaire')>Intermédiaire</option>
-                    <option value="Senior" @selected(request('niveau') === 'Senior')>Senior</option>
+                    <option value="">{{ __('Tous niveaux') }}</option>
+                    <option value="Junior" @selected(request('niveau') === 'Junior')>{{ __('Junior') }}</option>
+                    <option value="Intermédiaire" @selected(request('niveau') === 'Intermédiaire')>{{ __('Intermédiaire') }}</option>
+                    <option value="Senior" @selected(request('niveau') === 'Senior')>{{ __('Senior') }}</option>
                 </select>
 
-                <input type="text" name="lieu" value="{{ request('lieu') }}" placeholder="Lieu (remote, Cotonou...)"
+                <input type="text" name="lieu" value="{{ request('lieu') }}" placeholder="{{ __('Lieu (remote, Cotonou...)') }}"
                     onchange="this.form.submit()"
                     class="px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
 
                 <select name="tri" onchange="this.form.submit()"
                     class="ml-auto px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="recent" @selected(request('tri', 'recent') === 'recent')>Plus récentes</option>
-                    <option value="budget-desc" @selected(request('tri') === 'budget-desc')>Budget décroissant</option>
-                    <option value="budget-asc" @selected(request('tri') === 'budget-asc')>Budget croissant</option>
+                    <option value="recent" @selected(request('tri', 'recent') === 'recent')>{{ __('Plus récentes') }}</option>
+                    <option value="budget-desc" @selected(request('tri') === 'budget-desc')>{{ __('Budget décroissant') }}</option>
+                    <option value="budget-asc" @selected(request('tri') === 'budget-asc')>{{ __('Budget croissant') }}</option>
                 </select>
 
                 @if (request()->anyFilled(['domaine', 'niveau', 'lieu', 'q']))
                     <a href="{{ route('missions.index') }}"
                         class="px-4 py-2 rounded-full border border-red-200 bg-red-50 text-red-600 text-sm font-semibold hover:bg-red-100 transition-all">
-                        Effacer les filtres
+                        {{ __('Effacer les filtres') }}
                     </a>
                 @endif
             </form>
 
             <p class="text-sm text-gray-500 mb-6">
-                <span class="font-bold text-gray-900">{{ $missions->total() }}</span> mission(s) disponible(s)
+                {!! trans_choice(':count mission disponible|:count missions disponibles', $missions->total(), ['count' => '<span class="font-bold text-gray-900">' . $missions->total() . '</span>']) !!}
             </p>
 
             {{-- GRILLE MISSIONS --}}
@@ -135,7 +135,7 @@
                                 </div>
                                 @if ($mission->urgent)
                                     <span class="text-[10px] bg-red-50 text-red-600 border border-red-100 font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
-                                        Urgent
+                                        {{ __('Urgent') }}
                                     </span>
                                 @endif
                             </div>
@@ -147,7 +147,7 @@
                             <p class="text-[11px] font-bold text-indigo-500 mb-3">{{ $mission->domaine }}</p>
 
                             <div class="space-y-1.5 mb-4 text-xs text-gray-500">
-                                <p>{{ $mission->lieu ?: ($mission->remote ? 'Remote' : '-') }}</p>
+                                <p>{{ $mission->lieu ?: ($mission->remote ? __('Remote') : '-') }}</p>
                                 @if ($mission->duree)
                                     <p>{{ $mission->duree }}</p>
                                 @endif
@@ -187,16 +187,16 @@
                                         FCFA
                                     </p>
                                 @endif
-                                <span class="text-[10px] text-gray-400">{{ $mission->applications_count }} candidature(s)</span>
+                                <span class="text-[10px] text-gray-400">{{ trans_choice(':count candidature|:count candidatures', $mission->applications_count, ['count' => $mission->applications_count]) }}</span>
                             </div>
                         </div>
                     </a>
                 @empty
                     <div class="col-span-full text-center py-20 text-gray-400">
-                        <p class="text-sm font-medium">Aucune mission ne correspond à votre recherche pour le moment.</p>
+                        <p class="text-sm font-medium">{{ __('Aucune mission ne correspond à votre recherche pour le moment.') }}</p>
                         @auth
                             <a href="{{ route('missions.create') }}" class="inline-block mt-4 text-indigo-600 font-semibold text-sm hover:underline">
-                                Publier la première mission →
+                                {{ __('Publier la première mission') }} →
                             </a>
                         @endauth
                     </div>
@@ -206,7 +206,7 @@
             <div class="mt-10">{{ $missions->links() }}</div>
         </div>
 
-        <x-newsletter-cta title="Soyez notifié en premier"
-            description="Inscrivez-vous pour recevoir les nouvelles missions publiées sur Mefolio." source="missions" />
+        <x-newsletter-cta :title="__('Soyez notifié en premier')"
+            :description="__('Inscrivez-vous pour recevoir les nouvelles missions publiées sur Mefolio.')" source="missions" />
     </div>
 </x-app-layout>

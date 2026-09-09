@@ -24,21 +24,20 @@
 
         <div class="relative z-10 max-w-2xl mx-auto px-6 text-center">
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-relaxed mb-6">
-                Prouvez votre<br>
-                <span class="text-amber-500">talent.</span>
+                {{ __('Prouvez votre') }}<br>
+                <span class="text-amber-500">{{ __('talent.') }}</span>
             </h1>
             <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
-                Participez à des défis créatifs, gagnez des prix et faites reconnaître vos compétences par la
-                communauté Mefolio.
+                {{ __('Participez à des défis créatifs, gagnez des prix et faites reconnaître vos compétences par la communauté Mefolio.') }}
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16">
                 <a href="#defis"
                     class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02]">
-                    Découvrir les défis
+                    {{ __('Découvrir les défis') }}
                 </a>
                 <a href="{{ route('classement.index') }}"
                     class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 px-8 py-3.5 rounded-full text-sm font-bold hover:border-gray-400 transition-all">
-                    Voir le classement
+                    {{ __('Voir le classement') }}
                 </a>
             </div>
 
@@ -61,7 +60,7 @@
                     <div class="p-6">
                         <div class="flex items-center gap-2 mb-3">
                             <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full {{ $challenge->status === 'open' ? 'bg-green-50 text-green-600' : 'bg-gray-100 text-gray-500' }}">
-                                {{ $challenge->status === 'open' ? 'Ouvert' : 'Fermé' }}
+                                {{ $challenge->status === 'open' ? __('Ouvert') : __('Fermé') }}
                             </span>
                             @if ($challenge->category)
                                 <span class="text-[11px] font-semibold text-indigo-500">{{ $challenge->category }}</span>
@@ -70,7 +69,7 @@
                         <h3 class="font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">{{ $challenge->title }}</h3>
                         <p class="text-sm text-gray-500 line-clamp-2 mb-4">{{ $challenge->description }}</p>
                         <div class="flex items-center justify-between pt-4 border-t border-gray-50 text-xs text-gray-400">
-                            <span>{{ $challenge->participants_count }} participant(s)</span>
+                            <span>{{ trans_choice(':count participant|:count participants', $challenge->participants_count, ['count' => $challenge->participants_count]) }}</span>
                             @if ($challenge->prize)
                                 <span class="font-bold text-gray-900">{{ $challenge->prize }}</span>
                             @endif
@@ -79,14 +78,14 @@
                 </a>
             @empty
                 <div class="col-span-full text-center py-20 text-gray-400">
-                    <p class="text-sm font-medium">Aucun challenge n'est publié pour le moment. Revenez bientôt !</p>
+                    <p class="text-sm font-medium">{{ __("Aucun challenge n'est publié pour le moment. Revenez bientôt !") }}</p>
                 </div>
             @endforelse
         </div>
 
         <div class="mt-10">{{ $challenges->links() }}</div>
 
-        <x-newsletter-cta title="Soyez alerté des nouveaux challenges"
-            description="Recevez une notification dès qu'un nouveau challenge créatif est publié." source="challenges" />
+        <x-newsletter-cta :title="__('Soyez alerté des nouveaux challenges')"
+            :description="__('Recevez une notification dès qu\'un nouveau challenge créatif est publié.')" source="challenges" />
     </div>
 </x-app-layout>

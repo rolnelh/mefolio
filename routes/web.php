@@ -99,14 +99,14 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/creatifs', [CreatifController::class, 'index'])->name('creatifs.index');
 Route::get('/creatifs/localisation', function () {
     return view('coming-soon', [
-        'page' => 'Talents par localisation',
-        'description' => 'Trouvez des talents créatifs près de chez vous au Bénin et en Afrique.',
+        'page' => __('Talents par localisation'),
+        'description' => __('Trouvez des talents créatifs près de chez vous au Bénin et en Afrique.'),
     ]);
 })->name('creatifs.localisation');
 Route::get('/creatifs/domaine', function () {
     return view('coming-soon', [
-        'page' => 'Talents par domaine',
-        'description' => 'Design, Développement, Photographie, Vidéo : trouvez le bon profil.',
+        'page' => __('Talents par domaine'),
+        'description' => __('Design, Développement, Photographie, Vidéo : trouvez le bon profil.'),
     ]);
 })->name('creatifs.domaine');
 Route::get('/creatifs/{slug}', [CreatifController::class, 'show'])->name('creatifs.show');

@@ -13,9 +13,8 @@
 <div class="bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100 rounded-2xl p-5">
     <div class="flex items-center justify-between mb-3">
         <div>
-            <h3 class="text-sm font-bold text-gray-900">Configurez votre espace créatif</h3>
-            <p class="text-xs text-gray-500 mt-0.5">{{ $progression }}/{{ $total }}
-                étapes complétées</p>
+            <h3 class="text-sm font-bold text-gray-900">{{ __('Configurez votre espace créatif') }}</h3>
+            <p class="text-xs text-gray-500 mt-0.5">{{ __(':done/:total étapes complétées', ['done' => $progression, 'total' => $total]) }}</p>
         </div>
         <span class="text-xl font-extrabold text-indigo-600">{{ (int) $pourcentage }}%</span>
     </div>
@@ -45,9 +44,9 @@
             <div class="flex-1 min-w-0">
                 <p
                     class="text-xs font-semibold {{ $etapes['profil'] ? 'text-green-700' : 'text-gray-900' }}">
-                    {{ $etapes['profil'] ? ' Profil complété' : 'Compléter mon profil' }}
+                    {{ $etapes['profil'] ? __('Profil complété') : __('Compléter mon profil') }}
                 </p>
-                <p class="text-[11px] text-gray-400">Photo, bio, spécialité, localisation</p>
+                <p class="text-[11px] text-gray-400">{{ __('Photo, bio, spécialité, localisation') }}</p>
             </div>
         </a>
         <a href="{{ $etapes['profil'] ? route('projets.create') : '#' }}"
@@ -70,10 +69,10 @@
             <div class="flex-1 min-w-0">
                 <p
                     class="text-xs font-semibold {{ $etapes['projet'] ? 'text-green-700' : 'text-gray-900' }}">
-                    {{ $etapes['projet'] ? ' Premier projet ajouté' : 'Ajouter mon premier projet' }}
+                    {{ $etapes['projet'] ? __('Premier projet ajouté') : __('Ajouter mon premier projet') }}
                 </p>
                 <p class="text-[11px] text-gray-400">
-                    {{ !$etapes['profil'] ? 'Complétez d\'abord votre profil' : 'Partagez votre première réalisation' }}
+                    {{ !$etapes['profil'] ? __("Complétez d'abord votre profil") : __('Partagez votre première réalisation') }}
                 </p>
             </div>
         </a>

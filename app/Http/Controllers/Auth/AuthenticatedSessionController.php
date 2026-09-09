@@ -34,6 +34,14 @@ class AuthenticatedSessionController extends Controller
         $creatifCount = Creatif::where('is_paused', false)->count();
         $recentCreatifs = Creatif::where('is_paused', false)->latest()->take(3)->get();
         $tagline = self::TAGLINES[array_rand(self::TAGLINES)];
+        // Traduit ici (clé = texte français exact, voir lang/en.json) plutôt
+        // que dans la vue, pour que la même accroche tirée au sort reste
+        // cohérente sur ses 3 champs.
+        $tagline = [
+            'line1' => __($tagline['line1']),
+            'line2' => __($tagline['line2']),
+            'text' => __($tagline['text']),
+        ];
 
         return view('auth.login', compact('creatifCount', 'recentCreatifs', 'tagline'));
     }
@@ -51,7 +59,7 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerateToken();
 
             return redirect()->route('login')->withErrors([
-                'email' => "Ce compte a été suspendu. Contactez l'équipe Mefolio pour plus d'informations.",
+                'email' => __("Ce compte a été suspendu. Contactez l'équipe Mefolio pour plus d'informations."),
             ]);
         }
 

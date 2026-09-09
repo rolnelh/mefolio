@@ -8,20 +8,19 @@
     @csrf
     @method('PUT')
     <div>
-        <h2 class="text-lg font-black text-gray-900">Moyens de paiement</h2>
-        <p class="text-sm text-gray-400 mt-1">Choisissez comment vous souhaitez être payé pour vos
-            missions.</p>
+        <h2 class="text-lg font-black text-gray-900">{{ __('Moyens de paiement') }}</h2>
+        <p class="text-sm text-gray-400 mt-1">{{ __('Choisissez comment vous souhaitez être payé pour vos missions.') }}</p>
     </div>
 
     {{-- Mobile Money Afrique --}}
     <div class="bg-white border border-gray-100 rounded-2xl p-6">
         <div class="flex items-center gap-3 mb-5">
             <div>
-                <h3 class="font-bold text-gray-900 text-sm">Mobile Money Afrique</h3>
-                <p class="text-xs text-gray-400">Paiements locaux recommandés</p>
+                <h3 class="font-bold text-gray-900 text-sm">{{ __('Mobile Money Afrique') }}</h3>
+                <p class="text-xs text-gray-400">{{ __('Paiements locaux recommandés') }}</p>
             </div>
             <span
-                class="ml-auto text-[10px] bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full">Recommandé</span>
+                class="ml-auto text-[10px] bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full">{{ __('Recommandé') }}</span>
         </div>
 
         <div class="space-y-3">
@@ -48,7 +47,7 @@
 
         {{-- Numéro Mobile Money --}}
         <div class="mt-4 pt-4 border-t border-gray-50">
-            <label class="block text-xs font-bold text-gray-700 mb-1.5">Numéro Mobile Money</label>
+            <label class="block text-xs font-bold text-gray-700 mb-1.5">{{ __('Numéro Mobile Money') }}</label>
             <div class="flex gap-2">
                 <select name="payment_phone_prefix"
                     class="px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
@@ -66,8 +65,8 @@
     <div class="bg-white border border-gray-100 rounded-2xl p-6">
         <div class="flex items-center gap-3 mb-5">
             <div>
-                <h3 class="font-bold text-gray-900 text-sm">Paiements Internationaux</h3>
-                <p class="text-xs text-gray-400">Pour les clients hors Afrique</p>
+                <h3 class="font-bold text-gray-900 text-sm">{{ __('Paiements Internationaux') }}</h3>
+                <p class="text-xs text-gray-400">{{ __('Pour les clients hors Afrique') }}</p>
             </div>
         </div>
 
@@ -90,10 +89,10 @@
                 </div>
                 <div class="flex-1">
                     <p class="text-sm font-semibold text-gray-900">PayPal</p>
-                    <p class="text-xs text-gray-400">Paiements en USD/EUR</p>
+                    <p class="text-xs text-gray-400">{{ __('Paiements en USD/EUR') }}</p>
                 </div>
                 <span
-                    class="text-[10px] bg-blue-50 text-blue-600 font-semibold px-2 py-0.5 rounded-full">International</span>
+                    class="text-[10px] bg-blue-50 text-blue-600 font-semibold px-2 py-0.5 rounded-full">{{ __('International') }}</span>
             </label>
 
             {{-- Stripe --}}
@@ -110,10 +109,10 @@
                 </div>
                 <div class="flex-1">
                     <p class="text-sm font-semibold text-gray-900">Stripe</p>
-                    <p class="text-xs text-gray-400">Cartes bancaires internationales</p>
+                    <p class="text-xs text-gray-400">{{ __('Cartes bancaires internationales') }}</p>
                 </div>
                 <span
-                    class="text-[10px] bg-violet-50 text-violet-600 font-semibold px-2 py-0.5 rounded-full">International</span>
+                    class="text-[10px] bg-violet-50 text-violet-600 font-semibold px-2 py-0.5 rounded-full">{{ __('International') }}</span>
             </label>
 
             {{-- Wise --}}
@@ -127,10 +126,10 @@
                 </div>
                 <div class="flex-1">
                     <p class="text-sm font-semibold text-gray-900">Wise (TransferWise)</p>
-                    <p class="text-xs text-gray-400">Virements internationaux</p>
+                    <p class="text-xs text-gray-400">{{ __('Virements internationaux') }}</p>
                 </div>
                 <span
-                    class="text-[10px] bg-green-50 text-green-600 font-semibold px-2 py-0.5 rounded-full">International</span>
+                    class="text-[10px] bg-green-50 text-green-600 font-semibold px-2 py-0.5 rounded-full">{{ __('International') }}</span>
             </label>
         </div>
     </div>
@@ -139,8 +138,8 @@
     <div class="bg-white border border-gray-100 rounded-2xl p-6">
         <div class="flex items-center gap-3 mb-4">
             <div>
-                <h3 class="font-bold text-gray-900 text-sm">Virement Bancaire</h3>
-                <p class="text-xs text-gray-400">Pour les grandes transactions</p>
+                <h3 class="font-bold text-gray-900 text-sm">{{ __('Virement Bancaire') }}</h3>
+                <p class="text-xs text-gray-400">{{ __('Pour les grandes transactions') }}</p>
             </div>
         </div>
         <label
@@ -152,8 +151,8 @@
                 <span class="text-white text-[9px] font-black">BANK</span>
             </div>
             <div class="flex-1">
-                <p class="text-sm font-semibold text-gray-900">Virement bancaire (IBAN)</p>
-                <p class="text-xs text-gray-400">Délai 2-5 jours ouvrés</p>
+                <p class="text-sm font-semibold text-gray-900">{{ __('Virement bancaire (IBAN)') }}</p>
+                <p class="text-xs text-gray-400">{{ __('Délai 2-5 jours ouvrés') }}</p>
             </div>
         </label>
     </div>
@@ -162,7 +161,7 @@
     <div class="flex justify-end">
         <button type="submit"
             class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-indigo-200">
-            Sauvegarder mes moyens de paiement
+            {{ __('Sauvegarder mes moyens de paiement') }}
         </button>
     </div>
 </form>

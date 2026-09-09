@@ -168,14 +168,27 @@ reste dans sa langue d'origine — pratique standard des marketplaces
   traduisent les messages système du framework (erreurs de validation,
   etc.) — nécessaires car `fallback_locale` reste `fr` : sans eux, ces
   messages retomberaient silencieusement en français même en locale `en`.
-- **Couverture actuelle (état à ce jour, à étendre)** : navigation, footer
-  et le hero de la page d'accueil sont traduits. Le reste du site
-  (dashboard, listings marketplace, admin, blog...) affiche encore du
-  texte français en dur quelle que soit la langue choisie — ce n'est pas
-  un bug, juste une couverture incrémentale. Pour étendre : envelopper le
-  texte français dans `__('...')` dans la vue concernée, puis ajouter sa
-  traduction anglaise dans `lang/en.json` (clé = texte français exact,
-  espaces et ponctuation compris).
+- **Couverture actuelle (état à ce jour, à étendre)** : navigation, footer,
+  accueil (toutes sections), authentification (connexion, inscription,
+  mot de passe oublié/confirmation/réinitialisation, vérification email,
+  rôle Google), onboarding, tableau de bord (tous les onglets), et les
+  pages listing publiques (`projects`, `creatifs`, `missions`,
+  `challenges`, `classement`, `blog`, `hackathons`, `services`,
+  `talentoftheweek`, `coming-soon`) sont traduites. Restent en français
+  fixe quelle que soit la langue choisie : les pages de détail/formulaire
+  (`projects/show`, `creatifs/show`, `creatifs/create`, `creatifs/edit`,
+  `missions/show`, `missions/create`, `challenges/show`, `blog-show`),
+  les messages privés, la page profil (`profile/*`), et tout l'espace
+  admin (`admin/*`, usage interne, priorité basse) — ce n'est pas un bug,
+  juste une couverture incrémentale. Pour étendre : envelopper le texte
+  français dans `__('...')` dans la vue concernée (ou dans le contrôleur
+  si le texte est défini côté PHP, comme pour les accroches de
+  `AuthenticatedSessionController`), puis ajouter sa traduction anglaise
+  dans `lang/en.json` (clé = texte français exact, espaces et ponctuation
+  compris). Les noms propres de marque/paiement (MTN, Wave, PayPal...),
+  les noms de pays dans les filtres, et les termes déjà établis comme
+  fixes (Talent of the Week, Hall of Fame, Dashboard, Blog, Challenges)
+  restent volontairement non traduits.
 
 ### Règle de "profil complet"
 

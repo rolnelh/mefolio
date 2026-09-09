@@ -12,13 +12,13 @@
         {{-- Barre d'en-tête : titre + actions --}}
         <div class="flex items-center justify-between gap-4 px-6 sm:px-8 py-5 border-b border-gray-100 dark:border-gray-800">
             <div>
-                <h2 class="text-lg font-black text-gray-900 dark:text-white">Mon profil créatif</h2>
-                <p class="text-xs text-gray-400 mt-0.5">Personnalisez votre vitrine professionnelle</p>
+                <h2 class="text-lg font-black text-gray-900 dark:text-white">{{ __('Mon profil créatif') }}</h2>
+                <p class="text-xs text-gray-400 mt-0.5">{{ __('Personnalisez votre vitrine professionnelle') }}</p>
             </div>
             <div class="flex items-center gap-2 flex-shrink-0">
                 <button type="submit"
                     class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-indigo-200 dark:shadow-none">
-                    Enregistrer
+                    {{ __('Enregistrer') }}
                 </button>
             </div>
         </div>
@@ -26,15 +26,13 @@
         {{-- Identité visuelle --}}
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-6 sm:px-8 py-8 border-b border-gray-100 dark:border-gray-800">
             <div class="lg:col-span-1">
-                <h3 class="text-sm font-bold text-gray-900 dark:text-white">Identité visuelle</h3>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Ces images seront la première
-                    chose que vos clients verront.</p>
+                <h3 class="text-sm font-bold text-gray-900 dark:text-white">{{ __('Identité visuelle') }}</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ __('Ces images seront la première chose que vos clients verront.') }}</p>
             </div>
 
             <div class="lg:col-span-2 space-y-6">
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">Bannière
-                        de couverture</label>
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">{{ __('Bannière de couverture') }}</label>
                     <div x-data="{ preview: null }"
                         class="relative group h-36 w-full rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center overflow-hidden transition-all hover:border-indigo-400 bg-gray-50 dark:bg-gray-950">
                         @if ($creatif && $creatif->couverture)
@@ -53,8 +51,7 @@
                             <input type="file" name="couverture" id="couverture" accept="image/*"
                                 @change="preview = $event.target.files[0] ? URL.createObjectURL($event.target.files[0]) : preview"
                                 class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-                            <p class="mt-1 text-xs font-medium text-gray-600 dark:text-gray-400">Cliquez
-                                pour modifier la bannière</p>
+                            <p class="mt-1 text-xs font-medium text-gray-600 dark:text-gray-400">{{ __('Cliquez pour modifier la bannière') }}</p>
                         </div>
                     </div>
                 </div>
@@ -65,7 +62,7 @@
                             class="w-16 h-16 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm">
                             @if ($creatif?->photo)
                                 <img x-show="!preview" src="{{ $creatif->photo }}"
-                                    class="w-full h-full object-cover" alt="Photo de profil">
+                                    class="w-full h-full object-cover" alt="{{ __('Photo de profil') }}">
                             @else
                                 <div x-show="!preview"
                                     class="w-full h-full bg-indigo-600 text-white flex items-center justify-center text-xl font-black">
@@ -73,7 +70,7 @@
                                 </div>
                             @endif
                             <img x-show="preview" x-cloak :src="preview"
-                                class="w-full h-full object-cover" alt="Photo de profil">
+                                class="w-full h-full object-cover" alt="{{ __('Photo de profil') }}">
                         </div>
                         <label
                             class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-2xl opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
@@ -89,8 +86,8 @@
                         </label>
                     </div>
                     <div>
-                        <h4 class="text-sm font-bold text-gray-700 dark:text-gray-200">Photo de profil</h4>
-                        <p class="text-xs text-gray-500">JPG ou PNG de haute qualité</p>
+                        <h4 class="text-sm font-bold text-gray-700 dark:text-gray-200">{{ __('Photo de profil') }}</h4>
+                        <p class="text-xs text-gray-500">{{ __('JPG ou PNG de haute qualité') }}</p>
                     </div>
                 </div>
             </div>
@@ -99,45 +96,41 @@
         {{-- Informations --}}
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-6 sm:px-8 py-8 border-b border-gray-100 dark:border-gray-800">
             <div class="lg:col-span-1">
-                <h3 class="text-sm font-bold text-gray-900 dark:text-white">Informations</h3>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Comment vous présenter aux
-                    clients et autres créatifs.</p>
+                <h3 class="text-sm font-bold text-gray-900 dark:text-white">{{ __('Informations') }}</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ __('Comment vous présenter aux clients et autres créatifs.') }}</p>
             </div>
 
             <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
                 <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-700 dark:text-gray-300">Prénom</label>
+                    <label class="text-xs font-bold text-gray-700 dark:text-gray-300">{{ __('Prénom') }}</label>
                     <input type="text" name="prenom" value="{{ old('prenom', $creatif?->prenom) }}"
                         class="w-full rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-indigo-500 focus:ring-indigo-500 transition-all text-sm">
                 </div>
                 <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-700 dark:text-gray-300">Nom</label>
+                    <label class="text-xs font-bold text-gray-700 dark:text-gray-300">{{ __('Nom') }}</label>
                     <input type="text" name="nom" value="{{ old('nom', $creatif?->nom) }}"
                         class="w-full rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-indigo-500 focus:ring-indigo-500 transition-all text-sm">
                 </div>
                 <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-700 dark:text-gray-300">Spécialité &
-                        titre</label>
+                    <label class="text-xs font-bold text-gray-700 dark:text-gray-300">{{ __('Spécialité & titre') }}</label>
                     <input type="text" name="specialite"
                         value="{{ old('specialite', $creatif?->specialite) }}"
-                        placeholder="Ex : Designer UI/UX"
+                        placeholder="{{ __('Ex : Designer UI/UX') }}"
                         class="w-full rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-indigo-500 focus:ring-indigo-500 transition-all text-sm">
                 </div>
                 <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-700 dark:text-gray-300">Localisation</label>
+                    <label class="text-xs font-bold text-gray-700 dark:text-gray-300">{{ __('Localisation') }}</label>
                     <input type="text" name="localisation"
                         value="{{ old('localisation', $creatif?->localisation) }}"
-                        placeholder="Ex : Cotonou, Bénin"
+                        placeholder="{{ __('Ex : Cotonou, Bénin') }}"
                         class="w-full rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-950 focus:border-indigo-500 focus:ring-indigo-500 transition-all text-sm">
                 </div>
 
                 <label
                     class="sm:col-span-2 flex items-center justify-between gap-4 p-4 bg-gray-50 dark:bg-gray-950 rounded-xl cursor-pointer">
                     <span class="flex-1">
-                        <span class="block text-sm font-semibold text-gray-900 dark:text-white">Disponible
-                            pour de nouvelles missions</span>
-                        <span class="block text-xs text-gray-400 mt-0.5">Affiché sur votre profil
-                            public</span>
+                        <span class="block text-sm font-semibold text-gray-900 dark:text-white">{{ __('Disponible pour de nouvelles missions') }}</span>
+                        <span class="block text-xs text-gray-400 mt-0.5">{{ __('Affiché sur votre profil public') }}</span>
                     </span>
                     <span class="relative inline-flex flex-shrink-0">
                         <input type="checkbox" name="available_for_work" value="1"
@@ -155,12 +148,10 @@
         {{-- Bio --}}
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-6 sm:px-8 py-8 border-b border-gray-100 dark:border-gray-800">
             <div class="lg:col-span-1">
-                <h3 class="text-sm font-bold text-gray-900 dark:text-white">Biographie</h3>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Convainquez vos futurs
-                    partenaires en quelques phrases.
+                <h3 class="text-sm font-bold text-gray-900 dark:text-white">{{ __('Biographie') }}</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ __('Convainquez vos futurs partenaires en quelques phrases.') }}
                     <a href="{{ route('dashboard', ['tab' => 'assistant']) }}"
-                        class="text-indigo-600 font-semibold hover:underline">Besoin d'aide ? Demandez à
-                        l'assistant IA.</a>
+                        class="text-indigo-600 font-semibold hover:underline">{{ __("Besoin d'aide ? Demandez à l'assistant IA.") }}</a>
                 </p>
             </div>
             <div class="lg:col-span-2">
@@ -173,11 +164,10 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-6 sm:px-8 py-8">
             <div class="lg:col-span-1">
                 <h3 class="text-sm font-bold text-gray-900 dark:text-white">Portfolio</h3>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Un lien externe vers vos
-                    réalisations (Behance, site perso...).</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ __('Un lien externe vers vos réalisations (Behance, site perso...).') }}</p>
             </div>
             <div class="lg:col-span-2 space-y-1">
-                <label class="text-xs font-bold text-gray-700 dark:text-gray-300">URL du portfolio</label>
+                <label class="text-xs font-bold text-gray-700 dark:text-gray-300">{{ __('URL du portfolio') }}</label>
                 <input type="url" name="portfolio_url"
                     value="{{ old('portfolio_url', $creatif?->portfolio_url) }}"
                     placeholder="https://..."
@@ -190,7 +180,7 @@
     <div class="flex items-center justify-end gap-3 mt-4">
         <button type="submit"
             class="px-8 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-indigo-200 dark:shadow-none">
-            Enregistrer les modifications
+            {{ __('Enregistrer les modifications') }}
         </button>
     </div>
 </form>

@@ -14,20 +14,19 @@
 <div class="space-y-8">
     <div class="flex items-center justify-between">
         <div>
-            <h2 class="text-lg font-black text-gray-900">Mes missions</h2>
-            <p class="text-xs text-gray-400 mt-0.5">Vos candidatures envoyées et les missions que
-                vous avez publiées.</p>
+            <h2 class="text-lg font-black text-gray-900">{{ __('Mes missions') }}</h2>
+            <p class="text-xs text-gray-400 mt-0.5">{{ __('Vos candidatures envoyées et les missions que vous avez publiées.') }}</p>
         </div>
         <a href="{{ route('missions.create') }}"
             class="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all whitespace-nowrap">
-            Publier une mission
+            {{ __('Publier une mission') }}
         </a>
     </div>
 
     {{-- Mes candidatures --}}
     <div>
         <h3 class="text-sm font-black text-gray-900 mb-4">
-            Mes candidatures ({{ $appliedMissions->count() }})
+            {{ __('Mes candidatures (:count)', ['count' => $appliedMissions->count()]) }}
         </h3>
         @if ($appliedMissions->count())
             <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
@@ -39,26 +38,25 @@
                             <img src="{{ $mission?->user?->creatif?->photo ?: 'https://ui-avatars.com/api/?name=' . urlencode($mission?->user?->username ?? 'M') . '&background=6366f1&color=fff' }}"
                                 class="w-9 h-9 rounded-full object-cover border-2 border-white shadow-sm">
                             <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full {{ match($application->status) { 'accepted' => 'bg-green-100 text-green-700', 'rejected' => 'bg-red-100 text-red-700', default => 'bg-white/70 text-amber-700' } }}">
-                                {{ ['pending' => 'En attente', 'accepted' => 'Acceptée', 'rejected' => 'Refusée'][$application->status] }}
+                                {{ ['pending' => __('En attente'), 'accepted' => __('Acceptée'), 'rejected' => __('Refusée')][$application->status] }}
                             </span>
                         </div>
                         <p class="font-bold text-gray-900 text-sm leading-snug mb-1">
-                            {{ $mission->title ?? 'Mission supprimée' }}
+                            {{ $mission->title ?? __('Mission supprimée') }}
                         </p>
                         <p class="text-xs text-gray-500">
                             {{ $mission?->user?->username ?? '-' }} ·
-                            envoyée {{ $application->created_at->diffForHumans() }}
+                            {{ __('envoyée :time', ['time' => $application->created_at->diffForHumans()]) }}
                         </p>
                     </a>
                 @endforeach
             </div>
         @else
             <div class="text-center py-12 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
-                <p class="text-sm text-gray-400">Vous n'avez postulé à aucune mission pour le
-                    moment.</p>
+                <p class="text-sm text-gray-400">{{ __("Vous n'avez postulé à aucune mission pour le moment.") }}</p>
                 <a href="{{ route('missions.index') }}"
                     class="inline-block mt-2 text-indigo-600 font-semibold text-xs hover:underline">
-                    Parcourir les missions →
+                    {{ __('Parcourir les missions') }} →
                 </a>
             </div>
         @endif
@@ -67,7 +65,7 @@
     {{-- Mes missions publiées --}}
     <div>
         <h3 class="text-sm font-black text-gray-900 mb-4">
-            Mes missions publiées ({{ $postedMissions->count() }})
+            {{ __('Mes missions publiées (:count)', ['count' => $postedMissions->count()]) }}
         </h3>
         @if ($postedMissions->count())
             <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
@@ -93,23 +91,22 @@
                                 @endif
                             </div>
                             <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-white/70 text-gray-600">
-                                {{ ['open' => 'Ouverte', 'in_progress' => 'En cours', 'completed' => 'Terminée', 'cancelled' => 'Annulée'][$mission->status] ?? $mission->status }}
+                                {{ ['open' => __('Ouverte'), 'in_progress' => __('En cours'), 'completed' => __('Terminée'), 'cancelled' => __('Annulée')][$mission->status] ?? $mission->status }}
                             </span>
                         </div>
                         <p class="font-bold text-gray-900 text-sm leading-snug mb-1">{{ $mission->title }}</p>
                         <p class="text-xs text-gray-500">
-                            {{ $mission->applications_count }} candidature{{ $mission->applications_count > 1 ? 's' : '' }}
+                            {{ trans_choice(':count candidature|:count candidatures', $mission->applications_count, ['count' => $mission->applications_count]) }}
                         </p>
                     </a>
                 @endforeach
             </div>
         @else
             <div class="text-center py-12 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
-                <p class="text-sm text-gray-400">Vous n'avez publié aucune mission pour le
-                    moment.</p>
+                <p class="text-sm text-gray-400">{{ __("Vous n'avez publié aucune mission pour le moment.") }}</p>
                 <a href="{{ route('missions.create') }}"
                     class="inline-block mt-2 text-indigo-600 font-semibold text-xs hover:underline">
-                    Publier une mission →
+                    {{ __('Publier une mission') }} →
                 </a>
             </div>
         @endif

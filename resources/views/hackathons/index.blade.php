@@ -14,13 +14,12 @@
 
                 <div class="text-left order-2 lg:order-1">
                     <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[0.95] mb-6">
-                        Programmes &<br>
+                        {{ __('Programmes &') }}<br>
                         <span class="text-orange-500">Hackathons</span>
                     </h1>
 
                     <p class="text-lg text-slate-500 max-w-xl leading-relaxed mb-8">
-                        Découvrez les meilleurs programmes d'accompagnement et compétitions tech en Afrique,
-                        centralisés sur Mefolio.
+                        {{ __("Découvrez les meilleurs programmes d'accompagnement et compétitions tech en Afrique, centralisés sur Mefolio.") }}
                     </p>
                 </div>
 
@@ -40,8 +39,8 @@
         @if ($featured->count())
             <div class="mb-20">
                 <div class="mb-10">
-                    <p class="text-xs font-bold uppercase tracking-[0.3em] text-orange-500 mb-2">À la une</p>
-                    <h2 class="text-3xl font-black text-gray-900">Programmes phares</h2>
+                    <p class="text-xs font-bold uppercase tracking-[0.3em] text-orange-500 mb-2">{{ __('À la une') }}</p>
+                    <h2 class="text-3xl font-black text-gray-900">{{ __('Programmes phares') }}</h2>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -66,10 +65,10 @@
                                 @if ($program->url)
                                     <a href="{{ $program->url }}" target="_blank" rel="noopener"
                                         class="inline-flex items-center gap-2 bg-white text-slate-900 text-sm font-bold px-5 py-2.5 rounded-full hover:bg-indigo-50 transition-all">
-                                        Participer →
+                                        {{ __('Participer') }} →
                                     </a>
                                 @else
-                                    <p class="text-xs text-indigo-300">Lien officiel bientôt disponible</p>
+                                    <p class="text-xs text-indigo-300">{{ __('Lien officiel bientôt disponible') }}</p>
                                 @endif
                             </div>
                         </div>
@@ -80,7 +79,7 @@
 
         <div class="mb-20">
             <div class="flex items-center justify-between mb-8">
-                <h2 class="text-2xl font-black text-gray-900">Tous les programmes</h2>
+                <h2 class="text-2xl font-black text-gray-900">{{ __('Tous les programmes') }}</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -104,12 +103,12 @@
                         @if ($program->url)
                             <a href="{{ $program->url }}" target="_blank" rel="noopener"
                                 class="inline-flex items-center gap-1.5 bg-gray-900 hover:bg-black text-white text-xs font-bold px-4 py-2 rounded-full transition-all">
-                                Participer →
+                                {{ __('Participer') }} →
                             </a>
                         @endif
                     </div>
                 @empty
-                    <p class="col-span-full text-center py-16 text-gray-400 text-sm">Aucun programme référencé pour le moment.</p>
+                    <p class="col-span-full text-center py-16 text-gray-400 text-sm">{{ __('Aucun programme référencé pour le moment.') }}</p>
                 @endforelse
             </div>
 
@@ -118,15 +117,14 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
             <div class="bg-gray-50 border border-gray-100 rounded-3xl p-8">
-                <h3 class="text-xl font-black text-gray-900 mb-2">Vous organisez un programme ?</h3>
-                <p class="text-gray-500 text-sm mb-6">Référencez votre hackathon, concours ou programme d'accélération
-                    sur Mefolio et touchez des milliers de talents africains.</p>
+                <h3 class="text-xl font-black text-gray-900 mb-2">{{ __('Vous organisez un programme ?') }}</h3>
+                <p class="text-gray-500 text-sm mb-6">{{ __("Référencez votre hackathon, concours ou programme d'accélération sur Mefolio et touchez des milliers de talents africains.") }}</p>
                 <a href="mailto:contact@mefolio.com"
                     class="inline-flex items-center gap-2 bg-gray-900 text-white text-sm font-bold px-6 py-2.5 rounded-xl hover:bg-indigo-600 transition-all">
-                    Nous contacter →
+                    {{ __('Nous contacter') }} →
                 </a>
             </div>
-            <x-newsletter-cta title="Soyez alerté" description="Recevez une notification dès qu'un programme correspond à votre profil." source="hackathons" />
+            <x-newsletter-cta :title="__('Soyez alerté')" :description="__('Recevez une notification dès qu\'un programme correspond à votre profil.')" source="hackathons" />
         </div>
 
     </div>
