@@ -42,6 +42,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/langue/{locale}', function (string $locale) {
+    if (in_array($locale, \App\Http\Middleware\SetLocale::AVAILABLE_LOCALES, true)) {
+        session(['locale' => $locale]);
+    }
+
+    return back();
+})->name('locale.switch');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');

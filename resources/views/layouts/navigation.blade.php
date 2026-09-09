@@ -28,7 +28,7 @@
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open" @click.outside="open = false"
                             class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 rounded-lg hover:bg-gray-50 transition-all">
-                            Explorer
+                            {{ __('Explorer') }}
                             <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
                                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -38,14 +38,14 @@
                             x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
                             class="absolute top-full left-0 mt-3 w-[440px] bg-white rounded-2xl shadow-xl border border-gray-100 p-4 z-50 grid grid-cols-2 gap-x-4">
                             <div>
-                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Découvrir</p>
-                                <x-nav-dropdown-item :href="route('projects.index')" title="Projets créatifs" description="Explorez les réalisations" />
-                                <x-nav-dropdown-item :href="route('creatifs.index')" title="Tous les créatifs" description="Découvrez les talents" />
+                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">{{ __('Découvrir') }}</p>
+                                <x-nav-dropdown-item :href="route('projects.index')" :title="__('Projets créatifs')" :description="__('Explorez les réalisations')" />
+                                <x-nav-dropdown-item :href="route('creatifs.index')" :title="__('Tous les créatifs')" :description="__('Découvrez les talents')" />
                             </div>
                             <div>
-                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Reconnaissance</p>
-                                <x-nav-dropdown-item :href="route('classement.index')" title="Classement" description="Les meilleurs Builder Score" />
-                                <x-nav-dropdown-item :href="route('talentoftheweek.index')" title="Talent of the Week" description="Le talent de la semaine" />
+                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">{{ __('Reconnaissance') }}</p>
+                                <x-nav-dropdown-item :href="route('classement.index')" :title="__('Classement')" :description="__('Les meilleurs Builder Score')" />
+                                <x-nav-dropdown-item :href="route('talentoftheweek.index')" title="Talent of the Week" :description="__('Le talent de la semaine')" />
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open" @click.outside="open = false"
                             class="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 rounded-lg hover:bg-gray-50 transition-all">
-                            Missions
+                            {{ __('Missions') }}
                             <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
                                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -64,16 +64,16 @@
                             x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
                             class="absolute top-full left-0 mt-3 w-[440px] bg-white rounded-2xl shadow-xl border border-gray-100 p-4 z-50 grid grid-cols-2 gap-x-4">
                             <div>
-                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Freelance</p>
-                                <x-nav-dropdown-item :href="route('missions.index')" title="Trouver des missions" description="Freelance rémunéré" />
+                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">{{ __('Freelance') }}</p>
+                                <x-nav-dropdown-item :href="route('missions.index')" :title="__('Trouver des missions')" :description="__('Freelance rémunéré')" />
                             </div>
                             <div>
-                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Gérer</p>
+                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">{{ __('Gérer') }}</p>
                                 @auth
-                                    <x-nav-dropdown-item :href="route('missions.create')" title="Publier une mission" description="Trouvez un créatif" />
-                                    <x-nav-dropdown-item :href="route('missions.mine')" title="Mes missions" description="Publications et candidatures" />
+                                    <x-nav-dropdown-item :href="route('missions.create')" :title="__('Publier une mission')" :description="__('Trouvez un créatif')" />
+                                    <x-nav-dropdown-item :href="route('missions.mine')" :title="__('Mes missions')" :description="__('Publications et candidatures')" />
                                 @endauth
-                                <x-nav-dropdown-item :href="route('services.index')" title="Services" description="Commandez des services créatifs" badge="Bientôt" muted />
+                                <x-nav-dropdown-item :href="route('services.index')" :title="__('Services')" :description="__('Commandez des services créatifs')" :badge="__('Bientôt')" muted />
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open" @click.outside="open = false"
                             class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 rounded-lg hover:bg-gray-50 transition-all">
-                            Communauté
+                            {{ __('Communauté') }}
                             <svg class="w-3.5 h-3.5 transition-transform" :class="{ 'rotate-180': open }" fill="none"
                                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -98,16 +98,16 @@
                             x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
                             class="absolute top-full left-0 mt-3 w-[440px] bg-white rounded-2xl shadow-xl border border-gray-100 p-4 z-50 grid grid-cols-2 gap-x-4">
                             <div>
-                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Contenu</p>
-                                <x-nav-dropdown-item :href="route('blog')" title="Blog" description="Actualités et inspiration" />
-                                <x-nav-dropdown-item :href="route('hackathons.index')" title="Programmes & Hackathons" description="ASSIN, Sèmè City et plus" />
+                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">{{ __('Contenu') }}</p>
+                                <x-nav-dropdown-item :href="route('blog')" title="Blog" :description="__('Actualités et inspiration')" />
+                                <x-nav-dropdown-item :href="route('hackathons.index')" :title="__('Programmes & Hackathons')" :description="__('ASSIN, Sèmè City et plus')" />
                             </div>
                             <div>
-                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">À propos</p>
+                                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">{{ __('À propos') }}</p>
                                 <a href="mailto:contact@mefolio.com"
                                     class="flex items-start px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group">
                                     <span class="min-w-0">
-                                        <span class="text-sm font-semibold text-gray-900">Nous contacter</span>
+                                        <span class="text-sm font-semibold text-gray-900">{{ __('Nous contacter') }}</span>
                                         <span class="block text-xs text-gray-400 mt-0.5">contact@mefolio.com</span>
                                     </span>
                                 </a>
@@ -120,6 +120,31 @@
 
             {{-- DROITE DESKTOP --}}
             <div class="hidden lg:flex items-center gap-2">
+                {{-- Langue --}}
+                <div class="relative" x-data="{ openLang: false }">
+                    <button @click="openLang = !openLang" @click.outside="openLang = false"
+                        class="p-2 text-gray-500 hover:text-indigo-600 transition-colors flex items-center gap-1 text-xs font-bold uppercase">
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 21a9 9 0 100-18 9 9 0 000 18zm0 0c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m-9 9h18" />
+                        </svg>
+                        {{ app()->getLocale() }}
+                    </button>
+                    <div x-show="openLang" @click.outside="openLang = false"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                        class="absolute right-0 mt-3 w-36 bg-white rounded-2xl shadow-xl p-1.5 border border-gray-100 z-50">
+                        <a href="{{ route('locale.switch', 'fr') }}"
+                            class="flex items-center justify-between px-3 py-2 rounded-xl text-sm font-semibold hover:bg-gray-50 transition-colors {{ app()->getLocale() === 'fr' ? 'text-indigo-600' : 'text-gray-700' }}">
+                            Français
+                        </a>
+                        <a href="{{ route('locale.switch', 'en') }}"
+                            class="flex items-center justify-between px-3 py-2 rounded-xl text-sm font-semibold hover:bg-gray-50 transition-colors {{ app()->getLocale() === 'en' ? 'text-indigo-600' : 'text-gray-700' }}">
+                            English
+                        </a>
+                    </div>
+                </div>
+
                 @auth
                     @php
                         $creatif = Auth::user()->creatif;
@@ -148,7 +173,7 @@
                             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                             class="absolute right-0 mt-3 w-72 bg-white rounded-2xl shadow-xl p-3 border border-gray-100 z-50">
                             <form method="GET" action="{{ route('projects.index') }}">
-                                <input x-ref="navSearchInput" type="text" name="q" placeholder="Rechercher un projet..."
+                                <input x-ref="navSearchInput" type="text" name="q" placeholder="{{ __('Rechercher un projet...') }}"
                                     class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             </form>
                         </div>
@@ -196,12 +221,12 @@
                             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                             class="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden">
                             <div class="flex items-center justify-between px-4 py-2.5 border-b border-gray-100">
-                                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider">Notifications</h3>
+                                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider">{{ __('Notifications') }}</h3>
                                 @if ($navUnreadCount > 0)
                                     <form method="POST" action="{{ route('notifications.read-all') }}">
                                         @csrf
                                         <button type="submit" class="text-[11px] font-semibold text-indigo-600 hover:underline">
-                                            Tout marquer comme lu
+                                            {{ __('Tout marquer comme lu') }}
                                         </button>
                                     </form>
                                 @endif
@@ -227,7 +252,7 @@
                                     </a>
                                 @empty
                                     <div class="px-4 py-8 text-center text-sm text-gray-400">
-                                        Aucune notification pour le moment.
+                                        {{ __('Aucune notification pour le moment.') }}
                                     </div>
                                 @endforelse
                             </div>
@@ -270,46 +295,53 @@
                                 </span>
                                 <div class="min-w-0">
                                     <p class="text-sm font-bold truncate text-gray-800">
-                                        Bonjour, {{ $creatif?->prenom ?? Auth::user()->username }}
+                                        {{ __('Bonjour, :name', ['name' => $creatif?->prenom ?? Auth::user()->username]) }}
                                     </p>
                                     <p class="text-xs text-gray-400 truncate">{{ Auth::user()->email }}</p>
                                 </div>
                             </div>
-                            <x-dropdown-link :href="route('dashboard')">Tableau de bord</x-dropdown-link>
-                            <x-dropdown-link :href="route('profile.edit')">Mon Profil</x-dropdown-link>
+                            <x-dropdown-link :href="route('dashboard')">{{ __('Tableau de bord') }}</x-dropdown-link>
+                            <x-dropdown-link :href="route('profile.edit')">{{ __('Mon Profil') }}</x-dropdown-link>
                             @if ($creatif?->slug)
-                                <x-dropdown-link :href="route('creatifs.show', $creatif->slug)">Voir mon profil public</x-dropdown-link>
+                                <x-dropdown-link :href="route('creatifs.show', $creatif->slug)">{{ __('Voir mon profil public') }}</x-dropdown-link>
                             @endif
                             @if (Auth::user()->isAdmin())
-                                <x-dropdown-link :href="route('admin.dashboard')">Administration</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.dashboard')">{{ __('Administration') }}</x-dropdown-link>
                             @endif
                             @if (!$profilComplet)
                                 <x-dropdown-link :href="route('creatifs.edit')" class="text-amber-600 font-semibold">
-                                    Compléter mon profil
+                                    {{ __('Compléter mon profil') }}
                                 </x-dropdown-link>
                             @endif
                             <hr class="border-gray-100">
-                            <x-dropdown-link href="mailto:contact@mefolio.com">Aide</x-dropdown-link>
+                            <x-dropdown-link href="mailto:contact@mefolio.com">{{ __('Aide') }}</x-dropdown-link>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault(); this.closest('form').submit();" class="text-red-500">
-                                    Déconnexion
+                                    {{ __('Déconnexion') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
                     </x-dropdown>
                 @else
                     <a href="{{ route('login') }}"
-                        class="text-sm mr-2 font-semibold text-gray-600 hover:text-indigo-600 transition">Connexion</a>
+                        class="text-sm mr-2 font-semibold text-gray-600 hover:text-indigo-600 transition">{{ __('Connexion') }}</a>
                     <a href="{{ route('register') }}"
                         class="bg-gray-900 hover:bg-black text-white px-5 py-2 rounded-full text-sm font-bold transition">
-                        S'inscrire
+                        {{ __("S'inscrire") }}
                     </a>
                 @endauth
             </div>
 
-            <div class="flex items-center lg:hidden">
+            <div class="flex items-center gap-1 lg:hidden">
+                {{-- Langue (mobile) --}}
+                <a href="{{ route('locale.switch', app()->getLocale() === 'fr' ? 'en' : 'fr') }}"
+                    class="p-2 text-gray-500 hover:text-indigo-600 transition-colors text-[11px] font-bold uppercase"
+                    title="{{ app()->getLocale() === 'fr' ? 'English' : 'Français' }}">
+                    {{ app()->getLocale() }}
+                </a>
+
                 @auth
                     @php
                         $creatif = Auth::user()->creatif ?? null;
@@ -376,17 +408,17 @@
                                 </a>
                                 <a href="{{ $profilComplet ? route('projets.create') : route('creatifs.edit') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Créer un projet</span>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('Créer un projet') }}</span>
                                 </a>
                                 @if ($creatif?->slug)
                                     <a href="{{ route('creatifs.show', $creatif->slug) }}"
                                         class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                        <span class="text-sm font-semibold text-gray-700">Voir mon profil public</span>
+                                        <span class="text-sm font-semibold text-gray-700">{{ __('Voir mon profil public') }}</span>
                                     </a>
                                 @endif
                                 <a href="{{ route('missions.index') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Missions</span>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('Missions') }}</span>
                                 </a>
                                 <a href="{{ route('talentoftheweek.index') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
@@ -395,8 +427,7 @@
                                 </a>
                                 <a href="{{ route('hackathons.index') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Programmes &
-                                        Hackathons</span>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('Programmes & Hackathons') }}</span>
                                 </a>
                                 <a href="{{ route('blog') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
@@ -408,12 +439,12 @@
                                 </a>
                                 <a href="{{ route('services.index') }}"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Services</span>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('Services') }}</span>
                                 </a>
                                 @if (Auth::user()->isAdmin())
                                     <a href="{{ route('admin.dashboard') }}"
                                         class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                        <span class="text-sm font-semibold text-gray-700">Administration</span>
+                                        <span class="text-sm font-semibold text-gray-700">{{ __('Administration') }}</span>
                                     </a>
                                 @endif
 
@@ -422,8 +453,7 @@
                                 @if (!$profilComplet)
                                     <a href="{{ route('creatifs.edit') }}"
                                         class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 transition-colors mb-1">
-                                        <span class="text-sm font-semibold text-amber-700">Compléter mon
-                                            profil</span>
+                                        <span class="text-sm font-semibold text-amber-700">{{ __('Compléter mon profil') }}</span>
                                     </a>
                                 @endif
 
@@ -431,7 +461,7 @@
                                     @csrf
                                     <button onclick="event.preventDefault(); this.closest('form').submit();"
                                         class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 transition-colors text-red-500">
-                                        <span class="text-sm font-semibold">Déconnexion</span>
+                                        <span class="text-sm font-semibold">{{ __('Déconnexion') }}</span>
                                     </button>
                                 </form>
                             </div>
@@ -439,14 +469,14 @@
                     </div>
                 @else
                     <div class="relative flex items-center gap-1" x-data="{ openMobileMenu: false }">
-                        <a href="{{ route('login') }}" class="p-2 text-gray-600 hover:text-indigo-600 transition-colors" aria-label="Connexion">
+                        <a href="{{ route('login') }}" class="p-2 text-gray-600 hover:text-indigo-600 transition-colors" aria-label="{{ __('Connexion') }}">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                             </svg>
                         </a>
                         <button @click="openMobileMenu = !openMobileMenu" @click.outside="openMobileMenu = false"
-                            class="p-2 text-gray-600 hover:text-indigo-600 transition-colors" aria-label="Menu">
+                            class="p-2 text-gray-600 hover:text-indigo-600 transition-colors" aria-label="{{ __('Menu') }}">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
                             </svg>
@@ -458,47 +488,47 @@
                             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                             class="absolute right-0 top-full mt-3 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden">
                             <div class="p-2 max-h-[70vh] overflow-y-auto">
-                                <p class="px-3 pt-2 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Découvrir</p>
+                                <p class="px-3 pt-2 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{ __('Découvrir') }}</p>
                                 <a href="{{ route('projects.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Projets créatifs</span>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('Projets créatifs') }}</span>
                                 </a>
                                 <a href="{{ route('creatifs.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Tous les créatifs</span>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('Tous les créatifs') }}</span>
                                 </a>
                                 <a href="{{ route('classement.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Classement</span>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('Classement') }}</span>
                                 </a>
                                 <a href="{{ route('talentoftheweek.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
                                     <span class="text-sm font-semibold text-gray-700">Talent of the Week</span>
                                 </a>
 
-                                <p class="px-3 pt-3 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Missions & services</p>
+                                <p class="px-3 pt-3 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{ __('Missions & services') }}</p>
                                 <a href="{{ route('missions.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Trouver des missions</span>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('Trouver des missions') }}</span>
                                 </a>
                                 <a href="{{ route('challenges.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
                                     <span class="text-sm font-semibold text-gray-700">Challenges</span>
                                 </a>
                                 <a href="{{ route('services.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Services</span>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('Services') }}</span>
                                 </a>
 
-                                <p class="px-3 pt-3 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Communauté</p>
+                                <p class="px-3 pt-3 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{ __('Communauté') }}</p>
                                 <a href="{{ route('blog') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
                                     <span class="text-sm font-semibold text-gray-700">Blog</span>
                                 </a>
                                 <a href="{{ route('hackathons.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Programmes & Hackathons</span>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('Programmes & Hackathons') }}</span>
                                 </a>
                                 <a href="mailto:contact@mefolio.com" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm font-semibold text-gray-700">Nous contacter</span>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('Nous contacter') }}</span>
                                 </a>
 
                                 <div class="border-t border-gray-100 my-2"></div>
 
                                 <a href="{{ route('register') }}"
                                     class="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-gray-900 hover:bg-black transition-colors">
-                                    <span class="text-sm font-bold text-white">S'inscrire gratuitement</span>
+                                    <span class="text-sm font-bold text-white">{{ __("S'inscrire gratuitement") }}</span>
                                 </a>
                             </div>
                         </div>
@@ -524,7 +554,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
-                <span class="text-[9px] font-bold">Accueil</span>
+                <span class="text-[9px] font-bold">{{ __('Accueil') }}</span>
             </span>
         </a>
 
@@ -537,7 +567,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
-                <span class="text-[9px] font-bold">Projets</span>
+                <span class="text-[9px] font-bold">{{ __('Projets') }}</span>
             </span>
         </a>
 
@@ -550,7 +580,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span class="text-[9px] font-bold">Talents</span>
+                <span class="text-[9px] font-bold">{{ __('Talents') }}</span>
             </span>
         </a>
 
@@ -563,7 +593,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span class="text-[9px] font-bold">Missions</span>
+                <span class="text-[9px] font-bold">{{ __('Missions') }}</span>
             </span>
         </a>
 

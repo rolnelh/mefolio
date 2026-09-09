@@ -57,30 +57,29 @@
         <div class="relative z-10 mx-auto max-w-3xl px-6 lg:px-8 text-center">
 
             <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-gray-900 leading-[1.1]">
-                Un espace pour
+                {{ __('Un espace pour') }}
                 <span class="relative inline-block whitespace-nowrap">
-                    révéler
+                    {{ __('révéler') }}
                     <svg class="absolute -bottom-1 left-0 w-full" height="10" viewBox="0 0 120 10" preserveAspectRatio="none" fill="none">
                         <path d="M2 7C20 2 40 2 60 5C80 8 100 8 118 3" stroke="#FACC15" stroke-width="5" stroke-linecap="round" />
                     </svg>
                 </span>
-                votre talent créatif
+                {{ __('votre talent créatif') }}
             </h1>
 
             <p class="mt-6 text-lg text-gray-500 max-w-xl mx-auto leading-relaxed">
-                Mefolio aide les créatifs africains à construire leur portfolio, trouver des missions et se connecter
-                à une communauté qui valorise leur travail.
+                {{ __('Mefolio aide les créatifs africains à construire leur portfolio, trouver des missions et se connecter à une communauté qui valorise leur travail.') }}
             </p>
 
             <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                 @guest
                     <a href="{{ route('register') }}"
                         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-gray-900/10">
-                        Créer mon profil
+                        {{ __('Créer mon profil') }}
                     </a>
                     <a href="{{ route('projects.index') }}"
                         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 px-8 py-3.5 rounded-full text-sm font-bold hover:border-gray-400 transition-all">
-                        Explorer les projets
+                        {{ __('Explorer les projets') }}
                     </a>
                 @endguest
 
@@ -100,25 +99,25 @@
                     @if ($profilComplet)
                         <a href="{{ route('projets.create') }}"
                             class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-gray-900/10">
-                            Partager un projet
+                            {{ __('Partager un projet') }}
                         </a>
                     @else
                         <a href="{{ route('creatifs.edit') }}"
                             class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-gray-900/10">
-                            Compléter mon profil
+                            {{ __('Compléter mon profil') }}
                         </a>
                     @endif
                     <a href="{{ route('projects.index') }}"
                         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 px-8 py-3.5 rounded-full text-sm font-bold hover:border-gray-400 transition-all">
-                        Explorer les projets
+                        {{ __('Explorer les projets') }}
                     </a>
                 @endauth
             </div>
 
             @if ($creatifCount > 0)
                 <p class="mt-8 text-sm text-gray-400">
-                    Déjà rejoint par <span class="text-gray-900 font-semibold">{{ number_format($creatifCount) }}</span>
-                    créatif{{ $creatifCount > 1 ? 's' : '' }} africain{{ $creatifCount > 1 ? 's' : '' }}
+                    {{ __('Déjà rejoint par') }} <span class="text-gray-900 font-semibold">{{ number_format($creatifCount) }}</span>
+                    {{ trans_choice('créatif africain|créatifs africains', $creatifCount) }}
                 </p>
             @endif
 
