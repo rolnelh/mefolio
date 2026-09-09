@@ -75,6 +75,14 @@ class ProjectController extends Controller
         return back();
     }
 
+    /**
+     * Affiche le tableau de bord du créatif connecté.
+     *
+     * La vue (dashboard.blade.php) est un orchestrateur qui délègue
+     * chaque onglet à un partial sous resources/views/dashboard/ — voir
+     * le commentaire en tête de ce fichier pour la liste des variables
+     * transmises à chaque onglet.
+     */
     public function dashboard(BuilderScoreService $scorer)
     {
         $user = Auth::user();

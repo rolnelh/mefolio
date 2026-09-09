@@ -6,6 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+/**
+ * Profil public d'un créatif (un-à-un avec User, via user_id).
+ *
+ * Porte tout ce qui est affiché sur la page publique et dans le tableau
+ * de bord : identité, spécialité, bio, portfolio, Builder Score...
+ *
+ * Note : la règle de "profil complet" (nom+prenom+specialite+localisation
+ * +bio+portfolio_url+photo tous renseignés) est actuellement dupliquée
+ * dans plusieurs vues (dashboard, accueil, navigation) plutôt que
+ * centralisée ici — voir CLAUDE.md § "Règle de profil complet" pour le
+ * détail et une piste de nettoyage (accesseur $creatif->est_complet).
+ */
 class Creatif extends Model
 {
     use HasFactory;

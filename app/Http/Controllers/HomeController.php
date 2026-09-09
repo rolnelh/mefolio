@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 
+   /**
+    * Affiche la page d'accueil publique.
+    *
+    * Chaque section de la vue (hero, avantages, projets récents...) vit
+    * dans son propre partial sous resources/views/home/ — voir le
+    * commentaire en tête de home.blade.php pour le détail.
+    */
    public function index()
 {
 
