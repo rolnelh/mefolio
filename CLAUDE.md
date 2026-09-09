@@ -190,6 +190,40 @@ reste dans sa langue d'origine — pratique standard des marketplaces
   fixes (Talent of the Week, Hall of Fame, Dashboard, Blog, Challenges)
   restent volontairement non traduits.
 
+### Analytics de fréquentation (visites/jour, pages, référents)
+
+Suivi maison, volontairement minimaliste — pas d'outil externe (Umami,
+Plausible, Google Analytics...), pas de géolocalisation :
+
+- `App\Http\Middleware\TrackPageView` (dans le groupe `web`, après
+  `SetLocale`) enregistre une ligne dans `page_views` (`path`,
+  `referrer_host` nullable) à chaque requête GET qui ressemble à une
+  vraie navigation de page. Sont exclus : les requêtes AJAX/JSON, tout ce
+  qui commence par `admin/`, `build/`, `storage/`, `sanctum/` (pour ne
+  pas polluer les stats avec l'activité de l'équipe ou les assets), et
+  les User-Agent portant une signature de robot/monitoring connue (liste
+  `TrackPageView::BOT_SIGNATURES` — une détection grossière, pas un
+  anti-bot fiable, juste assez pour ne pas gonfler artificiellement les
+  chiffres avec les crawlers et moniteurs d'uptime les plus courants).
+- `referrer_host` ne garde que le nom d'hôte du `Referer`, et seulement
+  s'il est **externe** au site (une navigation interne entre deux pages
+  Mefolio met `referrer_host` à `null`, au même titre qu'un accès direct
+  — les deux se distinguent uniquement en regardant si un référent existe
+  du tout dans les données brutes, mais le dashboard actuel les affiche
+  ensemble sous "Accès direct").
+- `Admin\DashboardController::visitsSummary()` calcule les métriques
+  affichées (aujourd'hui/7j/30j, histogramme 14 jours, pages les plus
+  vues, référents externes sur 30 jours) et les passe à
+  `admin/dashboard.blade.php`, section "Visites".
+- Pas de suivi cross-page (aucun cookie visiteur) : chaque ligne est une
+  vue de page indépendante, il n'y a donc pas de notion de "session" ou
+  de visiteur unique — seulement des volumes de vues.
+
+Pour étendre (ex. visiteurs uniques, durée de session, pays) : ce sont
+des compromis volontairement écartés au profit de la simplicité (voir la
+question qui a mené à cette implémentation) — réévaluer si le besoin
+grandit, plutôt que de complexifier `TrackPageView` par petites touches.
+
 ### Règle de "profil complet"
 
 Un profil créatif est considéré "complet" (affiché publiquement, invite à
