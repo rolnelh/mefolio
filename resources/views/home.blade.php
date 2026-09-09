@@ -74,7 +74,7 @@
 
             <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                 @guest
-                    <a href="{{ route('onboarding') }}"
+                    <a href="{{ route('register') }}"
                         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-gray-900/10">
                         Créer mon profil
                     </a>

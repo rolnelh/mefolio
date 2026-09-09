@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('bienvenue', function () {
-        return view('onboarding');
+        // Une fois vu, on ne l'impose plus : cookie longue durée posé dès
+        // l'affichage pour que /register redirige ici seulement à la toute
+        // première visite (voir RegisteredUserController::create()).
+        return response(view('onboarding'))->cookie('mefolio_onboarded', '1', 60 * 24 * 365);
     })->name('onboarding');
 
     Route::get('register', [RegisteredUserController::class, 'create'])
