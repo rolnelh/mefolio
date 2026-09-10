@@ -66,24 +66,46 @@ class BuilderScoreService
         return max(1, (int)(($rank / $total) * 100));
     }
 
+    /**
+     * Grille de points par action. Partagée entre addPoints() (une action a
+     * lieu) et removePoints() (une action est annulée, ex. suppression d'un
+     * commentaire qui avait rapporté des points — voir CommentController).
+     */
+    const POINTS = [
+        'new_project'      => 20,
+        'update_project'   => 5,
+        'demo_added'       => 10,
+        'github_added'     => 8,
+        'project_like'     => 1,
+        'project_comment'  => 3,
+        'project_trending' => 10,
+        'mission_done'     => 50,
+        'streak_7_days'    => 10,
+        'streak_30_days'   => 50,
+        'profile_complete' => 30,
+    ];
+
     public function addPoints(Creatif $creatif, string $action): void
     {
-        $points = [
-            'new_project'      => 20,
-            'update_project'   => 5,
-            'demo_added'       => 10,
-            'github_added'     => 8,
-            'project_like'     => 1,
-            'project_comment'  => 3,
-            'project_trending' => 10,
-            'mission_done'     => 50,
-            'streak_7_days'    => 10,
-            'streak_30_days'   => 50,
-            'profile_complete' => 30,
-        ][$action] ?? 0;
+        $points = self::POINTS[$action] ?? 0;
 
         if ($points > 0) {
             $creatif->increment('builder_score', $points);
+            $this->refreshLevel($creatif->fresh());
+        }
+    }
+
+    /**
+     * Annule les points accordés par addPoints() pour la même action
+     * (ex. un commentaire supprimé pendant son délai de modification, voir
+     * Comment::estModifiable()). Ne descend jamais sous 0.
+     */
+    public function removePoints(Creatif $creatif, string $action): void
+    {
+        $points = self::POINTS[$action] ?? 0;
+
+        if ($points > 0) {
+            $creatif->update(['builder_score' => max(0, ($creatif->builder_score ?? 0) - $points)]);
             $this->refreshLevel($creatif->fresh());
         }
     }

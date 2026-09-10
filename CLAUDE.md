@@ -261,6 +261,53 @@ comme des pages différentes — un rechargement complet à chaque clic y
   l'instant — à étendre au même mécanisme si besoin, mais pas fait pour
   garder ce changement contenu et à faible risque.
 
+### Commentaires de projet : AJAX + fenêtre de modification/suppression
+
+Comme pour les onglets du dashboard, publier/modifier/supprimer un
+commentaire sur une page projet (`resources/views/comment.blade.php`,
+`comment/list.blade.php`, `CommentController`) ne recharge pas la page.
+Le mécanisme diffère volontairement de celui du dashboard : au lieu de
+tout garder en mémoire côté client (Alpine), chaque action AJAX renvoie
+le **fragment HTML déjà rendu** de la liste (`view('comment.list', ...)`,
+voir `CommentController::listResponse()`), et le front remplace
+`#comments-list` avec — une seule source de vérité pour le HTML des
+commentaires (le Blade), que ce soit au premier chargement ou après
+chaque action. `window.Alpine.initTree(...)` est appelé après chaque
+remplacement pour que Alpine initialise les `x-data` du nouveau contenu
+injecté (sinon ses boutons "Répondre"/"Modifier" resteraient inertes).
+
+- `mefolioComments(commentsUrl)`, définie dans un `<script>` en bas de
+  `comment.blade.php` (même style que `mefolioAssistant()` dans
+  `dashboard/tabs/assistant.blade.php`), reçoit l'URL de
+  `route('comments.store', $project)` déjà résolue côté serveur (via
+  `@js(...)`) plutôt que de la reconstruire à partir de l'id du projet :
+  `Project` utilise son `slug` comme clé de route
+  (`getRouteKeyName()`), pas son id.
+  **Piège** : `@js(...)` est une vraie directive Blade, y compris à
+  l'intérieur d'un commentaire JS (`//`) ou HTML — l'écrire en texte
+  libre (ex. dans une explication) doit être échappé en `@@js(...)`,
+  sinon Blade essaie de la compiler et casse la page (vécu pendant le
+  développement de cette fonctionnalité).
+- `store()` reste accessible sans JavaScript (formulaire HTML classique,
+  `POST` + redirection avec message flash) : c'est le mode de
+  soumission déjà existant avant l'AJAX, gardé en repli. `update()` et
+  `destroy()` sont eux exclusivement AJAX — ce sont des actions
+  nouvelles, sans équivalent avant ce changement, donc sans repli à
+  préserver.
+- Délai de modification : `Comment::estModifiable()` — un commentaire
+  (ou une réponse) ne peut être modifié ou supprimé par son auteur que
+  pendant `Comment::DELAI_MODIFICATION_MINUTES` (5 minutes) après sa
+  création ; ce délai ne se prolonge pas quand on le modifie. Passé ce
+  délai, les boutons "Modifier"/"Supprimer" n'apparaissent plus (calcul
+  côté serveur, dans `comment/list.blade.php`) et une tentative directe
+  sur les routes échoue avec un 403.
+- Supprimer un commentaire racine qui avait rapporté des points de score
+  (voir `BuilderScoreService::addPoints('project_comment', ...)` dans
+  `store()`) retire ces mêmes points via `removePoints()`, symétrique et
+  partageant la même grille `BuilderScoreService::POINTS` — sans jamais
+  descendre sous 0. Les réponses (répondre à un commentaire) ne
+  rapportent pas de points, donc rien à retirer pour elles.
+
 ### Règle de "profil complet"
 
 Un profil créatif est considéré "complet" (affiché publiquement, invite à

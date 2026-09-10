@@ -1,14 +1,29 @@
-<div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
+{{--
+    Section "Commentaires" d'une page projet (resources/views/projects/show.blade.php).
+
+    Orchestrateur : affiche l'en-tête, le formulaire de nouveau commentaire,
+    puis inclut resources/views/comment/list.blade.php pour la liste
+    elle-même. L'ajout, la modification et la suppression d'un commentaire
+    se font en AJAX (voir mefolioComments() plus bas) : #comments-list est
+    remplacé par le fragment HTML renvoyé par le serveur, sans rechargement
+    de page. Le formulaire principal garde malgré tout une action/méthode
+    HTML classiques en repli si JavaScript est indisponible (voir
+    CommentController::store()).
+
+    Variable attendue : $project (\App\Models\Project).
+--}}
+<div x-data="mefolioComments(@js(route('comments.store', $project)))" class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
 
     {{-- Header --}}
     <div class="flex items-center gap-3 mb-8">
         <h2 class="text-xl font-black text-gray-900">Commentaires</h2>
-        <span class="bg-indigo-50 text-indigo-600 text-xs font-bold px-2.5 py-1 rounded-lg border border-indigo-100">
-            {{ $project->comments->whereNull('parent_id')->count() }}
+        <span id="comments-count"
+            class="bg-indigo-50 text-indigo-600 text-xs font-bold px-2.5 py-1 rounded-lg border border-indigo-100">
+            {{ $project->comments->count() }}
         </span>
     </div>
 
-    {{-- Messages flash --}}
+    {{-- Messages flash (repli sans JS) --}}
     @if (session('success'))
         <div
             class="mb-6 flex items-center gap-3 p-4 bg-green-50 border border-green-100 text-green-700 rounded-2xl text-sm font-medium">
@@ -22,10 +37,17 @@
         </div>
     @endif
 
+    {{-- Erreur d'une action AJAX (ajout, modification, suppression) --}}
+    <div x-show="errorMessage" x-cloak
+        class="mb-6 flex items-center gap-3 p-4 bg-red-50 border border-red-100 text-red-700 rounded-2xl text-sm font-medium">
+        <span x-text="errorMessage"></span>
+    </div>
+
     {{-- Formulaire en haut --}}
     <div class="mb-8 pb-8 border-b border-gray-100">
         @auth
-            <form action="{{ route('comments.store', $project) }}" method="POST">
+            <form action="{{ route('comments.store', $project) }}" method="POST"
+                @submit.prevent="submitComment($event)">
                 @csrf
                 <div class="flex gap-4 items-start">
                     @php $userPhoto = Auth::user()->creatif?->photo; @endphp
@@ -39,12 +61,12 @@
                         </div>
                     @endif
                     <div class="flex-1">
-                        <textarea name="body" rows="3"
+                        <textarea name="body" rows="3" maxlength="1000"
                             class="w-full bg-gray-50 border border-gray-200 rounded-2xl text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent py-3 px-4 resize-none transition-all placeholder:text-gray-400"
                             placeholder="Partagez vos impressions sur ce projet..." required></textarea>
                         <div class="flex justify-end mt-2">
-                            <button type="submit"
-                                class="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl transition-all shadow-md shadow-indigo-200 hover:scale-105">
+                            <button type="submit" :disabled="posting"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-bold text-sm rounded-xl transition-all shadow-md shadow-indigo-200 hover:scale-105">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -78,138 +100,101 @@
     </div>
 
     {{-- Liste commentaires --}}
-    <div class="space-y-8">
-        @forelse($project->comments->whereNull('parent_id') as $comment)
-            <div x-data="{ showReply: false }" class="group">
-                <div class="flex items-start gap-4">
-
-                    {{-- Avatar --}}
-                    @php
-                        $commentPhoto = $comment->user->creatif?->photo;
-                        $commentName = $comment->user->creatif?->prenom ?? ($comment->user->username ?? 'Utilisateur');
-                        $commentSlug = $comment->user->creatif?->slug;
-                    @endphp
-
-                    @if ($commentSlug)
-                        <a href="{{ route('creatifs.show', $commentSlug) }}" class="flex-shrink-0">
-                        @else
-                            <div class="flex-shrink-0">
-                    @endif
-                    @if ($commentPhoto)
-                        <img src="{{ $commentPhoto }}" alt="{{ $commentName }}"
-                            class="w-11 h-11 rounded-2xl object-cover ring-2 ring-gray-100 shadow-sm">
-                    @else
-                        <div
-                            class="w-11 h-11 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-black text-sm">
-                            {{ strtoupper(substr($commentName, 0, 1)) }}
-                        </div>
-                    @endif
-                    @if ($commentSlug)
-                        </a>
-                    @else
-                </div>
-        @endif
-
-        <div class="flex-1 min-w-0">
-            <div class="flex items-center justify-between gap-2 mb-1">
-                <div class="flex items-center gap-2">
-                    @if ($commentSlug)
-                        <a href="{{ route('creatifs.show', $commentSlug) }}"
-                            class="text-sm font-bold text-gray-900 hover:text-indigo-600 transition-colors">
-                            {{ $commentName }} {{ $comment->user->creatif?->nom ?? '' }}
-                        </a>
-                    @else
-                        <span class="text-sm font-bold text-gray-900">{{ $commentName }}</span>
-                    @endif
-                    @if ($comment->user_id === $project->user_id)
-                        <span
-                            class="text-[9px] bg-indigo-600 text-white font-black px-2 py-0.5 rounded-full uppercase tracking-wide">Auteur</span>
-                    @endif
-                </div>
-                <span
-                    class="text-[11px] text-gray-400 whitespace-nowrap">{{ $comment->created_at->diffForHumans() }}</span>
-            </div>
-
-            <p class="text-sm text-gray-600 leading-relaxed">{{ $comment->body }}</p>
-
-            {{-- Bouton répondre (propriétaire du projet uniquement) --}}
-            @auth
-                @if (auth()->id() === $project->user_id && $comment->replies->isEmpty() && $comment->user_id !== auth()->id())
-                    <button @click="showReply = !showReply"
-                        class="inline-flex items-center gap-1.5 mt-3 text-xs font-semibold text-gray-400 hover:text-indigo-600 transition-colors">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
-                        </svg>
-                        <span x-text="showReply ? 'Annuler' : 'Répondre'"></span>
-                    </button>
-
-                    <div x-show="showReply" x-transition:enter="transition ease-out duration-200"
-                        x-transition:enter-start="opacity-0 -translate-y-1"
-                        x-transition:enter-end="opacity-100 translate-y-0" class="mt-4">
-                        <form action="{{ route('comments.store', $project) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="parent_id" value="{{ $comment->id }}">
-                            <div class="flex gap-3">
-                                <textarea name="body" rows="2"
-                                    class="flex-1 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent py-2.5 px-3 resize-none"
-                                    placeholder="Votre réponse..." required></textarea>
-                                <button type="submit"
-                                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl transition-all self-end">
-                                    Répondre
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                @endif
-            @endauth
-
-            {{-- Réponse --}}
-            @if ($comment->replies->count() > 0)
-                @php $reply = $comment->replies->first(); @endphp
-                <div class="mt-4 ml-2 bg-indigo-50/60 border border-indigo-100/50 rounded-2xl p-4">
-                    <div class="flex items-start gap-3">
-                        @php
-                            $replyPhoto = $reply->user->creatif?->photo;
-                            $replyName = $reply->user->creatif?->prenom ?? ($reply->user->username ?? 'Auteur');
-                            $replySlug = $reply->user->creatif?->slug;
-                        @endphp
-                        @if ($replyPhoto)
-                            <img src="{{ $replyPhoto }}" class="w-8 h-8 rounded-xl object-cover flex-shrink-0">
-                        @else
-                            <div
-                                class="w-8 h-8 rounded-xl bg-indigo-200 text-indigo-700 flex items-center justify-center font-black text-xs flex-shrink-0">
-                                {{ strtoupper(substr($replyName, 0, 1)) }}
-                            </div>
-                        @endif
-                        <div>
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-xs font-bold text-gray-900">{{ $replyName }}</span>
-                                <span
-                                    class="text-[9px] bg-indigo-600 text-white font-black px-2 py-0.5 rounded-full uppercase">Auteur</span>
-                                <span
-                                    class="text-[10px] text-gray-400">{{ $reply->created_at->diffForHumans() }}</span>
-                            </div>
-                            <p class="text-xs text-gray-600 leading-relaxed">{{ $reply->body }}</p>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
+    <div id="comments-list" class="space-y-8">
+        @include('comment.list', ['project' => $project])
     </div>
 </div>
-@empty
-<div class="text-center py-12">
-    <div class="w-14 h-14 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
-        <svg class="w-7 h-7 text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-    </div>
-    <p class="text-sm text-gray-400 font-medium">Aucun commentaire pour l'instant.</p>
-    <p class="text-xs text-gray-300 mt-1">Soyez le premier à donner votre avis !</p>
-</div>
-@endforelse
-</div>
-</div>
+
+<script>
+    // Composant Alpine autonome pour la section commentaires d'un projet :
+    // publication, modification et suppression en AJAX, sans rechargement
+    // de page (voir le commentaire en tête de fichier). En cas de succès,
+    // le serveur renvoie le fragment HTML déjà à jour de la liste
+    // (resources/views/comment/list.blade.php) : on remplace #comments-list
+    // avec, plutôt que de reconstruire le DOM à la main côté client — une
+    // seule source de vérité pour le rendu (le Blade), sur le premier
+    // chargement comme sur chaque action AJAX.
+    //
+    // commentsUrl est l'URL de route('comments.store', $project) — déjà
+    // résolue côté serveur (via la directive Blade @@js) plutôt que
+    // reconstruite ici à partir de l'id du projet : Project utilise son
+    // "slug" comme clé de route (voir Project::getRouteKeyName()), pas
+    // son id.
+    function mefolioComments(commentsUrl) {
+        return {
+            posting: false,
+            errorMessage: '',
+
+            csrfHeaders(extra = {}) {
+                return {
+                    Accept: 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    ...extra,
+                };
+            },
+
+            applyResponse(data) {
+                const list = document.getElementById('comments-list');
+                list.innerHTML = data.html;
+                window.Alpine.initTree(list);
+
+                const badge = document.getElementById('comments-count');
+                if (badge) badge.textContent = data.count;
+            },
+
+            async request(url, method, body) {
+                this.errorMessage = '';
+
+                try {
+                    const res = await fetch(url, {
+                        method,
+                        headers: this.csrfHeaders(body ? { 'Content-Type': 'application/json' } : {}),
+                        body: body ? JSON.stringify(body) : undefined,
+                    });
+                    const data = await res.json();
+
+                    if (res.ok && data.success) {
+                        this.applyResponse(data);
+                    } else {
+                        this.errorMessage = data.message || 'Une erreur est survenue.';
+                    }
+                } catch (e) {
+                    this.errorMessage = 'Connexion impossible. Vérifiez votre connexion et réessayez.';
+                }
+            },
+
+            async submitComment(event) {
+                if (this.posting) return;
+                this.posting = true;
+
+                const form = event.target;
+                const body = new FormData(form).get('body');
+
+                await this.request(commentsUrl, 'POST', { body, parent_id: null });
+
+                this.posting = false;
+                form.reset();
+            },
+
+            async submitReply(event, parentId) {
+                const form = event.target;
+                const body = new FormData(form).get('body');
+
+                await this.request(commentsUrl, 'POST', { body, parent_id: parentId });
+            },
+
+            async submitEdit(event, commentId) {
+                const form = event.target;
+                const body = new FormData(form).get('body');
+
+                await this.request(`${commentsUrl}/${commentId}`, 'PATCH', { body });
+            },
+
+            async deleteComment(commentId) {
+                if (! confirm('Supprimer ce commentaire ?')) return;
+
+                await this.request(`${commentsUrl}/${commentId}`, 'DELETE');
+            },
+        };
+    }
+</script>
