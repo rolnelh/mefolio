@@ -16,10 +16,19 @@
     - $postedMissions   Collection  Missions publiées par l'utilisateur.
     - $appliedMissions  Collection  Candidatures envoyées par l'utilisateur.
 
-    L'onglet affiché est piloté par le query param ?tab=... (voir
-    x-dashboard-sidebar pour les liens). Onglets valides : projets (défaut),
-    profil, productivite, missions, services, stats, parametres, paiements,
+    L'onglet affiché par défaut (avant toute interaction JS) est piloté par
+    le query param ?tab=... — utile pour un lien profond ou un premier
+    chargement de page. Onglets valides : projets (défaut), profil,
+    productivite, missions, services, stats, parametres, paiements,
     assistant.
+
+    Changer d'onglet ENSUITE ne recharge pas la page : les 9 onglets sont
+    tous rendus côté serveur au premier chargement (leurs variables sont de
+    toute façon déjà calculées, peu coûteux), puis affichés/masqués côté
+    client via Alpine (x-show sur "activeTab") — voir x-dashboard-sidebar
+    pour les clics qui pilotent ce state partagé, initialisé sur le conteneur
+    ci-dessous et propagé à la sidebar par chaînage de scope Alpine (ne pas
+    redéclarer "activeTab" dans un x-data imbriqué, ça romprait le partage).
 --}}
 <style>
     .hide-scrollbar {
@@ -92,7 +101,11 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div class="flex flex-col lg:flex-row gap-6 items-start">
+        {{--
+            x-data partagé par la sidebar (aside) et la zone d'onglets
+            (main) ci-dessous : voir le commentaire en tête de fichier.
+        --}}
+        <div class="flex flex-col lg:flex-row gap-6 items-start" x-data="{ activeTab: @js($activeTab) }">
 
             <aside class="w-full lg:w-auto flex-shrink-0 lg:sticky lg:top-24">
                 <div class="flex flex-row items-start gap-3">
@@ -104,52 +117,36 @@
             <main class="flex-1 min-w-0 space-y-6">
 
                 {{-- Raccourcis + stats rapides : seulement sur l'onglet Projets --}}
-                @if ($activeTab === 'projets')
+                <div x-show="activeTab === 'projets'" @unless ($activeTab === 'projets') style="display:none" @endunless>
                     @include('dashboard.tabs.projets-quick-actions')
-                @endif
+                </div>
 
                 {{-- Checklist d'onboarding : sur tous les onglets tant que le profil n'est pas complet --}}
                 @if ($pourcentage < 100)
                     @include('dashboard.onboarding-checklist')
                 @endif
 
-                @switch($activeTab)
-                    @case('projets')
-                        @include('dashboard.tabs.projets-list')
-                    @break
-
-                    @case('profil')
-                        @include('dashboard.tabs.profil-form')
-                    @break
-
-                    @case('productivite')
-                        @include('dashboard.tabs.productivite')
-                    @break
-
-                    @case('missions')
-                        @include('dashboard.tabs.missions')
-                    @break
-
-                    @case('services')
-                        @include('dashboard.tabs.services')
-                    @break
-
-                    @case('stats')
-                        @include('dashboard.tabs.stats')
-                    @break
-
-                    @case('parametres')
-                        @include('dashboard.tabs.parametres')
-                    @break
-
-                    @case('paiements')
-                        @include('dashboard.tabs.paiements')
-                    @break
-
-                    @case('assistant')
-                        @include('dashboard.tabs.assistant')
-                    @break
-                @endswitch
+                {{--
+                    Les 9 onglets sont tous rendus ici (leurs variables sont
+                    déjà calculées pour la page, coût négligeable) et
+                    basculés côté client sans rechargement — voir le
+                    commentaire en tête de fichier.
+                --}}
+                @foreach ([
+                    'projets' => 'dashboard.tabs.projets-list',
+                    'profil' => 'dashboard.tabs.profil-form',
+                    'productivite' => 'dashboard.tabs.productivite',
+                    'missions' => 'dashboard.tabs.missions',
+                    'services' => 'dashboard.tabs.services',
+                    'stats' => 'dashboard.tabs.stats',
+                    'parametres' => 'dashboard.tabs.parametres',
+                    'paiements' => 'dashboard.tabs.paiements',
+                    'assistant' => 'dashboard.tabs.assistant',
+                ] as $tabKey => $tabView)
+                    <div x-show="activeTab === '{{ $tabKey }}'" @unless ($activeTab === $tabKey) style="display:none" @endunless>
+                        @include($tabView)
+                    </div>
+                @endforeach
 
             </main>
 
