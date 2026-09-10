@@ -51,8 +51,29 @@
     $isItemActive = function (array $item) use ($active) {
         return $item['key'] !== null ? $active === $item['key'] : request()->routeIs($item['routeIs']);
     };
+
+    // Expression Alpine (pas une valeur PHP) déterminant si $item est actif :
+    // - un onglet du dashboard (key non null) s'active en comparant le state
+    //   client "activeTab" partagé avec la zone de contenu (voir
+    //   dashboard.blade.php), pour un changement d'onglet instantané, sans
+    //   rechargement de page ;
+    // - un lien vers une autre page (Messages, Classement...) reste un vrai
+    //   lien avec navigation classique : son état actif est calculé une fois
+    //   côté serveur ($isItemActive ci-dessus) et injecté comme booléen figé.
+    $isItemActiveExpr = fn (array $item) => $item['key'] !== null
+        ? "activeTab === '{$item['key']}'"
+        : ($isItemActive($item) ? 'true' : 'false');
 @endphp
 
+{{--
+    Note : ce composant est inclus depuis dashboard.blade.php à l'intérieur
+    d'un conteneur parent portant x-data="{ activeTab: ... }" (partagé avec
+    la zone de contenu des onglets, voir ce fichier). Le x-data local
+    ci-dessous n'ajoute que l'état "open" du menu déplié ; "activeTab"
+    référencé plus bas vient du scope parent (Alpine chaîne les scopes
+    imbriqués), pas de celui-ci — ne pas le redéclarer ici, ça romprait le
+    partage d'état avec la zone de contenu.
+--}}
 <div x-data="{ open: false }" @keydown.escape.window="open = false" class="relative flex-shrink-0">
 
     {{-- Rail : icônes seules, toujours visible --}}
@@ -70,9 +91,10 @@
 
         @foreach ($allItems as $item)
             <a href="{{ $item['href'] }}" title="{{ $item['label'] }}"
-                class="relative w-11 h-11 flex items-center justify-center rounded-xl transition-all
-                    {{ $isItemActive($item) ? 'bg-white/10' : 'hover:bg-white/5' }}">
-                <svg class="w-[18px] h-[18px] {{ $isItemActive($item) ? 'text-indigo-400' : 'text-white/40' }}"
+                @if ($item['key'] !== null) @click.prevent="activeTab = '{{ $item['key'] }}'; window.history.pushState(null, '', @js($item['href']))" @endif
+                x-bind:class="({{ $isItemActiveExpr($item) }}) ? 'bg-white/10' : 'hover:bg-white/5'"
+                class="relative w-11 h-11 flex items-center justify-center rounded-xl transition-all">
+                <svg class="w-[18px] h-[18px]" x-bind:class="({{ $isItemActiveExpr($item) }}) ? 'text-indigo-400' : 'text-white/40'"
                     fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
                     {!! $item['icon'] !!}
                 </svg>
@@ -147,17 +169,17 @@
                     <div class="space-y-0.5">
                         @foreach ($items as $item)
                             <a href="{{ $item['href'] }}"
-                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all
-                                    {{ $isItemActive($item) ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/80' }}">
-                                <svg class="w-[18px] h-[18px] flex-shrink-0 {{ $isItemActive($item) ? 'text-indigo-400' : 'text-white/40' }}"
+                                @if ($item['key'] !== null) @click.prevent="activeTab = '{{ $item['key'] }}'; window.history.pushState(null, '', @js($item['href'])); open = false" @endif
+                                x-bind:class="({{ $isItemActiveExpr($item) }}) ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/5 hover:text-white/80'"
+                                class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all">
+                                <svg class="w-[18px] h-[18px] flex-shrink-0" x-bind:class="({{ $isItemActiveExpr($item) }}) ? 'text-indigo-400' : 'text-white/40'"
                                     fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
                                     {!! $item['icon'] !!}
                                 </svg>
                                 <span class="text-sm font-semibold flex-1 truncate">{{ $item['label'] }}</span>
                                 @if ($item['count'])
-                                    <span
-                                        class="text-[11px] font-bold px-2 py-0.5 rounded-full
-                                            {{ $isItemActive($item) ? 'bg-white/15 text-white' : 'bg-white/5 text-white/40' }}">
+                                    <span x-bind:class="({{ $isItemActiveExpr($item) }}) ? 'bg-white/15 text-white' : 'bg-white/5 text-white/40'"
+                                        class="text-[11px] font-bold px-2 py-0.5 rounded-full">
                                         {{ $item['count'] }}
                                     </span>
                                 @endif
@@ -171,6 +193,7 @@
         {{-- Action rapide --}}
         <div class="px-3 pb-3 flex-shrink-0">
             <a href="{{ $profilComplet ? route('projets.create') : route('dashboard', ['tab' => 'profil']) }}"
+                @unless ($profilComplet) @click.prevent="activeTab = 'profil'; window.history.pushState(null, '', @js(route('dashboard', ['tab' => 'profil']))); open = false" @endunless
                 class="flex items-center justify-center gap-2 w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl transition-all">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

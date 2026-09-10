@@ -224,6 +224,43 @@ des compromis volontairement écartés au profit de la simplicité (voir la
 question qui a mené à cette implémentation) — réévaluer si le besoin
 grandit, plutôt que de complexifier `TrackPageView` par petites touches.
 
+### Changement d'onglet du dashboard sans rechargement de page
+
+Le reste du site est une application server-rendered classique (Blade) :
+chaque navigation est une vraie requête HTTP, il n'y a pas de routeur
+client-side façon SPA. Le dashboard est la seule exception, parce que ses
+"onglets" (`?tab=...`) sont visuellement perçus comme un seul écran, pas
+comme des pages différentes — un rechargement complet à chaque clic y
+était particulièrement visible et gênant.
+
+- `dashboard.blade.php` rend les 9 onglets **tous en même temps** dans le
+  DOM (leurs variables sont de toute façon déjà calculées pour la page,
+  coût négligeable), chacun dans un `<div x-show="activeTab === '...'">`.
+  `activeTab` vit dans un `x-data` posé sur le conteneur qui englobe à la
+  fois `<aside>` (la sidebar) et `<main>` (la zone d'onglets) — c'est ce
+  scope Alpine partagé, pas une prop passée explicitement, qui permet aux
+  deux de rester synchronisés.
+- `x-dashboard-sidebar` (rail + menu déplié) ne redéclare jamais
+  `activeTab` dans son propre `x-data="{ open: false }"` : Alpine chaîne
+  les scopes imbriqués, donc `activeTab` référencé dans ses clics/`:class`
+  vient bien du scope parent. Cliquer un onglet fait
+  `activeTab = '...'` + `history.pushState(...)` (URL à jour, pas de
+  rechargement) plutôt que suivre le lien ; l'attribut `href` reste
+  présent et fonctionnel (clic droit, ouverture dans un nouvel onglet,
+  ou dégradation propre si JS est indisponible).
+- Les items de la sidebar qui ne sont **pas** des onglets du dashboard
+  (Messages, Classement — `key: null`) restent des liens classiques avec
+  navigation complète : ce sont de vraies autres pages.
+- `$isItemActiveExpr` (dans `dashboard-sidebar.blade.php`) génère soit une
+  expression Alpine (`activeTab === 'xxx'`) pour les onglets, soit un
+  booléen PHP figé pour les vrais liens de page — un seul système de
+  classes CSS réactives (`x-bind:class`) couvre les deux cas.
+- Ce traitement est volontairement limité au dashboard. Les liens internes
+  "aller à l'onglet X" à l'intérieur du contenu d'un onglet (ex. "Modifier
+  mon profil" dans l'onglet Projets) restent des liens classiques pour
+  l'instant — à étendre au même mécanisme si besoin, mais pas fait pour
+  garder ce changement contenu et à faible risque.
+
 ### Règle de "profil complet"
 
 Un profil créatif est considéré "complet" (affiché publiquement, invite à
