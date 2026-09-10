@@ -70,7 +70,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/projets/{project}', [ProjectController::class, 'destroy'])->name('projets.destroy');
 
     Route::post('/projects/{project}/comments', [CommentController::class, 'store'])->name('comments.store');
-    Route::post('/projects/{project}/comments/ajax', [CommentController::class, 'storeAjax'])->name('comments.store.ajax');
+    Route::patch('/projects/{project}/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+    Route::delete('/projects/{project}/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
     Route::post('/projects/{project}/like', [ProjectController::class, 'toggleLike'])->name('projects.like');
 
     Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
