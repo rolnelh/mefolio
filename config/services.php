@@ -41,4 +41,16 @@ return [
         'redirect' => env('GOOGLE_REDIRECT_URI'),
     ],
 
+    // Upload des médias de projets/profils créatifs (voir ProjectController
+    // et CreatifController). Lu via config('services.cloudinary.*') plutôt
+    // qu'un env() direct dans ces contrôleurs : nécessaire pour pouvoir
+    // activer php artisan config:cache en production sans casser l'upload
+    // (une fois le cache généré, .env n'est plus relu — seul ce qui passe
+    // par un fichier config/*.php reste disponible).
+    'cloudinary' => [
+        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+        'api_key' => env('CLOUDINARY_API_KEY'),
+        'api_secret' => env('CLOUDINARY_API_SECRET'),
+    ],
+
 ];
