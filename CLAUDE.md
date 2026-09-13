@@ -308,6 +308,52 @@ injecté (sinon ses boutons "Répondre"/"Modifier" resteraient inertes).
   descendre sous 0. Les réponses (répondre à un commentaire) ne
   rapportent pas de points, donc rien à retirer pour elles.
 
+### Déploiement : quel fichier est réellement utilisé, et performance PHP
+
+Le dépôt contient **deux** descriptions de déploiement, mais une seule est
+active : le service Render est configuré en type **Docker**, avec
+`Dockerfile Path: ./Dockerfile` (vérifié dans Settings → Build du
+dashboard Render). Le fichier `render.yaml` à la racine (qui décrit un
+déploiement "Native Runtime" avec `php artisan serve`) est un **résidu
+d'une configuration antérieure, jamais utilisé** — ne pas s'y fier pour
+comprendre le comportement de prod, et ne pas le maintenir à jour
+implicitement en pensant qu'il sert à quelque chose. S'il doit un jour
+être supprimé ou réactivé, vérifier d'abord dans le dashboard Render
+lequel des deux modes est réellement configuré.
+
+Le `Dockerfile` active volontairement deux optimisations PHP/Laravel
+absentes par défaut :
+
+- **OPcache** (`docker-php-ext-enable opcache` + réglages dans
+  `opcache-recommended.ini`) : l'image `php:8.2-apache` ne l'active pas
+  par défaut, ce qui forçait PHP à recompiler tous les fichiers du
+  framework à chaque requête. `opcache.validate_timestamps=0` est sûr
+  ici : un nouveau déploiement démarre un nouveau conteneur (cache vide),
+  le code ne change jamais sous un conteneur déjà démarré.
+- **`php artisan config:cache` et `view:cache`**, lancés dans le `CMD` du
+  Dockerfile (donc au démarrage du conteneur, pas au build de l'image —
+  les variables d'environnement réelles ne sont fournies par Render qu'au
+  runtime). **`route:cache` est volontairement absent** : plusieurs
+  routes (`/langue/{locale}`, `/bienvenue`, `/creatifs/localisation`,
+  `/creatifs/domaine`, `/services`) sont définies avec une closure, et
+  `route:cache` refuse de sérialiser une closure — l'ajouter sans
+  d'abord les convertir en méthodes de contrôleur ferait planter le
+  démarrage du conteneur (le `CMD` enchaîne les commandes avec `&&`).
+- **Piège de `config:cache` évité** : cette commande fait que `.env`
+  n'est plus relu ensuite — tout `env(...)` appelé en dehors d'un fichier
+  `config/*.php` risque de retourner `null` en prod. C'est pour ça que
+  les identifiants Cloudinary, auparavant lus via `env('CLOUDINARY_...')`
+  directement dans `ProjectController`/`CreatifController`, passent
+  maintenant par `config('services.cloudinary.*')` (nouvelle entrée dans
+  `config/services.php`, même convention déjà utilisée pour `google`).
+  **Règle à suivre pour tout nouvel identifiant/clé d'API** : toujours
+  passer par un fichier `config/*.php`, jamais un `env()` direct dans un
+  contrôleur/modèle/vue.
+- Un déploiement Render est **sans coupure** : la version actuelle
+  continue de servir le trafic tant que le nouveau build n'a pas réussi
+  et démarré — un `Dockerfile` cassé fait échouer le déploiement sans
+  jamais impacter la prod en cours.
+
 ### Règle de "profil complet"
 
 Un profil créatif est considéré "complet" (affiché publiquement, invite à
