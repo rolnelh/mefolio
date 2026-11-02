@@ -356,14 +356,26 @@ absentes par défaut :
 
 ### Hero animé de l'accueil et méga-menus de la nav
 
-- `home/hero.blade.php` est une grande carte arrondie avec une image de
-  fond (`public/images/hero-accueil.webp`, à remplacer par une vraie photo
-  pour changer de visuel) sous un voile sombre en dégradé : titre blanc
-  en haut à gauche (apparition mot par mot, CSS dans un `<style>` local),
-  boutons, présentation en bas à gauche, pile d'avatars (`$heroCreatifs`)
-  et compteur en bas à droite. Animations désactivées si l'utilisateur a
-  activé "réduire les animations" (`prefers-reduced-motion`). Il a
-  remplacé un éventail de cartes animé (PR 69), retiré à la demande.
+- `home/hero.blade.php` suit une maquette fournie par le propriétaire du
+  projet (page d'agence web centrée) : fil d'étapes, titre centré avec un
+  mot en italique d'accent (`font-accent` = Instrument Serif, chargée dans
+  `layouts/app.blade.php` et déclarée dans `tailwind.config.js`), bouton
+  vert citron (`bg-lime-300`) + bouton secondaire blanc, avatars +
+  compteur, galerie de 7 cartes en perspective (projets récents avec
+  image, complétés par des photos de créatifs, réutilisés en boucle s'il
+  y en a moins de 7), puis bandeau défilant des domaines créatifs. La
+  galerie est mise à l'échelle par `scale-*` selon l'écran : si on change
+  la taille des cartes (`$heroStyles`), ajuster aussi les hauteurs
+  `h-[...]` du conteneur `.hero-scene`. Animations désactivées si
+  l'utilisateur a activé "réduire les animations"
+  (`prefers-reduced-motion`). Historique : éventail de cartes animé
+  (PR 69), puis grande image de fond (PR 70), remplacés à la demande.
+- La barre de nav desktop (`layouts/navigation.blade.php`) suit la même
+  maquette : plus de pilule flottante, logo à gauche, liens au centre
+  (grille `lg:grid-cols-[1fr_auto_1fr]`), actions et bouton "S'inscrire"
+  vert citron à droite, fond translucide pleine largeur porté par un
+  `<div>` en `w-screen` à l'intérieur de la `<nav>` (pour qu'il se cache
+  avec elle au scroll).
 - Les menus déroulants desktop (`layouts/navigation/desktop-menu.blade.php`)
   sont des méga-menus construits avec trois composants :
   `x-nav-mega` (bouton + panneau, ouverture au survol et au clic),

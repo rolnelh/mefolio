@@ -14,6 +14,8 @@ export default {
         extend: {
             fontFamily: {
                 jakarta: ["Plus Jakarta Sans", ...defaultTheme.fontFamily.sans],
+                // Italique d'accent des titres (mot en italique du hero).
+                accent: ["Instrument Serif", ...defaultTheme.fontFamily.serif],
             },
         },
     },
