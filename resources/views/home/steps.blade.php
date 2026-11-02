@@ -3,7 +3,7 @@
     reliées par une courbe SVG sur desktop, empilées sur mobile. Aucune
     variable externe requise.
 --}}
-<section class="bg-white py-24 px-6">
+<section class="bg-white py-24 px-6 overflow-x-clip">
     <div class="max-w-4xl mx-auto">
         <div class="text-center mb-4">
             <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mt-3">
@@ -38,7 +38,9 @@
         @endphp
 
         {{-- Cartes ascendantes reliées par une courbe (desktop) --}}
-        <div class="hidden md:block relative mx-auto mt-16" style="width: 820px; height: 400px;">
+        {{-- Largeur fixe de 820 px : affiché seulement à partir de lg (1024 px),
+             sinon il débordait sur les tablettes (768-850 px). --}}
+        <div class="hidden lg:block relative mx-auto mt-16" style="width: 820px; height: 400px;">
             <svg class="absolute inset-0 w-full h-full" viewBox="0 0 820 400" fill="none">
                 <path d="M260 320 C 330 320, 330 190, 280 190" stroke="#c7d2fe" stroke-width="2" />
                 <path d="M540 190 C 610 190, 610 60, 560 60" stroke="#ddd6fe" stroke-width="2" />
@@ -61,7 +63,7 @@
         </div>
 
         {{-- Version mobile : empilée --}}
-        <div class="md:hidden space-y-4 mt-10">
+        <div class="lg:hidden space-y-4 mt-10">
             @foreach ($steps as $step)
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
                     <div class="flex items-center justify-between mb-4">

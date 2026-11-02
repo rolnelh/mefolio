@@ -403,7 +403,13 @@ absentes par défaut :
   (grille `lg:grid-cols-[1fr_auto_1fr]`), actions et bouton "S'inscrire"
   vert citron à droite, fond translucide pleine largeur porté par un
   `<div>` en `w-screen` à l'intérieur de la `<nav>` (pour qu'il se cache
-  avec elle au scroll).
+  avec elle au scroll). **Piège** : `100vw` inclut la barre de défilement
+  verticale sous Windows, d'où un défilement horizontal parasite sur
+  toutes les pages ; le conteneur sticky porte `overflow-x-clip` pour
+  couper ce dépassement (ne pas le retirer). Les navigateurs headless de
+  test masquent les barres de défilement : pour vérifier un débordement,
+  lancer Chromium avec `--disable-features=OverlayScrollbar` et sans
+  `--hide-scrollbars`, puis comparer `scrollWidth` et `clientWidth`.
 - Les menus déroulants desktop (`layouts/navigation/desktop-menu.blade.php`)
   sont des méga-menus construits avec trois composants :
   `x-nav-mega` (bouton + panneau, ouverture au survol et au clic),

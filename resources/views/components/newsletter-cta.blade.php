@@ -9,7 +9,7 @@
         @csrf
         <input type="hidden" name="source" value="{{ $source }}">
         <input type="email" name="email" required placeholder="votre@email.com"
-            class="flex-1 px-4 py-3 rounded-xl text-gray-900 text-sm focus:outline-none">
+            class="min-w-0 flex-1 px-4 py-3 rounded-xl text-gray-900 text-sm focus:outline-none">
         <button type="submit"
             class="bg-white text-indigo-600 font-bold px-5 py-3 rounded-xl hover:bg-indigo-50 transition whitespace-nowrap text-sm">
             {{ __("M'alerter") }}
