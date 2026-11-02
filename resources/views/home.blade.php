@@ -4,9 +4,9 @@
     chaque partial pour les variables qu'il attend.
 
     Variables reçues du contrôleur (HomeController::index) :
-    - $heroCreatifs   Collection  Créatifs avec photo, complément de l'éventail du hero.
+    - $heroCreatifs   Collection  Créatifs avec photo, avatars de la preuve sociale du hero.
     - $creatifCount   int         Nombre de créatifs actifs (compteur social proof).
-    - $projects       Collection  Projets récents (aussi les cartes de l'éventail du hero).
+    - $projects       Collection  Projets récents.
     - $creatifs       Collection  Créatifs mis en avant.
     - $testimonials   Collection  Témoignages publiés (peut être vide).
 --}}
