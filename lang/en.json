@@ -76,11 +76,8 @@
     "ou": "or",
     "Adresse Email": "Email address",
     "Mot de passe": "Password",
-    "Oublié ?": "Forgot?",
     "Rester connecté": "Stay signed in",
-    "Vous n'aurez plus à retaper votre mot de passe la prochaine fois.": "You won't have to retype your password next time.",
     "Se connecter": "Log in",
-    "\"Mefolio m'a permis de décrocher mon premier contrat freelance en 2 semaines. La plateforme parle vraiment à notre réalité africaine.\"": "\"Mefolio helped me land my first freelance contract in 2 weeks. The platform really speaks to our African reality.\"",
     ":count créatif nous a rejoint|:count créatifs nous ont rejoint": ":count creative has joined us|:count creatives have joined us",
 
     "Créer votre compte": "Create your account",
@@ -89,9 +86,6 @@
     "Je suis client": "I'm a client",
     "Nom d'utilisateur": "Username",
     "Créer mon compte gratuitement": "Create my free account",
-    "Valorisons les talents africains": "Empowering African talent",
-    "à l'échelle mondiale.": "on a global scale.",
-    "Mefolio connecte les talents africains aux recruteurs, aux opportunités et aux missions réelles, sans barrières techniques, sans blocages de paiement, pensé pour nos réalités.": "Mefolio connects African talent with recruiters, opportunities and real jobs — no technical barriers, no payment blockers, built for our realities.",
 
     "Retrouvez": "Get back",
     "votre accès.": "your access.",
@@ -513,5 +507,12 @@
     "Quels types de fichiers puis-je publier ?": "What kinds of files can I publish?",
     "Les entreprises publient leurs missions freelance sur Mefolio. Parcourez-les depuis le menu Missions et postulez directement depuis votre compte.": "Companies post their freelance missions on Mefolio. Browse them from the Missions menu and apply directly from your account.",
     "Est-ce vraiment gratuit ?": "Is it really free?",
-    "Précédent": "Previous"
+    "Précédent": "Previous",
+    "Rejoignez la communauté des créatifs africains.": "Join the community of African creatives.",
+    "ou avec votre email": "or with your email",
+    "Bon retour": "Welcome back",
+    "Connectez-vous pour retrouver vos projets et missions.": "Sign in to get back to your projects and missions.",
+    "ou continuer avec": "or continue with",
+    "Masquer le mot de passe": "Hide password",
+    "Afficher le mot de passe": "Show password"
 }

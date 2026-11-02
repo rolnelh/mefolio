@@ -1,224 +1,131 @@
+{{--
+    Page d'inscription, sur le modèle d'une maquette fournie : fond gris
+    clair, grande carte blanche arrondie au centre ; à gauche un panneau
+    gris avec une illustration 3D (public/images/designer.png, fondue dans
+    le fond par mix-blend-multiply), à droite le formulaire (lien
+    "Se connecter" en haut à droite, bouton Google, séparateur, choix du
+    rôle, nom d'utilisateur, email, mot de passe, bouton bleu).
+
+    Variables attendues (RegisteredUserController::create) :
+    - $recentCreatifs  Collection  Derniers créatifs (avatars du panneau).
+    - $creatifCount    int         Nombre de créatifs (texte du panneau).
+--}}
+@php
+    $champ = 'w-full h-11 px-4 rounded-xl border border-gray-200 bg-white text-sm outline-none placeholder:text-gray-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-500/10 transition';
+    $libelle = 'block mb-1.5 text-xs font-medium text-gray-600';
+@endphp
 <x-guest-layout>
-    <div class="min-h-screen bg-white flex flex-col lg:flex-row">
+    <div class="min-h-screen bg-[#F1F1EF] flex items-center justify-center px-3 py-6 sm:p-8">
+        <div class="w-full max-w-5xl rounded-[28px] bg-white p-3 shadow-[0_30px_80px_-40px_rgba(17,24,39,0.35)] ring-1 ring-gray-900/5 grid grid-cols-1 lg:grid-cols-2 gap-3">
 
-            {{-- Panneau gauche : formulaire --}}
-            <div class="w-full lg:w-1/2 min-h-screen px-6 sm:px-12 lg:px-16 py-10 flex flex-col justify-center">
-
-                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 mb-4 w-fit transition-transform hover:scale-105">
-                    <x-application-logo class="h-8 w-auto text-indigo-600" />
-                    <span class="font-bold text-lg text-gray-900">Mefolio</span>
+            {{-- Panneau illustration --}}
+            <div class="relative hidden lg:flex flex-col items-center justify-center overflow-hidden rounded-[22px] bg-[#EDEDEB] p-10">
+                <a href="{{ route('home') }}" class="absolute left-6 top-6 flex items-center gap-2" aria-label="Mefolio">
+                    <x-application-logo class="h-7 w-auto text-gray-900" />
                 </a>
+                <img src="{{ asset('images/designer.png') }}" alt="" class="w-full max-w-sm mix-blend-multiply drop-shadow-[0_30px_30px_rgba(0,0,0,0.12)]">
 
-                <h1 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">{{ __('Créer votre compte') }}</h1>
-                <p class="text-sm text-gray-500 mb-5">
-                    {{ __('Déjà membre ?') }}
-                    <a href="{{ route('login') }}" class="text-indigo-600 font-bold hover:underline">{{ __('Se connecter') }}</a>
-                </p>
-
-                @if (session('google_error'))
-                    <div class="mb-4 p-3 bg-amber-50 border border-amber-100 rounded-xl text-sm text-amber-700">
-                        {{ session('google_error') }}
-                    </div>
-                @endif
-
-                <form method="POST" action="{{ route('register') }}" class="space-y-3">
-                    @csrf
-
-                    {{-- RÔLE --}}
-                    <div>
-                        <div class="grid grid-cols-2 gap-1 p-1 bg-gray-100 rounded-xl">
-                            <label class="cursor-pointer">
-                                <input type="radio" name="role" value="creatif" class="peer hidden"
-                                    @checked(old('role', 'creatif') === 'creatif')>
-                                <div
-                                    class="py-2 rounded-lg text-center text-sm font-semibold text-gray-500 peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm transition-all">
-                                    {{ __('Je suis créatif') }}
-                                </div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="role" value="client" class="peer hidden"
-                                    @checked(old('role') === 'client')>
-                                <div
-                                    class="py-2 rounded-lg text-center text-sm font-semibold text-gray-500 peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm transition-all">
-                                    {{ __('Je suis client') }}
-                                </div>
-                            </label>
-                        </div>
-                        <x-input-error :messages="$errors->get('role')" />
-                    </div>
-
-                    {{-- USERNAME --}}
-                    <div class="space-y-1">
-                        <div class="relative">
-                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
-                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                            </svg>
-                            <input type="text" name="username" value="{{ old('username') }}" required
-                                placeholder="{{ __("Nom d'utilisateur") }}"
-                                class="w-full h-12 pl-11 pr-4 rounded-xl border border-gray-200 text-sm outline-none
-                       focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
-                        </div>
-                        <x-input-error :messages="$errors->get('username')" />
-                    </div>
-
-                    {{-- EMAIL --}}
-                    <div class="space-y-1">
-                        <div class="relative">
-                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
-                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                            </svg>
-                            <input type="email" name="email" value="{{ old('email') }}" required
-                                placeholder="votre@email.com"
-                                class="w-full h-12 pl-11 pr-4 rounded-xl border border-gray-200 text-sm outline-none
-                       focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
-                        </div>
-                        <x-input-error :messages="$errors->get('email')" />
-                    </div>
-
-                    {{-- PASSWORD --}}
-                    <div class="space-y-1">
-                        <div class="relative">
-                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
-                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                            </svg>
-                            <input type="password" id="password" name="password" required placeholder="{{ __('Mot de passe') }}"
-                                class="w-full h-12 pl-11 pr-12 rounded-xl border border-gray-200 text-sm outline-none
-                   focus:border-gray-300 focus:ring-2 focus:ring-indigo-500/20 transition">
-                            <button type="button" onclick="togglePwd('password', 'eye-open-1', 'eye-close-1')"
-                                class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-indigo-600">
-                                <svg id="eye-open-1" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
-                                    stroke-width="2" viewBox="0 0 24 24">
-                                    <path
-                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                <svg id="eye-close-1" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029" />
-                                    <path d="M3 3l18 18" />
-                                </svg>
-                            </button>
-                        </div>
-                        <x-input-error :messages="$errors->get('password')" />
-                    </div>
-
-                    <button type="submit"
-                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-xl shadow-indigo-100 text-sm">
-                        {{ __('Créer mon compte gratuitement') }} →
-                    </button>
-                </form>
-
-                <div class="relative my-4">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-100"></div>
-                    </div>
-                    <div class="relative flex justify-center">
-                        <span class="px-4 bg-white text-[10px] text-gray-800 font-bold uppercase">{{ __('ou') }}</span>
-                    </div>
-                </div>
-
-                <a href="{{ route('google.redirect') }}"
-                    class="w-full flex items-center justify-center gap-3 border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all">
-                    <svg class="w-5 h-5" viewBox="0 0 48 48">
-                        <path fill="#FFC107"
-                            d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
-                        <path fill="#FF3D00"
-                            d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
-                        <path fill="#4CAF50"
-                            d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
-                        <path fill="#1976D2"
-                            d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
-                    </svg>
-                    {{ __('Continuer avec Google') }}
-                </a>
-            </div>
-
-            {{-- Panneau droit : identité de marque --}}
-            <div class="hidden lg:flex lg:w-1/2 min-h-screen relative flex-col justify-between p-12 xl:p-16 overflow-hidden">
-                {{-- Image de fond --}}
-                <div aria-hidden="true" class="absolute inset-0 bg-cover bg-center opacity-40"
-                    style="background-image: url('{{ asset('images/talentoftheweek.png') }}');"></div>
-                <div aria-hidden="true"
-                    class="absolute inset-0 bg-gradient-to-br from-indigo-50/80 via-white/70 to-amber-50/80"></div>
-
-                <div aria-hidden="true" class="absolute inset-0">
-                    <div class="absolute -top-8 -right-8 w-72 h-72 bg-indigo-200/40 rounded-full blur-3xl"></div>
-                    <div class="absolute -bottom-8 -left-8 w-80 h-80 bg-violet-200/40 rounded-full blur-3xl"></div>
-                    <svg class="absolute bottom-24 left-14 w-20 h-20 text-indigo-900/5" fill="none" stroke="currentColor"
-                        stroke-width="1.5" viewBox="0 0 100 100">
-                        <path d="M10 40 C 40 10, 60 80, 90 55" stroke-linecap="round" />
-                    </svg>
-                    <div class="absolute top-32 left-24 w-10 h-10 border border-indigo-900/10 rounded-lg -rotate-12"></div>
-                </div>
-
-                <span class="relative z-10"></span>
-
-                <div class="relative z-10">
-                    <h2 class="text-4xl font-black text-gray-900 leading-tight mb-5">
-                        {{ __('Valorisons les talents africains') }}<br>
-                        <span class="text-indigo-600">{{ __("à l'échelle mondiale.") }}</span>
-                    </h2>
-
-                    <p class="text-gray-500 text-sm leading-relaxed max-w-md">
-                        {{ __('Mefolio connecte les talents africains aux recruteurs, aux opportunités et aux missions réelles, sans barrières techniques, sans blocages de paiement, pensé pour nos réalités.') }}
-                    </p>
-                </div>
-
-                <div class="relative z-10 flex items-center gap-3 bg-white/80 border border-white shadow-sm backdrop-blur-sm rounded-full pl-2 pr-4 py-2 w-fit">
+                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 rounded-full bg-white/80 py-1.5 pl-1.5 pr-4 shadow-sm backdrop-blur">
                     <div class="flex -space-x-2">
                         @forelse ($recentCreatifs as $rc)
                             @if ($rc->photo)
-                                <img src="{{ $rc->photo }}" alt="{{ $rc->prenom }}"
-                                    class="w-7 h-7 rounded-full object-cover border-2 border-white">
+                                <img src="{{ $rc->photo }}" alt="{{ $rc->prenom }}" class="h-7 w-7 rounded-full border-2 border-white object-cover">
                             @else
-                                <div
-                                    class="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-black border-2 border-white">
+                                <div class="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-blue-600 text-[10px] font-bold text-white">
                                     {{ strtoupper(substr($rc->prenom ?: '?', 0, 1)) }}
                                 </div>
                             @endif
                         @empty
-                            @foreach (['bg-indigo-400', 'bg-violet-400', 'bg-pink-400'] as $c)
-                                <div class="w-7 h-7 rounded-full {{ $c }} border-2 border-white"></div>
+                            @foreach (['bg-blue-400', 'bg-amber-400', 'bg-rose-400'] as $c)
+                                <div class="h-7 w-7 rounded-full border-2 border-white {{ $c }}"></div>
                             @endforeach
                         @endforelse
                     </div>
-                    <p class="text-gray-700 text-xs font-semibold">{{ trans_choice(':count créatif nous a rejoint|:count créatifs nous ont rejoint', $creatifCount, ['count' => $creatifCount > 10 ? '10+' : $creatifCount]) }}</p>
+                    <p class="whitespace-nowrap text-xs font-medium text-gray-700">{{ trans_choice(':count créatif nous a rejoint|:count créatifs nous ont rejoint', $creatifCount, ['count' => $creatifCount > 10 ? '10+' : $creatifCount]) }}</p>
                 </div>
             </div>
+
+            {{-- Formulaire --}}
+            <div class="flex flex-col px-4 py-5 sm:px-10 sm:py-6">
+                <div class="flex items-center justify-between gap-4 text-xs text-gray-500">
+                    <a href="{{ route('home') }}" class="flex items-center gap-2 lg:invisible">
+                        <x-application-logo class="h-7 w-auto text-gray-900" />
+                        <span class="text-sm font-bold text-gray-900">Mefolio</span>
+                    </a>
+                    <p>
+                        {{ __('Déjà membre ?') }}
+                        <a href="{{ route('login') }}" class="font-semibold text-gray-900 hover:underline">{{ __('Se connecter') }}</a>
+                    </p>
+                </div>
+
+                <div class="mx-auto my-auto w-full max-w-sm py-8">
+                    <h1 class="text-2xl font-semibold tracking-tight text-gray-900">{{ __('Créer votre compte') }}</h1>
+                    <p class="mt-1 text-sm text-gray-500">{{ __('Rejoignez la communauté des créatifs africains.') }}</p>
+
+                    @if (session('google_error'))
+                        <div class="mt-5 rounded-xl border border-amber-100 bg-amber-50 p-3 text-sm text-amber-700">
+                            {{ session('google_error') }}
+                        </div>
+                    @endif
+
+                    <a href="{{ route('google.redirect') }}"
+                        class="mt-6 flex w-full items-center justify-center gap-3 rounded-xl border border-gray-200 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
+                        <x-google-icon />
+                        {{ __('Continuer avec Google') }}
+                    </a>
+
+                    <div class="my-5 flex items-center gap-3 text-[11px] text-gray-400">
+                        <span class="h-px flex-1 bg-gray-100"></span>
+                        {{ __('ou avec votre email') }}
+                        <span class="h-px flex-1 bg-gray-100"></span>
+                    </div>
+
+                    <form method="POST" action="{{ route('register') }}" class="space-y-4">
+                        @csrf
+
+                        {{-- Rôle --}}
+                        <div>
+                            <div class="grid grid-cols-2 gap-1 rounded-xl bg-gray-100 p-1">
+                                @foreach (['creatif' => __('Je suis créatif'), 'client' => __('Je suis client')] as $valeur => $texte)
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="role" value="{{ $valeur }}" class="peer hidden"
+                                            @checked(old('role', 'creatif') === $valeur)>
+                                        <div class="rounded-lg py-2 text-center text-xs font-semibold text-gray-500 transition peer-checked:bg-white peer-checked:text-gray-900 peer-checked:shadow-sm">
+                                            {{ $texte }}
+                                        </div>
+                                    </label>
+                                @endforeach
+                            </div>
+                            <x-input-error :messages="$errors->get('role')" />
+                        </div>
+
+                        <div>
+                            <label for="username" class="{{ $libelle }}">{{ __("Nom d'utilisateur") }}</label>
+                            <input type="text" id="username" name="username" value="{{ old('username') }}" required autocomplete="username"
+                                placeholder="{{ __("Nom d'utilisateur") }}" class="{{ $champ }}">
+                            <x-input-error :messages="$errors->get('username')" />
+                        </div>
+
+                        <div>
+                            <label for="email" class="{{ $libelle }}">{{ __('Adresse Email') }}</label>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required autocomplete="email"
+                                placeholder="votre@email.com" class="{{ $champ }}">
+                            <x-input-error :messages="$errors->get('email')" />
+                        </div>
+
+                        <div>
+                            <label for="password" class="{{ $libelle }}">{{ __('Mot de passe') }}</label>
+                            <x-password-input :input-class="$champ" autocomplete="new-password" placeholder="{{ __('Mot de passe') }}" />
+                            <x-input-error :messages="$errors->get('password')" />
+                        </div>
+
+                        <button type="submit"
+                            class="w-full rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 active:scale-[0.99]">
+                            {{ __('Créer mon compte gratuitement') }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <script>
-        function togglePwd(inputId, openId, closeId) {
-            const input = document.getElementById(inputId);
-            const openIcon = document.getElementById(openId);
-            const closeIcon = document.getElementById(closeId);
-
-            if (input.type === "password") {
-                input.type = "text";
-                openIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-            } else {
-                input.type = "password";
-                openIcon.classList.add('hidden');
-                closeIcon.classList.remove('hidden');
-            }
-        }
-    </script>
-
-    <style>
-        html, body {
-            scrollbar-width: none;
-        }
-
-        html::-webkit-scrollbar, body::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
 </x-guest-layout>

@@ -128,6 +128,20 @@ sans retaper son mot de passe à chaque visite, de façon sécurisée. Voir
 `resources/views/auth/login.blade.php` et
 `app/Http/Requests/Auth/LoginRequest.php`.
 
+### Pages de connexion et d'inscription
+
+Les deux pages suivent des maquettes fournies par le propriétaire :
+`auth/register.blade.php` est une grande carte blanche centrée sur fond
+gris (illustration 3D `public/images/designer.png` à gauche, formulaire
+à droite, bouton bleu), `auth/login.blade.php` une page scindée (scène
+verte avec l'accroche tirée au sort et `public/images/talentoftheweek.png`
+à gauche, formulaire et bouton vert citron à droite, Google en bouton
+rond). Les illustrations ont un fond blanc fondu dans le panneau par
+`mix-blend-multiply`. Le bouton oeil du mot de passe est le composant
+`x-password-input` (état Alpine local, plus de script `togglePwd`
+global) et le logo Google le composant `x-google-icon`. Le témoignage
+fictif qui figurait sur l'ancienne page de connexion a été retiré.
+
 ### Message d'erreur dédié pour les comptes créés via Google
 
 Un compte créé (ou relié) via Google n'a jamais de mot de passe choisi par
