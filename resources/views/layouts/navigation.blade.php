@@ -14,7 +14,7 @@
     Auth::user() / app()->getLocale() / request() directement, comme le
     reste du layout partagé.
 --}}
-<div class="sticky top-0 z-50 pointer-events-none">
+<div class="sticky top-0 z-50 pointer-events-none overflow-x-clip">
 <nav x-data="{
     open: false,
     lastPos: window.scrollY,
@@ -30,7 +30,11 @@
     class="relative pointer-events-auto max-w-6xl mx-auto transition-transform duration-300 ease-in-out">
 
     {{-- Fond translucide sur toute la largeur de l'écran (la nav elle-même
-         reste limitée à max-w-6xl) ; il suit la nav quand elle se cache. --}}
+         reste limitée à max-w-6xl) ; il suit la nav quand elle se cache.
+         w-screen (100vw) inclut la barre de défilement verticale sous
+         Windows : sans le overflow-x-clip du conteneur sticky, ce fond
+         dépassait de quelques pixels et créait un défilement horizontal
+         sur toutes les pages. --}}
     <div class="absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 -z-10 bg-[#FAFAF8]/80 backdrop-blur-md" aria-hidden="true"></div>
 
     <div class="px-4 sm:px-6">
