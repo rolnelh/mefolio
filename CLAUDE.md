@@ -361,15 +361,22 @@ absentes par défaut :
   mot en italique d'accent (`font-accent` = Instrument Serif, chargée dans
   `layouts/app.blade.php` et déclarée dans `tailwind.config.js`), bouton
   vert citron (`bg-lime-300`) + bouton secondaire blanc, avatars +
-  compteur, galerie de 7 cartes en perspective (projets récents avec
-  image, complétés par des photos de créatifs, réutilisés en boucle s'il
-  y en a moins de 7), puis bandeau défilant des domaines créatifs. La
-  galerie est mise à l'échelle par `scale-*` selon l'écran : si on change
-  la taille des cartes (`$heroStyles`), ajuster aussi les hauteurs
-  `h-[...]` du conteneur `.hero-scene`. Animations désactivées si
-  l'utilisateur a activé "réduire les animations"
+  compteur, puis bandeau défilant des domaines créatifs. Animations
+  désactivées si l'utilisateur a activé "réduire les animations"
   (`prefers-reduced-motion`). Historique : éventail de cartes animé
-  (PR 69), puis grande image de fond (PR 70), remplacés à la demande.
+  (PR 69), grande image de fond (PR 70), puis galerie de cartes en
+  perspective (PR 71), retirés à la demande.
+- Les sections suivantes de l'accueil suivent aussi des maquettes du
+  propriétaire : `home/avantages.blade.php` (titre sur deux lignes, la
+  seconde en gris, et quatre tuiles avec une pile de mini-cartes
+  inclinées ; utilise `$projects` et `$heroCreatifs` du scope parent),
+  `home/benefits.blade.php` (grille de six cartes blanches, illustration
+  à gauche et flèche en haut à droite, icônes de `public/images`) et
+  `home/talents.blade.php` (cartes de profil alternant un style sombre et
+  un style clair à photo plein cadre ; `$creatifs` porte
+  `projects_count` via `withCount('projects')` dans `HomeController`).
+  `x-creatif-card` n'y est plus utilisé mais sert toujours sur
+  `creatifs/index`.
 - La barre de nav desktop (`layouts/navigation.blade.php`) suit la même
   maquette : plus de pilule flottante, logo à gauche, liens au centre
   (grille `lg:grid-cols-[1fr_auto_1fr]`), actions et bouton "S'inscrire"
@@ -381,7 +388,10 @@ absentes par défaut :
   `x-nav-mega` (bouton + panneau, ouverture au survol et au clic),
   `x-nav-mega-link` (liens de la colonne de gauche) et `x-nav-mega-card`
   (cartes illustrées de droite, images dans `public/images/*-menu.webp`,
-  versions réduites à 480 px). Le panneau se positionne par rapport à la
+  versions réduites à 480 px ; sans image, la carte affiche un aplat
+  dégradé avec son titre, comme la carte Blog). Pas de photo de personne
+  réelle dans ces cartes : la photo qui illustrait Blog a
+  été retirée à la demande du propriétaire du projet. Le panneau se positionne par rapport à la
   `<nav>` (classe `relative` ajoutée dans `navigation.blade.php`), pas par
   rapport au bouton : c'est ce qui le centre sous la pilule sans déborder
   de l'écran pour les derniers menus. Ne pas remettre `relative` sur le
