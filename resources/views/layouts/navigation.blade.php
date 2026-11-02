@@ -1,6 +1,8 @@
 {{--
-    Header du site : nav flottante desktop (pill, auto-hide au scroll vers
-    le bas) + barre de navigation flottante mobile en bas d'écran.
+    Header du site : barre de nav desktop épurée (logo à gauche, liens au
+    centre, actions et bouton vert citron à droite, fond translucide,
+    auto-hide au scroll vers le bas) + barre de navigation flottante mobile
+    en bas d'écran.
 
     Chaque widget non trivial est délégué à une vue dédiée sous
     resources/views/layouts/navigation/ — voir le commentaire en tête de
@@ -12,7 +14,7 @@
     Auth::user() / app()->getLocale() / request() directement, comme le
     reste du layout partagé.
 --}}
-<div class="sticky top-0 z-50 pt-3 sm:pt-4 px-2 sm:px-6 lg:px-8 pointer-events-none">
+<div class="sticky top-0 z-50 pointer-events-none">
 <nav x-data="{
     open: false,
     lastPos: window.scrollY,
@@ -25,22 +27,24 @@
     lastPos = currentPos;
 })"
     :class="{ 'translate-y-0': showNav, '-translate-y-24': !showNav && !open }"
-    class="relative pointer-events-auto max-w-6xl mx-auto bg-white/95 backdrop-blur-md border border-gray-100 rounded-full shadow-lg shadow-gray-900/5 transition-transform duration-300 ease-in-out">
+    class="relative pointer-events-auto max-w-6xl mx-auto transition-transform duration-300 ease-in-out">
+
+    {{-- Fond translucide sur toute la largeur de l'écran (la nav elle-même
+         reste limitée à max-w-6xl) ; il suit la nav quand elle se cache. --}}
+    <div class="absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 -z-10 bg-[#FAFAF8]/80 backdrop-blur-md" aria-hidden="true"></div>
 
     <div class="px-4 sm:px-6">
-        <div class="flex justify-between items-center h-16">
+        <div class="flex justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] items-center h-16 lg:h-20">
 
-            <div class="flex items-center gap-8">
-                <a href="{{ route('home') }}" class="flex items-center gap-2 transition-transform hover:scale-[1.02]">
-                    <x-application-logo class="block h-7 w-auto fill-current text-indigo-600" />
-                    <span class="font-bold text-lg text-gray-900 tracking-tight">Mefolio</span>
-                </a>
+            <a href="{{ route('home') }}" class="flex items-center gap-2 justify-self-start transition-transform hover:scale-[1.02]">
+                <x-application-logo class="block h-7 w-auto fill-current text-gray-900" />
+                <span class="font-bold text-lg text-gray-900 tracking-tight">Mefolio</span>
+            </a>
 
-                @include('layouts.navigation.desktop-menu')
-            </div>
+            @include('layouts.navigation.desktop-menu')
 
             {{-- DROITE DESKTOP --}}
-            <div class="hidden lg:flex items-center gap-2">
+            <div class="hidden lg:flex items-center gap-2 justify-self-end">
                 @include('layouts.navigation.language-switcher')
 
                 @auth
@@ -97,7 +101,7 @@
                     <a href="{{ route('login') }}"
                         class="text-sm mr-2 font-semibold text-gray-600 hover:text-indigo-600 transition">{{ __('Connexion') }}</a>
                     <a href="{{ route('register') }}"
-                        class="bg-gray-900 hover:bg-black text-white px-5 py-2 rounded-full text-sm font-bold transition">
+                        class="bg-lime-300 hover:bg-lime-200 text-gray-900 px-5 py-2.5 rounded-full text-sm font-semibold shadow-[0_6px_20px_-6px_rgba(163,230,53,0.8)] transition">
                         {{ __("S'inscrire") }}
                     </a>
                 @endauth
