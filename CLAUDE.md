@@ -356,17 +356,14 @@ absentes par défaut :
 
 ### Hero animé de l'accueil et méga-menus de la nav
 
-- `home/hero.blade.php` contient sa propre animation (CSS dans un `<style>`
-  local + composant Alpine `mefolioHeroFan()` dans un `<script>` en bas du
-  fichier, même style que `mefolioAssistant()`) : titre qui apparaît mot
-  par mot, éventail de cartes qui s'ouvre puis se referme au scroll, fond
-  à halos colorés flous animés. Les cartes sont les projets récents avec
-  image (`$projects`), complétées par des photos de créatifs
-  (`$heroCreatifs`) s'il en manque. Tout est désactivé si l'utilisateur a
-  activé "réduire les animations" dans son système
-  (`prefers-reduced-motion`). Les grappes de portraits flottants qui
-  occupaient auparavant les côtés du hero ont été retirées au profit de
-  l'éventail.
+- `home/hero.blade.php` est une grande carte arrondie avec une image de
+  fond (`public/images/hero-accueil.webp`, à remplacer par une vraie photo
+  pour changer de visuel) sous un voile sombre en dégradé : titre blanc
+  en haut à gauche (apparition mot par mot, CSS dans un `<style>` local),
+  boutons, présentation en bas à gauche, pile d'avatars (`$heroCreatifs`)
+  et compteur en bas à droite. Animations désactivées si l'utilisateur a
+  activé "réduire les animations" (`prefers-reduced-motion`). Il a
+  remplacé un éventail de cartes animé (PR 69), retiré à la demande.
 - Les menus déroulants desktop (`layouts/navigation/desktop-menu.blade.php`)
   sont des méga-menus construits avec trois composants :
   `x-nav-mega` (bouton + panneau, ouverture au survol et au clic),
