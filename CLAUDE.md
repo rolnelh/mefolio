@@ -354,6 +354,30 @@ absentes par défaut :
   et démarré — un `Dockerfile` cassé fait échouer le déploiement sans
   jamais impacter la prod en cours.
 
+### Hero animé de l'accueil et méga-menus de la nav
+
+- `home/hero.blade.php` contient sa propre animation (CSS dans un `<style>`
+  local + composant Alpine `mefolioHeroFan()` dans un `<script>` en bas du
+  fichier, même style que `mefolioAssistant()`) : titre qui apparaît mot
+  par mot, éventail de cartes qui s'ouvre puis se referme au scroll, fond
+  à halos colorés flous animés. Les cartes sont les projets récents avec
+  image (`$projects`), complétées par des photos de créatifs
+  (`$heroCreatifs`) s'il en manque. Tout est désactivé si l'utilisateur a
+  activé "réduire les animations" dans son système
+  (`prefers-reduced-motion`). Les grappes de portraits flottants qui
+  occupaient auparavant les côtés du hero ont été retirées au profit de
+  l'éventail.
+- Les menus déroulants desktop (`layouts/navigation/desktop-menu.blade.php`)
+  sont des méga-menus construits avec trois composants :
+  `x-nav-mega` (bouton + panneau, ouverture au survol et au clic),
+  `x-nav-mega-link` (liens de la colonne de gauche) et `x-nav-mega-card`
+  (cartes illustrées de droite, images dans `public/images/*-menu.webp`,
+  versions réduites à 480 px). Le panneau se positionne par rapport à la
+  `<nav>` (classe `relative` ajoutée dans `navigation.blade.php`), pas par
+  rapport au bouton : c'est ce qui le centre sous la pilule sans déborder
+  de l'écran pour les derniers menus. Ne pas remettre `relative` sur le
+  wrapper de `x-nav-mega`.
+
 ### Règle de "profil complet"
 
 Un profil créatif est considéré "complet" (affiché publiquement, invite à

@@ -30,9 +30,9 @@ class HomeController extends Controller
     $creatifs = Creatif::where('is_paused', false)->orderBy('created_at', 'desc')->take(8)->get();
     $creatifCount = Creatif::where('is_paused', false)->count();
 
-    // Grappes de portraits du hero : uniquement des créatifs avec une vraie
-    // photo (jamais d'avatars par initiales), puisées plus largement que les
-    // 8 derniers pour ne pas laisser des grappes vides.
+    // Cartes de complément pour l'éventail du hero (home/hero.blade.php),
+    // utilisées quand trop peu de projets récents ont une image : uniquement
+    // des créatifs avec une vraie photo (jamais d'avatars par initiales).
     $heroCreatifs = Creatif::where('is_paused', false)
         ->whereNotNull('photo')
         ->orderBy('created_at', 'desc')
