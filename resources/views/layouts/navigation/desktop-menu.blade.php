@@ -82,7 +82,7 @@
         <x-nav-mega-card :href="route('hackathons.index')" :image="asset('images/challenges-menu.webp')"
             :title="__('Programmes & Hackathons')"
             :description="__('ASSIN, Sèmè City et d\'autres programmes pour accélérer votre parcours.')" />
-        <x-nav-mega-card :href="route('blog')" :image="asset('images/profil-menu.webp')"
+        <x-nav-mega-card :href="route('blog')"
             title="Blog"
             :description="__('Actualités, portraits et inspiration pour les créatifs africains.')" />
     </x-nav-mega>

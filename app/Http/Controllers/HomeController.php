@@ -27,7 +27,9 @@ class HomeController extends Controller
         ->orderBy('created_at', 'desc')
         ->paginate(8);
 
-    $creatifs = Creatif::where('is_paused', false)->orderBy('created_at', 'desc')->take(8)->get();
+    // Section "Nos talents" (home/talents.blade.php) : le nombre de projets
+    // s'affiche sur chaque carte de profil.
+    $creatifs = Creatif::where('is_paused', false)->withCount('projects')->orderBy('created_at', 'desc')->take(8)->get();
     $creatifCount = Creatif::where('is_paused', false)->count();
 
     // Avatars de la preuve sociale du hero (home/hero.blade.php), et
