@@ -25,7 +25,7 @@
     lastPos = currentPos;
 })"
     :class="{ 'translate-y-0': showNav, '-translate-y-24': !showNav && !open }"
-    class="pointer-events-auto max-w-6xl mx-auto bg-white/95 backdrop-blur-md border border-gray-100 rounded-full shadow-lg shadow-gray-900/5 transition-transform duration-300 ease-in-out">
+    class="relative pointer-events-auto max-w-6xl mx-auto bg-white/95 backdrop-blur-md border border-gray-100 rounded-full shadow-lg shadow-gray-900/5 transition-transform duration-300 ease-in-out">
 
     <div class="px-4 sm:px-6">
         <div class="flex justify-between items-center h-16">
