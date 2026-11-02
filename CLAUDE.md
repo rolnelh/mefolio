@@ -357,7 +357,7 @@ absentes par défaut :
 ### Hero animé de l'accueil et méga-menus de la nav
 
 - `home/hero.blade.php` suit une maquette fournie par le propriétaire du
-  projet (page d'agence web centrée) : fil d'étapes, titre centré avec un
+  projet (page d'agence web centrée) : titre centré avec un
   mot en italique d'accent (`font-accent` = Instrument Serif, chargée dans
   `layouts/app.blade.php` et déclarée dans `tailwind.config.js`), bouton
   vert citron (`bg-lime-300`) + bouton secondaire blanc, avatars +
@@ -376,7 +376,14 @@ absentes par défaut :
   un style clair à photo plein cadre ; `$creatifs` porte
   `projects_count` via `withCount('projects')` dans `HomeController`).
   `x-creatif-card` n'y est plus utilisé mais sert toujours sur
-  `creatifs/index`.
+  `creatifs/index`. `home/recent-projects.blade.php` est un carrousel
+  horizontal (scroll-snap, flèches) de grandes cartes image dont le
+  bouton "+" révèle la description sur un voile sombre (`x-data` local
+  par carte). `home/faq-cta.blade.php` contient la FAQ (cadre blanc,
+  questions numérotées, une seule ouverte à la fois ; pas de plugin
+  Alpine `collapse` installé, d'où une simple transition d'opacité) puis
+  le CTA final (panneau en léger dégradé dans un cadre blanc). Le fil
+  d'étapes au-dessus du titre du hero a été retiré à la demande.
 - La barre de nav desktop (`layouts/navigation.blade.php`) suit la même
   maquette : plus de pilule flottante, logo à gauche, liens au centre
   (grille `lg:grid-cols-[1fr_auto_1fr]`), actions et bouton "S'inscrire"

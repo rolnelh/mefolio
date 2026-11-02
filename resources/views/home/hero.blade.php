@@ -1,6 +1,5 @@
 {{--
     Section hero de la page d'accueil, mise en page centrée :
-      - petit fil d'étapes ("Crée ton profil > Publie tes projets > ...") ;
       - titre centré avec un mot en italique d'accent (police font-accent) ;
       - sous-titre, bouton vert citron + bouton secondaire ;
       - preuve sociale (avatars + compteur de créatifs) ;
@@ -57,17 +56,7 @@
 
     <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
 
-        {{-- Fil d'étapes --}}
-        <p class="hero-apparition inline-flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 rounded-full bg-white px-3.5 py-1.5 text-xs font-medium text-gray-500 shadow-sm ring-1 ring-gray-900/5" style="--d: 50ms">
-            <span class="h-1.5 w-1.5 rounded-full bg-lime-400"></span>
-            {{ __('Crée ton profil') }}
-            <span class="text-gray-300">&gt;</span>
-            {{ __('Publie tes projets') }}
-            <span class="text-gray-300">&gt;</span>
-            {{ __('Décroche des missions') }}
-        </p>
-
-        <h1 class="hero-apparition mt-7 text-[2.5rem] sm:text-6xl font-semibold tracking-tight text-gray-900 leading-[1.08]" style="--d: 150ms">
+        <h1 class="hero-apparition text-[2.5rem] sm:text-6xl font-semibold tracking-tight text-gray-900 leading-[1.08]" style="--d: 150ms">
             {{ __('Un espace pour') }}
             <span class="font-accent italic font-normal tracking-normal">{{ __('révéler') }}</span>
             {{ __('votre talent créatif') }}

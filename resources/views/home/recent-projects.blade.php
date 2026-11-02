@@ -1,125 +1,102 @@
 {{--
-    Section "Projets récents" — grille des derniers projets publiés.
-    Variables attendues : $projects (Collection, injectée par HomeController).
---}}
-<section class="py-20 bg-white dark:bg-gray-950">
-    <div class="max-w-7xl mx-auto px-6">
+    Section "Projets récents" : carrousel horizontal de grandes cartes
+    arrondies (défilement avec accroche, flèches précédent/suivant).
+    Chaque carte montre l'image du projet avec son titre en bas à gauche et
+    un bouton rond "+" en bas à droite. Le "+" retourne la carte : un voile
+    sombre flouté affiche la description, l'auteur, les likes et un lien
+    vers le projet, avec un bouton "−" pour revenir à l'image. État géré
+    par un petit x-data local par carte (aucun état partagé).
 
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+    Variables attendues : $projects (Paginator, injecté par HomeController,
+    avec les relations creatif et likes chargées).
+--}}
+<section class="py-20 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6" x-data>
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
             <div>
-                <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    Projets <span class="text-blue-600">récents</span>
+                <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">
+                    <span class="text-gray-900">{{ __('Projets récents') }}</span>
                 </h2>
-                <p class="mt-3 text-gray-500 dark:text-gray-400 font-light max-w-md">
-                    Découvrez les dernières créations de notre communauté de talents.
+                <p class="mt-3 text-gray-500 max-w-md">
+                    {{ __('Découvrez les dernières créations de notre communauté de talents.') }}
                 </p>
             </div>
 
-            <a href="{{ route('projects.index') }}"
-                class="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-blue-600 transition-all duration-300">
-                Voir toute la galerie
-                <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-            </a>
+            <div class="flex items-center gap-3">
+                <a href="{{ route('projects.index') }}"
+                    class="mr-2 text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors">
+                    {{ __('Voir toute la galerie') }} <span aria-hidden="true">→</span>
+                </a>
+                @foreach (['precedent' => -1, 'suivant' => 1] as $sens => $signe)
+                    <button type="button" aria-label="{{ $sens === 'precedent' ? __('Précédent') : __('Suivant') }}"
+                        @click="$refs.carrousel.scrollBy({ left: {{ $signe }} * ($refs.carrousel.clientWidth * 0.8), behavior: 'smooth' })"
+                        class="flex h-10 w-10 items-center justify-center rounded-full ring-1 ring-gray-900/10 text-gray-700 hover:bg-gray-900 hover:text-white transition">
+                        <svg class="h-4 w-4 {{ $signe < 0 ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                @endforeach
+            </div>
         </div>
 
-        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div x-ref="carrousel"
+            class="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             @foreach ($projects as $project)
-                <article class="group">
+                @php
+                    $auteur = $project->creatif;
+                    $lien = route('projects.show', $project->slug);
+                @endphp
+                <article x-data="{ ouvert: false }"
+                    class="relative h-[420px] w-[78vw] max-w-[340px] shrink-0 snap-start overflow-hidden rounded-[28px] bg-gray-900 shadow-lg shadow-gray-900/10">
 
-                    <div
-                        class="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-blue-500/10 group-hover:-translate-y-1">
-
-                        <img src="{{ $project->image ?: 'https://via.placeholder.com/400x300' }}"
-                            alt="{{ $project->title }}"
-                            class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
-
-                        <div class="absolute top-4 left-4 z-20">
-                            <span
-                                class="inline-flex items-center rounded-full bg-white/90 dark:bg-gray-900/80 px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-gray-900 dark:text-white backdrop-blur-md border border-white/20">
-                                {{ $project->category ?? 'Design' }}
-                            </span>
-                        </div>
-
-                        <div
-                            class="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
-                            <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-
-                                <div class="flex items-start justify-between gap-4">
-                                    <div class="flex-1">
-
-                                        <h3 class="text-base font-bold text-white leading-tight">
-                                            {{ $project->title }}
-                                        </h3>
-
-                                        <p
-                                            class="mt-2 text-xs text-gray-200 line-clamp-2 font-light leading-relaxed">
-                                            {{ $project->description }}
-                                        </p>
-                                    </div>
-
-                                    <a href="{{ route('projects.show', $project->slug) }}"
-                                        class="size-9 shrink-0 flex items-center justify-center rounded-full bg-white text-gray-900 shadow-xl hover:scale-110 transition-transform duration-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                        </svg>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-5 flex items-center justify-between px-1">
-                        <a href="{{ route('creatifs.show', $project->creatif->slug) }}"
-                            class="flex items-center gap-3 group/author">
-                            <div class="relative">
-                                <img src="{{ $project->creatif->photo ?: 'https://ui-avatars.com/api/?name=' . urlencode($project->creatif->prenom) }}"
-                                    class="size-8 rounded-full object-cover grayscale group-hover/author:grayscale-0 transition-all duration-300" />
-                                <div
-                                    class="absolute -bottom-0.5 -right-0.5 size-2 rounded-full bg-green-500 border-2 border-white dark:border-gray-950">
-                                </div>
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-none">
-                                    {{ $project->creatif->prenom }}
-                                </span>
-                                <span class="text-[10px] text-gray-400 font-medium mt-1">
-                                    @ {{ $project->creatif->slug }}
-                                </span>
-                            </div>
-                        </a>
-
-                        @auth
-                            <form method="POST" action="{{ route('projects.like', $project) }}">
-                                @csrf
-                                <button
-                                    class="flex items-center gap-1.5 px-2 py-1 transition-all duration-300 {{ $project->isLikedBy(auth()->user()) ? 'text-red-500' : 'text-gray-400 hover:text-red-500' }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
-                                        fill="{{ $project->isLikedBy(auth()->user()) ? 'currentColor' : 'none' }}"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                    </svg>
-                                    <span class="text-[11px] font-bold">{{ $project->likes->count() }}</span>
-                                </button>
-                            </form>
+                    {{-- Image du projet --}}
+                    <a href="{{ $lien }}" class="absolute inset-0" tabindex="-1" aria-hidden="true">
+                        @if ($project->image)
+                            <img src="{{ $project->image }}" alt="" loading="lazy"
+                                class="h-full w-full object-cover transition-transform duration-700"
+                                :class="ouvert ? 'scale-110' : 'scale-100'">
                         @else
-                            <div class="flex items-center gap-1.5 px-2 py-1 text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                                <span class="text-[11px] font-bold">{{ $project->likes->count() }}</span>
-                            </div>
-                        @endauth
+                            <span class="block h-full w-full bg-gradient-to-br from-gray-700 to-gray-900"></span>
+                        @endif
+                    </a>
+
+                    {{-- Légende (face image) --}}
+                    <div x-show="!ouvert" x-transition.opacity.duration.300ms
+                        class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent px-6 pb-6 pt-24 pr-20">
+                        <h3 class="text-base font-semibold leading-snug text-white">
+                            <a href="{{ $lien }}" class="pointer-events-auto hover:underline">{{ $project->title }}</a>
+                        </h3>
+                        @if ($auteur)
+                            <p class="mt-1 text-xs text-white/70">{{ trim($auteur->prenom . ' ' . $auteur->nom) }}</p>
+                        @endif
                     </div>
+
+                    {{-- Description (face texte) --}}
+                    <div x-show="ouvert" x-cloak x-transition.opacity.duration.300ms
+                        class="absolute inset-0 flex flex-col bg-gray-900/80 p-7 pr-8 backdrop-blur-xl">
+                        <p class="text-[10px] font-semibold uppercase tracking-widest text-white/50">{{ $project->category ?? __('Projet') }}</p>
+                        <h3 class="mt-3 text-base font-semibold leading-snug text-white">{{ $project->title }}</h3>
+                        <p class="mt-4 line-clamp-[8] text-sm leading-relaxed text-white/75">{{ $project->description }}</p>
+                        <div class="mt-auto flex items-center gap-3 pr-14 pt-5 text-xs text-white/70">
+                            @if ($auteur)
+                                <a href="{{ route('creatifs.show', $auteur->slug) }}" class="truncate hover:text-white">{{ trim($auteur->prenom . ' ' . $auteur->nom) }}</a>
+                                <span class="text-white/30">·</span>
+                            @endif
+                            <span class="shrink-0">{{ $project->likes->count() }} {{ trans_choice('like|likes', $project->likes->count()) }}</span>
+                        </div>
+                        <a href="{{ $lien }}" class="mt-3 text-sm font-semibold text-white hover:underline">{{ __('Voir le projet') }} <span aria-hidden="true">→</span></a>
+                    </div>
+
+                    {{-- Bouton + / − --}}
+                    <button type="button" @click="ouvert = !ouvert" :aria-expanded="ouvert"
+                        :aria-label="ouvert ? @js(__('Masquer la description')) : @js(__('Afficher la description'))"
+                        class="absolute bottom-5 right-5 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-900 shadow-lg transition hover:scale-110">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" d="M5 12h14" />
+                            <path x-show="!ouvert" stroke-linecap="round" d="M12 5v14" />
+                        </svg>
+                    </button>
                 </article>
             @endforeach
         </div>
