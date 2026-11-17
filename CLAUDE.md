@@ -390,10 +390,13 @@ absentes par défaut :
   un style clair à photo plein cadre ; `$creatifs` porte
   `projects_count` via `withCount('projects')` dans `HomeController`).
   `x-creatif-card` n'y est plus utilisé mais sert toujours sur
-  `creatifs/index`. `home/recent-projects.blade.php` est un carrousel
-  horizontal (scroll-snap, flèches) de grandes cartes image dont le
-  bouton "+" révèle la description sur un voile sombre (`x-data` local
-  par carte). `home/faq-cta.blade.php` contient la FAQ (cadre blanc,
+  `creatifs/index`. `home/recent-projects.blade.php` est une grille de
+  6 cartes (3 par ligne sur desktop) : image arrondie avec une encoche
+  en haut à droite pour deux étiquettes (technologies, sinon catégorie)
+  et une encoche en bas à droite pour un bouton rond noir à flèche vert
+  citron. Les encoches sont des blocs de la couleur du fond de section
+  avec des arrondis inversés (`.projet-coin`, radial-gradient) : si le
+  fond de la section change, changer `--fond-section`. `home/faq-cta.blade.php` contient la FAQ (cadre blanc,
   questions numérotées, une seule ouverte à la fois ; pas de plugin
   Alpine `collapse` installé, d'où une simple transition d'opacité) puis
   le CTA final (panneau en léger dégradé dans un cadre blanc). Le fil
