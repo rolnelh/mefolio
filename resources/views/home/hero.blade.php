@@ -57,7 +57,7 @@
     <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
 
         <h1 class="hero-apparition text-[2.5rem] sm:text-6xl font-semibold tracking-tight text-gray-900 leading-[1.08]" style="--d: 150ms">
-            {{ __('Découvrez, exposez et recrutez') }}
+            {{ __('Découvrez, valorisez et recrutez') }}
             <span class="font-accent italic font-normal tracking-normal">{{ __('les talents africains') }}</span>
         </h1>
 
