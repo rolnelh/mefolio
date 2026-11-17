@@ -371,8 +371,8 @@ absentes par défaut :
 ### Hero animé de l'accueil et méga-menus de la nav
 
 - `home/hero.blade.php` suit une maquette fournie par le propriétaire du
-  projet (page d'agence web centrée) : titre centré avec un
-  mot en italique d'accent (`font-accent` = Instrument Serif, chargée dans
+  projet (page d'agence web centrée) : titre centré « Découvrez, valorisez
+  et recrutez les talents africains », la fin en italique d'accent (`font-accent` = Instrument Serif, chargée dans
   `layouts/app.blade.php` et déclarée dans `tailwind.config.js`), bouton
   vert citron (`bg-lime-300`) + bouton secondaire blanc, avatars +
   compteur, puis bandeau défilant des domaines créatifs. Animations
@@ -423,6 +423,15 @@ absentes par défaut :
   rapport au bouton : c'est ce qui le centre sous la pilule sans déborder
   de l'écran pour les derniers menus. Ne pas remettre `relative` sur le
   wrapper de `x-nav-mega`.
+
+### Barre de navigation mobile (bas d'écran)
+
+`layouts/navigation/bottom-nav.blade.php` suit une maquette fournie :
+pilule blanche, cinq icônes au trait sans libellé visible (Accueil,
+Projets, Talents, Missions, Profil), et un petit trait sous l'icône de
+la page active. Chaque lien porte `aria-label`, `title` et
+`aria-current="page"` quand il est actif. Le lien Profil mène au tableau
+de bord si l'utilisateur est connecté, à la connexion sinon.
 
 ### Règle de "profil complet"
 
