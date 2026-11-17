@@ -371,8 +371,8 @@ absentes par défaut :
 ### Hero animé de l'accueil et méga-menus de la nav
 
 - `home/hero.blade.php` suit une maquette fournie par le propriétaire du
-  projet (page d'agence web centrée) : titre centré avec un
-  mot en italique d'accent (`font-accent` = Instrument Serif, chargée dans
+  projet (page d'agence web centrée) : titre centré « Découvrez, exposez
+  et recrutez les talents africains », la fin en italique d'accent (`font-accent` = Instrument Serif, chargée dans
   `layouts/app.blade.php` et déclarée dans `tailwind.config.js`), bouton
   vert citron (`bg-lime-300`) + bouton secondaire blanc, avatars +
   compteur, puis bandeau défilant des domaines créatifs. Animations
