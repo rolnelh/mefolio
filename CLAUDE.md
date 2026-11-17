@@ -424,6 +424,15 @@ absentes par défaut :
   de l'écran pour les derniers menus. Ne pas remettre `relative` sur le
   wrapper de `x-nav-mega`.
 
+### Barre de navigation mobile (bas d'écran)
+
+`layouts/navigation/bottom-nav.blade.php` suit une maquette fournie :
+pilule blanche, cinq icônes au trait sans libellé visible (Accueil,
+Projets, Talents, Missions, Profil), et un petit trait sous l'icône de
+la page active. Chaque lien porte `aria-label`, `title` et
+`aria-current="page"` quand il est actif. Le lien Profil mène au tableau
+de bord si l'utilisateur est connecté, à la connexion sinon.
+
 ### Règle de "profil complet"
 
 Un profil créatif est considéré "complet" (affiché publiquement, invite à
