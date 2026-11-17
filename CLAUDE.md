@@ -396,7 +396,13 @@ absentes par défaut :
   et une encoche en bas à droite pour un bouton rond noir à flèche vert
   citron. Les encoches sont des blocs de la couleur du fond de section
   avec des arrondis inversés (`.projet-coin`, radial-gradient) : si le
-  fond de la section change, changer `--fond-section`. `home/faq-cta.blade.php` contient la FAQ (cadre blanc,
+  fond de la section change, changer `--fond-section`.
+  Les premières cartes sont des **projets mis en avant** déclarés dans
+  `config/mefolio.php` (clé `projets_vedette` : titre, sous-titre,
+  étiquettes, image dans `public/images/projets/`, url facultative), pas
+  en base ; les projets récents de la base complètent jusqu'à 6 cartes.
+  Pour en ajouter ou en retirer, modifier ce fichier puis redéployer
+  (`config:cache` relit la config au démarrage du conteneur). `home/faq-cta.blade.php` contient la FAQ (cadre blanc,
   questions numérotées, une seule ouverte à la fois ; pas de plugin
   Alpine `collapse` installé, d'où une simple transition d'opacité) puis
   le CTA final (panneau en léger dégradé dans un cadre blanc). Le fil
